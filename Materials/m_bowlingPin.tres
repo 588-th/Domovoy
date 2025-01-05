@@ -1,0 +1,8 @@
+[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://dh8hqhhvqlpk5"]
+
+[ext_resource type="Texture2D" uid="uid://uxd6f6cs7vwm" path="res://Textures/t_bowlingPin.png" id="1_i7w7n"]
+
+[resource]
+resource_name = "m_bowlingPin"
+albedo_texture = ExtResource("1_i7w7n")
+texture_filter = 0

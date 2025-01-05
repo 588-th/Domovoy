@@ -1,0 +1,88 @@
+[gd_scene load_steps=6 format=3 uid="uid://dujsw8ieyw2nw"]
+
+[ext_resource type="PackedScene" uid="uid://b3iv1y7gfgqbi" path="res://Prefabs/Props/BowlingBall.tscn" id="1_24m24"]
+[ext_resource type="Script" path="res://Scripts/Spawners/Players/PlayerSpawner.cs" id="2_kofon"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_cihl8"]
+sky_top_color = Color(0.311447, 0.495967, 0.878786, 1)
+sky_horizon_color = Color(0.700422, 0.784078, 0.886842, 1)
+ground_bottom_color = Color(0.490242, 0.640343, 0.668584, 1)
+ground_horizon_color = Color(0.700422, 0.784078, 0.886842, 1)
+
+[sub_resource type="Sky" id="Sky_pjlj1"]
+sky_material = SubResource("ProceduralSkyMaterial_cihl8")
+
+[sub_resource type="Environment" id="Environment_qukhg"]
+background_mode = 2
+sky = SubResource("Sky_pjlj1")
+glow_enabled = true
+
+[node name="Level" type="Node3D"]
+
+[node name="Players" type="Node" parent="."]
+
+[node name="Objects" type="Node" parent="."]
+
+[node name="RigidBody3D" parent="Objects" instance=ExtResource("1_24m24")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4, 0)
+
+[node name="Environment" type="Node" parent="."]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="Environment"]
+environment = SubResource("Environment_qukhg")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="Environment"]
+transform = Transform3D(1, 0, 0, 0, 0.399725, 0.916635, 0, -0.916635, 0.399725, 0, 3.36361, -0.0171896)
+shadow_enabled = true
+
+[node name="CSGCombiner3D" type="CSGCombiner3D" parent="Environment"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
+use_collision = true
+
+[node name="Floor" type="CSGBox3D" parent="Environment/CSGCombiner3D"]
+layers = 4
+snap = 1e-06
+size = Vector3(25, 1, 25)
+
+[node name="PillarFrontward" type="CSGBox3D" parent="Environment/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 0.707107, -0.707107, 0, 0.707107, 0.707107, 0, 3.5, -6)
+layers = 4
+snap = 1e-06
+size = Vector3(1, 6, 1)
+
+[node name="PillarBackward" type="CSGBox3D" parent="Environment/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 3.5, 6)
+layers = 4
+snap = 1e-06
+size = Vector3(1, 6, 1)
+
+[node name="PillarLeft" type="CSGBox3D" parent="Environment/CSGCombiner3D"]
+transform = Transform3D(0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 0, 0, 1, -6, 3.5, 0)
+layers = 4
+snap = 1e-06
+size = Vector3(1, 6, 1)
+
+[node name="PillarRight" type="CSGBox3D" parent="Environment/CSGCombiner3D"]
+transform = Transform3D(0.707107, -0.707107, 0, 0.707107, 0.707107, 0, 0, 0, 1, 6, 3.5, 0)
+layers = 4
+snap = 1e-06
+size = Vector3(1, 6, 1)
+
+[node name="MarkerPlayerSpawners" type="Node" parent="."]
+
+[node name="FirstPlayer" type="Marker3D" parent="MarkerPlayerSpawners"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 4)
+
+[node name="SecondPlayer" type="Marker3D" parent="MarkerPlayerSpawners"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -4)
+
+[node name="ThirdPlayer" type="Marker3D" parent="MarkerPlayerSpawners"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 1, 0)
+
+[node name="FourthPlayer" type="Marker3D" parent="MarkerPlayerSpawners"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 1, 0)
+
+[node name="PlayerSpawner" type="Node" parent="." node_paths=PackedStringArray("_spawnMarkers", "_spawnNode")]
+script = ExtResource("2_kofon")
+_spawnMarkers = [NodePath("../MarkerPlayerSpawners/FirstPlayer"), NodePath("../MarkerPlayerSpawners/SecondPlayer"), NodePath("../MarkerPlayerSpawners/ThirdPlayer"), NodePath("../MarkerPlayerSpawners/FourthPlayer")]
+_spawnNode = NodePath("../Players")

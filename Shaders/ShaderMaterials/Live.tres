@@ -1,0 +1,20 @@
+[gd_resource type="ShaderMaterial" load_steps=5 format=3 uid="uid://c00xuuo2mgu3g"]
+
+[ext_resource type="Shader" path="res://Shaders/notWork/Live.gdshader" id="1_yd3tv"]
+[ext_resource type="Texture2D" uid="uid://cuwaa2ocbp2xu" path="res://Textures/t_wallpaper.png" id="2_15txy"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_13rhq"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_pjuht"]
+noise = SubResource("FastNoiseLite_13rhq")
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_yd3tv")
+shader_parameter/uv_scale = Vector2(1.5, 0.75)
+shader_parameter/intensity = 1.0
+shader_parameter/resolution_x = 128.0
+shader_parameter/resolution_y = 128.0
+shader_parameter/speed = 0.01
+shader_parameter/texture_albedo = ExtResource("2_15txy")
+shader_parameter/texture_noise = SubResource("NoiseTexture2D_pjuht")

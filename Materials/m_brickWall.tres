@@ -1,0 +1,12 @@
+[gd_resource type="StandardMaterial3D" load_steps=3 format=3 uid="uid://bg0fh2ja3bjby"]
+
+[ext_resource type="Texture2D" uid="uid://b58bimfvig55u" path="res://Textures/t_brickWall.png" id="1_noh46"]
+[ext_resource type="Texture2D" uid="uid://c8qgmcxxfvt61" path="res://Textures/NormalMaps/n_brickWall.png" id="2_ib4u3"]
+
+[resource]
+albedo_texture = ExtResource("1_noh46")
+normal_enabled = true
+normal_scale = 4.0
+normal_texture = ExtResource("2_ib4u3")
+uv1_scale = Vector3(4, 1.5, 1)
+texture_filter = 0

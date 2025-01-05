@@ -1,0 +1,78 @@
+[gd_scene load_steps=12 format=3 uid="uid://bk1k3s1o2gys8"]
+
+[ext_resource type="Material" uid="uid://bf3rygs7earu8" path="res://Materials/bullet.tres" id="1_8air1"]
+[ext_resource type="Script" path="res://Scripts/Net/AuthorityScripter.cs" id="2_8n1xe"]
+[ext_resource type="Script" path="res://Scripts/Props/Bullet/BulletLife.cs" id="3_mge40"]
+[ext_resource type="Script" path="res://Scripts/Props/Bullet/BulletCollided.cs" id="4_u5mv4"]
+[ext_resource type="Script" path="res://Scripts/Props/Bullet/BulletCollidedWithPlayer.cs" id="5_k2dvy"]
+[ext_resource type="AudioStream" uid="uid://bq0lq87liuagh" path="res://Audio/SFX/Firearm/BulletHit.mp3" id="6_lf21y"]
+[ext_resource type="Script" path="res://Scripts/Props/Bullet/BulletDestroy.cs" id="6_v225l"]
+[ext_resource type="Script" path="res://Scripts/AudioPlayer.cs" id="7_4uue6"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_7d6uw"]
+material = ExtResource("1_8air1")
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_0se0g"]
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_twwcy"]
+properties/0/path = NodePath(".:position")
+properties/0/spawn = true
+properties/0/replication_mode = 1
+properties/1/path = NodePath(".:rotation")
+properties/1/spawn = true
+properties/1/replication_mode = 1
+
+[node name="Bullet" type="RigidBody3D" groups=["Object:Prop", "Prop:Draggble"]]
+collision_layer = 8
+collision_mask = 1807
+mass = 0.01
+continuous_cd = true
+contact_monitor = true
+max_contacts_reported = 1
+
+[node name="Model" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0, 0)
+mesh = SubResource("BoxMesh_7d6uw")
+
+[node name="Hitbox" type="CollisionShape3D" parent="." groups=["Hitbox:Item"]]
+transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0, 0)
+shape = SubResource("BoxShape3D_0se0g")
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
+bus = &"SFX"
+
+[node name="Scripts" type="Node" parent="."]
+script = ExtResource("2_8n1xe")
+
+[node name="BulletLife" type="Node" parent="Scripts" node_paths=PackedStringArray("_bulletLife", "_bulletDestroy")]
+script = ExtResource("3_mge40")
+_bulletLife = NodePath("../../BulletLife")
+_bulletDestroy = NodePath("../BulletDestroy")
+
+[node name="BulletCollided" type="Node" parent="Scripts" node_paths=PackedStringArray("_bulletRigidBody", "_bulletLife")]
+script = ExtResource("4_u5mv4")
+_bulletRigidBody = NodePath("../..")
+_bulletLife = NodePath("../../BulletLife")
+
+[node name="BulletCollidedWithPlayer" type="Node" parent="Scripts" node_paths=PackedStringArray("_bulletRigidBody", "_bulletDestroy", "_audioPlayer", "_audioStreamPlayer3D")]
+script = ExtResource("5_k2dvy")
+_bulletRigidBody = NodePath("../..")
+_bulletDestroy = NodePath("../BulletDestroy")
+_audioPlayer = NodePath("../../AudioPlayer")
+_hitAudio = ExtResource("6_lf21y")
+_audioStreamPlayer3D = NodePath("../../AudioStreamPlayer3D")
+
+[node name="BulletDestroy" type="Node" parent="Scripts" node_paths=PackedStringArray("_bulletRigidBody", "_audioStreamPlayer3D")]
+script = ExtResource("6_v225l")
+_bulletRigidBody = NodePath("../..")
+_audioStreamPlayer3D = NodePath("../../AudioStreamPlayer3D")
+
+[node name="BulletLife" type="Timer" parent="."]
+one_shot = true
+
+[node name="AudioPlayer" type="Node" parent="." node_paths=PackedStringArray("_audioStreamPlayer3D")]
+script = ExtResource("7_4uue6")
+_audioStreamPlayer3D = NodePath("../AudioStreamPlayer3D")
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_twwcy")

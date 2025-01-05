@@ -1,0 +1,84 @@
+[gd_scene load_steps=7 format=3 uid="uid://bmygsw76ycvts"]
+
+[ext_resource type="Shader" path="res://Shaders/Vignette.gdshader" id="1_084wr"]
+[ext_resource type="Shader" path="res://Shaders/Dithering.gdshader" id="1_cp8rq"]
+[ext_resource type="Shader" path="res://Shaders/Sanity.gdshader" id="1_ij2rh"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_d6qf0"]
+shader = ExtResource("1_ij2rh")
+shader_parameter/brightness = 0.0
+shader_parameter/contrast = 1.0
+shader_parameter/saturation = 1.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_gljsr"]
+shader = ExtResource("1_084wr")
+shader_parameter/alpha = 0.25
+shader_parameter/inner_radius = 0.5
+shader_parameter/outer_radius = 1.25
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_l2acs"]
+shader = ExtResource("1_cp8rq")
+shader_parameter/enable_dithering = true
+shader_parameter/dithering_intensity = 0.065
+shader_parameter/dither_scale = 1.5
+
+[node name="UIHUD" type="CanvasLayer"]
+
+[node name="InteractInfo" type="Label" parent="."]
+offset_left = 556.0
+offset_top = 332.0
+offset_right = 596.0
+offset_bottom = 355.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Health" type="Label" parent="."]
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -23.0
+offset_right = 50.0
+grow_vertical = 0
+text = "health"
+
+[node name="Item" type="Label" parent="."]
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -40.0
+offset_top = -23.0
+grow_horizontal = 0
+grow_vertical = 0
+text = "Item"
+
+[node name="HightPriority" type="CanvasLayer" parent="."]
+layer = 2
+
+[node name="Sanity" type="ColorRect" parent="HightPriority"]
+material = SubResource("ShaderMaterial_d6qf0")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Vignette" type="ColorRect" parent="."]
+material = SubResource("ShaderMaterial_gljsr")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Dithering" type="ColorRect" parent="."]
+material = SubResource("ShaderMaterial_l2acs")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2

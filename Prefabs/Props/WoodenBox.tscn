@@ -1,0 +1,78 @@
+[gd_scene load_steps=10 format=4 uid="uid://cmmaqjm2r7yhn"]
+
+[ext_resource type="Shader" path="res://Shaders/Glowing.gdshader" id="1_5maye"]
+[ext_resource type="Texture2D" uid="uid://b8j4mmhohmfqj" path="res://Textures/t_box.png" id="2_d801o"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_13rhq"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_pjuht"]
+seamless = true
+noise = SubResource("FastNoiseLite_13rhq")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_4sqnq"]
+render_priority = 0
+shader = ExtResource("1_5maye")
+shader_parameter/intensity = 0.125
+shader_parameter/resolution_x = 128.0
+shader_parameter/resolution_y = 128.0
+shader_parameter/speed = 0.05
+shader_parameter/texture_albedo = ExtResource("2_d801o")
+shader_parameter/texture_noise = SubResource("NoiseTexture2D_pjuht")
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_ln566"]
+_surfaces = [{
+"aabb": AABB(-0.5, -0.5, -0.5, 1, 1, 1),
+"format": 34896613377,
+"index_count": 36,
+"index_data": PackedByteArray("AAAGAAQAAAACAAYAAwAGAAIAAwAHAAYABwAEAAYABwAFAAQABQADAAEABQAHAAMAAQACAAAAAQADAAIABQAAAAQABQABAAAA"),
+"name": "m_woodenBox",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 8,
+"vertex_data": PackedByteArray("/////wAAAAD//wAAAAAAAP///////wAA//8AAP//AAAAAP//AAAAAAAAAAAAAAAAAAD/////AAAAAAAA//8AAA==")
+}]
+blend_shape_mode = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_akkqi"]
+resource_name = "HiddenCollection_WoodenBox"
+_surfaces = [{
+"aabb": AABB(-0.5, -0.5, -0.5, 1, 1, 1),
+"attribute_data": PackedByteArray("/3/8v/9//L/8v/9//3//f/9//3//f/9//38FAP9/+f/8vwJA/38CQP9/AkD/fwJAAkD8vwJA/L8FAP9/AkD/fwJA/38CQP9/AkAFAAJA+f8FAAJAAkACQAJAAkACQAJA"),
+"format": 34896613399,
+"index_count": 36,
+"index_data": PackedByteArray("AQATAA0AAQAHABMACQASAAYACQAVABIAFwAOABQAFwARAA4AEAAKAAQAEAAWAAoABQAIAAIABQALAAgADwAAAAwADwADAAAA"),
+"material": SubResource("ShaderMaterial_4sqnq"),
+"name": "m_woodenBox",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 24,
+"vertex_data": PackedByteArray("/////wAA////////AAD/v/////8AAFTV//8AAAAA/////wAAAAD/v///AAAAAFTV////////AID/////////v////////1TV//8AAP//AID//wAA////v///AAD//1TVAAD//wAA//8AAP//AAD/vwAA//8AAFTVAAAAAAAA//8AAAAAAAD/vwAAAAAAAFTVAAD/////AIAAAP//////vwAA/////1TVAAAAAP//AIAAAAAA////vwAAAAD//1TV/v//f/7//3+qKqoq////fwAA/3+qKqoq/3///////3+qKqoq/3///wAA/3+qKqoq/v//f/7//39UVamq/v//fwAA/39UVaqq/3////7//39UVamq/3///wAA/39UVamq")
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_ln566")
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_lfobg"]
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_d5s70"]
+properties/0/path = NodePath(".:position")
+properties/0/spawn = true
+properties/0/replication_mode = 1
+properties/1/path = NodePath(".:rotation")
+properties/1/spawn = true
+properties/1/replication_mode = 1
+properties/2/path = NodePath(".:linear_velocity")
+properties/2/spawn = true
+properties/2/replication_mode = 1
+
+[node name="WoodenBox" type="RigidBody3D" groups=["Object:Prop", "Prop:Draggble"]]
+collision_layer = 2
+collision_mask = 1807
+
+[node name="Model" type="MeshInstance3D" parent="."]
+mesh = SubResource("ArrayMesh_akkqi")
+
+[node name="Hitbox" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_lfobg")
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_d5s70")

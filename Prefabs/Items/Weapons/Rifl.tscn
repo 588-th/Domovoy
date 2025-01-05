@@ -1,0 +1,90 @@
+[gd_scene load_steps=13 format=3 uid="uid://blrsmbolm5q1j"]
+
+[ext_resource type="Script" path="res://Scripts/Items/Firearm/Firearm.cs" id="1_co1fx"]
+[ext_resource type="PackedScene" uid="uid://bk1k3s1o2gys8" path="res://Prefabs/Props/Bullet.tscn" id="2_1qahs"]
+[ext_resource type="AudioStream" uid="uid://5h7hqp3o4agm" path="res://Audio/SFX/Common/Pickup.mp3" id="2_gmjo4"]
+[ext_resource type="Material" uid="uid://dxlttlqeuo7y4" path="res://Materials/mItem.tres" id="2_pn6u3"]
+[ext_resource type="Script" path="res://Scripts/Items/Firearm/FirearmParameters.cs" id="3_mcxp7"]
+[ext_resource type="Script" path="res://Scripts/Items/Firearm/FirearmShoot.cs" id="4_0l4y0"]
+[ext_resource type="Script" path="res://Scripts/Items/Firearm/FirearmReload.cs" id="6_78iqy"]
+[ext_resource type="Script" path="res://Scripts/Items/Firearm/FirearmToggleAutomatic.cs" id="7_ciyys"]
+[ext_resource type="Script" path="res://Scripts/AudioPlayer.cs" id="9_w6es0"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_3bk0e"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_pjvfg"]
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_4oldc"]
+properties/0/path = NodePath(".:position")
+properties/0/spawn = true
+properties/0/replication_mode = 2
+properties/1/path = NodePath(".:rotation")
+properties/1/spawn = true
+properties/1/replication_mode = 2
+properties/2/path = NodePath(".:freeze")
+properties/2/spawn = true
+properties/2/replication_mode = 2
+
+[node name="Rifle" type="RigidBody3D" node_paths=PackedStringArray("_firearmParameters", "_firearmShoot", "_firearmReload") groups=["Item:Pickupble", "Object:Item"]]
+collision_layer = 8
+collision_mask = 15
+script = ExtResource("1_co1fx")
+_firearmParameters = NodePath("ServerPart/FirearmParameters")
+_firearmShoot = NodePath("ServerPart/FirearmShoot")
+_firearmReload = NodePath("ServerPart/FirearmReload")
+PickupAudio = ExtResource("2_gmjo4")
+
+[node name="Model" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.4, 0, 0, 0, 0.4, 0, 0, 0, 1.12, 0, 0, 0)
+material_override = ExtResource("2_pn6u3")
+mesh = SubResource("BoxMesh_3bk0e")
+
+[node name="Hitbox" type="CollisionShape3D" parent="." groups=["Hitbox:Item"]]
+transform = Transform3D(0.4, 0, 0, 0, 0.4, 0, 0, 0, 1.12, 0, 0, 0)
+shape = SubResource("BoxShape3D_pjvfg")
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
+bus = &"SFX"
+
+[node name="ServerPart" type="Node" parent="."]
+
+[node name="FirearmAudio" type="Node" parent="ServerPart" node_paths=PackedStringArray("_audioStreamPlayer3D")]
+script = ExtResource("9_w6es0")
+_audioStreamPlayer3D = NodePath("../../AudioStreamPlayer3D")
+
+[node name="FirearmParameters" type="Node" parent="ServerPart"]
+script = ExtResource("3_mcxp7")
+BulletsPerClip = 30
+TotalClips = 2
+CurrentBulletsInClip = 30
+CurrentClips = 2
+FireRate = 3.0
+BulletSpeed = 3.0
+IsAutomatic = true
+IsCanSwitchAitomatic = true
+
+[node name="FirearmShoot" type="Node" parent="ServerPart" node_paths=PackedStringArray("_firearm", "_firearmParameters", "_shootCooldownTimer", "_bulletSpawnPosition")]
+script = ExtResource("4_0l4y0")
+_firearm = NodePath("../..")
+_firearmParameters = NodePath("../FirearmParameters")
+_shootCooldownTimer = NodePath("../ShootCooldownTimer")
+_bulletSpawnPosition = NodePath("../BulletSpawnPosition")
+_bulletScene = ExtResource("2_1qahs")
+
+[node name="FirearmReload" type="Node" parent="ServerPart" node_paths=PackedStringArray("_firearm", "_firearmParameters")]
+script = ExtResource("6_78iqy")
+_firearm = NodePath("../..")
+_firearmParameters = NodePath("../FirearmParameters")
+
+[node name="FirearmSwitchAutomatic" type="Node" parent="ServerPart" node_paths=PackedStringArray("_firearmParameters")]
+script = ExtResource("7_ciyys")
+_firearmParameters = NodePath("../FirearmParameters")
+
+[node name="ShootCooldownTimer" type="Timer" parent="ServerPart"]
+wait_time = 0.2
+
+[node name="BulletSpawnPosition" type="Marker3D" parent="ServerPart"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.665156)
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_4oldc")

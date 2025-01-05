@@ -1,0 +1,8 @@
+[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://bwv0dqu3gaugl"]
+
+[ext_resource type="Texture2D" uid="uid://pl0lj2kavc8i" path="res://Textures/Carpet.png" id="1_khoju"]
+
+[resource]
+resource_name = "m_carpet"
+albedo_texture = ExtResource("1_khoju")
+texture_filter = 0

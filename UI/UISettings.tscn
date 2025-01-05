@@ -1,0 +1,163 @@
+[gd_scene load_steps=4 format=3 uid="uid://csxytgmqigpea"]
+
+[ext_resource type="Script" path="res://Scripts/UserInterface/Menu/UISettingsVideo.cs" id="1_jcenu"]
+[ext_resource type="Script" path="res://Scripts/UserInterface/Menu/UIMouseSettings.cs" id="2_5yfvq"]
+[ext_resource type="Script" path="res://Scripts/UserInterface/Menu/UISettingsMultiplayer.cs" id="2_xp1g6"]
+
+[node name="UISettings" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TabContainer" type="TabContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 184.0
+offset_top = 109.0
+offset_right = -184.0
+offset_bottom = -109.0
+grow_horizontal = 2
+grow_vertical = 2
+current_tab = 0
+
+[node name="UIVideoSettings" type="TabBar" parent="TabContainer" node_paths=PackedStringArray("_resolutionsOptionButton", "_windowModeOptionButton", "_fovSpinBox", "_fovHSlider", "_backButton")]
+layout_mode = 2
+script = ExtResource("1_jcenu")
+_resolutionsOptionButton = NodePath("VBoxContainer/Resolution")
+_windowModeOptionButton = NodePath("VBoxContainer/WindowMode")
+_fovSpinBox = NodePath("VBoxContainer/FovSpinBox")
+_fovHSlider = NodePath("VBoxContainer/FovHSlider")
+_backButton = NodePath("Back")
+metadata/_tab_index = 0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="TabContainer/UIVideoSettings"]
+layout_mode = 0
+offset_right = 100.0
+offset_bottom = 44.0
+
+[node name="Resolution" type="OptionButton" parent="TabContainer/UIVideoSettings/VBoxContainer"]
+layout_mode = 2
+
+[node name="WindowMode" type="OptionButton" parent="TabContainer/UIVideoSettings/VBoxContainer"]
+layout_mode = 2
+
+[node name="FovSpinBox" type="SpinBox" parent="TabContainer/UIVideoSettings/VBoxContainer"]
+layout_mode = 2
+min_value = 1.0
+max_value = 179.0
+value = 75.0
+
+[node name="FovHSlider" type="HSlider" parent="TabContainer/UIVideoSettings/VBoxContainer"]
+layout_mode = 2
+min_value = 1.0
+max_value = 179.0
+value = 75.0
+
+[node name="Back" type="Button" parent="TabContainer/UIVideoSettings"]
+layout_mode = 2
+offset_left = 4.0
+offset_top = 357.0
+offset_right = 148.0
+offset_bottom = 388.0
+text = "Back to menu"
+
+[node name="Apply" type="Button" parent="TabContainer/UIVideoSettings"]
+layout_mode = 0
+offset_left = 161.0
+offset_top = 357.0
+offset_right = 305.0
+offset_bottom = 388.0
+text = "Apply
+"
+
+[node name="UIMouseSettings" type="TabBar" parent="TabContainer" node_paths=PackedStringArray("_sensivitySpinBox", "_sensivityHSlider", "_backButton")]
+visible = false
+layout_mode = 2
+script = ExtResource("2_5yfvq")
+_sensivitySpinBox = NodePath("VBoxContainer/SensivitySpinBox")
+_sensivityHSlider = NodePath("VBoxContainer/SensivityHSlider")
+_backButton = NodePath("Back")
+metadata/_tab_index = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="TabContainer/UIMouseSettings"]
+layout_mode = 0
+offset_right = 100.0
+offset_bottom = 66.0
+
+[node name="SensivitySpinBox" type="SpinBox" parent="TabContainer/UIMouseSettings/VBoxContainer"]
+layout_mode = 2
+min_value = 1.0
+max_value = 10.0
+step = 0.1
+value = 3.0
+
+[node name="SensivityHSlider" type="HSlider" parent="TabContainer/UIMouseSettings/VBoxContainer"]
+layout_mode = 2
+min_value = 1.0
+max_value = 10.0
+step = 0.1
+value = 3.0
+
+[node name="Back" type="Button" parent="TabContainer/UIMouseSettings"]
+layout_mode = 0
+offset_left = 4.0
+offset_top = 357.0
+offset_right = 148.0
+offset_bottom = 388.0
+text = "Back to menu"
+
+[node name="Apply" type="Button" parent="TabContainer/UIMouseSettings"]
+layout_mode = 0
+offset_left = 161.0
+offset_top = 357.0
+offset_right = 305.0
+offset_bottom = 388.0
+text = "Apply
+"
+
+[node name="UIMultiplayerSettings" type="TabBar" parent="TabContainer" node_paths=PackedStringArray("_ipLabel", "_portLabel", "_applyButton", "_backButton")]
+visible = false
+layout_mode = 2
+script = ExtResource("2_xp1g6")
+_ipLabel = NodePath("VBoxContainer/IpLabel")
+_portLabel = NodePath("VBoxContainer/PortLabel")
+_applyButton = NodePath("Apply")
+_backButton = NodePath("Back")
+metadata/_tab_index = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="TabContainer/UIMultiplayerSettings"]
+layout_mode = 0
+offset_right = 100.0
+offset_bottom = 66.0
+
+[node name="IpLabel" type="LineEdit" parent="TabContainer/UIMultiplayerSettings/VBoxContainer"]
+layout_mode = 2
+text = "127.0.0.1"
+placeholder_text = "ip"
+
+[node name="PortLabel" type="LineEdit" parent="TabContainer/UIMultiplayerSettings/VBoxContainer"]
+layout_mode = 2
+text = "7000"
+placeholder_text = "port"
+
+[node name="Back" type="Button" parent="TabContainer/UIMultiplayerSettings"]
+layout_mode = 0
+offset_left = 4.0
+offset_top = 357.0
+offset_right = 148.0
+offset_bottom = 388.0
+text = "Back to menu"
+
+[node name="Apply" type="Button" parent="TabContainer/UIMultiplayerSettings"]
+layout_mode = 0
+offset_left = 161.0
+offset_top = 357.0
+offset_right = 305.0
+offset_bottom = 388.0
+text = "Apply
+"

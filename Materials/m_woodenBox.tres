@@ -1,0 +1,12 @@
+[gd_resource type="StandardMaterial3D" load_steps=3 format=3 uid="uid://dupkns3it7avb"]
+
+[ext_resource type="Texture2D" uid="uid://b8j4mmhohmfqj" path="res://Textures/t_box.png" id="1_6piqu"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_4odag"]
+
+[resource]
+resource_name = "m_woodenBox"
+albedo_texture = ExtResource("1_6piqu")
+normal_scale = 0.5
+normal_texture = SubResource("CompressedTexture2D_4odag")
+texture_filter = 0

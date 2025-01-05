@@ -1,0 +1,336 @@
+[gd_scene load_steps=15 format=3 uid="uid://crx34hicnctwg"]
+
+[ext_resource type="Script" path="res://Scripts/Spawners/Players/PlayerSpawner.cs" id="3_bcg2r"]
+[ext_resource type="Script" path="res://Scripts/Spawners/Players/SpectatorSpawner.cs" id="4_u7ryt"]
+[ext_resource type="Script" path="res://Scripts/Spawners/ItemSpawner.cs" id="5_e16a8"]
+[ext_resource type="Script" path="res://Scripts/Net/AuthorityScripter.cs" id="8_wxw26"]
+[ext_resource type="Script" path="res://Scripts/Round/RoundController.cs" id="9_fqncy"]
+[ext_resource type="Script" path="res://Scripts/Round/RoundRoleRoller.cs" id="10_oq5mr"]
+[ext_resource type="Script" path="res://Scripts/Spawners/RoundSpawnSystem.cs" id="11_0nej4"]
+[ext_resource type="PackedScene" uid="uid://bks72b4kwjk1f" path="res://Prefabs/Players/PlayerHuman.tscn" id="12_4p7pk"]
+[ext_resource type="PackedScene" uid="uid://dw2d8yb5aog0t" path="res://Prefabs/Players/PlayerMonster.tscn" id="13_6rgwt"]
+[ext_resource type="PackedScene" uid="uid://dn6bs13u0l2at" path="res://Prefabs/Players/PlayerSpectator.tscn" id="14_2r4p4"]
+[ext_resource type="Script" path="res://Scripts/Round/RoundEnder.cs" id="15_0lt8v"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_cihl8"]
+sky_top_color = Color(0.311447, 0.495967, 0.878786, 1)
+sky_horizon_color = Color(0.700422, 0.784078, 0.886842, 1)
+ground_bottom_color = Color(0.490242, 0.640343, 0.668584, 1)
+ground_horizon_color = Color(0.700422, 0.784078, 0.886842, 1)
+
+[sub_resource type="Sky" id="Sky_0njii"]
+sky_material = SubResource("ProceduralSkyMaterial_cihl8")
+
+[sub_resource type="Environment" id="Environment_qukhg"]
+background_mode = 2
+sky = SubResource("Sky_0njii")
+glow_enabled = true
+
+[node name="LevelRound" type="Node3D"]
+
+[node name="SpawnAchors" type="Node" parent="."]
+
+[node name="AchorsPlayerHumanSpawners" type="Node" parent="SpawnAchors"]
+
+[node name="FirstPlayer" type="Marker3D" parent="SpawnAchors/AchorsPlayerHumanSpawners"]
+transform = Transform3D(1, 0, 2.13163e-14, 0, 1, 0, -2.13163e-14, 0, 1, 3.44606, 1, 10.8849)
+
+[node name="AchorsPlayerMonsterSpawners" type="Node" parent="SpawnAchors"]
+
+[node name="FirstPlayer" type="Marker3D" parent="SpawnAchors/AchorsPlayerMonsterSpawners"]
+transform = Transform3D(1, 0, 1.74846e-07, 0, 1, 0, -1.74846e-07, 0, 1, 5.89542, 1, 10.8849)
+
+[node name="AchorsItemSpawners" type="Node" parent="SpawnAchors"]
+
+[node name="Environment" type="Node" parent="."]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="Environment"]
+environment = SubResource("Environment_qukhg")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="Environment"]
+transform = Transform3D(1, 0, 0, 0, 0.399725, 0.916635, 0, -0.916635, 0.399725, 0, 3.36361, -0.0171896)
+shadow_enabled = true
+
+[node name="CSGCombiner3D" type="CSGCombiner3D" parent="Environment"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
+use_collision = true
+collision_layer = 2
+collision_mask = 29
+
+[node name="Floor" type="CSGBox3D" parent="Environment/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 1.5)
+size = Vector3(21, 1, 22)
+
+[node name="Floor2" type="CSGBox3D" parent="Environment/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 19.5, 0, -6.5)
+size = Vector3(14, 1, 38)
+
+[node name="Floor3" type="CSGBox3D" parent="Environment/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.5, 3.4995, -17.5)
+size = Vector3(10, 0.001, 14)
+
+[node name="Floor4" type="CSGBox3D" parent="Environment/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, -2, -29)
+size = Vector3(11, 1, 37)
+
+[node name="Floor7" type="CSGBox3D" parent="Environment/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15.5, 1, -26)
+size = Vector3(10, 1, 31)
+
+[node name="Floor5" type="CSGBox3D" parent="Environment/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.5, -2, -37.5)
+size = Vector3(14, 1, 6)
+
+[node name="Floor8" type="CSGBox3D" parent="Environment/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 19, -2, -34.5)
+size = Vector3(7, 1, 12)
+
+[node name="Floor9" type="CSGBox3D" parent="Environment/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.5, -2, -47)
+size = Vector3(6, 1, 13)
+
+[node name="Floor6" type="CSGBox3D" parent="Environment/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, -2, -29)
+size = Vector3(9, 1, 9)
+
+[node name="Floor10" type="CSGBox3D" parent="Environment/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14, -2, -31)
+size = Vector3(3, 1, 5)
+
+[node name="Wall" type="CSGBox3D" parent="Environment/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.04299, 5, 1.488)
+size = Vector3(1, 9, 22)
+
+[node name="Wall2" type="CSGBox3D" parent="Environment/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9, 5, 13)
+size = Vector3(35, 9, 1)
+
+[node name="Wall6" type="CSGBox3D" parent="Environment/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 19.5, 4, -26)
+size = Vector3(14, 7, 1)
+
+[node name="Wall8" type="CSGBox3D" parent="Environment/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 5, -10)
+size = Vector3(15, 9, 1)
+
+[node name="Wall21" type="CSGBox3D" parent="Environment/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 1.5, -48)
+size = Vector3(11, 6, 1)
+
+[node name="Wall27" type="CSGBox3D" parent="Environment/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9, 1.5, -34)
+size = Vector3(13, 6, 1)
+
+[node name="Wall28" type="CSGBox3D" parent="Environment/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 1.5, -41)
+size = Vector3(5, 6, 1)
+
+[node name="Wall29" type="CSGBox3D" parent="Environment/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18, 1.5, -41)
+size = Vector3(9, 6, 1)
+
+[node name="Wall30" type="CSGBox3D" parent="Environment/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17.5, 1.5, -28)
+size = Vector3(10, 6, 1)
+
+[node name="Wall22" type="CSGBox3D" parent="Environment/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 1.5, -10)
+size = Vector3(11, 6, 1)
+
+[node name="Wall23" type="CSGBox3D" parent="Environment/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11, 5.5, -25)
+size = Vector3(3, 4, 1)
+
+[node name="Wall24" type="CSGBox3D" parent="Environment/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 5.5, -25)
+size = Vector3(3, 4, 1)
+
+[node name="Wall9" type="CSGBox3D" parent="Environment/CSGCombiner3D"]
+transform = Transform3D(0.999961, 0.0088138, 0, -0.0088138, 0.999961, 0, 0, 0, 1, 10.9868, 5.00006, -10)
+size = Vector3(3, 9, 1)
+
+[node name="Wall10" type="CSGBox3D" parent="Environment/CSGCombiner3D"]
+transform = Transform3D(0.999961, 0.0088138, 0, -0.0088138, 0.999961, 0, 0, 0, 1, 7.96034, 2.00017, -10)
+size = Vector3(3, 3, 1)
+
+[node name="Wall11" type="CSGBox3D" parent="Environment/CSGCombiner3D"]
+transform = Transform3D(0.999961, 0.0088138, 0, -0.0088138, 0.999961, 0, 0, 0, 1, 7.96034, 8.00017, -10)
+size = Vector3(3, 3, 1)
+
+[node name="Wall3" type="CSGBox3D" parent="Environment/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 27, 4, -6.5)
+size = Vector3(1, 7, 40)
+
+[node name="Wall4" type="CSGBox3D" parent="Environment/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13, 5, 10)
+size = Vector3(1, 9, 7)
+
+[node name="Wall5" type="CSGBox3D" parent="Environment/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13, 5, -5.44391)
+size = Vector3(1, 9, 10)
+
+[node name="Wall13" type="CSGBox3D" parent="Environment/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 5.5, -17.5)
+size = Vector3(1, 4, 14)
+
+[node name="Wall14" type="CSGBox3D" parent="Environment/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 1.5, -13)
+size = Vector3(1, 6, 5)
+
+[node name="Wall16" type="CSGBox3D" parent="Environment/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 0, -29)
+size = Vector3(1, 3, 37)
+
+[node name="Wall31" type="CSGBox3D" parent="Environment/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 23, 1.5, -34.5)
+size = Vector3(1, 6, 12)
+
+[node name="Wall32" type="CSGBox3D" parent="Environment/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14, 1.5, -47.5)
+size = Vector3(1, 6, 12)
+
+[node name="Wall33" type="CSGBox3D" parent="Environment/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.03571, 1.48274, -47.5)
+size = Vector3(1, 6, 12)
+
+[node name="Wall17" type="CSGBox3D" parent="Environment/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 3, -29)
+size = Vector3(1, 3, 13)
+
+[node name="Wall18" type="CSGBox3D" parent="Environment/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 3, -44.5)
+size = Vector3(1, 3, 6)
+
+[node name="Wall19" type="CSGBox3D" parent="Environment/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 3, -13.5)
+size = Vector3(1, 3, 6)
+
+[node name="Wall34" type="CSGBox3D" parent="Environment/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -21, 3, -26)
+size = Vector3(1, 3, 31)
+
+[node name="Wall35" type="CSGBox3D" parent="Environment/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16, 3, -42)
+size = Vector3(11, 3, 1)
+
+[node name="Wall36" type="CSGBox3D" parent="Environment/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16, 3, -10)
+size = Vector3(11, 3, 1)
+
+[node name="Wall15" type="CSGBox3D" parent="Environment/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 1.5, -27.5)
+size = Vector3(1, 6, 14)
+
+[node name="Wall20" type="CSGBox3D" parent="Environment/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 1.5, -44)
+size = Vector3(1, 6, 7)
+
+[node name="Wall12" type="CSGBox3D" parent="Environment/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13, 7.5, 3)
+size = Vector3(1, 4, 7)
+
+[node name="Wall7" type="CSGBox3D" parent="Environment/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13, 4, -23)
+size = Vector3(1, 7, 5)
+
+[node name="Wall25" type="CSGBox3D" parent="Environment/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13, 4, -23)
+size = Vector3(1, 7, 5)
+
+[node name="Wall26" type="CSGBox3D" parent="Environment/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13, 4, -13.135)
+size = Vector3(1, 7, 5)
+
+[node name="Wall37" type="CSGBox3D" parent="Environment/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0.354488, -15)
+size = Vector3(11, 6, 1)
+
+[node name="CSGPolygon3D" type="CSGPolygon3D" parent="Environment/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.50753, -1.50047, -15.4911)
+polygon = PackedVector2Array(0, 0, -0.00112247, 0.00188589, 10.8727, 2.09038, 1, 0)
+depth = 5.0
+
+[node name="Wall38" type="CSGBox3D" parent="Environment/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.00068, 0.235109, -20.9946)
+size = Vector3(11, 6, 1)
+
+[node name="CSGPolygon3D2" type="CSGPolygon3D" parent="Environment/CSGCombiner3D"]
+transform = Transform3D(-1, 7.64274e-15, -8.74228e-08, 0, -1, -8.74228e-08, -8.74228e-08, -8.74228e-08, 1, 12.5075, 3.43584, -15.4911)
+polygon = PackedVector2Array(0, 0, -0.00112247, 0.00188589, 10.8727, 2.09038, 1, 0)
+depth = 5.0
+
+[node name="Bodys" type="Node" parent="."]
+
+[node name="Players" type="Node" parent="Bodys"]
+
+[node name="PlayerHumans" type="Node" parent="Bodys/Players"]
+
+[node name="PlayesMonsters" type="Node" parent="Bodys/Players"]
+
+[node name="Spectators" type="Node" parent="Bodys/Players"]
+
+[node name="Objects" type="Node" parent="Bodys"]
+
+[node name="Props" type="Node" parent="Bodys/Objects"]
+
+[node name="Items" type="Node" parent="Bodys/Objects"]
+
+[node name="Spawners" type="Node" parent="."]
+
+[node name="PlayerHumanSpawner" type="MultiplayerSpawner" parent="Spawners" node_paths=PackedStringArray("_playersParent", "_spawnMarkers")]
+_spawnable_scenes = PackedStringArray("res://Prefabs/Players/PlayerHuman.tscn")
+spawn_path = NodePath("../../Bodys/Players/PlayerHumans")
+script = ExtResource("3_bcg2r")
+_playersParent = NodePath("../../Bodys/Players/PlayerHumans")
+_spawnMarkers = [NodePath("../../SpawnAchors/AchorsPlayerHumanSpawners/FirstPlayer")]
+
+[node name="PlayerMonsterSpawner" type="MultiplayerSpawner" parent="Spawners" node_paths=PackedStringArray("_playersParent", "_spawnMarkers")]
+_spawnable_scenes = PackedStringArray("res://Prefabs/Players/PlayerMonster.tscn")
+spawn_path = NodePath("../../Bodys/Players/PlayesMonsters")
+script = ExtResource("3_bcg2r")
+_playersParent = NodePath("../../Bodys/Players/PlayesMonsters")
+_spawnMarkers = [NodePath("../../SpawnAchors/AchorsPlayerMonsterSpawners/FirstPlayer")]
+
+[node name="SpectatorSpawner" type="MultiplayerSpawner" parent="Spawners" node_paths=PackedStringArray("_spectatorParent")]
+_spawnable_scenes = PackedStringArray("res://Prefabs/Players/Spectator.tscn")
+spawn_path = NodePath("../../Bodys/Players/Spectators")
+script = ExtResource("4_u7ryt")
+_spectatorParent = NodePath("../../Bodys/Players/Spectators")
+
+[node name="ItemSpawner" type="MultiplayerSpawner" parent="Spawners" node_paths=PackedStringArray("_markers", "_itemsParent")]
+_spawnable_scenes = PackedStringArray("res://Prefabs/Items/Med.tscn", "res://Prefabs/Items/Weapons/Pistol.tscn", "res://Prefabs/Items/Weapons/Rifl.tscn")
+spawn_path = NodePath("../../Bodys/Objects/Items")
+script = ExtResource("5_e16a8")
+_markers = []
+_packedScenes = []
+_itemsParent = NodePath("../../Bodys/Objects/Items")
+
+[node name="PropSpawner" type="MultiplayerSpawner" parent="Spawners"]
+_spawnable_scenes = PackedStringArray("res://Prefabs/Props/Sphere.tscn", "res://Prefabs/Props/Bullet.tscn", "res://Prefabs/Props/Cube.tscn")
+spawn_path = NodePath("../../Bodys/Objects/Props")
+
+[node name="Round" type="Node" parent="."]
+script = ExtResource("8_wxw26")
+
+[node name="RoundController" type="Node" parent="Round" node_paths=PackedStringArray("_roundRoleRoller", "_roundSpawnSystem", "_itemSpawner")]
+script = ExtResource("9_fqncy")
+_roundRoleRoller = NodePath("../RoundRoleRoller")
+_roundSpawnSystem = NodePath("../RoundSpawnSystem")
+_itemSpawner = NodePath("../../Spawners/ItemSpawner")
+
+[node name="RoundRoleRoller" type="Node" parent="Round"]
+script = ExtResource("10_oq5mr")
+
+[node name="RoundSpawnSystem" type="Node" parent="Round" node_paths=PackedStringArray("_playerHumanSpawner", "_playerMonsterSpawner", "_spectatorSpawner")]
+script = ExtResource("11_0nej4")
+_playerHumanSpawner = NodePath("../../Spawners/PlayerHumanSpawner")
+_playerMonsterSpawner = NodePath("../../Spawners/PlayerMonsterSpawner")
+_spectatorSpawner = NodePath("../../Spawners/SpectatorSpawner")
+_playerHumanScene = ExtResource("12_4p7pk")
+_playerMonsterScene = ExtResource("13_6rgwt")
+_spectatorScene = ExtResource("14_2r4p4")
+
+[node name="RoundEnder" type="Node" parent="Round" node_paths=PackedStringArray("_parentPlayerHumans", "_parentPlayerMonsters")]
+script = ExtResource("15_0lt8v")
+_parentPlayerHumans = NodePath("../../Bodys/Players/PlayerHumans")
+_parentPlayerMonsters = NodePath("../../Bodys/Players/PlayesMonsters")

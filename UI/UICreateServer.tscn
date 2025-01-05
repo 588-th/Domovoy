@@ -1,0 +1,60 @@
+[gd_scene load_steps=2 format=3 uid="uid://dcqotk8dsw1uk"]
+
+[ext_resource type="Script" path="res://Scripts/UserInterface/Menu/UICreateServer.cs" id="1_cwg1b"]
+
+[node name="UICreateServer" type="Control" node_paths=PackedStringArray("_createServerButton", "_cancelButton", "_ipLabel", "_portLabel")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_cwg1b")
+_createServerButton = NodePath("MarginContainer/Panel/VBoxContainer/HBoxContainer/CreateServer")
+_cancelButton = NodePath("MarginContainer/Panel/VBoxContainer/HBoxContainer/Cancel")
+_ipLabel = NodePath("MarginContainer/Panel/VBoxContainer/IpLabel")
+_portLabel = NodePath("MarginContainer/Panel/VBoxContainer/PortLabel")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 400
+theme_override_constants/margin_top = 115
+theme_override_constants/margin_right = 400
+theme_override_constants/margin_bottom = 200
+
+[node name="Panel" type="Panel" parent="MarginContainer"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="IpLabel" type="LineEdit" parent="MarginContainer/Panel/VBoxContainer"]
+layout_mode = 2
+text = "127.0.0.1"
+placeholder_text = "ip"
+
+[node name="PortLabel" type="LineEdit" parent="MarginContainer/Panel/VBoxContainer"]
+layout_mode = 2
+text = "7000"
+placeholder_text = "port"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/Panel/VBoxContainer"]
+layout_mode = 2
+
+[node name="Cancel" type="Button" parent="MarginContainer/Panel/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "Cancel"
+
+[node name="CreateServer" type="Button" parent="MarginContainer/Panel/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "Create"

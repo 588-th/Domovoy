@@ -1,26 +1,26 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "D:\\Documents\\GodotProjects\\",
+  "WorkspaceRootPath": "D:\\Documents\\GodotProjects\\BoomerDuel\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{33528F9A-F553-4E74-A408-6E8C24FA54FC}|Godot Projects.csproj|d:\\documents\\godotprojects\\scripts\\playermovement\\playermovement.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{33528F9A-F553-4E74-A408-6E8C24FA54FC}|Godot Projects.csproj|solutionrelative:scripts\\playermovement\\playermovement.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{33528F9A-F553-4E74-A408-6E8C24FA54FC}|Godot Projects.csproj|d:\\documents\\godotprojects\\boomerduel\\scripts\\autoload\\settingsvideo.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{33528F9A-F553-4E74-A408-6E8C24FA54FC}|Godot Projects.csproj|solutionrelative:scripts\\autoload\\settingsvideo.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{33528F9A-F553-4E74-A408-6E8C24FA54FC}|Godot Projects.csproj|d:\\documents\\godotprojects\\scripts\\playermovement\\playermovementstats.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{33528F9A-F553-4E74-A408-6E8C24FA54FC}|Godot Projects.csproj|solutionrelative:scripts\\playermovement\\playermovementstats.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{33528F9A-F553-4E74-A408-6E8C24FA54FC}|Godot Projects.csproj|d:\\documents\\godotprojects\\boomerduel\\scripts\\userinterface\\menu\\uisettingsvideo.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{33528F9A-F553-4E74-A408-6E8C24FA54FC}|Godot Projects.csproj|solutionrelative:scripts\\userinterface\\menu\\uisettingsvideo.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{33528F9A-F553-4E74-A408-6E8C24FA54FC}|Godot Projects.csproj|d:\\documents\\godotprojects\\scripts\\playermovement\\statemachine\\standstate.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{33528F9A-F553-4E74-A408-6E8C24FA54FC}|Godot Projects.csproj|solutionrelative:scripts\\playermovement\\statemachine\\standstate.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{33528F9A-F553-4E74-A408-6E8C24FA54FC}|Godot Projects.csproj|d:\\documents\\godotprojects\\boomerduel\\scripts\\autoload\\settingsmouse.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{33528F9A-F553-4E74-A408-6E8C24FA54FC}|Godot Projects.csproj|solutionrelative:scripts\\autoload\\settingsmouse.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{33528F9A-F553-4E74-A408-6E8C24FA54FC}|Godot Projects.csproj|d:\\documents\\godotprojects\\scripts\\playermovement\\tempmovementlogic.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{33528F9A-F553-4E74-A408-6E8C24FA54FC}|Godot Projects.csproj|solutionrelative:scripts\\playermovement\\tempmovementlogic.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{33528F9A-F553-4E74-A408-6E8C24FA54FC}|Godot Projects.csproj|d:\\documents\\godotprojects\\boomerduel\\scripts\\userinterface\\menu\\uimousesettings.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{33528F9A-F553-4E74-A408-6E8C24FA54FC}|Godot Projects.csproj|solutionrelative:scripts\\userinterface\\menu\\uimousesettings.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{33528F9A-F553-4E74-A408-6E8C24FA54FC}|Godot Projects.csproj|d:\\documents\\godotprojects\\scripts\\inputeventhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{33528F9A-F553-4E74-A408-6E8C24FA54FC}|Godot Projects.csproj|solutionrelative:scripts\\inputeventhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{33528F9A-F553-4E74-A408-6E8C24FA54FC}|Godot Projects.csproj|d:\\documents\\godotprojects\\boomerduel\\scripts\\player\\playercamera.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{33528F9A-F553-4E74-A408-6E8C24FA54FC}|Godot Projects.csproj|solutionrelative:scripts\\player\\playercamera.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -35,67 +35,66 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "PlayerMovement.cs",
-              "DocumentMoniker": "D:\\Documents\\GodotProjects\\Scripts\\PlayerMovement\\PlayerMovement.cs",
-              "RelativeDocumentMoniker": "Scripts\\PlayerMovement\\PlayerMovement.cs",
-              "ToolTip": "D:\\Documents\\GodotProjects\\Scripts\\PlayerMovement\\PlayerMovement.cs",
-              "RelativeToolTip": "Scripts\\PlayerMovement\\PlayerMovement.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAIAAAA1AAAA",
+              "Title": "SettingsVideo.cs",
+              "DocumentMoniker": "D:\\Documents\\GodotProjects\\BoomerDuel\\Scripts\\Autoload\\SettingsVideo.cs",
+              "RelativeDocumentMoniker": "Scripts\\Autoload\\SettingsVideo.cs",
+              "ToolTip": "D:\\Documents\\GodotProjects\\BoomerDuel\\Scripts\\Autoload\\SettingsVideo.cs",
+              "RelativeToolTip": "Scripts\\Autoload\\SettingsVideo.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAoAAAAGAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-07-30T14:33:07.029Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "InputEventHandler.cs",
-              "DocumentMoniker": "D:\\Documents\\GodotProjects\\Scripts\\InputEventHandler.cs",
-              "RelativeDocumentMoniker": "Scripts\\InputEventHandler.cs",
-              "ToolTip": "D:\\Documents\\GodotProjects\\Scripts\\InputEventHandler.cs",
-              "RelativeToolTip": "Scripts\\InputEventHandler.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAABIAAAAIAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-07-30T14:13:01.252Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "StandState.cs",
-              "DocumentMoniker": "D:\\Documents\\GodotProjects\\Scripts\\PlayerMovement\\StateMachine\\StandState.cs",
-              "RelativeDocumentMoniker": "Scripts\\PlayerMovement\\StateMachine\\StandState.cs",
-              "ToolTip": "D:\\Documents\\GodotProjects\\Scripts\\PlayerMovement\\StateMachine\\StandState.cs",
-              "RelativeToolTip": "Scripts\\PlayerMovement\\StateMachine\\StandState.cs",
-              "ViewState": "AQIAAA4AAAAAAAAAAAAAAEMAAAAFAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-07-30T14:06:45.481Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "TempMovementLogic.cs",
-              "DocumentMoniker": "D:\\Documents\\GodotProjects\\Scripts\\PlayerMovement\\TempMovementLogic.cs",
-              "RelativeDocumentMoniker": "Scripts\\PlayerMovement\\TempMovementLogic.cs",
-              "ToolTip": "D:\\Documents\\GodotProjects\\Scripts\\PlayerMovement\\TempMovementLogic.cs",
-              "RelativeToolTip": "Scripts\\PlayerMovement\\TempMovementLogic.cs",
-              "ViewState": "AQIAAAIAAAAAAAAAAAAAAAsAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "OverriddenGroupName": "Scripts\\PlayerMovement",
-              "WhenOpened": "2024-07-30T10:55:22.558Z",
+              "WhenOpened": "2024-12-31T08:53:06.031Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "PlayerMovementStats.cs",
-              "DocumentMoniker": "D:\\Documents\\GodotProjects\\Scripts\\PlayerMovement\\PlayerMovementStats.cs",
-              "RelativeDocumentMoniker": "Scripts\\PlayerMovement\\PlayerMovementStats.cs",
-              "ToolTip": "D:\\Documents\\GodotProjects\\Scripts\\PlayerMovement\\PlayerMovementStats.cs",
-              "RelativeToolTip": "Scripts\\PlayerMovement\\PlayerMovementStats.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAqwBMAAAAeAAAA",
+              "Title": "UISettingsVideo.cs",
+              "DocumentMoniker": "D:\\Documents\\GodotProjects\\BoomerDuel\\Scripts\\UserInterface\\Menu\\UISettingsVideo.cs",
+              "RelativeDocumentMoniker": "Scripts\\UserInterface\\Menu\\UISettingsVideo.cs",
+              "ToolTip": "D:\\Documents\\GodotProjects\\BoomerDuel\\Scripts\\UserInterface\\Menu\\UISettingsVideo.cs",
+              "RelativeToolTip": "Scripts\\UserInterface\\Menu\\UISettingsVideo.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-07-30T11:03:27.435Z",
+              "WhenOpened": "2024-12-29T13:17:10.966Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "PlayerCamera.cs",
+              "DocumentMoniker": "D:\\Documents\\GodotProjects\\BoomerDuel\\Scripts\\Player\\PlayerCamera.cs",
+              "RelativeDocumentMoniker": "Scripts\\Player\\PlayerCamera.cs",
+              "ToolTip": "D:\\Documents\\GodotProjects\\BoomerDuel\\Scripts\\Player\\PlayerCamera.cs",
+              "RelativeToolTip": "Scripts\\Player\\PlayerCamera.cs",
+              "ViewState": "AQIAAAIAAAAAAAAAAAAxwC4AAAAaAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-12-29T13:19:55.309Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "SettingsMouse.cs",
+              "DocumentMoniker": "D:\\Documents\\GodotProjects\\BoomerDuel\\Scripts\\Autoload\\SettingsMouse.cs",
+              "RelativeDocumentMoniker": "Scripts\\Autoload\\SettingsMouse.cs",
+              "ToolTip": "D:\\Documents\\GodotProjects\\BoomerDuel\\Scripts\\Autoload\\SettingsMouse.cs",
+              "RelativeToolTip": "Scripts\\Autoload\\SettingsMouse.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-12-29T13:21:21.647Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "UIMouseSettings.cs",
+              "DocumentMoniker": "D:\\Documents\\GodotProjects\\BoomerDuel\\Scripts\\UserInterface\\Menu\\UIMouseSettings.cs",
+              "RelativeDocumentMoniker": "Scripts\\UserInterface\\Menu\\UIMouseSettings.cs",
+              "ToolTip": "D:\\Documents\\GodotProjects\\BoomerDuel\\Scripts\\UserInterface\\Menu\\UIMouseSettings.cs",
+              "RelativeToolTip": "Scripts\\UserInterface\\Menu\\UIMouseSettings.cs",
+              "ViewState": "AQIAABgAAAAAAAAAAAAowCIAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-12-29T13:27:15.643Z",
               "EditorCaption": ""
             }
           ]

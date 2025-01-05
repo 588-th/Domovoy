@@ -1,0 +1,8 @@
+[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://cf3iovcowyest"]
+
+[ext_resource type="Texture2D" uid="uid://1cio4q4d450x" path="res://Textures/t_poster5.png" id="1_0nvce"]
+
+[resource]
+resource_name = "m_poster5"
+albedo_texture = ExtResource("1_0nvce")
+texture_filter = 0

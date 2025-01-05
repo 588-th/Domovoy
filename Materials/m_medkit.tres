@@ -1,0 +1,8 @@
+[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://dkd4kxx24fgag"]
+
+[ext_resource type="Texture2D" uid="uid://bm8gmirwuk6sy" path="res://Textures/t_medkit.png" id="1_s5tkg"]
+
+[resource]
+resource_name = "m_medkit"
+albedo_texture = ExtResource("1_s5tkg")
+texture_filter = 0

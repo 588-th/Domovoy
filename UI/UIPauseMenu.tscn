@@ -1,0 +1,70 @@
+[gd_scene load_steps=4 format=3 uid="uid://c131mixukwjnm"]
+
+[ext_resource type="Script" path="res://Scripts/UserInterface/Menu/UIPauseMenu.cs" id="1_i4o8g"]
+[ext_resource type="Script" path="res://Scripts/UserInterface/Menu/UIMenu.cs" id="2_20yb2"]
+[ext_resource type="PackedScene" uid="uid://csxytgmqigpea" path="res://UI/UISettings.tscn" id="3_ykk8p"]
+
+[node name="UIPauseMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_i4o8g")
+
+[node name="UIMenu" type="Control" parent="." node_paths=PackedStringArray("_settings", "_startRound", "_settingsButton", "_disconnectButton")]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("2_20yb2")
+_settings = NodePath("../UISettings")
+_startRound = NodePath("CenterContainer/VBoxContainer/StartRound")
+_settingsButton = NodePath("CenterContainer/VBoxContainer/Settings")
+_disconnectButton = NodePath("CenterContainer/VBoxContainer/Disconnect")
+
+[node name="CenterContainer" type="CenterContainer" parent="UIMenu"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UIMenu/CenterContainer"]
+layout_mode = 2
+
+[node name="StartRound" type="Button" parent="UIMenu/CenterContainer/VBoxContainer"]
+layout_mode = 2
+text = "Start round"
+
+[node name="Settings" type="Button" parent="UIMenu/CenterContainer/VBoxContainer"]
+layout_mode = 2
+text = "Settings
+"
+
+[node name="Disconnect" type="Button" parent="UIMenu/CenterContainer/VBoxContainer"]
+layout_mode = 2
+text = "Disconnect"
+
+[node name="UISettings" parent="." instance=ExtResource("3_ykk8p")]
+visible = false
+layout_mode = 1
+
+[node name="UIVideoSettings" parent="UISettings/TabContainer" index="1" node_paths=PackedStringArray("_menu", "_settings")]
+_menu = NodePath("../../../UIMenu")
+_settings = NodePath("../..")
+
+[node name="UIMouseSettings" parent="UISettings/TabContainer" index="2" node_paths=PackedStringArray("_menu", "_settings")]
+_menu = NodePath("../../../UIMenu")
+_settings = NodePath("../..")
+
+[node name="UIMultiplayerSettings" parent="UISettings/TabContainer" index="3" node_paths=PackedStringArray("_menu", "_settings")]
+_menu = NodePath("../../../UIMenu")
+_settings = NodePath("../..")
+
+[editable path="UISettings"]
