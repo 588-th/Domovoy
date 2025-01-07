@@ -7,22 +7,22 @@ public partial class MonsterParticles : Node
 
     public override void _Ready()
     {
-        _monsterArea.AreaEntered += (_) => EnableParticles();
-        _monsterArea.AreaExited += (_) => DisableParticles();
+        _monsterArea.AreaEntered += EnableParticles;
+        _monsterArea.AreaExited += DisableParticles;
     }
 
     public override void _ExitTree()
     {
-        _monsterArea.AreaEntered -= (_) => EnableParticles();
-        _monsterArea.AreaExited -= (_) => DisableParticles();
+        _monsterArea.AreaEntered -= EnableParticles;
+        _monsterArea.AreaExited -= DisableParticles;
     }
 
-    private void EnableParticles()
+    private void EnableParticles(Node area)
     {
         _particles.Emitting = true;
     }
 
-    private void DisableParticles()
+    private void DisableParticles(Node area)
     {
         _particles.Emitting = false;
     }

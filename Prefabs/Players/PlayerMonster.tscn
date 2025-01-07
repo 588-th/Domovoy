@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=3 uid="uid://dw2d8yb5aog0t"]
+[gd_scene load_steps=33 format=3 uid="uid://dw2d8yb5aog0t"]
 
 [ext_resource type="Script" path="res://Scripts/AudioPlayer.cs" id="1_cu3h5"]
 [ext_resource type="Script" path="res://Scripts/Player/PlayerInputVector.cs" id="1_l02lm"]
@@ -15,6 +15,7 @@
 [ext_resource type="Script" path="res://Scripts/Player/PlayerHealth.cs" id="9_2j7p8"]
 [ext_resource type="Script" path="res://Scripts/Player/ItemInteract/PlayerHotbar.cs" id="10_4lchb"]
 [ext_resource type="Script" path="res://Scripts/Player/PropInteract/PlayerPropInteractor.cs" id="11_lwt4p"]
+[ext_resource type="PackedScene" uid="uid://dneigjq1nfs2b" path="res://UI/UIPlayerList.tscn" id="12_nnmj0"]
 [ext_resource type="AudioStream" uid="uid://3jamu0u0vmak" path="res://Audio/SFX/Common/Jump.mp3" id="13_pj3sh"]
 [ext_resource type="AudioStream" uid="uid://gmsohkdgi4p5" path="res://Audio/SFX/Common/Landing.mp3" id="14_5ujt1"]
 [ext_resource type="Script" path="res://Scripts/Player/Monster/PlayerMeleeAttack.cs" id="15_0hw5x"]
@@ -149,6 +150,14 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 layers = 524288
 mesh = SubResource("CylinderMesh_nnmp6")
 
+[node name="MonsterArea" type="Area3D" parent="CommonPart/PlayerBody"]
+collision_layer = 131072
+collision_mask = 65536
+
+[node name="AreaHitbox" type="CollisionShape3D" parent="CommonPart/PlayerBody/MonsterArea"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("CylinderShape3D_ix7cr")
+
 [node name="Achors" type="Node3D" parent="CommonPart/PlayerBody"]
 
 [node name="achorCamera" type="Marker3D" parent="CommonPart/PlayerBody/Achors"]
@@ -175,14 +184,6 @@ amount = 15
 lifetime = 3.0
 process_material = SubResource("ParticleProcessMaterial_tupl5")
 draw_pass_1 = SubResource("BoxMesh_p8w52")
-
-[node name="MonsterArea3D" type="Area3D" parent="CommonPart/PlayerBody"]
-collision_layer = 131072
-collision_mask = 65536
-
-[node name="Hitbox2" type="CollisionShape3D" parent="CommonPart/PlayerBody/MonsterArea3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
-shape = SubResource("CylinderShape3D_ix7cr")
 
 [node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="CommonPart"]
 bus = &"SFX"
@@ -234,6 +235,9 @@ _inputActions = NodePath("../../../ClientServerPart/Scripts/InputActions")
 _playerMovement = NodePath("../../../ServerPart/Scripts/PlayerMovement")
 
 [node name="UICrosshair" parent="ClientPart/UI" instance=ExtResource("7_5q3fu")]
+
+[node name="UIPlayerList" parent="ClientPart/UI" node_paths=PackedStringArray("_inputActions") instance=ExtResource("12_nnmj0")]
+_inputActions = NodePath("../../../ClientServerPart/Scripts/InputActions")
 
 [node name="ServerPart" type="Node" parent="."]
 
@@ -287,7 +291,7 @@ _lightAttackDamage = 25
 [node name="MonsterParticles" type="Node" parent="ServerPart/Scripts" node_paths=PackedStringArray("_particles", "_monsterArea")]
 script = ExtResource("18_nqpkp")
 _particles = NodePath("../../../CommonPart/PlayerBody/Flame")
-_monsterArea = NodePath("../../../CommonPart/PlayerBody/MonsterArea3D")
+_monsterArea = NodePath("../../../CommonPart/PlayerBody/MonsterArea")
 
 [node name="RemoteCameraRotation" type="Node" parent="ServerPart/Scripts" node_paths=PackedStringArray("_playerCamera", "_playerBody")]
 script = ExtResource("17_es1xv")

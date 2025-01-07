@@ -3,24 +3,16 @@
   "WorkspaceRootPath": "D:\\Documents\\GodotProjects\\BoomerDuel\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{33528F9A-F553-4E74-A408-6E8C24FA54FC}|Godot Projects.csproj|d:\\documents\\godotprojects\\boomerduel\\scripts\\autoload\\settingsvideo.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{33528F9A-F553-4E74-A408-6E8C24FA54FC}|Godot Projects.csproj|solutionrelative:scripts\\autoload\\settingsvideo.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{33528F9A-F553-4E74-A408-6E8C24FA54FC}|Godot Projects.csproj|d:\\documents\\godotprojects\\boomerduel\\scripts\\userinterface\\hud\\uiplayerlist.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{33528F9A-F553-4E74-A408-6E8C24FA54FC}|Godot Projects.csproj|solutionrelative:scripts\\userinterface\\hud\\uiplayerlist.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{33528F9A-F553-4E74-A408-6E8C24FA54FC}|Godot Projects.csproj|d:\\documents\\godotprojects\\boomerduel\\scripts\\userinterface\\menu\\uisettingsvideo.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{33528F9A-F553-4E74-A408-6E8C24FA54FC}|Godot Projects.csproj|solutionrelative:scripts\\userinterface\\menu\\uisettingsvideo.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{33528F9A-F553-4E74-A408-6E8C24FA54FC}|Godot Projects.csproj|d:\\documents\\godotprojects\\boomerduel\\scripts\\userinterface\\menu\\uipausemenu.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{33528F9A-F553-4E74-A408-6E8C24FA54FC}|Godot Projects.csproj|solutionrelative:scripts\\userinterface\\menu\\uipausemenu.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{33528F9A-F553-4E74-A408-6E8C24FA54FC}|Godot Projects.csproj|d:\\documents\\godotprojects\\boomerduel\\scripts\\autoload\\settingsmouse.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{33528F9A-F553-4E74-A408-6E8C24FA54FC}|Godot Projects.csproj|solutionrelative:scripts\\autoload\\settingsmouse.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{33528F9A-F553-4E74-A408-6E8C24FA54FC}|Godot Projects.csproj|d:\\documents\\godotprojects\\boomerduel\\scripts\\userinterface\\menu\\uimousesettings.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{33528F9A-F553-4E74-A408-6E8C24FA54FC}|Godot Projects.csproj|solutionrelative:scripts\\userinterface\\menu\\uimousesettings.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{33528F9A-F553-4E74-A408-6E8C24FA54FC}|Godot Projects.csproj|d:\\documents\\godotprojects\\boomerduel\\scripts\\player\\playercamera.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{33528F9A-F553-4E74-A408-6E8C24FA54FC}|Godot Projects.csproj|solutionrelative:scripts\\player\\playercamera.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{33528F9A-F553-4E74-A408-6E8C24FA54FC}|Godot Projects.csproj|d:\\documents\\godotprojects\\boomerduel\\scripts\\userinterface\\menu\\uimenu.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{33528F9A-F553-4E74-A408-6E8C24FA54FC}|Godot Projects.csproj|solutionrelative:scripts\\userinterface\\menu\\uimenu.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -30,71 +22,45 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 0,
+          "SelectedChildIndex": 2,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "SettingsVideo.cs",
-              "DocumentMoniker": "D:\\Documents\\GodotProjects\\BoomerDuel\\Scripts\\Autoload\\SettingsVideo.cs",
-              "RelativeDocumentMoniker": "Scripts\\Autoload\\SettingsVideo.cs",
-              "ToolTip": "D:\\Documents\\GodotProjects\\BoomerDuel\\Scripts\\Autoload\\SettingsVideo.cs",
-              "RelativeToolTip": "Scripts\\Autoload\\SettingsVideo.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAoAAAAGAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-31T08:53:06.031Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "UISettingsVideo.cs",
-              "DocumentMoniker": "D:\\Documents\\GodotProjects\\BoomerDuel\\Scripts\\UserInterface\\Menu\\UISettingsVideo.cs",
-              "RelativeDocumentMoniker": "Scripts\\UserInterface\\Menu\\UISettingsVideo.cs",
-              "ToolTip": "D:\\Documents\\GodotProjects\\BoomerDuel\\Scripts\\UserInterface\\Menu\\UISettingsVideo.cs",
-              "RelativeToolTip": "Scripts\\UserInterface\\Menu\\UISettingsVideo.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Title": "UIPauseMenu.cs",
+              "DocumentMoniker": "D:\\Documents\\GodotProjects\\BoomerDuel\\Scripts\\UserInterface\\Menu\\UIPauseMenu.cs",
+              "RelativeDocumentMoniker": "Scripts\\UserInterface\\Menu\\UIPauseMenu.cs",
+              "ToolTip": "D:\\Documents\\GodotProjects\\BoomerDuel\\Scripts\\UserInterface\\Menu\\UIPauseMenu.cs",
+              "RelativeToolTip": "Scripts\\UserInterface\\Menu\\UIPauseMenu.cs",
+              "ViewState": "AQIAAA0AAAAAAAAAAAAgwAgAAAAFAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-29T13:17:10.966Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "PlayerCamera.cs",
-              "DocumentMoniker": "D:\\Documents\\GodotProjects\\BoomerDuel\\Scripts\\Player\\PlayerCamera.cs",
-              "RelativeDocumentMoniker": "Scripts\\Player\\PlayerCamera.cs",
-              "ToolTip": "D:\\Documents\\GodotProjects\\BoomerDuel\\Scripts\\Player\\PlayerCamera.cs",
-              "RelativeToolTip": "Scripts\\Player\\PlayerCamera.cs",
-              "ViewState": "AQIAAAIAAAAAAAAAAAAxwC4AAAAaAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-29T13:19:55.309Z",
+              "WhenOpened": "2025-01-07T11:58:02.58Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 2,
-              "Title": "SettingsMouse.cs",
-              "DocumentMoniker": "D:\\Documents\\GodotProjects\\BoomerDuel\\Scripts\\Autoload\\SettingsMouse.cs",
-              "RelativeDocumentMoniker": "Scripts\\Autoload\\SettingsMouse.cs",
-              "ToolTip": "D:\\Documents\\GodotProjects\\BoomerDuel\\Scripts\\Autoload\\SettingsMouse.cs",
-              "RelativeToolTip": "Scripts\\Autoload\\SettingsMouse.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Title": "UIMenu.cs",
+              "DocumentMoniker": "D:\\Documents\\GodotProjects\\BoomerDuel\\Scripts\\UserInterface\\Menu\\UIMenu.cs",
+              "RelativeDocumentMoniker": "Scripts\\UserInterface\\Menu\\UIMenu.cs",
+              "ToolTip": "D:\\Documents\\GodotProjects\\BoomerDuel\\Scripts\\UserInterface\\Menu\\UIMenu.cs",
+              "RelativeToolTip": "Scripts\\UserInterface\\Menu\\UIMenu.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABYAAAAkAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-29T13:21:21.647Z",
+              "WhenOpened": "2025-01-07T11:03:31.178Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "UIMouseSettings.cs",
-              "DocumentMoniker": "D:\\Documents\\GodotProjects\\BoomerDuel\\Scripts\\UserInterface\\Menu\\UIMouseSettings.cs",
-              "RelativeDocumentMoniker": "Scripts\\UserInterface\\Menu\\UIMouseSettings.cs",
-              "ToolTip": "D:\\Documents\\GodotProjects\\BoomerDuel\\Scripts\\UserInterface\\Menu\\UIMouseSettings.cs",
-              "RelativeToolTip": "Scripts\\UserInterface\\Menu\\UIMouseSettings.cs",
-              "ViewState": "AQIAABgAAAAAAAAAAAAowCIAAAAAAAAA",
+              "DocumentIndex": 0,
+              "Title": "UIPlayerList.cs",
+              "DocumentMoniker": "D:\\Documents\\GodotProjects\\BoomerDuel\\Scripts\\UserInterface\\HUD\\UIPlayerList.cs",
+              "RelativeDocumentMoniker": "Scripts\\UserInterface\\HUD\\UIPlayerList.cs",
+              "ToolTip": "D:\\Documents\\GodotProjects\\BoomerDuel\\Scripts\\UserInterface\\HUD\\UIPlayerList.cs",
+              "RelativeToolTip": "Scripts\\UserInterface\\HUD\\UIPlayerList.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAcAAAAaAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-29T13:27:15.643Z",
+              "WhenOpened": "2025-01-07T11:58:36.745Z",
               "EditorCaption": ""
             }
           ]

@@ -7,8 +7,8 @@ public partial class UIPauseMenu : Control
 
     public override void _Ready()
     {
-        _inputActions.EscapeKeyDown += OnEscapeKeyPressed;
         HidePauseMenu();
+        _inputActions.EscapeKeyDown += OnEscapeKeyPressed;
     }
 
     public override void _ExitTree()

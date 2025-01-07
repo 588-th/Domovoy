@@ -59,14 +59,22 @@ public partial class MultiplayerConnection : Node
         foreach (var peerID in Multiplayer.GetPeers())
             RpcId(peerID, nameof(RpcCloseClient));
 
-        Multiplayer.MultiplayerPeer.PeerDisconnected += OnPeerDisconnected;
+        if (Multiplayer.GetPeers().Length == 0)
+        {
+            Multiplayer.MultiplayerPeer.Dispose();
+            Multiplayer.MultiplayerPeer = null;
+            connectionState = ConnectionStateEnum.None;
+            ServerClosed?.Invoke();
+        }
+        else
+            Multiplayer.MultiplayerPeer.PeerDisconnected += OnAllPeerDisconnected;
     }
 
-    private void OnPeerDisconnected(long peerID)
+    private void OnAllPeerDisconnected(long peer)
     {
         if (Multiplayer.GetPeers().Length == 0)
         {
-            Multiplayer.MultiplayerPeer.PeerDisconnected -= OnPeerDisconnected;
+            Multiplayer.MultiplayerPeer.PeerDisconnected -= OnAllPeerDisconnected;
             Multiplayer.MultiplayerPeer.Dispose();
             Multiplayer.MultiplayerPeer = null;
             connectionState = ConnectionStateEnum.None;

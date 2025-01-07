@@ -10,14 +10,20 @@ public partial class UIMenu : Control
 
     public override void _Ready()
     {
-        _startRound.Pressed += OnStartRoundButtonPressed;
+        if (Multiplayer.IsServer())
+        {
+            _startRound.Visible = true;
+            _startRound.Pressed += OnStartRoundButtonPressed;
+        }
+
         _settingsButton.Pressed += OnSettingsButtonPressed;
         _disconnectButton.Pressed += OnDisconnectButtonPressed;
     }
 
     public override void _ExitTree()
     {
-        _startRound.Pressed -= OnStartRoundButtonPressed;
+        if (Multiplayer.IsServer())
+            _startRound.Pressed -= OnStartRoundButtonPressed;
         _settingsButton.Pressed -= OnSettingsButtonPressed;
         _disconnectButton.Pressed -= OnDisconnectButtonPressed;
     }

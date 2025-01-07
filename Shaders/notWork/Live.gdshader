@@ -11,10 +11,10 @@ uniform float speed : hint_range(0.0, 5.0); // Скорость анимации
 void fragment() {
     // Исходные UV-координаты
     vec2 uv = UV * uv_scale;
-    
+
     // Разрешение пиксельной сетки
     vec2 pixel_size = vec2(1.0 / resolution_x, 1.0 / resolution_y);
-    
+
     // Округление UV до ближайших координат пиксельной сетки
     vec2 pixel_uv = floor(uv / pixel_size) * pixel_size;
 
@@ -28,6 +28,6 @@ void fragment() {
 
     // Получение цвета из основной текстуры
     vec4 color = texture(texture_albedo, final_uv);
-    
+
     ALBEDO = color.rgb;
 }

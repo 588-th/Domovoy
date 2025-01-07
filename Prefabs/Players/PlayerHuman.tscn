@@ -1,4 +1,4 @@
-[gd_scene load_steps=38 format=3 uid="uid://bks72b4kwjk1f"]
+[gd_scene load_steps=39 format=3 uid="uid://bks72b4kwjk1f"]
 
 [ext_resource type="Script" path="res://Scripts/Player/InputVector.cs" id="2_8kxsr"]
 [ext_resource type="Script" path="res://Scripts/Player/PlayerInputVector.cs" id="2_ca8we"]
@@ -20,6 +20,7 @@
 [ext_resource type="PackedScene" uid="uid://bq3h4dv3nkys1" path="res://UI/UIPlayerMovement.tscn" id="12_3spqa"]
 [ext_resource type="Script" path="res://Scripts/AudioPlayer.cs" id="13_bwvh4"]
 [ext_resource type="PackedScene" uid="uid://cojvgyniobwbk" path="res://UI/UICrosshair.tscn" id="13_h4pmd"]
+[ext_resource type="PackedScene" uid="uid://dneigjq1nfs2b" path="res://UI/UIPlayerList.tscn" id="15_yqhfc"]
 [ext_resource type="Script" path="res://Scripts/Player/PlayerDeath.cs" id="15_yvyp7"]
 [ext_resource type="Resource" uid="uid://by7ti8k7bsiet" path="res://ScriptableObjects/PlayerMovementParameters.tres" id="16_a8fdu"]
 [ext_resource type="Script" path="res://Scripts/Player/PlayerHUDParameters.cs" id="17_ijix5"]
@@ -261,6 +262,9 @@ _inputActions = NodePath("../../../ClientServerPart/Scripts/InputActions")
 _playerMovement = NodePath("../../../ServerPart/Scripts/PlayerMovement")
 
 [node name="UICrosshair" parent="ClientPart/UI" instance=ExtResource("13_h4pmd")]
+
+[node name="UIPlayerList" parent="ClientPart/UI" node_paths=PackedStringArray("_inputActions") instance=ExtResource("15_yqhfc")]
+_inputActions = NodePath("../../../ClientServerPart/Scripts/InputActions")
 
 [node name="ServerPart" type="Node" parent="."]
 

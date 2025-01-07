@@ -39,6 +39,7 @@ mouse_filter = 0
 layout_mode = 2
 
 [node name="StartRound" type="Button" parent="UIMenu/CenterContainer/VBoxContainer"]
+visible = false
 layout_mode = 2
 text = "Start round"
 
