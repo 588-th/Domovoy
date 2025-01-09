@@ -20,14 +20,14 @@ public partial class FirearmToggleLaser : Node
     private void ToggleOnLaser()
     {
         _laserLight.LightEnergy = _firearmParameters.LaserEnergy;
-        _audioPlayer.PlayAudio3DForAll(_firearmParameters.LaserOnAudio, true);
+        _audioPlayer.PlayAudio3D(_firearmParameters.LaserOnAudio);
         _isLaserEnable = true;
     }
 
     private void ToggleOffLaser()
     {
         _laserLight.LightEnergy = 0;
-        _audioPlayer.PlayAudio3DForAll(_firearmParameters.LaserOffAudio, true);
+        _audioPlayer.PlayAudio3D(_firearmParameters.LaserOffAudio);
         _isLaserEnable = false;
     }
 }

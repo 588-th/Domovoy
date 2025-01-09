@@ -43,7 +43,7 @@ public partial class FirearmShoot : Node
 
         if (_firearmParameters.CurrentBulletsInClip <= 0)
         {
-            _audioPlayer.PlayAudio3DForAll(_firearmParameters.EmptyShotAudio, true);
+            _audioPlayer.PlayAudio3D(_firearmParameters.EmptyShotAudio);
             return;
         }
 
@@ -52,7 +52,7 @@ public partial class FirearmShoot : Node
 
         SpawnBullet();
         _firearmParameters.CurrentBulletsInClip--;
-        _audioPlayer.PlayAudio3DForAll(_firearmParameters.ShotAudio, true);
+        _audioPlayer.PlayAudio3D(_firearmParameters.ShotAudio);
 
         _firearm.ItemUsed?.Invoke();
     }

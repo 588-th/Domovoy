@@ -73,7 +73,7 @@ public class JumpState : MovementState
 
         _playerMovement.AudioPlayer.PlayAudio(_playerMovement.PlayerMovementParameters.JumpAudio);
         if (!_playerMovement.PlayerMovementParameters.PlayAudioOnlyLocaly)
-            _playerMovement.AudioPlayer.PlayAudio3DForAll(_playerMovement.PlayerMovementParameters.JumpAudio, false);
+            _playerMovement.AudioPlayer.PlayAudio3DExceptClient(_playerMovement.PlayerMovementParameters.JumpAudio);
     }
 
     private void OnJumpKeyDown()
@@ -91,6 +91,6 @@ public class JumpState : MovementState
 
         _playerMovement.AudioPlayer.PlayAudio(_playerMovement.PlayerMovementParameters.LandingAudio);
         if (!_playerMovement.PlayerMovementParameters.PlayAudioOnlyLocaly)
-            _playerMovement.AudioPlayer.PlayAudio3DForAll(_playerMovement.PlayerMovementParameters.LandingAudio, false);
+            _playerMovement.AudioPlayer.PlayAudio3DExceptClient(_playerMovement.PlayerMovementParameters.LandingAudio);
     }
 }

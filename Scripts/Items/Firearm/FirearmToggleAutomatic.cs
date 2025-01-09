@@ -10,7 +10,7 @@ public partial class FirearmToggleAutomatic : Node
         if (_firearmParameters.IsCanSwitchAitomatic)
         {
             _firearmParameters.IsAutomatic = !_firearmParameters.IsAutomatic;
-            _audioPlayer.PlayAudio3DForAll(_firearmParameters.ToggleAutomaticAudio, true);
+            _audioPlayer.PlayAudio3D(_firearmParameters.ToggleAutomaticAudio);
         }
     }
 }

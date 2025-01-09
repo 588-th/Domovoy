@@ -9,7 +9,7 @@
 [ext_resource type="Script" path="res://Scripts/AudioPlayer.cs" id="3_wgr0m"]
 [ext_resource type="Script" path="res://Scripts/Items/Firearm/FirearmShoot.cs" id="4_ltr6o"]
 [ext_resource type="Script" path="res://Scripts/Items/Firearm/FirearmReload.cs" id="6_mvirk"]
-[ext_resource type="AudioStream" uid="uid://bt3lxgsow3gbl" path="res://Audio/SFX/Nothing.mp3" id="7_ktftt"]
+[ext_resource type="AudioStream" uid="uid://dv71qbh6l5kfu" path="res://Audio/SFX/Firearm/Pistol/FirearmPistolShot.mp3" id="7_iv6w0"]
 [ext_resource type="Script" path="res://Scripts/Items/Firearm/FirearmToggleAutomatic.cs" id="7_tle65"]
 [ext_resource type="AudioStream" uid="uid://cy1wa5i5pykto" path="res://Audio/SFX/Firearm/Pistol/FirearmPistolEmptyShot.mp3" id="10_aobik"]
 [ext_resource type="Script" path="res://Scripts/Items/Firearm/FirearmToggleLaser.cs" id="10_px31b"]
@@ -83,7 +83,8 @@ CurrentBulletsInClip = 13
 CurrentClips = 2
 FireRate = 2.0
 BulletSpeed = 2.0
-ShotAudio = ExtResource("7_ktftt")
+LaserEnergy = 10
+ShotAudio = ExtResource("7_iv6w0")
 EmptyShotAudio = ExtResource("10_aobik")
 ReloadAudio = ExtResource("12_jeq0h")
 ToggleAutomaticAudio = ExtResource("14_txdib")

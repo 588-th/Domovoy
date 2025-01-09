@@ -13,7 +13,7 @@ public partial class FirearmReload : Node
 
         _firearmParameters.CurrentClips--;
         _firearmParameters.CurrentBulletsInClip = _firearmParameters.BulletsPerClip;
-        _audioPlayer.PlayAudio3DForAll(_firearmParameters.ReloadAudio, true);
+        _audioPlayer.PlayAudio3D(_firearmParameters.ReloadAudio);
         _firearm.ItemUsed?.Invoke();
     }
 }

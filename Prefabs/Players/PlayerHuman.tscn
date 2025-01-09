@@ -96,16 +96,18 @@ properties/0/replication_mode = 2
 metadata/PlayerCamera = NodePath("CommonPart/PlayerCamera")
 metadata/PlayerHealth = NodePath("ServerPart/Scripts/PlayerHealth")
 metadata/RayOfLook = NodePath("CommonPart/PlayerCamera/RayOfLook")
+metadata/AudioPlayer = NodePath("CommonPart/AudioPlayer")
 
 [node name="CommonPart" type="Node" parent="."]
 
-[node name="AudioPlayer" type="Node" parent="CommonPart" node_paths=PackedStringArray("_audioStreamPlayer", "_audioStreamPlayer3D")]
+[node name="AudioPlayer" type="Node" parent="CommonPart" node_paths=PackedStringArray("_playerRoot", "_audioStreamPlayer", "_audioStreamPlayer3D")]
 script = ExtResource("13_bwvh4")
+_playerRoot = NodePath("../..")
 _audioStreamPlayer = NodePath("../../ClientServerPart/AudioStreamPlayer")
 _audioStreamPlayer3D = NodePath("../AudioStreamPlayer3D")
 
 [node name="PlayerCamera" type="Camera3D" parent="CommonPart"]
-transform = Transform3D(1, 0, 0, 0, 1, 1.06581e-14, 0, -1.06581e-14, 1, -1.0829, 1.5, -3.19743e-14)
+transform = Transform3D(1, 0, 0, 0, 1, 1.06581e-14, 0, -1.06581e-14, 1, 0, 1.5, -3.19743e-14)
 cull_mask = 524287
 
 [node name="RayOfLook" type="RayCast3D" parent="CommonPart/PlayerCamera"]
@@ -165,7 +167,7 @@ transform = Transform3D(0.1, 0, 0, 0, -4.37114e-08, 0.1, 0, -1, -4.37114e-09, 0,
 shape = SubResource("ConcavePolygonShape3D_rgiks")
 
 [node name="PlayerBody" type="CharacterBody3D" parent="CommonPart" groups=["Hitbox:Player"]]
-transform = Transform3D(1, 0, 0, 0, 1, 2.13162e-14, 0, -2.13162e-14, 1, -1.0829, 0, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 2.13162e-14, 0, -2.13162e-14, 1, 0, 0, 0)
 collision_layer = 512
 collision_mask = 519
 floor_max_angle = 1.0472
@@ -283,6 +285,12 @@ script = ExtResource("5_37vo5")
 MaxHealth = 100
 CurrentHealth = 100
 
+[node name="PlayerHotbar" type="Node" parent="ServerPart/Scripts" node_paths=PackedStringArray("_inputActions", "_audioPlayer", "playerNode")]
+script = ExtResource("6_eq515")
+_inputActions = NodePath("../../../ClientServerPart/Scripts/InputActions")
+_audioPlayer = NodePath("../../../CommonPart/AudioPlayer")
+playerNode = NodePath("../../..")
+
 [node name="PlayerPropInteractor" type="Node" parent="ServerPart/Scripts" node_paths=PackedStringArray("_inputActions", "RayOfLook", "PlayerBody", "AnchorForDraggedObject", "StaticBody3D", "Generic6DofJoint3D")]
 script = ExtResource("7_d01bu")
 _inputActions = NodePath("../../../ClientServerPart/Scripts/InputActions")
@@ -298,12 +306,6 @@ _inputActions = NodePath("../../../ClientServerPart/Scripts/InputActions")
 _playerHotbar = NodePath("../PlayerHotbar")
 _player = NodePath("../../../CommonPart/PlayerBody")
 _rayOfLook = NodePath("../../../CommonPart/PlayerCamera/RayOfLook")
-
-[node name="PlayerHotbar" type="Node" parent="ServerPart/Scripts" node_paths=PackedStringArray("_inputActions", "_audioPlayer", "playerNode")]
-script = ExtResource("6_eq515")
-_inputActions = NodePath("../../../ClientServerPart/Scripts/InputActions")
-_audioPlayer = NodePath("../../../CommonPart/AudioPlayer")
-playerNode = NodePath("../../..")
 
 [node name="PlayerItemEquipper" type="Node" parent="ServerPart/Scripts" node_paths=PackedStringArray("_inputActions", "_audioPlayer", "_playerHotbar", "_anchorHandItem", "_anchorPrimatyItem", "_anchorSecondaryItem", "_anchorTertiaryItem")]
 script = ExtResource("9_nr6ef")

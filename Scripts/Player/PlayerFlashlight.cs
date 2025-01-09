@@ -36,7 +36,7 @@ public partial class PlayerFlashlight : Node
         _flashlight.LightEnergy = _flashlightEnergy;
         _flashlightArea.Monitorable = true;
         _audioPlayer.PlayAudio(_flashlightOnAudio);
-        _audioPlayer.PlayAudio3DForAll(_flashlightOnAudio, false);
+        _audioPlayer.PlayAudio3DExceptClient(_flashlightOnAudio);
         _isFlashlightEnable = true;
     }
 
@@ -45,7 +45,7 @@ public partial class PlayerFlashlight : Node
         _flashlight.LightEnergy = 0;
         _flashlightArea.Monitorable = false;
         _audioPlayer.PlayAudio(_flashlightOffAudio);
-        _audioPlayer.PlayAudio3DForAll(_flashlightOffAudio, false);
+        _audioPlayer.PlayAudio3DExceptClient(_flashlightOffAudio);
         _isFlashlightEnable = false;
     }
 }

@@ -13,8 +13,11 @@ public partial class PlayerHUDParameters : Node
     public override void _Ready()
     {
         _playerHealth.PlayerHealthChanged += TransferHealthData;
-        _playerItemEquipper.ActiveSlotChanged += TransferItemData;
-        _playerItemEquipper.ActiveSlotChanged += SubToItemUsed;
+        if (_playerItemEquipper != null)
+        {
+            _playerItemEquipper.ActiveSlotChanged += TransferItemData;
+            _playerItemEquipper.ActiveSlotChanged += SubToItemUsed;
+        }
 
         TransferHealthData();
         TransferMaxHealthData();

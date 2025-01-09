@@ -45,8 +45,9 @@ metadata/PlayerCamera = NodePath("CommonPart/PlayerCamera")
 
 [node name="CommonPart" type="Node" parent="."]
 
-[node name="AudioPlayer" type="Node" parent="CommonPart" node_paths=PackedStringArray("_audioStreamPlayer", "_audioStreamPlayer3D")]
+[node name="AudioPlayer" type="Node" parent="CommonPart" node_paths=PackedStringArray("_playerRoot", "_audioStreamPlayer", "_audioStreamPlayer3D")]
 script = ExtResource("1_4resh")
+_playerRoot = NodePath("../..")
 _audioStreamPlayer = NodePath("../../ClientServerPart/AudioStreamPlayer")
 _audioStreamPlayer3D = NodePath("../AudioStreamPlayer3D")
 
