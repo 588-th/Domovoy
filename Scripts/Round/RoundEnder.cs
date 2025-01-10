@@ -1,19 +1,33 @@
 using Godot;
+using Godot.Collections;
 
 public partial class RoundEnder : Node
 {
-    [Export] private Node _parentPlayerHumans;
-    [Export] private Node _parentPlayerMonsters;
-
     public override void _Ready()
     {
-        GameEvent.Instance.playerDied += (_) => CheckPlayers();
+        GameEvent.Instance.playerDied += CheckPlayers;
     }
 
-    private void CheckPlayers()
+    public override void _ExitTree()
     {
-        if (_parentPlayerHumans.GetChildren().Count == 0
-            || _parentPlayerMonsters.GetChildren().Count == 0)
+        GameEvent.Instance.playerDied -= CheckPlayers;
+    }
+
+    private void CheckPlayers(long id)
+    {
+        Array<Node> players = GetTree().GetNodesInGroup("Player");
+
+        int humanCount = 0;
+        foreach (Node player in players)
+            if (player.IsInGroup("Player:Human"))
+                humanCount++;
+
+        int monsterCount = 0;
+        foreach (var player in players)
+            if (player.IsInGroup("Player:Monster"))
+                monsterCount++;
+
+        if (humanCount == 0 || monsterCount == 0)
             EndRound();
     }
 

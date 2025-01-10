@@ -5,7 +5,7 @@
 [ext_resource type="ArrayMesh" uid="uid://b2mb176k0pcgp" path="res://Meshes/HiddenCollection_BowlingPin.res" id="1_w8yps"]
 [ext_resource type="Script" path="res://Scripts/Player/InputVector.cs" id="1_xdgfg"]
 [ext_resource type="Script" path="res://Scripts/Player/InputActions.cs" id="2_tndgs"]
-[ext_resource type="Script" path="res://Scripts/Player/PlayerInputActions.cs" id="4_63mi2"]
+[ext_resource type="Script" path="res://Scripts/Player/PlayerInputKeys.cs" id="4_63mi2"]
 [ext_resource type="Script" path="res://Scripts/Player/PlayerCamera.cs" id="4_in0gx"]
 [ext_resource type="PackedScene" uid="uid://c131mixukwjnm" path="res://UI/UIPauseMenu.tscn" id="5_0kvk8"]
 [ext_resource type="PackedScene" uid="uid://bq3h4dv3nkys1" path="res://UI/UIPlayerMovement.tscn" id="6_p88as"]
@@ -18,6 +18,7 @@
 [ext_resource type="Script" path="res://Scripts/Player/RemoteCameraRotation.cs" id="14_2swan"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_e1mld"]
+radius = 0.3
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_ghvew"]
 properties/0/path = NodePath(".:Vector")
@@ -52,7 +53,7 @@ _audioStreamPlayer = NodePath("../../ClientServerPart/AudioStreamPlayer")
 _audioStreamPlayer3D = NodePath("../AudioStreamPlayer3D")
 
 [node name="PlayerCamera" type="Camera3D" parent="CommonPart"]
-transform = Transform3D(1, 0, 0, 0, 1, 1.06581e-14, 0, -1.06581e-14, 1, 0, 1.5, -1.59872e-14)
+transform = Transform3D(1, 0, 0, 0, 1, 1.06581e-14, 0, -1.06581e-14, 1, 0, 0.5, -5.32905e-15)
 
 [node name="PlayerLook" type="Node3D" parent="CommonPart/PlayerCamera"]
 
@@ -81,23 +82,22 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.41989, -0.13983, -1.11052)
 [node name="PlayerBody" type="CharacterBody3D" parent="CommonPart" groups=["Hitbox:Player"]]
 transform = Transform3D(1, 0, 0, 0, 1, 1.06581e-14, 0, -1.06581e-14, 1, 0, 0, 0)
 collision_layer = 256
-collision_mask = 7
+collision_mask = 259
 floor_max_angle = 1.0472
 metadata/PlayerRoot = NodePath("../..")
 
 [node name="Model" type="MeshInstance3D" parent="CommonPart/PlayerBody"]
-transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 0, 1.12063, 2.57128e-15)
+transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 0, 0.125, 0)
 cast_shadow = 0
 mesh = ExtResource("1_w8yps")
 
 [node name="Hitbox" type="CollisionShape3D" parent="CommonPart/PlayerBody"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 shape = SubResource("CylinderShape3D_e1mld")
 
 [node name="Achors" type="Node3D" parent="CommonPart/PlayerBody"]
 
 [node name="achorCamera" type="Marker3D" parent="CommonPart/PlayerBody/Achors"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 
 [node name="RemotePositionToCamera" type="RemoteTransform3D" parent="CommonPart/PlayerBody/Achors/achorCamera"]
 remote_path = NodePath("../../../../PlayerCamera")
@@ -105,13 +105,13 @@ update_rotation = false
 update_scale = false
 
 [node name="anchorPrimatyItem" type="Marker3D" parent="CommonPart/PlayerBody/Achors"]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 1.25, 0.5)
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, -0.25, 0.35)
 
 [node name="anchorSecondaryItem" type="Marker3D" parent="CommonPart/PlayerBody/Achors"]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0.5, 0.75, 0)
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0.35, -0.25, 0)
 
 [node name="anchorTertiaryItem" type="Marker3D" parent="CommonPart/PlayerBody/Achors"]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, -0.5, 0.75, 0)
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, -0.35, -0.25, 0)
 
 [node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="CommonPart"]
 bus = &"SFX"
@@ -133,7 +133,7 @@ bus = &"SFX"
 
 [node name="Scripts" type="Node" parent="ClientPart"]
 
-[node name="PlayerInputActions" type="Node" parent="ClientPart/Scripts" node_paths=PackedStringArray("_inputActions")]
+[node name="PlayerInputKeys" type="Node" parent="ClientPart/Scripts" node_paths=PackedStringArray("_inputActions")]
 script = ExtResource("4_63mi2")
 _inputActions = NodePath("../../../ClientServerPart/Scripts/InputActions")
 

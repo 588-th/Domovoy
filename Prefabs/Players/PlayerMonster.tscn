@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://Scripts/AudioPlayer.cs" id="1_cu3h5"]
 [ext_resource type="Script" path="res://Scripts/Player/PlayerInputVector.cs" id="1_l02lm"]
-[ext_resource type="Script" path="res://Scripts/Player/PlayerInputActions.cs" id="2_5vfog"]
+[ext_resource type="Script" path="res://Scripts/Player/PlayerInputKeys.cs" id="2_5vfog"]
 [ext_resource type="Script" path="res://Scripts/Player/InputActions.cs" id="2_yphgy"]
 [ext_resource type="Script" path="res://Scripts/Player/InputVector.cs" id="3_p0joe"]
 [ext_resource type="Script" path="res://Scripts/Player/PlayerCamera.cs" id="4_b45tp"]
@@ -15,7 +15,6 @@
 [ext_resource type="PackedScene" uid="uid://bmygsw76ycvts" path="res://UI/UIHUD.tscn" id="8_gglgl"]
 [ext_resource type="Script" path="res://Scripts/Player/PlayerHealth.cs" id="9_2j7p8"]
 [ext_resource type="Script" path="res://Scripts/UserInterface/HUD/PlayerHUD.cs" id="9_raijq"]
-[ext_resource type="Script" path="res://Scripts/Player/ItemInteract/PlayerHotbar.cs" id="10_4lchb"]
 [ext_resource type="Script" path="res://Scripts/Player/PropInteract/PlayerPropInteractor.cs" id="11_lwt4p"]
 [ext_resource type="PackedScene" uid="uid://dneigjq1nfs2b" path="res://UI/UIPlayerList.tscn" id="12_nnmj0"]
 [ext_resource type="AudioStream" uid="uid://3jamu0u0vmak" path="res://Audio/SFX/Common/Jump.mp3" id="13_pj3sh"]
@@ -25,6 +24,7 @@
 [ext_resource type="Script" path="res://Scripts/Player/PlayerDeath.cs" id="15_t6oc2"]
 [ext_resource type="Script" path="res://Scripts/Player/RemoteCameraRotation.cs" id="17_es1xv"]
 [ext_resource type="Script" path="res://Scripts/Player/Monster/MonsterParticles.cs" id="18_nqpkp"]
+[ext_resource type="PackedScene" uid="uid://dyq2rw3wcmvjc" path="res://Prefabs/Props/HumanCorpse.tscn" id="21_o67hm"]
 [ext_resource type="Script" path="res://Scripts/Player/PlayerHUDParameters.cs" id="26_k2iwt"]
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_nnmp6"]
@@ -108,7 +108,7 @@ properties/1/path = NodePath(".:rotation")
 properties/1/spawn = true
 properties/1/replication_mode = 2
 
-[node name="PlayerMonster" type="Node" groups=["Player", "Player:Human"]]
+[node name="PlayerMonster" type="Node" groups=["Player", "Player:Monster"]]
 metadata/PlayerCamera = NodePath("CommonPart/PlayerCamera")
 metadata/PlayerHealth = NodePath("ServerPart/Scripts/PlayerHealth")
 metadata/AudioPlayer = NodePath("CommonPart/AudioPlayer")
@@ -122,7 +122,7 @@ _audioStreamPlayer = NodePath("../../ClientServerPart/AudioStreamPlayer")
 _audioStreamPlayer3D = NodePath("../AudioStreamPlayer3D")
 
 [node name="PlayerCamera" type="Camera3D" parent="CommonPart"]
-transform = Transform3D(1, 0, 0, 0, 1, 1.06581e-14, 0, -1.06581e-14, 1, 0, 1.5, -1.59872e-14)
+transform = Transform3D(1, 0, 0, 0, 1, 1.06581e-14, 0, -1.06581e-14, 1, 0, 0.5, 0)
 cull_mask = 524287
 
 [node name="PlayerLook" type="Node3D" parent="CommonPart/PlayerCamera"]
@@ -155,19 +155,16 @@ linear_limit_z/enabled = false
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.41989, -0.13983, -1.11052)
 
 [node name="PlayerBody" type="CharacterBody3D" parent="CommonPart" groups=["Hitbox:Player"]]
-transform = Transform3D(1, 0, 0, 0, 1, 1.06581e-14, 0, -1.06581e-14, 1, 0, 0, 0)
 collision_layer = 1024
-collision_mask = 7
+collision_mask = 11
 floor_max_angle = 1.0472
 metadata/PlayerRoot = NodePath("../..")
 
 [node name="Model" type="MeshInstance3D" parent="CommonPart/PlayerBody"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 layers = 524288
 mesh = SubResource("CylinderMesh_nnmp6")
 
 [node name="Hitbox" type="CollisionShape3D" parent="CommonPart/PlayerBody"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 shape = SubResource("CylinderShape3D_ix7cr")
 
 [node name="MonsterArea" type="Area3D" parent="CommonPart/PlayerBody"]
@@ -175,27 +172,17 @@ collision_layer = 131072
 collision_mask = 65536
 
 [node name="AreaHitbox" type="CollisionShape3D" parent="CommonPart/PlayerBody/MonsterArea"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 shape = SubResource("CylinderShape3D_ix7cr")
 
 [node name="Achors" type="Node3D" parent="CommonPart/PlayerBody"]
 
 [node name="achorCamera" type="Marker3D" parent="CommonPart/PlayerBody/Achors"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 
 [node name="RemotePositionToCamera" type="RemoteTransform3D" parent="CommonPart/PlayerBody/Achors/achorCamera"]
 remote_path = NodePath("../../../../PlayerCamera")
 update_rotation = false
 update_scale = false
-
-[node name="anchorPrimatyItem" type="Marker3D" parent="CommonPart/PlayerBody/Achors"]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 1.25, 0.5)
-
-[node name="anchorSecondaryItem" type="Marker3D" parent="CommonPart/PlayerBody/Achors"]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0.5, 0.75, 0)
-
-[node name="anchorTertiaryItem" type="Marker3D" parent="CommonPart/PlayerBody/Achors"]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, -0.5, 0.75, 0)
 
 [node name="Flame" type="GPUParticles3D" parent="CommonPart/PlayerBody"]
 transform = Transform3D(1, 0, 0, 0, 1, -3.19743e-14, 0, 3.19743e-14, 1, 0, 0.750524, 7.99916e-15)
@@ -228,7 +215,7 @@ bus = &"SFX"
 
 [node name="Scripts" type="Node" parent="ClientPart"]
 
-[node name="PlayerInputActions" type="Node" parent="ClientPart/Scripts" node_paths=PackedStringArray("_inputActions")]
+[node name="PlayerInputKeys" type="Node" parent="ClientPart/Scripts" node_paths=PackedStringArray("_inputActions")]
 script = ExtResource("2_5vfog")
 _inputActions = NodePath("../../../ClientServerPart/Scripts/InputActions")
 
@@ -285,6 +272,18 @@ PlayerBody = NodePath("../../../CommonPart/PlayerBody")
 AudioPlayer = NodePath("../../../CommonPart/AudioPlayer")
 PlayerMovementParameters = SubResource("Resource_2cnea")
 
+[node name="PlayerHealth" type="Node" parent="ServerPart/Scripts"]
+script = ExtResource("9_2j7p8")
+MaxHealth = 100
+CurrentHealth = 90
+
+[node name="PlayerDeath" type="Node" parent="ServerPart/Scripts" node_paths=PackedStringArray("_player", "_playerBody", "_playerHealth")]
+script = ExtResource("15_t6oc2")
+_player = NodePath("../../..")
+_playerBody = NodePath("../../../CommonPart/PlayerBody")
+_playerHealth = NodePath("../PlayerHealth")
+_humanCorpseScene = ExtResource("21_o67hm")
+
 [node name="PlayerPropInteractor" type="Node" parent="ServerPart/Scripts" node_paths=PackedStringArray("_inputActions", "RayOfLook", "PlayerBody", "AnchorForDraggedObject", "StaticBody3D", "Generic6DofJoint3D")]
 script = ExtResource("11_lwt4p")
 _inputActions = NodePath("../../../ClientServerPart/Scripts/InputActions")
@@ -293,21 +292,6 @@ PlayerBody = NodePath("../../../CommonPart/PlayerBody")
 AnchorForDraggedObject = NodePath("../../../CommonPart/PlayerCamera/PlayerLook/ObjectInteraction/anchorForDraggedObject")
 StaticBody3D = NodePath("../../../CommonPart/PlayerCamera/PlayerLook/ObjectInteraction/StaticBody3D")
 Generic6DofJoint3D = NodePath("../../../CommonPart/PlayerCamera/PlayerLook/ObjectInteraction/Generic6DOFJoint3D")
-
-[node name="PlayerHealth" type="Node" parent="ServerPart/Scripts"]
-script = ExtResource("9_2j7p8")
-MaxHealth = 100
-CurrentHealth = 90
-
-[node name="PlayerHotbar" type="Node" parent="ServerPart/Scripts" node_paths=PackedStringArray("_inputActions", "playerNode")]
-script = ExtResource("10_4lchb")
-_inputActions = NodePath("../../../ClientServerPart/Scripts/InputActions")
-playerNode = NodePath("../../..")
-
-[node name="PlayerDeath" type="Node" parent="ServerPart/Scripts" node_paths=PackedStringArray("_player", "_playerHealth")]
-script = ExtResource("15_t6oc2")
-_player = NodePath("../../..")
-_playerHealth = NodePath("../PlayerHealth")
 
 [node name="PlayerMeleeAttack" type="Node" parent="ServerPart/Scripts" node_paths=PackedStringArray("_inputActions", "_playerObjectInteractor", "_rayOfAttack", "_attackCooldownTimer", "_hardAttackChargeTimer")]
 script = ExtResource("15_0hw5x")
@@ -348,14 +332,11 @@ _rayOfLook = NodePath("../../../CommonPart/PlayerCamera/PlayerLook/RayOfLook")
 
 [node name="PrimaryItemSpawner" type="MultiplayerSpawner" parent="Spawners"]
 _spawnable_scenes = PackedStringArray("res://Prefabs/Items/Weapons/Rifl.tscn")
-spawn_path = NodePath("../../CommonPart/PlayerBody/Achors/anchorPrimatyItem")
 
 [node name="SecondaryItemSpawner" type="MultiplayerSpawner" parent="Spawners"]
 _spawnable_scenes = PackedStringArray("res://Prefabs/Items/Weapons/Pistol.tscn")
-spawn_path = NodePath("../../CommonPart/PlayerBody/Achors/anchorSecondaryItem")
 
 [node name="TertiaryItemSpawner" type="MultiplayerSpawner" parent="Spawners"]
-spawn_path = NodePath("../../CommonPart/PlayerBody/Achors/anchorTertiaryItem")
 
 [node name="HoldingItemSpawner" type="MultiplayerSpawner" parent="Spawners"]
 _spawnable_scenes = PackedStringArray("res://Prefabs/Items/Weapons/Pistol.tscn", "res://Prefabs/Items/Weapons/Rifl.tscn")

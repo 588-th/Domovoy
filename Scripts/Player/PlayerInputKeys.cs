@@ -1,15 +1,21 @@
 using Godot;
 using System.Collections.Generic;
 
-public partial class PlayerInputActions : Node
+public partial class PlayerInputKeys : Node
 {
     [Export] private InputActions _inputActions;
 
     private readonly List<string> _inputs = new()
     {
-        "up", "down", "left", "right",
-        "primarySlot", "secondarySlot", "tertiarySlot",
-        "crouch", "jump",
+        "up", 
+        "down", 
+        "left", 
+        "right",
+        "primarySlot", 
+        "secondarySlot", 
+        "tertiarySlot",
+        "crouch", 
+        "jump",
         "escape",
         "interact",
         "drop",
@@ -20,6 +26,8 @@ public partial class PlayerInputActions : Node
         "toggleFirearmAutomatic",
         "toggleFirearmLaser",
         "toggleFlashlight",
+        "spectateNextPlayer",
+        "spectatePreviousPlayer",
     };
 
     public override void _Process(double delta)

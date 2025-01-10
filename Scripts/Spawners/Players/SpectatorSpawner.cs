@@ -62,10 +62,13 @@ public partial class SpectatorSpawner : MultiplayerSpawner
     {
         SetMultiplayerAuthoritys(spectatorRoot, "ClientPart", authorityID);
         SetMultiplayerAuthoritys(spectatorRoot, "ClientServerPart", authorityID);
+        SetMultiplayerAuthoritys(spectatorRoot, "ClientServerPart/SpectatorCamera", 1);
     }
 
     private void SetSyncronizersVisibility(Node spectatorRoot, int authorityID)
     {
+        SetVisibility(spectatorRoot, "Synchronizers/SpectatorCameraSynchronizer", 1, true);
+        SetVisibility(spectatorRoot, "Synchronizers/SpectatorCameraSynchronizer", authorityID, true);
         SetVisibility(spectatorRoot, "Synchronizers/HUDParametersSynchronizer", 1, true);
         SetVisibility(spectatorRoot, "Synchronizers/HUDParametersSynchronizer", authorityID, true);
     }

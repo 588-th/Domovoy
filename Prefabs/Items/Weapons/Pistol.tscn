@@ -37,7 +37,7 @@ properties/3/spawn = true
 properties/3/replication_mode = 2
 
 [node name="Pistol" type="RigidBody3D" node_paths=PackedStringArray("_firearmParameters", "_firearmShoot", "_firearmReload", "_firearmToggleAutomatic", "_firearmToggleLaser") groups=["Item:Pickupble", "Object:Item"]]
-collision_layer = 8
+collision_layer = 4
 collision_mask = 15
 script = ExtResource("1_co1fx")
 _firearmParameters = NodePath("ServerPart/FirearmParameters")
@@ -82,7 +82,7 @@ TotalClips = 2
 CurrentBulletsInClip = 13
 CurrentClips = 2
 FireRate = 2.0
-BulletSpeed = 2.0
+BulletSpeed = 1.5
 LaserEnergy = 10
 ShotAudio = ExtResource("7_iv6w0")
 EmptyShotAudio = ExtResource("10_aobik")

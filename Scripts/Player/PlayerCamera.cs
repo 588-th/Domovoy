@@ -3,6 +3,8 @@ using Godot;
 public partial class PlayerCamera : Node
 {
     [Export] private Camera3D _playerCamera;
+    [Export] private bool _playerCanMoveCamera = true;
+
     private float _sensitivityMultiplayer = 0.001f;
 
     public override void _Ready()
@@ -13,7 +15,7 @@ public partial class PlayerCamera : Node
 
     public override void _ExitTree()
     {
-        SettingsVideo.Instance.FOVUpdated += UpdateFOV;
+        SettingsVideo.Instance.FOVUpdated -= UpdateFOV;
     }
 
     private void InitializeSettings()
@@ -28,7 +30,8 @@ public partial class PlayerCamera : Node
         if (@event is not InputEventMouseMotion mouseMotion)
             return;
 
-        RotateCamera(mouseMotion);
+        if (_playerCanMoveCamera)
+            RotateCamera(mouseMotion);
     }
 
     private void RotateCamera(InputEventMouseMotion mouseMotion)

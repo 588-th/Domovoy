@@ -11,7 +11,6 @@ public partial class InputActions : Node
     public Action RightKeyDown;
     public Action CrouchKeyDown;
     public Action JumpKeyDown;
-    public Action SlideKeyDown;
     public Action InteractKeyDown;
     public Action DropKeyDown;
     public Action AttackKeyDown;
@@ -24,6 +23,8 @@ public partial class InputActions : Node
     public Action ToggleFirearmAutomaticDown;
     public Action ToggleFirearmLaserDown;
     public Action ToggleFlashlightDown;
+    public Action SpectateNextPlayerDown;
+    public Action SpectatePreviousPlayerDown;
 
     public Action EscapeKeyUp;
     public Action UpKeyUp;
@@ -32,7 +33,6 @@ public partial class InputActions : Node
     public Action RightKeyUp;
     public Action CrouchKeyUp;
     public Action JumpKeyUp;
-    public Action SlideKeyUp;
     public Action InteractKeyUp;
     public Action DropKeyUp;
     public Action AttackKeyUp;
@@ -52,7 +52,6 @@ public partial class InputActions : Node
             {"right", () => RightKeyDown},
             {"crouch", () => CrouchKeyDown},
             {"jump", () => JumpKeyDown},
-            {"slide", () => SlideKeyDown},
             {"interact", () => InteractKeyDown},
             {"drop", () => DropKeyDown},
             {"attack", () => AttackKeyDown},
@@ -65,6 +64,8 @@ public partial class InputActions : Node
             {"toggleFirearmAutomatic", () => ToggleFirearmAutomaticDown},
             {"toggleFirearmLaser", () => ToggleFirearmLaserDown},
             {"toggleFlashlight", () => ToggleFlashlightDown},
+            {"spectateNextPlayer", () => SpectateNextPlayerDown},
+            {"spectatePreviousPlayer", () => SpectatePreviousPlayerDown},
         };
 
         _keyUpActions = new()
@@ -76,7 +77,6 @@ public partial class InputActions : Node
             {"right", () => RightKeyUp},
             {"crouch", () => CrouchKeyUp},
             {"jump", () => JumpKeyUp},
-            {"slide", () => SlideKeyUp},
             {"interact", () => InteractKeyUp},
             {"drop", () => DropKeyUp},
             {"attack", () => AttackKeyUp},

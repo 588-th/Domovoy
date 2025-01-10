@@ -18,10 +18,13 @@ public partial class BulletCollided : Node
 
     private void OnBodyEntered(Node body)
     {
+        GD.Print("Hit");
         if (IsPlayerHitbox(body))
         {
-            DecreasePlayerHealth(body);
-            PlayHitAudio(body);
+            GD.Print("HitPlayer");
+            int plaeyrHealth = DecreasePlayerHealth(body);
+            if (plaeyrHealth > 0)
+                PlayHitAudio(body);
         }
 
         _bulletDestroy.Destroy();
@@ -32,7 +35,7 @@ public partial class BulletCollided : Node
         return node.IsInGroup("Hitbox:Player");
     }
 
-    private void DecreasePlayerHealth(Node body)
+    private int DecreasePlayerHealth(Node body)
     {
         var playerRootNode = body.GetMeta("PlayerRoot");
         Node playerRoot = body.GetNode(playerRootNode.ToString());
@@ -41,6 +44,7 @@ public partial class BulletCollided : Node
         PlayerHealth playerHealth = playerRoot.GetNode(playerHealthNode.ToString()) as PlayerHealth;
 
         playerHealth.DecreaseHealth(10);
+        return playerHealth.CurrentHealth;
     }
 
     private void PlayHitAudio(Node body)

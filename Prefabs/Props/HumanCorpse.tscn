@@ -1,0 +1,29 @@
+[gd_scene load_steps=4 format=3 uid="uid://dyq2rw3wcmvjc"]
+
+[ext_resource type="ArrayMesh" uid="uid://b2mb176k0pcgp" path="res://Meshes/HiddenCollection_BowlingPin.res" id="1_lf7rp"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_rxyfa"]
+size = Vector3(0.63, 1.8, 0.3)
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_dibuo"]
+properties/0/path = NodePath(".:position")
+properties/0/spawn = true
+properties/0/replication_mode = 2
+properties/1/path = NodePath(".:rotation")
+properties/1/spawn = true
+properties/1/replication_mode = 2
+
+[node name="HumanCorps" type="RigidBody3D" groups=["Object:Prop"]]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0)
+collision_layer = 16
+
+[node name="Model" type="MeshInstance3D" parent="."]
+transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 0, 0.125, 0)
+mesh = ExtResource("1_lf7rp")
+
+[node name="Hitbox" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.15)
+shape = SubResource("BoxShape3D_rxyfa")
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_dibuo")

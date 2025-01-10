@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=3 uid="uid://c352e57r1w1l0"]
+[gd_scene load_steps=31 format=3 uid="uid://c352e57r1w1l0"]
 
 [ext_resource type="Texture2D" uid="uid://dogrre0un6mu6" path="res://Textures/t_lenoleum.png" id="1_m0hbh"]
 [ext_resource type="Texture2D" uid="uid://dekoex0syt1yj" path="res://Textures/t_ceiling.png" id="2_cpi2b"]
@@ -15,6 +15,7 @@
 [ext_resource type="ArrayMesh" uid="uid://cxdg8kcralgnt" path="res://Meshes/HiddenCollection_Poster3.res" id="8_8af14"]
 [ext_resource type="ArrayMesh" uid="uid://bjel8qxk853nq" path="res://Meshes/HiddenCollection_Poster4.res" id="9_ibvpo"]
 [ext_resource type="ArrayMesh" uid="uid://c6pcolew5pp02" path="res://Meshes/HiddenCollection_Poster5.res" id="10_6fvwg"]
+[ext_resource type="PackedScene" uid="uid://dyq2rw3wcmvjc" path="res://Prefabs/Props/HumanCorpse.tscn" id="10_8n305"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_auiyk"]
 sky_top_color = Color(0.311447, 0.495967, 0.878786, 1)
@@ -98,16 +99,16 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.13511, -1.73959, 0.220598)
 [node name="AchorsPlayerSpawners" type="Node" parent="."]
 
 [node name="FirstPlayer" type="Marker3D" parent="AchorsPlayerSpawners"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2, 3)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 3)
 
 [node name="SecondPlayer" type="Marker3D" parent="AchorsPlayerSpawners"]
-transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0.2, -3)
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 1, -3)
 
 [node name="ThirdPlayer" type="Marker3D" parent="AchorsPlayerSpawners"]
-transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -2, 0.2, 0)
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -2, 1, 0)
 
 [node name="FourthPlayer" type="Marker3D" parent="AchorsPlayerSpawners"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0.2, 0)
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 2, 1, 0)
 
 [node name="Environment" type="Node" parent="."]
 
@@ -121,8 +122,7 @@ shadow_enabled = true
 [node name="CSGCombiner3D" type="CSGCombiner3D" parent="Environment"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
 use_collision = true
-collision_layer = 2
-collision_mask = 29
+collision_mask = 1822
 
 [node name="Floor" type="CSGBox3D" parent="Environment/CSGCombiner3D"]
 size = Vector3(6, 0.5, 8)
@@ -187,6 +187,9 @@ skeleton = NodePath("../..")
 transform = Transform3D(-4.37114e-08, 1, -4.37114e-08, 0, -4.37114e-08, -1, -1, -4.37114e-08, 1.91069e-15, -2.992, 1.5, -3)
 mesh = ExtResource("10_6fvwg")
 skeleton = NodePath("../..")
+
+[node name="HumanCorps" parent="Environment/CSGCombiner3D" instance=ExtResource("10_8n305")]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 1.3096, 0)
 
 [node name="Light" type="Node" parent="Environment"]
 

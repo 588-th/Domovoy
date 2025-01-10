@@ -1,50 +1,46 @@
-[gd_scene load_steps=9 format=3 uid="uid://dn6bs13u0l2at"]
+[gd_scene load_steps=13 format=3 uid="uid://dn6bs13u0l2at"]
 
 [ext_resource type="Script" path="res://Scripts/Player/HUDParameters.cs" id="1_6eu3q"]
-[ext_resource type="Script" path="res://Scripts/Player/Spectator/SpectatorInputActions.cs" id="1_43bjw"]
-[ext_resource type="Script" path="res://Scripts/Player/Spectator/SpectatorMode.cs" id="2_acyj6"]
-[ext_resource type="Script" path="res://Scripts/Player/Spectator/SpectatorModeActions.cs" id="2_qdrqm"]
+[ext_resource type="Script" path="res://Scripts/Player/InputActions.cs" id="1_ouwve"]
+[ext_resource type="Script" path="res://Scripts/Player/Spectator/SpectatorPlayerChanger.cs" id="2_acyj6"]
+[ext_resource type="Script" path="res://Scripts/Player/PlayerInputKeys.cs" id="3_y84ls"]
 [ext_resource type="Script" path="res://Scripts/UserInterface/HUD/PlayerHUD.cs" id="4_ahxpb"]
 [ext_resource type="PackedScene" uid="uid://bmygsw76ycvts" path="res://UI/UIHUD.tscn" id="5_0vuk4"]
+[ext_resource type="Script" path="res://Scripts/Player/PlayerCamera.cs" id="5_16n5l"]
 [ext_resource type="Script" path="res://Scripts/Player/Spectator/HUDParameterSpectating.cs" id="6_3li0g"]
+[ext_resource type="PackedScene" uid="uid://c131mixukwjnm" path="res://UI/UIPauseMenu.tscn" id="6_3ocre"]
+[ext_resource type="PackedScene" uid="uid://dneigjq1nfs2b" path="res://UI/UIPlayerList.tscn" id="7_ox3bw"]
+[ext_resource type="Script" path="res://Scripts/Player/Spectator/SpectatorCameraFollow.cs" id="9_ngxsr"]
 
-[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_5174b"]
-properties/0/path = NodePath(".:PlayerHealthMax")
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_vvjep"]
+properties/0/path = NodePath(".:position")
 properties/0/spawn = true
 properties/0/replication_mode = 2
-properties/1/path = NodePath(".:PlayerHealth")
+properties/1/path = NodePath(".:rotation")
 properties/1/spawn = true
 properties/1/replication_mode = 2
-properties/2/path = NodePath(".:PlayerActiveSlotItem")
-properties/2/spawn = true
-properties/2/replication_mode = 2
-properties/3/path = NodePath(".:PlayerInteractData")
-properties/3/spawn = true
-properties/3/replication_mode = 2
 
 [node name="PlayerSpectator" type="Node" groups=["Player", "Player:Spectator"]]
 
 [node name="ClientServerPart" type="Node" parent="."]
 
+[node name="SpectatorCamera" type="Camera3D" parent="ClientServerPart"]
+
 [node name="Scripts" type="Node" parent="ClientServerPart"]
+
+[node name="InputActions" type="Node" parent="ClientServerPart/Scripts"]
+script = ExtResource("1_ouwve")
 
 [node name="HUDParameters" type="Node" parent="ClientServerPart/Scripts"]
 script = ExtResource("1_6eu3q")
-
-[node name="SpectatorModeActions" type="Node" parent="ClientServerPart/Scripts"]
-script = ExtResource("2_qdrqm")
 
 [node name="ClientPart" type="Node" parent="."]
 
 [node name="Scripts" type="Node" parent="ClientPart"]
 
-[node name="SpectatorInputActions" type="Node" parent="ClientPart/Scripts"]
-script = ExtResource("1_43bjw")
-
-[node name="SpectatorMode" type="Node" parent="ClientPart/Scripts" node_paths=PackedStringArray("_spectatorInputActions", "_spectatorModeActions")]
-script = ExtResource("2_acyj6")
-_spectatorInputActions = NodePath("../SpectatorInputActions")
-_spectatorModeActions = NodePath("../../../ClientServerPart/Scripts/SpectatorModeActions")
+[node name="PlayerInputKeys" type="Node" parent="ClientPart/Scripts" node_paths=PackedStringArray("_inputActions")]
+script = ExtResource("3_y84ls")
+_inputActions = NodePath("../../../ClientServerPart/Scripts/InputActions")
 
 [node name="PlayerHUD" type="Node" parent="ClientPart/Scripts" node_paths=PackedStringArray("_HUDParameters", "_UIplayerHealth", "_UIitem", "_UIinteractInfo", "_UISanity")]
 script = ExtResource("4_ahxpb")
@@ -52,24 +48,45 @@ _HUDParameters = NodePath("../../../ClientServerPart/Scripts/HUDParameters")
 _UIplayerHealth = NodePath("../../UI/UIHUD/Health")
 _UIitem = NodePath("../../UI/UIHUD/Item")
 _UIinteractInfo = NodePath("../../UI/UIHUD/InteractInfo")
-_UISanity = NodePath("../../UI/UIHUD/Sanity")
+_UISanity = NodePath("../../UI/UIHUD/HightPriority/Sanity")
+
+[node name="PlayerCamera" type="Node" parent="ClientPart/Scripts" node_paths=PackedStringArray("_playerCamera")]
+script = ExtResource("5_16n5l")
+_playerCamera = NodePath("../../../ClientServerPart/SpectatorCamera")
+_playerCanMoveCamera = false
 
 [node name="UI" type="Node" parent="ClientPart"]
 
 [node name="UIHUD" parent="ClientPart/UI" instance=ExtResource("5_0vuk4")]
 
+[node name="UIPauseMenu" parent="ClientPart/UI" node_paths=PackedStringArray("_inputActions") instance=ExtResource("6_3ocre")]
+mouse_filter = 1
+_inputActions = NodePath("../../../ClientServerPart/Scripts/InputActions")
+
+[node name="UIPlayerList" parent="ClientPart/UI" node_paths=PackedStringArray("_inputActions") instance=ExtResource("7_ox3bw")]
+_inputActions = NodePath("../../../ClientServerPart/Scripts/InputActions")
+
 [node name="ServerPart" type="Node" parent="."]
 
-[node name="HUDParameterSpectating" type="Node" parent="ServerPart" node_paths=PackedStringArray("_playerData", "_spectatorModeEvents")]
+[node name="SpectatorCameraFollow" type="Node" parent="ServerPart" node_paths=PackedStringArray("_spectatorPlayerChanger", "_spectatorCamera")]
+script = ExtResource("9_ngxsr")
+_spectatorPlayerChanger = NodePath("../SpectatorPlayerChanger")
+_spectatorCamera = NodePath("../../ClientServerPart/SpectatorCamera")
+
+[node name="SpectatorPlayerChanger" type="Node" parent="ServerPart" node_paths=PackedStringArray("_inputActions")]
+script = ExtResource("2_acyj6")
+_inputActions = NodePath("../../ClientServerPart/Scripts/InputActions")
+
+[node name="HUDParameterSpectating" type="Node" parent="ServerPart" node_paths=PackedStringArray("_playerData", "_spectatorMode")]
 script = ExtResource("6_3li0g")
 _playerData = NodePath("../../ClientServerPart/Scripts/HUDParameters")
-_spectatorModeEvents = NodePath("../../ClientServerPart/Scripts/SpectatorModeActions")
+_spectatorMode = NodePath("../SpectatorPlayerChanger")
 
 [node name="Synchronizers" type="Node" parent="."]
 
-[node name="HUDParametersSynchronizer" type="MultiplayerSynchronizer" parent="Synchronizers"]
-root_path = NodePath("../../ClientServerPart/Scripts/HUDParameters")
-replication_config = SubResource("SceneReplicationConfig_5174b")
+[node name="SpectatorCameraSynchronizer" type="MultiplayerSynchronizer" parent="Synchronizers"]
+root_path = NodePath("../../ClientServerPart/SpectatorCamera")
+replication_config = SubResource("SceneReplicationConfig_vvjep")
 public_visibility = false
 
 [editable path="ClientPart/UI/UIHUD"]

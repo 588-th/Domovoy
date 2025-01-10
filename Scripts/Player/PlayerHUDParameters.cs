@@ -31,8 +31,12 @@ public partial class PlayerHUDParameters : Node
     public override void _ExitTree()
     {
         _playerHealth.PlayerHealthChanged -= TransferHealthData;
-        _playerItemEquipper.ActiveSlotChanged -= TransferItemData;
-        _playerItemEquipper.ActiveSlotChanged -= SubToItemUsed;
+        if (_playerItemEquipper != null)
+        {
+            _playerItemEquipper.ActiveSlotChanged -= TransferItemData;
+            _playerItemEquipper.ActiveSlotChanged -= SubToItemUsed;
+        }
+
     }
 
     private void TransferHealthData()

@@ -116,8 +116,7 @@ environment = SubResource("Environment_qukhg")
 [node name="CSGCombiner3D" type="CSGCombiner3D" parent="Environment"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
 use_collision = true
-collision_layer = 2
-collision_mask = 29
+collision_mask = 1822
 
 [node name="Ceiling" type="CSGBox3D" parent="Environment/CSGCombiner3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0159416, 5, 0.0284653)
@@ -239,7 +238,7 @@ _markers = [NodePath("../../SpawnAchors/AchorsItemSpawners/Pistol"), NodePath(".
 _packedScenes = Array[PackedScene]([ExtResource("4_uh4xc"), ExtResource("7_hb782"), ExtResource("5_164mi")])
 
 [node name="PropSpawner" type="MultiplayerSpawner" parent="Spawners"]
-_spawnable_scenes = PackedStringArray("res://Prefabs/Props/Bullet.tscn")
+_spawnable_scenes = PackedStringArray("res://Prefabs/Props/Bullet.tscn", "res://Prefabs/Props/HumanCorpse.tscn")
 spawn_path = NodePath("../../Bodys/Objects/Props")
 
 [node name="Round" type="Node" parent="."]
@@ -263,7 +262,5 @@ _playerHumanScene = ExtResource("9_8lybn")
 _playerMonsterScene = ExtResource("10_2x741")
 _playerSpectatorScene = ExtResource("10_vrys8")
 
-[node name="RoundEnder" type="Node" parent="Round" node_paths=PackedStringArray("_parentPlayerHumans", "_parentPlayerMonsters")]
+[node name="RoundEnder" type="Node" parent="Round"]
 script = ExtResource("14_3yvyd")
-_parentPlayerHumans = NodePath("../../Bodys/Players/Humans")
-_parentPlayerMonsters = NodePath("../../Bodys/Players/Monsters")

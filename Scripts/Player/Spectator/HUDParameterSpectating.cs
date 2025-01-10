@@ -3,19 +3,19 @@ using Godot;
 public partial class HUDParameterSpectating : Node
 {
     [Export] private HUDParameters _playerData;
-    [Export] private SpectatorModeActions _spectatorModeEvents;
+    [Export] private SpectatorPlayerChanger _spectatorMode;
 
     private HUDParameters _spectatingPlayerData;
 
     public override void _Ready()
     {
-        _spectatorModeEvents.SpectatedPlayerChanged += SpectatePlayerData;
+        _spectatorMode.SpectatedPlayerChanged += SpectatePlayerData;
     }
 
     public override void _ExitTree()
     {
         UnspectatePlayerData();
-        _spectatorModeEvents.SpectatedPlayerChanged -= SpectatePlayerData;
+        _spectatorMode.SpectatedPlayerChanged -= SpectatePlayerData;
     }
 
     private void SpectatePlayerData(string playerPath)

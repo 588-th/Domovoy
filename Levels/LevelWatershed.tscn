@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://crx34hicnctwg"]
+[gd_scene load_steps=14 format=3 uid="uid://crx34hicnctwg"]
 
 [ext_resource type="Script" path="res://Scripts/Spawners/Players/PlayerSpawner.cs" id="3_bcg2r"]
 [ext_resource type="Script" path="res://Scripts/Spawners/Players/SpectatorSpawner.cs" id="4_u7ryt"]
@@ -9,7 +9,6 @@
 [ext_resource type="Script" path="res://Scripts/Spawners/RoundSpawnSystem.cs" id="11_0nej4"]
 [ext_resource type="PackedScene" uid="uid://bks72b4kwjk1f" path="res://Prefabs/Players/PlayerHuman.tscn" id="12_4p7pk"]
 [ext_resource type="PackedScene" uid="uid://dw2d8yb5aog0t" path="res://Prefabs/Players/PlayerMonster.tscn" id="13_6rgwt"]
-[ext_resource type="PackedScene" uid="uid://dn6bs13u0l2at" path="res://Prefabs/Players/PlayerSpectator.tscn" id="14_2r4p4"]
 [ext_resource type="Script" path="res://Scripts/Round/RoundEnder.cs" id="15_0lt8v"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_cihl8"]
@@ -292,21 +291,19 @@ _playersParent = NodePath("../../Bodys/Players/PlayesMonsters")
 _spawnMarkers = [NodePath("../../SpawnAchors/AchorsPlayerMonsterSpawners/FirstPlayer")]
 
 [node name="SpectatorSpawner" type="MultiplayerSpawner" parent="Spawners" node_paths=PackedStringArray("_spectatorParent")]
-_spawnable_scenes = PackedStringArray("res://Prefabs/Players/Spectator.tscn")
 spawn_path = NodePath("../../Bodys/Players/Spectators")
 script = ExtResource("4_u7ryt")
 _spectatorParent = NodePath("../../Bodys/Players/Spectators")
 
-[node name="ItemSpawner" type="MultiplayerSpawner" parent="Spawners" node_paths=PackedStringArray("_markers", "_itemsParent")]
-_spawnable_scenes = PackedStringArray("res://Prefabs/Items/Med.tscn", "res://Prefabs/Items/Weapons/Pistol.tscn", "res://Prefabs/Items/Weapons/Rifl.tscn")
+[node name="ItemSpawner" type="MultiplayerSpawner" parent="Spawners" node_paths=PackedStringArray("_markers")]
+_spawnable_scenes = PackedStringArray("res://Prefabs/Items/Weapons/Pistol.tscn", "res://Prefabs/Items/Weapons/Rifl.tscn")
 spawn_path = NodePath("../../Bodys/Objects/Items")
 script = ExtResource("5_e16a8")
 _markers = []
 _packedScenes = []
-_itemsParent = NodePath("../../Bodys/Objects/Items")
 
 [node name="PropSpawner" type="MultiplayerSpawner" parent="Spawners"]
-_spawnable_scenes = PackedStringArray("res://Prefabs/Props/Sphere.tscn", "res://Prefabs/Props/Bullet.tscn", "res://Prefabs/Props/Cube.tscn")
+_spawnable_scenes = PackedStringArray("res://Prefabs/Props/Bullet.tscn")
 spawn_path = NodePath("../../Bodys/Objects/Props")
 
 [node name="Round" type="Node" parent="."]
@@ -321,16 +318,12 @@ _itemSpawner = NodePath("../../Spawners/ItemSpawner")
 [node name="RoundRoleRoller" type="Node" parent="Round"]
 script = ExtResource("10_oq5mr")
 
-[node name="RoundSpawnSystem" type="Node" parent="Round" node_paths=PackedStringArray("_playerHumanSpawner", "_playerMonsterSpawner", "_spectatorSpawner")]
+[node name="RoundSpawnSystem" type="Node" parent="Round" node_paths=PackedStringArray("_playerHumanSpawner", "_playerMonsterSpawner")]
 script = ExtResource("11_0nej4")
 _playerHumanSpawner = NodePath("../../Spawners/PlayerHumanSpawner")
 _playerMonsterSpawner = NodePath("../../Spawners/PlayerMonsterSpawner")
-_spectatorSpawner = NodePath("../../Spawners/SpectatorSpawner")
 _playerHumanScene = ExtResource("12_4p7pk")
 _playerMonsterScene = ExtResource("13_6rgwt")
-_spectatorScene = ExtResource("14_2r4p4")
 
-[node name="RoundEnder" type="Node" parent="Round" node_paths=PackedStringArray("_parentPlayerHumans", "_parentPlayerMonsters")]
+[node name="RoundEnder" type="Node" parent="Round"]
 script = ExtResource("15_0lt8v")
-_parentPlayerHumans = NodePath("../../Bodys/Players/PlayerHumans")
-_parentPlayerMonsters = NodePath("../../Bodys/Players/PlayesMonsters")

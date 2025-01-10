@@ -37,15 +37,9 @@ public partial class RoundController : Node
         foreach (var playerRole in playerRoles)
         {
             if (playerRole.Value == "monster")
-            {
                 _roundSpawnSystem.SpawnMonster(playerRole.Key);
-                GD.Print("mon: " + playerRole.Key);
-            }
             else
-            {
                 _roundSpawnSystem.SpawnHuman(playerRole.Key);
-                GD.Print("hum: " + playerRole.Key);
-            }
         }
     }
 }
