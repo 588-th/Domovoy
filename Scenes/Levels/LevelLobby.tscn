@@ -1,0 +1,250 @@
+[gd_scene load_steps=30 format=3 uid="uid://c352e57r1w1l0"]
+
+[ext_resource type="Texture2D" uid="uid://dogrre0un6mu6" path="res://Textures/t_lenoleum.png" id="1_d61ao"]
+[ext_resource type="Texture2D" uid="uid://dekoex0syt1yj" path="res://Textures/t_ceiling.png" id="2_wryti"]
+[ext_resource type="Texture2D" uid="uid://cuwaa2ocbp2xu" path="res://Textures/t_wallpaper.png" id="3_wlf8q"]
+[ext_resource type="ArrayMesh" uid="uid://cdx4mw5ehtnse" path="res://Meshes/HiddenCollection_Carpter.res" id="4_s1o75"]
+[ext_resource type="ArrayMesh" uid="uid://bihnmt4b10wd1" path="res://Meshes/HiddenCollection_Poster1.res" id="5_wxurj"]
+[ext_resource type="ArrayMesh" uid="uid://b48x3cmj3wtln" path="res://Meshes/HiddenCollection_Poster2.res" id="6_cx0gj"]
+[ext_resource type="ArrayMesh" uid="uid://cxdg8kcralgnt" path="res://Meshes/HiddenCollection_Poster3.res" id="7_u6hp1"]
+[ext_resource type="ArrayMesh" uid="uid://bjel8qxk853nq" path="res://Meshes/HiddenCollection_Poster4.res" id="8_vb3tm"]
+[ext_resource type="ArrayMesh" uid="uid://c6pcolew5pp02" path="res://Meshes/HiddenCollection_Poster5.res" id="9_qypwh"]
+[ext_resource type="PackedScene" uid="uid://doi6koxvp4aya" path="res://Scenes/Props/BowlingBall.tscn" id="10_s3kvw"]
+[ext_resource type="PackedScene" uid="uid://cmmaqjm2r7yhn" path="res://Scenes/Props/WoodenBox.tscn" id="11_bfqfi"]
+[ext_resource type="PackedScene" uid="uid://ijuv211yjc0w" path="res://Scenes/Props/BowlingPin.tscn" id="12_jf7di"]
+[ext_resource type="Script" path="res://Scripts/Spawners/Players/PlayerSpawner.cs" id="13_1ilnm"]
+[ext_resource type="Script" path="res://Scripts/Spawners/LobbySpawnSystem.cs" id="14_vg0c8"]
+[ext_resource type="PackedScene" uid="uid://7fa0b3shof4a" path="res://Scenes/Players/PlayerLobby.tscn" id="15_t2e1i"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_auiyk"]
+sky_top_color = Color(0.311447, 0.495967, 0.878786, 1)
+sky_horizon_color = Color(0.700422, 0.784078, 0.886842, 1)
+ground_bottom_color = Color(0.490242, 0.640343, 0.668584, 1)
+ground_horizon_color = Color(0.700422, 0.784078, 0.886842, 1)
+
+[sub_resource type="Sky" id="Sky_0njii"]
+sky_material = SubResource("ProceduralSkyMaterial_auiyk")
+
+[sub_resource type="Environment" id="Environment_d3664"]
+background_mode = 1
+background_color = Color(0.0405, 0.049575, 0.09, 1)
+background_energy_multiplier = 1.45
+sky = SubResource("Sky_0njii")
+tonemap_mode = 3
+glow_enabled = true
+adjustment_enabled = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3yhqx"]
+albedo_texture = ExtResource("1_d61ao")
+uv1_scale = Vector3(2, 1.5, 1)
+texture_filter = 0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7u0y3"]
+albedo_texture = ExtResource("2_wryti")
+uv1_scale = Vector3(2, 1.5, 1)
+texture_filter = 0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_b16sb"]
+albedo_texture = ExtResource("3_wlf8q")
+uv1_scale = Vector3(1.5, 0.75, 1)
+texture_filter = 0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6p07n"]
+albedo_texture = ExtResource("3_wlf8q")
+uv1_scale = Vector3(1.5, 0.75, 1)
+texture_filter = 0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ogpir"]
+albedo_texture = ExtResource("3_wlf8q")
+uv1_scale = Vector3(2, 0.75, 1)
+texture_filter = 0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4fdvc"]
+albedo_texture = ExtResource("3_wlf8q")
+uv1_scale = Vector3(2, 0.75, 1)
+texture_filter = 0
+
+[sub_resource type="Curve" id="Curve_saepc"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.250847, 0.7), 0.0, 0.0, 0, 0, Vector2(0.505085, 0.7), 0.0, 0.0, 0, 0, Vector2(0.752542, 0.7), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 5
+
+[sub_resource type="CurveTexture" id="CurveTexture_08qm6"]
+curve = SubResource("Curve_saepc")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_aw1ym"]
+emission_shape_scale = Vector3(3, 1.5, 4)
+emission_shape = 3
+emission_box_extents = Vector3(1, 1, 1)
+direction = Vector3(0, 0, 0)
+initial_velocity_min = 0.1
+initial_velocity_max = 0.1
+gravity = Vector3(0, 0, 0)
+alpha_curve = SubResource("CurveTexture_08qm6")
+turbulence_enabled = true
+turbulence_noise_scale = 5.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_w2wjc"]
+transparency = 1
+vertex_color_use_as_albedo = true
+billboard_mode = 1
+
+[sub_resource type="QuadMesh" id="QuadMesh_356pf"]
+material = SubResource("StandardMaterial3D_w2wjc")
+size = Vector2(0.01, 0.01)
+
+[node name="LevelLobby" type="Node3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.13511, -1.73959, 0.220598)
+
+[node name="AchorsPlayerSpawners" type="Node" parent="."]
+
+[node name="FirstPlayer" type="Marker3D" parent="AchorsPlayerSpawners"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 3)
+
+[node name="SecondPlayer" type="Marker3D" parent="AchorsPlayerSpawners"]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 1, -3)
+
+[node name="ThirdPlayer" type="Marker3D" parent="AchorsPlayerSpawners"]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -2, 1, 0)
+
+[node name="FourthPlayer" type="Marker3D" parent="AchorsPlayerSpawners"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 2, 1, 0)
+
+[node name="Environment" type="Node" parent="."]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="Environment"]
+environment = SubResource("Environment_d3664")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="Environment"]
+transform = Transform3D(1, 0, 0, 0, 0.399725, 0.916635, 0, -0.916635, 0.399725, 0.00114998, 3.36041, -0.0150543)
+shadow_enabled = true
+
+[node name="CSGCombiner3D" type="CSGCombiner3D" parent="Environment"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
+use_collision = true
+collision_mask = 1822
+
+[node name="Floor" type="CSGBox3D" parent="Environment/CSGCombiner3D"]
+size = Vector3(6, 0.5, 8)
+material = SubResource("StandardMaterial3D_3yhqx")
+
+[node name="Ceiling" type="CSGBox3D" parent="Environment/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.5, 0)
+size = Vector3(6, 0.5, 8)
+material = SubResource("StandardMaterial3D_7u0y3")
+
+[node name="FrontWall" type="CSGBox3D" parent="Environment/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.75, -4.25)
+size = Vector3(6, 3, 0.5)
+material = SubResource("StandardMaterial3D_b16sb")
+
+[node name="FrontWall2" type="CSGBox3D" parent="Environment/CSGCombiner3D"]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0, 1.75, 4.25)
+size = Vector3(6, 3, 0.5)
+material = SubResource("StandardMaterial3D_6p07n")
+
+[node name="FrontWall3" type="CSGBox3D" parent="Environment/CSGCombiner3D"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -3.25, 1.75, 0)
+size = Vector3(8, 3, 0.5)
+material = SubResource("StandardMaterial3D_ogpir")
+
+[node name="FrontWall4" type="CSGBox3D" parent="Environment/CSGCombiner3D"]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 3.25434, 1.75, -0.000284672)
+size = Vector3(8, 3, 0.5)
+material = SubResource("StandardMaterial3D_4fdvc")
+
+[node name="HiddenCollectionCarpter" type="MeshInstance3D" parent="Environment/CSGCombiner3D"]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, 0.291083, 0)
+mesh = ExtResource("4_s1o75")
+skeleton = NodePath("../../..")
+
+[node name="HiddenCollectionCarpter2" type="MeshInstance3D" parent="Environment/CSGCombiner3D"]
+transform = Transform3D(1.91069e-15, -1, 4.37114e-08, -4.37114e-08, -4.37114e-08, -1, 1, 0, -4.37114e-08, 2.9, 1.75, 0)
+mesh = ExtResource("4_s1o75")
+skeleton = NodePath("../../..")
+
+[node name="HiddenCollectionPoster1" type="MeshInstance3D" parent="Environment/CSGCombiner3D"]
+transform = Transform3D(-4.37114e-08, 1, -4.37114e-08, 0, -4.37114e-08, -1, -1, -4.37114e-08, 1.91069e-15, -2.9, 1.625, 0)
+mesh = ExtResource("5_wxurj")
+skeleton = NodePath("../../..")
+
+[node name="HiddenCollectionPoster2" type="MeshInstance3D" parent="Environment/CSGCombiner3D"]
+transform = Transform3D(-4.37114e-08, 1, -4.37114e-08, 0, -4.37114e-08, -1, -1, -4.37114e-08, 1.91069e-15, -2.992, 1.5, 1.75)
+mesh = ExtResource("6_cx0gj")
+skeleton = NodePath("../..")
+
+[node name="HiddenCollectionPoster3" type="MeshInstance3D" parent="Environment/CSGCombiner3D"]
+transform = Transform3D(-4.37114e-08, 1, -4.37114e-08, 0, -4.37114e-08, -1, -1, -4.37114e-08, 1.91069e-15, -2.992, 1.5, 3)
+mesh = ExtResource("7_u6hp1")
+skeleton = NodePath("../..")
+
+[node name="HiddenCollectionPoster4" type="MeshInstance3D" parent="Environment/CSGCombiner3D"]
+transform = Transform3D(-4.37114e-08, 1, -4.37114e-08, 0, -4.37114e-08, -1, -1, -4.37114e-08, 1.91069e-15, -2.992, 1.5, -1.75)
+mesh = ExtResource("8_vb3tm")
+skeleton = NodePath("../..")
+
+[node name="HiddenCollectionPoster5" type="MeshInstance3D" parent="Environment/CSGCombiner3D"]
+transform = Transform3D(-4.37114e-08, 1, -4.37114e-08, 0, -4.37114e-08, -1, -1, -4.37114e-08, 1.91069e-15, -2.992, 1.5, -3)
+mesh = ExtResource("9_qypwh")
+skeleton = NodePath("../..")
+
+[node name="Light" type="Node" parent="Environment"]
+
+[node name="OmniLight3D" type="OmniLight3D" parent="Environment/Light"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.57377, 0)
+light_energy = 0.07
+shadow_enabled = true
+omni_range = 8.15
+
+[node name="SpotLight3D" type="SpotLight3D" parent="Environment/Light"]
+transform = Transform3D(1, 0, 0, 0, -5.96046e-08, 1, 0, -1, -5.96046e-08, 0, 2.56009, 0)
+light_energy = 0.5
+light_specular = 1.5
+shadow_enabled = true
+spot_range = 10.0
+spot_angle = 80.0
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="Environment"]
+amount = 16
+lifetime = 10.0
+visibility_aabb = AABB(-3, 0, -4, 6, 3, 8)
+process_material = SubResource("ParticleProcessMaterial_aw1ym")
+draw_pass_1 = SubResource("QuadMesh_356pf")
+
+[node name="Bodys" type="Node" parent="."]
+
+[node name="Players" type="Node" parent="Bodys"]
+
+[node name="Objects" type="Node" parent="Bodys"]
+
+[node name="Props" type="Node" parent="Bodys/Objects" groups=["Holder:Props"]]
+
+[node name="BowlingBall" parent="Bodys/Objects/Props" instance=ExtResource("10_s3kvw")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.15978, -0.00956458, -3.04804)
+
+[node name="Box" parent="Bodys/Objects/Props" instance=ExtResource("11_bfqfi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.26701, 0.2863, -3.18047)
+
+[node name="BowlingPin" parent="Bodys/Objects/Props" instance=ExtResource("12_jf7di")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.51125, 0.112604, -3.45978)
+
+[node name="BowlingPin2" parent="Bodys/Objects/Props" instance=ExtResource("12_jf7di")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.51454, 0.112604, -3.7061)
+
+[node name="BowlingPin3" parent="Bodys/Objects/Props" instance=ExtResource("12_jf7di")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.69888, 0.112604, -3.63397)
+
+[node name="Items" type="Node" parent="Bodys/Objects" groups=["Holder:Items"]]
+
+[node name="Spawners" type="Node" parent="."]
+
+[node name="PlayerSpawner" type="MultiplayerSpawner" parent="Spawners" node_paths=PackedStringArray("_playersParent", "_spawnMarkers")]
+_spawnable_scenes = PackedStringArray("res://Scenes/Players/PlayerLobby.tscn")
+spawn_path = NodePath("../../Bodys/Players")
+script = ExtResource("13_1ilnm")
+_playersParent = NodePath("../../Bodys/Players")
+_spawnMarkers = [NodePath("../../AchorsPlayerSpawners/FirstPlayer"), NodePath("../../AchorsPlayerSpawners/SecondPlayer"), NodePath("../../AchorsPlayerSpawners/ThirdPlayer"), NodePath("../../AchorsPlayerSpawners/FourthPlayer")]
+
+[node name="LobbySpawnSystem" type="Node" parent="Spawners" node_paths=PackedStringArray("_playerSpawner")]
+script = ExtResource("14_vg0c8")
+_playerSpawner = NodePath("../PlayerSpawner")
+_playerLobbyScene = ExtResource("15_t2e1i")

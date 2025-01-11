@@ -2,35 +2,32 @@ using Godot;
 
 public partial class HUDParameterSpectating : Node
 {
-    [Export] private HUDParameters _playerData;
-    [Export] private SpectatorPlayerChanger _spectatorMode;
+    [Export] private HUDParameters _hudParameters;
+    [Export] private SpectatorPlayerChanger _spectatorPlayerChanger;
 
-    private HUDParameters _spectatingPlayerData;
+    private HUDParameters _spectatingPlayerParameters;
 
     public override void _Ready()
     {
-        _spectatorMode.SpectatedPlayerChanged += SpectatePlayerData;
+        _spectatorPlayerChanger.SpectatedPlayerChanged += SpectatePlayerData;
     }
 
     public override void _ExitTree()
     {
-        UnspectatePlayerData();
-        _spectatorMode.SpectatedPlayerChanged -= SpectatePlayerData;
+        Unsubscribe();
+        _spectatorPlayerChanger.SpectatedPlayerChanged -= SpectatePlayerData;
     }
 
     private void SpectatePlayerData(string playerPath)
     {
         Node playerRoot = GetNode(playerPath);
 
-        UnspectatePlayerData();
+        Unsubscribe();
 
         HUDParameters playerData = playerRoot.GetNode<HUDParameters>("ClientServerPart/Scripts/HUDParameters");
-        _spectatingPlayerData = playerData;
+        _spectatingPlayerParameters = playerData;
 
-        playerData.PlayerHealthUpdated += TransferHealthData;
-        playerData.PlayerHealthMaxUpdated += TransferMaxHealthData;
-        playerData.PlayerActiveSlotItemUpdated += TransferItemData;
-        playerData.PlayerInteractDataUpdated += TransferInteractData;
+        Subscribe();
 
         TransferHealthData();
         TransferMaxHealthData();
@@ -38,34 +35,42 @@ public partial class HUDParameterSpectating : Node
         TransferInteractData();
     }
 
-    private void UnspectatePlayerData()
+    private void Subscribe()
     {
-        if (_spectatingPlayerData == null)
+        _spectatingPlayerParameters.PlayerHealthUpdated += TransferHealthData;
+        _spectatingPlayerParameters.PlayerHealthMaxUpdated += TransferMaxHealthData;
+        _spectatingPlayerParameters.PlayerHoldingItemUpdated += TransferItemData;
+        _spectatingPlayerParameters.PlayerInteractDataUpdated += TransferInteractData;
+    }
+
+    private void Unsubscribe()
+    {
+        if (_spectatingPlayerParameters == null)
             return;
 
-        _spectatingPlayerData.PlayerHealthUpdated -= TransferHealthData;
-        _spectatingPlayerData.PlayerHealthMaxUpdated -= TransferMaxHealthData;
-        _spectatingPlayerData.PlayerActiveSlotItemUpdated -= TransferItemData;
-        _spectatingPlayerData.PlayerInteractDataUpdated -= TransferInteractData;
+        _spectatingPlayerParameters.PlayerHealthUpdated -= TransferHealthData;
+        _spectatingPlayerParameters.PlayerHealthMaxUpdated -= TransferMaxHealthData;
+        _spectatingPlayerParameters.PlayerHoldingItemUpdated -= TransferItemData;
+        _spectatingPlayerParameters.PlayerInteractDataUpdated -= TransferInteractData;
     }
 
     private void TransferHealthData()
     {
-        _playerData.PlayerHealth = _spectatingPlayerData.PlayerHealth;
+        _hudParameters.PlayerHealth = _spectatingPlayerParameters.PlayerHealth;
     }
 
     private void TransferMaxHealthData()
     {
-        _playerData.PlayerHealthMax = _spectatingPlayerData.PlayerHealthMax;
+        _hudParameters.PlayerHealthMax = _spectatingPlayerParameters.PlayerHealthMax;
     }
 
     private void TransferItemData()
     {
-        _playerData.PlayerActiveSlotItem = _spectatingPlayerData.PlayerActiveSlotItem;
+        _hudParameters.PlayerHoldingItem = _spectatingPlayerParameters.PlayerHoldingItem;
     }
 
     private void TransferInteractData()
     {
-        _playerData.PlayerInteractData = _spectatingPlayerData.PlayerInteractData;
+        _hudParameters.PlayerInteract = _spectatingPlayerParameters.PlayerInteract;
     }
 }

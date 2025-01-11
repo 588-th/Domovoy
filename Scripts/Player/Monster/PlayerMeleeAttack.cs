@@ -7,25 +7,22 @@ public partial class PlayerMeleeAttack : Node
     [Export] private RayCast3D _rayOfAttack;
     [Export] private Timer _attackCooldownTimer;
     [Export] private Timer _hardAttackChargeTimer;
-    [Export] private float _attackCooldownTime;
-    [Export] private float _hardAttackChargeTimeMax;
-    [Export] private int _hardAttackMinDamage;
-    [Export] private int _hardAttackMaxDamage;
-    [Export] private int _lightAttackDamage;
+    [Export] private AudioPlayer _audioPlayer;
+    [Export] private PlayerMeleeAttackParameters _meleeAttackParameters;
 
     private bool _isCooldownAttackTimeout = true;
 
     public override void _Ready()
     {
         _hardAttackChargeTimer.OneShot = true;
-        _hardAttackChargeTimer.WaitTime = _hardAttackChargeTimeMax;
+        _hardAttackChargeTimer.WaitTime = _meleeAttackParameters.HardAttackChargeTimeMax;
 
-        _attackCooldownTimer.WaitTime = _attackCooldownTime;
+        _attackCooldownTimer.WaitTime = _meleeAttackParameters.AttackCooldownTime;
 
         _attackCooldownTimer.Timeout += CooldownAttackTimeout;
         _inputActions.AlternativeKeyDown += StartChargeHardAttack;
         _inputActions.AlternativeKeyUp += () => AttemptAttack(CalculateHardAttackDamage());
-        _inputActions.AttackKeyDown += () => AttemptAttack(_lightAttackDamage);
+        _inputActions.AttackKeyDown += () => AttemptAttack(_meleeAttackParameters.LightAttackDamage);
     }
 
     public override void _ExitTree()
@@ -33,7 +30,7 @@ public partial class PlayerMeleeAttack : Node
         _attackCooldownTimer.Timeout -= CooldownAttackTimeout;
         _inputActions.AlternativeKeyDown -= StartChargeHardAttack;
         _inputActions.AlternativeKeyUp -= () => AttemptAttack(CalculateHardAttackDamage());
-        _inputActions.AttackKeyDown -= () => AttemptAttack(_lightAttackDamage);
+        _inputActions.AttackKeyDown -= () => AttemptAttack(_meleeAttackParameters.LightAttackDamage);
     }
 
     private void CooldownAttackTimeout()
@@ -50,7 +47,7 @@ public partial class PlayerMeleeAttack : Node
     private int CalculateHardAttackDamage()
     {
         float chargePercentage = 1.0f - ((float)_hardAttackChargeTimer.TimeLeft / (float)_hardAttackChargeTimer.WaitTime);
-        int damage = (int)Mathf.Lerp(_hardAttackMinDamage, _hardAttackMaxDamage, chargePercentage);
+        int damage = (int)Mathf.Lerp(_meleeAttackParameters.HardAttackMinDamage, _meleeAttackParameters.HardAttackMaxDamage, chargePercentage);
 
         _hardAttackChargeTimer.Stop();
 
@@ -73,10 +70,17 @@ public partial class PlayerMeleeAttack : Node
         _attackCooldownTimer.Start();
 
         if (!IsLookingAtPlayer())
+        {
+            _audioPlayer.PlayAudio(_meleeAttackParameters.MissAttackAudio);
+            _audioPlayer.PlayAudio3DExceptClient(_meleeAttackParameters.MissAttackAudio);
             return;
+        }
 
         PlayerHealth playerHealth = GetPlayerHealth(collider);
         playerHealth.DecreaseHealth(damage);
+
+        _audioPlayer.PlayAudio(_meleeAttackParameters.HitAttackAudio);
+        _audioPlayer.PlayAudio3DExceptClient(_meleeAttackParameters.HitAttackAudio);
     }
 
     private bool IsLookingAtPlayer()

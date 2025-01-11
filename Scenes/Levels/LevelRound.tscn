@@ -1,0 +1,267 @@
+[gd_scene load_steps=31 format=3 uid="uid://do1568507grhy"]
+
+[ext_resource type="Texture2D" uid="uid://b58bimfvig55u" path="res://Textures/t_brickWall.png" id="1_5ptqm"]
+[ext_resource type="Texture2D" uid="uid://ejoim3yef42l" path="res://Textures/t_russianFloor.png" id="2_xi2jp"]
+[ext_resource type="Texture2D" uid="uid://dtyybi03k42wj" path="res://Textures/NormalMaps/n_russianFloor.png" id="3_ddst6"]
+[ext_resource type="Texture2D" uid="uid://clrjly31vyug8" path="res://Textures/t_russianWall.png" id="4_8vre8"]
+[ext_resource type="Material" uid="uid://bg0fh2ja3bjby" path="res://Materials/m_brickWall.tres" id="5_cmucx"]
+[ext_resource type="PackedScene" uid="uid://doi6koxvp4aya" path="res://Scenes/Props/BowlingBall.tscn" id="6_ns3nu"]
+[ext_resource type="PackedScene" uid="uid://cmmaqjm2r7yhn" path="res://Scenes/Props/WoodenBox.tscn" id="7_ftnwb"]
+[ext_resource type="Script" path="res://Scripts/Spawners/Players/PlayerSpawner.cs" id="8_84q2b"]
+[ext_resource type="Script" path="res://Scripts/Spawners/Players/SpectatorSpawner.cs" id="9_ewqd5"]
+[ext_resource type="Script" path="res://Scripts/Spawners/ItemSpawner.cs" id="10_plkn5"]
+[ext_resource type="PackedScene" uid="uid://17h7ix4n16i0" path="res://Scenes/Items/Weapons/Pistol.tscn" id="11_vbw6l"]
+[ext_resource type="PackedScene" uid="uid://blrsmbolm5q1j" path="res://Scenes/Items/Weapons/Rifl.tscn" id="12_t035y"]
+[ext_resource type="PackedScene" uid="uid://damhtsrr8py4i" path="res://Scenes/Items/Medkit.tscn" id="13_wbqwi"]
+[ext_resource type="Script" path="res://Scripts/Net/AuthorityScripter.cs" id="14_4j52o"]
+[ext_resource type="Script" path="res://Scripts/Round/RoundController.cs" id="15_xl4tv"]
+[ext_resource type="Script" path="res://Scripts/Round/RoundRoleRoller.cs" id="16_5igol"]
+[ext_resource type="Script" path="res://Scripts/Spawners/RoundSpawnSystem.cs" id="17_rbhgs"]
+[ext_resource type="PackedScene" uid="uid://bks72b4kwjk1f" path="res://Scenes/Players/PlayerHuman.tscn" id="18_rkj8o"]
+[ext_resource type="PackedScene" uid="uid://dw2d8yb5aog0t" path="res://Scenes/Players/PlayerMonster.tscn" id="19_jbt0v"]
+[ext_resource type="PackedScene" uid="uid://dn6bs13u0l2at" path="res://Scenes/Players/PlayerSpectator.tscn" id="20_0s3gt"]
+[ext_resource type="Script" path="res://Scripts/Round/RoundEnder.cs" id="21_badf4"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_cihl8"]
+sky_top_color = Color(0.311447, 0.495967, 0.878786, 1)
+sky_horizon_color = Color(0.700422, 0.784078, 0.886842, 1)
+ground_bottom_color = Color(0.490242, 0.640343, 0.668584, 1)
+ground_horizon_color = Color(0.700422, 0.784078, 0.886842, 1)
+
+[sub_resource type="Sky" id="Sky_ks3xb"]
+sky_material = SubResource("ProceduralSkyMaterial_cihl8")
+
+[sub_resource type="Environment" id="Environment_qukhg"]
+background_mode = 1
+sky = SubResource("Sky_ks3xb")
+tonemap_mode = 3
+glow_enabled = true
+adjustment_enabled = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0mb4q"]
+albedo_texture = ExtResource("1_5ptqm")
+uv1_scale = Vector3(6.25, 6.25, 1)
+texture_filter = 0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8rl3m"]
+albedo_texture = ExtResource("2_xi2jp")
+normal_enabled = true
+normal_scale = 4.0
+normal_texture = ExtResource("3_ddst6")
+uv1_scale = Vector3(6.25, 6.25, 1)
+texture_filter = 0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5mssu"]
+albedo_texture = ExtResource("4_8vre8")
+uv1_scale = Vector3(6.25, 1, 1)
+texture_filter = 0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6kld1"]
+albedo_texture = ExtResource("4_8vre8")
+uv1_scale = Vector3(6.25, 1, 1)
+texture_filter = 0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fu351"]
+albedo_texture = ExtResource("4_8vre8")
+uv1_scale = Vector3(6.25, 1, 1)
+texture_filter = 0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_c6ri1"]
+albedo_texture = ExtResource("4_8vre8")
+uv1_scale = Vector3(0.25, 1, 1)
+texture_filter = 0
+
+[node name="LevelRound" type="Node3D"]
+
+[node name="SpawnAchors" type="Node" parent="."]
+
+[node name="AchorsPlayerHumanSpawners" type="Node" parent="SpawnAchors"]
+
+[node name="FirstPlayer" type="Marker3D" parent="SpawnAchors/AchorsPlayerHumanSpawners"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 1, 8)
+
+[node name="SecondPlayer" type="Marker3D" parent="SpawnAchors/AchorsPlayerHumanSpawners"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 1, 8)
+
+[node name="ThirdPlayer" type="Marker3D" parent="SpawnAchors/AchorsPlayerHumanSpawners"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 1, 6)
+
+[node name="FourthPlayer" type="Marker3D" parent="SpawnAchors/AchorsPlayerHumanSpawners"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 1, 6)
+
+[node name="AchorsPlayerMonsterSpawners" type="Node" parent="SpawnAchors"]
+
+[node name="FirstPlayer" type="Marker3D" parent="SpawnAchors/AchorsPlayerMonsterSpawners"]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 1, -4)
+
+[node name="AchorsItemSpawners" type="Node" parent="SpawnAchors"]
+
+[node name="Pistol" type="Marker3D" parent="SpawnAchors/AchorsItemSpawners"]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 5.41313, 1.17305, 6.34731)
+
+[node name="Pistol2" type="Marker3D" parent="SpawnAchors/AchorsItemSpawners"]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 5.48338, 1.17305, 7.04525)
+
+[node name="Rifl" type="Marker3D" parent="SpawnAchors/AchorsItemSpawners"]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 4.59818, 0.308004, 5.63046)
+
+[node name="Medkit" type="Marker3D" parent="SpawnAchors/AchorsItemSpawners"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.81379, 1.17305, 7.71766)
+
+[node name="Environment" type="Node" parent="."]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="Environment"]
+environment = SubResource("Environment_qukhg")
+
+[node name="CSGCombiner3D" type="CSGCombiner3D" parent="Environment"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
+use_collision = true
+collision_mask = 1822
+
+[node name="Ceiling" type="CSGBox3D" parent="Environment/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0159416, 5, 0.0284653)
+size = Vector3(25, 1, 25)
+material = SubResource("StandardMaterial3D_0mb4q")
+
+[node name="Floor" type="CSGBox3D" parent="Environment/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0159416, 0, 0.0284653)
+size = Vector3(25, 1, 25)
+material = SubResource("StandardMaterial3D_8rl3m")
+
+[node name="WallFront" type="CSGBox3D" parent="Environment/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5, -12)
+size = Vector3(25, 4, 1)
+material = SubResource("StandardMaterial3D_5mssu")
+
+[node name="WallLeft" type="CSGBox3D" parent="Environment/CSGCombiner3D"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -12, 2.5, 0)
+size = Vector3(25, 4, 1)
+material = SubResource("StandardMaterial3D_6kld1")
+
+[node name="WallRight" type="CSGBox3D" parent="Environment/CSGCombiner3D"]
+transform = Transform3D(1.31134e-07, 0, -1, 0, 1, 0, 1, 0, 1.31134e-07, 12, 2.5, 0)
+size = Vector3(25, 4, 1)
+material = SubResource("StandardMaterial3D_fu351")
+
+[node name="WallBack" type="CSGBox3D" parent="Environment/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.5, 10.3368)
+size = Vector3(16, 6, 1)
+material = ExtResource("5_cmucx")
+
+[node name="PillarLeft" type="CSGBox3D" parent="Environment/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.0028, 2.5, 0.0119066)
+size = Vector3(1, 4, 1)
+material = SubResource("StandardMaterial3D_c6ri1")
+
+[node name="PillarRight" type="CSGBox3D" parent="Environment/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 2.5, 0)
+size = Vector3(1, 4, 1)
+material = SubResource("StandardMaterial3D_c6ri1")
+
+[node name="Light" type="Node" parent="Environment"]
+
+[node name="OmniLight3D" type="OmniLight3D" parent="Environment/Light"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.36713, 0)
+shadow_enabled = true
+omni_range = 8.15
+
+[node name="OmniLight3D2" type="OmniLight3D" parent="Environment/Light"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.36713, -9.8147)
+shadow_enabled = true
+omni_range = 8.15
+
+[node name="OmniLight3D4" type="OmniLight3D" parent="Environment/Light"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 3.36713, -9.8147)
+shadow_enabled = true
+omni_range = 8.15
+
+[node name="OmniLight3D3" type="OmniLight3D" parent="Environment/Light"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.36713, 7.34402)
+shadow_enabled = true
+omni_range = 8.15
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="Environment/Light"]
+transform = Transform3D(1, 0, 0, 0, 0.399725, 0.916635, 0, -0.916635, 0.399725, 0, 3.36361, -0.0171896)
+shadow_enabled = true
+
+[node name="Bodys" type="Node" parent="."]
+
+[node name="Players" type="Node" parent="Bodys"]
+
+[node name="Humans" type="Node" parent="Bodys/Players" groups=["Holder:Humans"]]
+
+[node name="Monsters" type="Node" parent="Bodys/Players" groups=["Holder:Monsters"]]
+
+[node name="Spectators" type="Node" parent="Bodys/Players" groups=["Holder:Spectators"]]
+
+[node name="Objects" type="Node" parent="Bodys"]
+
+[node name="Props" type="Node" parent="Bodys/Objects" groups=["Holder:Props"]]
+
+[node name="BowlingBall" parent="Bodys/Objects/Props" instance=ExtResource("6_ns3nu")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.768895, 0.526845, -0.347685)
+
+[node name="Box" parent="Bodys/Objects/Props" instance=ExtResource("7_ftnwb")]
+transform = Transform3D(0.707107, 0, -0.707107, 0, 1, 0, 0.707107, 0, 0.707107, 5.38013, 0.5, 6.65159)
+
+[node name="Box2" parent="Bodys/Objects/Props" instance=ExtResource("7_ftnwb")]
+transform = Transform3D(0.866025, 0, -0.5, 0, 1, 0, 0.5, 0, 0.866025, 5.90392, 0.5, 7.74106)
+
+[node name="Items" type="Node" parent="Bodys/Objects" groups=["Holder:Items"]]
+
+[node name="Spawners" type="Node" parent="."]
+
+[node name="PlayerHumanSpawner" type="MultiplayerSpawner" parent="Spawners" node_paths=PackedStringArray("_playersParent", "_spawnMarkers")]
+_spawnable_scenes = PackedStringArray("res://Scenes/Players/PlayerHuman.tscn")
+spawn_path = NodePath("../../Bodys/Players/Humans")
+script = ExtResource("8_84q2b")
+_playersParent = NodePath("../../Bodys/Players/Humans")
+_spawnMarkers = [NodePath("../../SpawnAchors/AchorsPlayerHumanSpawners/FirstPlayer"), NodePath("../../SpawnAchors/AchorsPlayerHumanSpawners/SecondPlayer"), NodePath("../../SpawnAchors/AchorsPlayerHumanSpawners/ThirdPlayer"), NodePath("../../SpawnAchors/AchorsPlayerHumanSpawners/FourthPlayer")]
+
+[node name="PlayerMonsterSpawner" type="MultiplayerSpawner" parent="Spawners" node_paths=PackedStringArray("_playersParent", "_spawnMarkers")]
+_spawnable_scenes = PackedStringArray("res://Scenes/Players/PlayerMonster.tscn")
+spawn_path = NodePath("../../Bodys/Players/Monsters")
+script = ExtResource("8_84q2b")
+_playersParent = NodePath("../../Bodys/Players/Monsters")
+_spawnMarkers = [NodePath("../../SpawnAchors/AchorsPlayerMonsterSpawners/FirstPlayer")]
+
+[node name="PlayerSpectatorSpawner" type="MultiplayerSpawner" parent="Spawners" node_paths=PackedStringArray("_spectatorParent")]
+_spawnable_scenes = PackedStringArray("res://Scenes/Players/PlayerSpectator.tscn")
+spawn_path = NodePath("../../Bodys/Players/Spectators")
+script = ExtResource("9_ewqd5")
+_spectatorParent = NodePath("../../Bodys/Players/Spectators")
+
+[node name="ItemSpawner" type="MultiplayerSpawner" parent="Spawners" node_paths=PackedStringArray("_markers")]
+_spawnable_scenes = PackedStringArray("res://Scenes/Items/Weapons/Pistol.tscn", "res://Scenes/Items/Weapons/Rifl.tscn", "res://Scenes/Items/Medkit.tscn")
+spawn_path = NodePath("../../Bodys/Objects/Items")
+script = ExtResource("10_plkn5")
+_markers = [NodePath("../../SpawnAchors/AchorsItemSpawners/Pistol"), NodePath("../../SpawnAchors/AchorsItemSpawners/Rifl"), NodePath("../../SpawnAchors/AchorsItemSpawners/Medkit")]
+_packedScenes = Array[PackedScene]([ExtResource("11_vbw6l"), ExtResource("12_t035y"), ExtResource("13_wbqwi")])
+
+[node name="PropSpawner" type="MultiplayerSpawner" parent="Spawners"]
+_spawnable_scenes = PackedStringArray("res://Scenes/Props/Bullet.tscn", "res://Scenes/Props/HumanCorpse.tscn")
+spawn_path = NodePath("../../Bodys/Objects/Props")
+
+[node name="Round" type="Node" parent="."]
+script = ExtResource("14_4j52o")
+
+[node name="RoundController" type="Node" parent="Round" node_paths=PackedStringArray("_roundRoleRoller", "_roundSpawnSystem", "_itemSpawner")]
+script = ExtResource("15_xl4tv")
+_roundRoleRoller = NodePath("../RoundRoleRoller")
+_roundSpawnSystem = NodePath("../RoundSpawnSystem")
+_itemSpawner = NodePath("../../Spawners/ItemSpawner")
+
+[node name="RoundRoleRoller" type="Node" parent="Round"]
+script = ExtResource("16_5igol")
+
+[node name="RoundSpawnSystem" type="Node" parent="Round" node_paths=PackedStringArray("_playerHumanSpawner", "_playerMonsterSpawner", "_playerSpectatorSpawner")]
+script = ExtResource("17_rbhgs")
+_playerHumanSpawner = NodePath("../../Spawners/PlayerHumanSpawner")
+_playerMonsterSpawner = NodePath("../../Spawners/PlayerMonsterSpawner")
+_playerSpectatorSpawner = NodePath("../../Spawners/PlayerSpectatorSpawner")
+_playerHumanScene = ExtResource("18_rkj8o")
+_playerMonsterScene = ExtResource("19_jbt0v")
+_playerSpectatorScene = ExtResource("20_0s3gt")
+
+[node name="RoundEnder" type="Node" parent="Round"]
+script = ExtResource("21_badf4")

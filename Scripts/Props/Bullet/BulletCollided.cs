@@ -18,10 +18,8 @@ public partial class BulletCollided : Node
 
     private void OnBodyEntered(Node body)
     {
-        GD.Print("Hit");
         if (IsPlayerHitbox(body))
         {
-            GD.Print("HitPlayer");
             int plaeyrHealth = DecreasePlayerHealth(body);
             if (plaeyrHealth > 0)
                 PlayHitAudio(body);

@@ -2,57 +2,68 @@ using Godot;
 
 public partial class PlayerHUDParameters : Node
 {
-    [Export] private HUDParameters _HUDParameters;
+    [Export] private HUDParameters _hudParameters;
 
     [Export] private PlayerHealth _playerHealth;
     [Export] private PlayerItemEquipper _playerItemEquipper;
     [Export] private RayCast3D _rayOfLook;
+    [Export] private RayCast3D _rayOfAttack;
 
     private Item _rememberItem = new();
 
     public override void _Ready()
     {
-        _playerHealth.PlayerHealthChanged += TransferHealthData;
+        if (_playerHealth != null)
+        {
+            _playerHealth.PlayerHealthChanged += TransferHealthData;
+            TransferHealthData();
+            TransferMaxHealthData();
+        }
+
         if (_playerItemEquipper != null)
         {
             _playerItemEquipper.ActiveSlotChanged += TransferItemData;
             _playerItemEquipper.ActiveSlotChanged += SubToItemUsed;
         }
-
-        TransferHealthData();
-        TransferMaxHealthData();
-    }
-
-    public override void _Process(double delta)
-    {
-        TransferInteractData();
     }
 
     public override void _ExitTree()
     {
-        _playerHealth.PlayerHealthChanged -= TransferHealthData;
+        if (_playerHealth != null)
+        {
+            _playerHealth.PlayerHealthChanged -= TransferHealthData;
+        }
+
         if (_playerItemEquipper != null)
         {
             _playerItemEquipper.ActiveSlotChanged -= TransferItemData;
             _playerItemEquipper.ActiveSlotChanged -= SubToItemUsed;
         }
+    }
 
+    public override void _Process(double delta)
+    {
+        if (_rayOfLook != null)
+            TransferInteractData();
+
+        if (_rayOfAttack != null)
+            TransfetAttackData();
     }
 
     private void TransferHealthData()
     {
-        _HUDParameters.PlayerHealth = _playerHealth.CurrentHealth;
+        _hudParameters.PlayerHealth = _playerHealth.CurrentHealth;
     }
 
     private void TransferMaxHealthData()
     {
-        _HUDParameters.PlayerHealthMax = _playerHealth.MaxHealth;
+        _hudParameters.PlayerHealthMax = _playerHealth.MaxHealth;
     }
 
     private void TransferItemData(Item item)
     {
-        _HUDParameters.PlayerActiveSlotItem = "";
-        _HUDParameters.PlayerActiveSlotItem = item?.GetItemInfo();
+        _hudParameters.PlayerHoldingItem = "";
+        _hudParameters.PlayerHoldingItem = item?.GetItemInfo();
     }
 
     private void SubToItemUsed(Item item)
@@ -67,15 +78,33 @@ public partial class PlayerHUDParameters : Node
 
     private void TransferInteractData()
     {
-        _HUDParameters.PlayerInteractData = "";
+        _hudParameters.PlayerInteract = "";
 
         if (!_rayOfLook.IsColliding())
             return;
 
         Node collider = _rayOfLook.GetCollider() as Node;
+        if (collider == null)
+            return;
+
         if (collider.IsInGroup("Item:Pickupble") && collider is Item item)
-            _HUDParameters.PlayerInteractData = $"[E] Pickup {item.Name}";
+            _hudParameters.PlayerInteract = $"[E] Pickup {item.Name}";
         else if (collider.IsInGroup("Hitbox:Player") && _playerItemEquipper.GetHoldingItem() is Medkit)
-            _HUDParameters.PlayerInteractData = "[Hold right button] to heal teammate";
+            _hudParameters.PlayerInteract = "[Hold right button] to heal teammate";
+    }
+
+    private void TransfetAttackData()
+    {
+        _hudParameters.PlayerAttack = "";
+
+        if (!_rayOfAttack.IsColliding())
+            return;
+
+        Node collider = _rayOfAttack.GetCollider() as Node;
+        if (collider == null)
+            return;
+
+        if (collider.IsInGroup("Hitbox:Player"))
+            _hudParameters.PlayerAttack = "Attack Human";
     }
 }

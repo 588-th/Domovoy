@@ -5,39 +5,43 @@ public partial class HUDParameters : Node
 {
     private int _playerHealth;
     private int _playerHealthMax;
-    private string _playerActiveSlotItem;
-    private string _playerInteractData;
+    private string _playerHoldingItem;
+    private string _playerInteract;
+    private string _playerAttack;
 
     public Action PlayerHealthUpdated;
     public Action PlayerHealthMaxUpdated;
-    public Action PlayerActiveSlotItemUpdated;
+    public Action PlayerHoldingItemUpdated;
     public Action PlayerInteractDataUpdated;
+    public Action PlayerAttackDataUpdated;
 
-    [Export]
     public int PlayerHealthMax
     {
         get { return _playerHealthMax; }
         set { _playerHealthMax = value; PlayerHealthMaxUpdated?.Invoke(); }
     }
 
-    [Export]
     public int PlayerHealth
     {
         get {  return _playerHealth; }
         set { _playerHealth = value; PlayerHealthUpdated?.Invoke(); }
     }
 
-    [Export]
-    public string PlayerActiveSlotItem
+    public string PlayerHoldingItem
     {
-        get { return _playerActiveSlotItem; }
-        set { _playerActiveSlotItem = value; PlayerActiveSlotItemUpdated?.Invoke(); }
+        get { return _playerHoldingItem; }
+        set { _playerHoldingItem = value; PlayerHoldingItemUpdated?.Invoke(); }
     }
 
-    [Export]
-    public string PlayerInteractData
+    public string PlayerInteract
     {
-        get { return _playerInteractData; }
-        set { _playerInteractData = value; PlayerInteractDataUpdated?.Invoke(); }
+        get { return _playerInteract; }
+        set { _playerInteract = value; PlayerInteractDataUpdated?.Invoke(); }
+    }
+
+    public string PlayerAttack
+    {
+        get { return _playerAttack; }
+        set { _playerAttack = value; PlayerAttackDataUpdated?.Invoke(); }
     }
 }

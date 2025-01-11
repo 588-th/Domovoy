@@ -4,6 +4,7 @@ public partial class PlayerDeath : Node
 {
     [Export] private Node _player;
     [Export] private CharacterBody3D _playerBody;
+    [Export] private RayCast3D _rayGround;
     [Export] private PlayerHealth _playerHealth;
     [Export] private PackedScene _humanCorpseScene;
 
@@ -23,13 +24,30 @@ public partial class PlayerDeath : Node
 
         Node3D humanCorpse = _humanCorpseScene.Instantiate<Node3D>();
         humanCorpse.Name = playerID.ToString();
-        humanCorpse.Rotation = new Vector3(humanCorpse.Rotation.X, _playerBody.Rotation.Y, 0);
-        humanCorpse.Position = new Vector3(_playerBody.Position.X, 0, _playerBody.Position.Z);
+
+        RandomNumberGenerator rng = new RandomNumberGenerator();
+        rng.Randomize();
+        float randomYRotation = Mathf.DegToRad(rng.RandfRange(-30, 30));
+
+        humanCorpse.Rotation = new Vector3(humanCorpse.Rotation.X, _playerBody.Rotation.Y + randomYRotation, 0);
+        humanCorpse.Position = GetCorpsePosition();
 
         GetTree().GetFirstNodeInGroup("Holder:Props").AddChild(humanCorpse, true);
 
         _player.GetParent().RemoveChild(_player);
+        _player.QueueFree();
 
         GameEvent.Instance.InvokePlayerDied(playerID);
+    }
+
+
+    private Vector3 GetCorpsePosition()
+    {
+        Vector3 spawnPosition = _playerBody.Position;
+
+        if (_rayGround.IsColliding())
+            spawnPosition = _rayGround.GetCollisionPoint();
+
+        return spawnPosition;
     }
 }

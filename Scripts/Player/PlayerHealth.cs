@@ -6,8 +6,8 @@ public partial class PlayerHealth : Node
     [Export] public int MaxHealth { get; private set; }
     [Export] public int CurrentHealth { get; private set; }
 
-    public Action PlayerHealthZero;
     public Action PlayerHealthChanged;
+    public Action PlayerHealthZero;
 
     public void IncreaseHealth(int healthUnits)
     {
