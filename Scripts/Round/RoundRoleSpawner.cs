@@ -1,6 +1,6 @@
 using Godot;
 
-public partial class RoundSpawnSystem : Node
+public partial class RoundRoleSpawner : Node
 {
     [Export] private PlayerSpawner _playerHumanSpawner;
     [Export] private PlayerSpawner _playerMonsterSpawner;

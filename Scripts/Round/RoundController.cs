@@ -5,7 +5,7 @@ using System.Collections.Generic;
 public partial class RoundController : Node
 {
     [Export] private RoundRoleRoller _roundRoleRoller;
-    [Export] private RoundSpawnSystem _roundSpawnSystem;
+    [Export] private RoundRoleSpawner _roundSpawnSystem;
     [Export] private ItemSpawner _itemSpawner;
 
     public override void _Ready()

@@ -2,14 +2,14 @@ using Godot;
 
 public partial class UICreateServer : Control
 {
-    [Export] private Node _mainManu;
-    [Export] private Control _UIMenu;
+    [Export] private Node _mainMenu;
+    [Export] private Control _uiMenu;
 
     [Export] private Button _createServerButton;
     [Export] private Button _cancelButton;
 
-    [Export] private LineEdit _ipLabel;
-    [Export] private LineEdit _portLabel;
+    [Export] private LineEdit _ipLineEdit;
+    [Export] private LineEdit _portLineEdit;
 
     public override void _Ready()
     {
@@ -25,14 +25,14 @@ public partial class UICreateServer : Control
 
     private void OnCreateServerButtonPressed()
     {
-        MultiplayerConnection.Instance.CreateServer(int.Parse(_portLabel.Text));
-        GameState.Instance.StartLobby();
-        _mainManu.QueueFree();
+        MultiplayerConnection.Instance.CreateServer(int.Parse(_portLineEdit.Text));
+        GameStage.Instance.ChangeStageToLobby();
+        _mainMenu.QueueFree();
     }
 
     private void OnCancelButtonPressed()
     {
         Hide();
-        _UIMenu.Show();
+        _uiMenu.Show();
     }
 }

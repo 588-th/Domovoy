@@ -6,7 +6,7 @@
 [ext_resource type="Script" path="res://Scripts/Net/AuthorityScripter.cs" id="8_wxw26"]
 [ext_resource type="Script" path="res://Scripts/Round/RoundController.cs" id="9_fqncy"]
 [ext_resource type="Script" path="res://Scripts/Round/RoundRoleRoller.cs" id="10_oq5mr"]
-[ext_resource type="Script" path="res://Scripts/Spawners/RoundSpawnSystem.cs" id="11_0nej4"]
+[ext_resource type="Script" path="res://Scripts/Round/RoundRoleSpawner.cs" id="11_0nej4"]
 [ext_resource type="PackedScene" uid="uid://bks72b4kwjk1f" path="res://Scenes/Players/PlayerHuman.tscn" id="12_4p7pk"]
 [ext_resource type="PackedScene" uid="uid://dw2d8yb5aog0t" path="res://Scenes/Players/PlayerMonster.tscn" id="13_6rgwt"]
 [ext_resource type="Script" path="res://Scripts/Round/RoundEnder.cs" id="15_0lt8v"]

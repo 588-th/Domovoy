@@ -33,6 +33,6 @@ public partial class RoundEnder : Node
 
     private void EndRound()
     {
-        GameState.Instance.StartLobby();
+        GameStage.Instance.ChangeStageToLobby();
     }
 }

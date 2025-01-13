@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://Scripts/UserInterface/Menu/UIConnectServer.cs" id="1_an3ft"]
 
-[node name="UIConnectServer" type="Control" node_paths=PackedStringArray("_connectServerButton", "_cancelButton", "_ipLabel", "_portLabel")]
+[node name="UIConnectServer" type="Control" node_paths=PackedStringArray("_connectServerButton", "_cancelButton", "_ipLineEdit", "_portLineEdit")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -12,8 +12,8 @@ grow_vertical = 2
 script = ExtResource("1_an3ft")
 _connectServerButton = NodePath("MarginContainer/Panel/VBoxContainer/HBoxContainer/ConnectServer")
 _cancelButton = NodePath("MarginContainer/Panel/VBoxContainer/HBoxContainer/Cancel")
-_ipLabel = NodePath("MarginContainer/Panel/VBoxContainer/IpLabel")
-_portLabel = NodePath("MarginContainer/Panel/VBoxContainer/PortLabel")
+_ipLineEdit = NodePath("MarginContainer/Panel/VBoxContainer/IP")
+_portLineEdit = NodePath("MarginContainer/Panel/VBoxContainer/Port")
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 1
@@ -38,12 +38,12 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="IpLabel" type="LineEdit" parent="MarginContainer/Panel/VBoxContainer"]
+[node name="IP" type="LineEdit" parent="MarginContainer/Panel/VBoxContainer"]
 layout_mode = 2
 text = "127.0.0.1"
 placeholder_text = "ip"
 
-[node name="PortLabel" type="LineEdit" parent="MarginContainer/Panel/VBoxContainer"]
+[node name="Port" type="LineEdit" parent="MarginContainer/Panel/VBoxContainer"]
 layout_mode = 2
 text = "7000"
 placeholder_text = "port"

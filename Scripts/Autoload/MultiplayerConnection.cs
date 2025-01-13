@@ -5,13 +5,14 @@ public partial class MultiplayerConnection : Node
 {
     public static MultiplayerConnection Instance { get; private set; }
 
-    private enum ConnectionStateEnum { None, Server, Client }
-    private ConnectionStateEnum connectionState = ConnectionStateEnum.None;
+    private enum EnumConnectionState { None, Server, Client }
+    private EnumConnectionState connectionState = EnumConnectionState.None;
 
     public Action ServerCreated;
     public Action ServerClosed;
     public Action ClientCreated;
     public Action ClientClosed;
+    public Action ClientCreateFailed;
 
     public override void _Ready()
     {
@@ -20,40 +21,23 @@ public partial class MultiplayerConnection : Node
 
     public void CreateServer(int port)
     {
-        if (connectionState != ConnectionStateEnum.None)
+        if (connectionState != EnumConnectionState.None)
             return;
 
         ENetMultiplayerPeer peer = new();
         peer.CreateServer(port);
+
         if (peer.GetConnectionStatus() == MultiplayerPeer.ConnectionStatus.Disconnected)
             return;
 
         Multiplayer.MultiplayerPeer = peer;
-        connectionState = ConnectionStateEnum.Server;
+        connectionState = EnumConnectionState.Server;
         ServerCreated?.Invoke();
-    }
-
-    public void CreateClient(string ip, int port)
-    {
-        if (connectionState != ConnectionStateEnum.None)
-            return;
-
-        ENetMultiplayerPeer peer = new();
-        peer.CreateClient(ip, port);
-
-        if (peer.GetConnectionStatus() == MultiplayerPeer.ConnectionStatus.Disconnected)
-            return;
-
-        Multiplayer.ServerDisconnected += CloseClient;
-
-        connectionState = ConnectionStateEnum.Client;
-        Multiplayer.MultiplayerPeer = peer;
-        ClientCreated?.Invoke();
     }
 
     public void CloseServer()
     {
-        if (connectionState != ConnectionStateEnum.Server)
+        if (connectionState != EnumConnectionState.Server)
             return;
 
         foreach (var peerID in Multiplayer.GetPeers())
@@ -63,28 +47,37 @@ public partial class MultiplayerConnection : Node
         {
             Multiplayer.MultiplayerPeer.Dispose();
             Multiplayer.MultiplayerPeer = null;
-            connectionState = ConnectionStateEnum.None;
+            connectionState = EnumConnectionState.None;
             ServerClosed?.Invoke();
         }
         else
             Multiplayer.MultiplayerPeer.PeerDisconnected += OnAllPeerDisconnected;
     }
 
-    private void OnAllPeerDisconnected(long peer)
+    public void CreateClient(string ip, int port)
     {
-        if (Multiplayer.GetPeers().Length == 0)
+        if (connectionState != EnumConnectionState.None)
+            return;
+
+        ENetMultiplayerPeer peer = new();
+        peer.CreateClient(ip, port);
+
+        if (peer.GetConnectionStatus() == MultiplayerPeer.ConnectionStatus.Disconnected)
         {
-            Multiplayer.MultiplayerPeer.PeerDisconnected -= OnAllPeerDisconnected;
-            Multiplayer.MultiplayerPeer.Dispose();
-            Multiplayer.MultiplayerPeer = null;
-            connectionState = ConnectionStateEnum.None;
-            ServerClosed?.Invoke();
+            ClientCreateFailed.Invoke();
+            return;
         }
+
+        Multiplayer.ServerDisconnected += CloseClient;
+
+        connectionState = EnumConnectionState.Client;
+        Multiplayer.MultiplayerPeer = peer;
+        ClientCreated?.Invoke();
     }
 
     public void CloseClient()
     {
-        if (connectionState != ConnectionStateEnum.Client)
+        if (connectionState != EnumConnectionState.Client)
             return;
 
         if (Multiplayer.MultiplayerPeer.GetConnectionStatus() == MultiplayerPeer.ConnectionStatus.Connecting)
@@ -94,8 +87,20 @@ public partial class MultiplayerConnection : Node
 
         Multiplayer.MultiplayerPeer.Dispose();
         Multiplayer.MultiplayerPeer = null;
-        connectionState = ConnectionStateEnum.None;
+        connectionState = EnumConnectionState.None;
         ClientClosed?.Invoke();
+    }
+
+    private void OnAllPeerDisconnected(long peer)
+    {
+        if (Multiplayer.GetPeers().Length == 0)
+        {
+            Multiplayer.MultiplayerPeer.PeerDisconnected -= OnAllPeerDisconnected;
+            Multiplayer.MultiplayerPeer.Dispose();
+            Multiplayer.MultiplayerPeer = null;
+            connectionState = EnumConnectionState.None;
+            ServerClosed?.Invoke();
+        }
     }
 
     [Rpc(MultiplayerApi.RpcMode.Authority, CallLocal = false, TransferMode = MultiplayerPeer.TransferModeEnum.Reliable)]

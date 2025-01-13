@@ -31,7 +31,7 @@ public partial class UIMenu : Control
     private void OnStartRoundButtonPressed()
     {
         if (Multiplayer.IsServer())
-            GameState.Instance.StartRound();
+            GameStage.Instance.ChangeStateToRound();
     }
 
     private void OnSettingsButtonPressed()

@@ -22,8 +22,8 @@ buses/default_bus_layout="res://Audio/default_bus_layout.tres"
 [autoload]
 
 MultiplayerConnection="*res://Scripts/Autoload/MultiplayerConnection.cs"
+GameStage="*res://Scripts/Autoload/GameStage.cs"
 GameEvent="*res://Scripts/Autoload/GameEvent.cs"
-GameState="*res://Scripts/Autoload/GameState.cs"
 RpcFunctions="*res://Scripts/Autoload/RpcFunctions.cs"
 SettingsVideo="*res://Scripts/Autoload/SettingsVideo.cs"
 SettingsMouse="*res://Scripts/Autoload/SettingsMouse.cs"
@@ -66,6 +66,7 @@ Item:Pickupble=""
 Hitbox:Item=""
 Prop:Dragged=""
 Prop:Draggble=""
+Holder:Level=""
 
 [importer_defaults]
 

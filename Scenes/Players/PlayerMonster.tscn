@@ -220,6 +220,7 @@ draw_pass_1 = SubResource("BoxMesh_p8w52")
 target_position = Vector3(0, -25, 0)
 
 [node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="CommonPart"]
+max_polyphony = 4
 bus = &"SFX"
 
 [node name="ClientServerPart" type="Node" parent="."]
@@ -236,6 +237,7 @@ script = ExtResource("3_p0joe")
 script = ExtResource("4_mojhr")
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="ClientServerPart"]
+max_polyphony = 4
 bus = &"SFX"
 
 [node name="ClientPart" type="Node" parent="."]

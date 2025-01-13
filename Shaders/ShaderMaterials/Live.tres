@@ -1,6 +1,6 @@
 [gd_resource type="ShaderMaterial" load_steps=5 format=3 uid="uid://c00xuuo2mgu3g"]
 
-[ext_resource type="Shader" path="res://Shaders/notWork/Live.gdshader" id="1_yd3tv"]
+[ext_resource type="Shader" path="res://Shaders/ShaderMaterials/Live.gdshader" id="1_yd3tv"]
 [ext_resource type="Texture2D" uid="uid://cuwaa2ocbp2xu" path="res://Textures/t_wallpaper.png" id="2_15txy"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_13rhq"]
