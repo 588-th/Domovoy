@@ -14,6 +14,7 @@ public partial class PlayerInputKeys : Node
         "primarySlot", 
         "secondarySlot", 
         "tertiarySlot",
+        "quaternarySlot",
         "crouch", 
         "jump",
         "escape",

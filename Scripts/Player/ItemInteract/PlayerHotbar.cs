@@ -8,9 +8,10 @@ public partial class PlayerHotbar : Node
     [Export] private Node playerNode;
 
     private HotbarSlot _activeSlot;
-    private HotbarSlot _primarySlot;
-    private HotbarSlot _secondarySlot;
-    private HotbarSlot _tertiarySlot;
+    private HotbarSlot _primarySlot = new(HotbarSlotType.Primary);
+    private HotbarSlot _secondarySlot = new(HotbarSlotType.Secondary);
+    private HotbarSlot _tertiarySlot = new(HotbarSlotType.Tertiary);
+    private HotbarSlot _quaternarySlot = new(HotbarSlotType.Quaternary);
 
     public Action<HotbarSlot> ActiveSlotChanged;
     public Action<Item> ItemPlacedIntoActiveSlot;
@@ -22,8 +23,8 @@ public partial class PlayerHotbar : Node
         _inputActions.PrimarySlotDown += () => ActivateSlot(_primarySlot);
         _inputActions.SecondarySlotDown += () => ActivateSlot(_secondarySlot);
         _inputActions.TertiarySlotDown += () => ActivateSlot(_tertiarySlot);
+        _inputActions.QuaternarySlotDown += () => ActivateSlot(_quaternarySlot);
 
-        InitializeSlots();
         ActivateSlot(_primarySlot);
     }
 
@@ -32,6 +33,8 @@ public partial class PlayerHotbar : Node
         _inputActions.PrimarySlotDown -= () => ActivateSlot(_primarySlot);
         _inputActions.SecondarySlotDown -= () => ActivateSlot(_secondarySlot);
         _inputActions.TertiarySlotDown -= () => ActivateSlot(_tertiarySlot);
+        _inputActions.TertiarySlotDown -= () => ActivateSlot(_tertiarySlot);
+        _inputActions.QuaternarySlotDown -= () => ActivateSlot(_quaternarySlot);
     }
 
     public bool IsHotbarSlotEmpty(HotbarSlotType slot)
@@ -78,13 +81,6 @@ public partial class PlayerHotbar : Node
         ItemAborted?.Invoke(item);
     }
 
-    private void InitializeSlots()
-    {
-        _primarySlot = new HotbarSlot(HotbarSlotType.Primary);
-        _secondarySlot = new HotbarSlot(HotbarSlotType.Secondary);
-        _tertiarySlot = new HotbarSlot(HotbarSlotType.Tertiary);
-    }
-
     private void ActivateSlot(HotbarSlot hotbarSlot)
     {
         if (_activeSlot == hotbarSlot)
@@ -104,6 +100,8 @@ public partial class PlayerHotbar : Node
                 return ref _secondarySlot;
             case HotbarSlotType.Tertiary:
                 return ref _tertiarySlot;
+            case HotbarSlotType.Quaternary:
+                return ref _quaternarySlot;
             default:
                 throw new ArgumentException("Invalid hotbar slot type");
         }

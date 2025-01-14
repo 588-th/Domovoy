@@ -8,7 +8,7 @@ public partial class Firearm : Item
     [Export] private FirearmToggleAutomatic _firearmToggleAutomatic;
     [Export] private FirearmToggleLaser _firearmToggleLaser;
 
-    public override void BindActions(InputActions inputAction)
+    public override void BindOnHandActions(InputActions inputAction)
     {
         inputAction.AttackKeyDown += _firearmShoot.OnAttackKeyDown;
         inputAction.AttackKeyUp += _firearmShoot.OnAttackKeyUp;
@@ -17,7 +17,7 @@ public partial class Firearm : Item
         inputAction.ToggleFirearmLaserDown += _firearmToggleLaser.ToggleLaser;
     }
 
-    public override void UnbindActions(InputActions inputAction)
+    public override void UnbindOnHandActions(InputActions inputAction)
     {
         inputAction.AttackKeyDown -= _firearmShoot.OnAttackKeyDown;
         inputAction.AttackKeyUp -= _firearmShoot.OnAttackKeyUp;

@@ -2,5 +2,6 @@ public enum HotbarSlotType
 {
     Primary,
     Secondary,
-    Tertiary
+    Tertiary,
+    Quaternary
 }

@@ -11,12 +11,22 @@ public partial class Item : RigidBody3D
 
     public Action ItemUsed;
 
-    public virtual void BindActions(InputActions inputHandler)
+    public virtual void BindOnHandActions(InputActions inputAction)
     {
         
     }
 
-    public virtual void UnbindActions(InputActions inputHandler)
+    public virtual void UnbindOnHandActions(InputActions inputAction)
+    {
+
+    }
+
+    public virtual void BindEquipActions(InputActions inputAction)
+    {
+
+    }
+
+    public virtual void UnbindEquipActions(InputActions inputAction)
     {
 
     }

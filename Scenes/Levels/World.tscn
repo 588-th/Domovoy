@@ -4,7 +4,7 @@
 [ext_resource type="Script" path="res://Scripts/Spawners/LevelSpawner.cs" id="1_opl21"]
 [ext_resource type="Script" path="res://Scripts/Spawners/GameStageSpawner.cs" id="2_hki6v"]
 [ext_resource type="PackedScene" uid="uid://c352e57r1w1l0" path="res://Scenes/Levels/LevelLobby.tscn" id="5_6lppg"]
-[ext_resource type="PackedScene" uid="uid://cs1oc4wf53g30" path="res://Scenes/Levels/LevelApartments.tscn" id="5_ekr0p"]
+[ext_resource type="PackedScene" uid="uid://cs1oc4wf53g30" path="res://Scenes/Levels/LevelApartments.tscn" id="5_lucyf"]
 
 [node name="World" type="Node"]
 
@@ -24,4 +24,4 @@ _levelParent = NodePath("../../Level")
 script = ExtResource("2_hki6v")
 _levelSpawner = NodePath("../LevelSpawner")
 _lobbyLevelScene = ExtResource("5_6lppg")
-_roundLevelScene = ExtResource("5_ekr0p")
+_roundLevelScene = ExtResource("5_lucyf")

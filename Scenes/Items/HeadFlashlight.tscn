@@ -1,0 +1,100 @@
+[gd_scene load_steps=17 format=3 uid="uid://k7pkap4vw1ub"]
+
+[ext_resource type="Script" path="res://Scripts/Items/HeadFlashlight/HeadFlashlight.cs" id="1_lkn76"]
+[ext_resource type="AudioStream" uid="uid://5h7hqp3o4agm" path="res://Audio/SFX/Common/Pickup.mp3" id="2_b0dn4"]
+[ext_resource type="Texture2D" uid="uid://dhv7170e17ans" path="res://Textures/t_flashlight.png" id="2_liwow"]
+[ext_resource type="Script" path="res://Scripts/AudioPlayer.cs" id="3_mckr8"]
+[ext_resource type="AudioStream" uid="uid://blgubek3j4k0s" path="res://Audio/SFX/Firearm/FirearmTakeOnHand.mp3" id="3_oi12e"]
+[ext_resource type="Script" path="res://Scripts/Items/HeadFlashlight/HeadFlashlightBattery.cs" id="6_xfi5a"]
+[ext_resource type="Script" path="res://Scripts/Items/HeadFlashlight/HeadFlashlightFlicker.cs" id="7_guxgo"]
+[ext_resource type="Script" path="res://Scripts/Items/HeadFlashlight/HeadFlashlightToggleLight.cs" id="8_mrvqq"]
+[ext_resource type="AudioStream" uid="uid://bg34se6p4niyk" path="res://Audio/SFX/Flashlight/FlashlighOn.mp3" id="9_pi1m2"]
+[ext_resource type="AudioStream" uid="uid://dwmimfq7ydehc" path="res://Audio/SFX/Flashlight/FlashlighOff.mp3" id="10_6pnoi"]
+[ext_resource type="AudioStream" uid="uid://brcp0ytd6lduk" path="res://Audio/SFX/Flashlight/FlashlightOnDischargedAudio.mp3" id="11_5dcvq"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_iew44"]
+albedo_color = Color(0.2, 0.2, 0.2, 1)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_22hy7"]
+material = SubResource("StandardMaterial3D_iew44")
+top_radius = 0.1
+bottom_radius = 0.1
+height = 0.05
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_mvwxk"]
+size = Vector3(0.205, 0.055, 0.205)
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_hpf56"]
+properties/0/path = NodePath(".:position")
+properties/0/spawn = true
+properties/0/replication_mode = 2
+properties/1/path = NodePath(".:lock_rotation")
+properties/1/spawn = true
+properties/1/replication_mode = 2
+properties/2/path = NodePath(".:freeze")
+properties/2/spawn = true
+properties/2/replication_mode = 2
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_aqt3q"]
+properties/0/path = NodePath(".:light_energy")
+properties/0/spawn = true
+properties/0/replication_mode = 2
+
+[node name="HeadFlashlight" type="RigidBody3D" node_paths=PackedStringArray("_headFlashlightToggleLight", "_headFlashlightBattery") groups=["Item:Pickupble", "Object:Item"]]
+collision_layer = 4
+script = ExtResource("1_lkn76")
+_headFlashlightToggleLight = NodePath("ServerPart/HeadFlashlightToggleLight")
+_headFlashlightBattery = NodePath("ServerPart/HeadFlashlightBattery")
+SlotType = 3
+PickupAudio = ExtResource("2_b0dn4")
+TakeOnHandAudio = ExtResource("3_oi12e")
+
+[node name="Model" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0)
+mesh = SubResource("CylinderMesh_22hy7")
+
+[node name="Hitbox" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0)
+shape = SubResource("BoxShape3D_mvwxk")
+
+[node name="Flashlight" type="SpotLight3D" parent="."]
+light_energy = 0.0
+light_projector = ExtResource("2_liwow")
+shadow_enabled = true
+spot_range = 25.0
+spot_angle = 20.0
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
+bus = &"SFX"
+
+[node name="ServerPart" type="Node" parent="."]
+
+[node name="AudioPlayer" type="Node" parent="ServerPart" node_paths=PackedStringArray("_audioStreamPlayer3D")]
+script = ExtResource("3_mckr8")
+_audioStreamPlayer3D = NodePath("../../AudioStreamPlayer3D")
+
+[node name="HeadFlashlightBattery" type="Node" parent="ServerPart"]
+script = ExtResource("6_xfi5a")
+DrainRate = 2.5
+
+[node name="HeadFlashlightFlicker" type="Node" parent="ServerPart" node_paths=PackedStringArray("_flashlight")]
+script = ExtResource("7_guxgo")
+_flashlight = NodePath("../../Flashlight")
+
+[node name="HeadFlashlightToggleLight" type="Node" parent="ServerPart" node_paths=PackedStringArray("_flashlight", "_headFlashlightBattery", "_headFlashlightFlicker", "_audioPlayer")]
+script = ExtResource("8_mrvqq")
+_flashlight = NodePath("../../Flashlight")
+_headFlashlightBattery = NodePath("../HeadFlashlightBattery")
+_headFlashlightFlicker = NodePath("../HeadFlashlightFlicker")
+_lightEnergy = 2.0
+_audioPlayer = NodePath("../AudioPlayer")
+_flashlightOnAudio = ExtResource("9_pi1m2")
+_flashlightOffAudio = ExtResource("10_6pnoi")
+_flashlightOnDischargedAudio = ExtResource("11_5dcvq")
+
+[node name="ItemBodySynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_hpf56")
+
+[node name="FlashlightSynchronizer" type="MultiplayerSynchronizer" parent="."]
+root_path = NodePath("../Flashlight")
+replication_config = SubResource("SceneReplicationConfig_aqt3q")

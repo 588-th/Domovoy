@@ -11,6 +11,7 @@ public partial class PlayerItemEquipper : Node
     [Export] private Marker3D _anchorPrimatyItem;
     [Export] private Marker3D _anchorSecondaryItem;
     [Export] private Marker3D _anchorTertiaryItem;
+    [Export] private Marker3D _anchorQuaternaryItem;
 
     private readonly List<Item> _equipedItems = new();
     private Item _holdingItem;
@@ -57,12 +58,15 @@ public partial class PlayerItemEquipper : Node
     {
         if (_holdingItem == item)
         {
-            item.UnbindActions(_inputActions);
+            item.UnbindOnHandActions(_inputActions);
             ItemOnActiveSlotChanged?.Invoke(item);
             _holdingItem = null;
         }
         else
+        {
+            item.UnbindEquipActions(_inputActions);
             _equipedItems.Remove(item);
+        }
     }
 
     private void EquipItem(Item item)
@@ -73,7 +77,8 @@ public partial class PlayerItemEquipper : Node
         achorSlot.AddChild(item, true);
         item.EmitSignal(SignalName.Ready);
 
-        item.UnbindActions(_inputActions);
+        item.BindEquipActions(_inputActions);
+        item.UnbindOnHandActions(_inputActions);
         item.Position = Vector3.Zero;
         item.Rotation = Vector3.Zero;
 
@@ -87,7 +92,8 @@ public partial class PlayerItemEquipper : Node
         _anchorHandItem.AddChild(item, true);
         item.EmitSignal(SignalName.Ready);
 
-        item.BindActions(_inputActions);
+        item.BindOnHandActions(_inputActions);
+        item.UnbindEquipActions(_inputActions);
         item.Position = Vector3.Zero;
         item.Rotation = Vector3.Zero;
         _holdingItem = item;
@@ -107,6 +113,8 @@ public partial class PlayerItemEquipper : Node
                 return ref _anchorSecondaryItem;
             case HotbarSlotType.Tertiary:
                 return ref _anchorTertiaryItem;
+            case HotbarSlotType.Quaternary:
+                return ref _anchorQuaternaryItem;
             default:
                 throw new ArgumentException("Invalid slot name");
         }

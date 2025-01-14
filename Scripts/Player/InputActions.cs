@@ -19,6 +19,7 @@ public partial class InputActions : Node
     public Action PrimarySlotDown;
     public Action SecondarySlotDown;
     public Action TertiarySlotDown;
+    public Action QuaternarySlotDown;
     public Action ToggleMonsterVisionDown;
     public Action ToggleFirearmAutomaticDown;
     public Action ToggleFirearmLaserDown;
@@ -60,6 +61,7 @@ public partial class InputActions : Node
             {"primarySlot", () => PrimarySlotDown},
             {"secondarySlot", () => SecondarySlotDown},
             {"tertiarySlot", () => TertiarySlotDown},
+            {"quaternarySlot", () => QuaternarySlotDown},
             {"toggleMonsterVision", () => ToggleMonsterVisionDown},
             {"toggleFirearmAutomatic", () => ToggleFirearmAutomaticDown},
             {"toggleFirearmLaser", () => ToggleFirearmLaserDown},

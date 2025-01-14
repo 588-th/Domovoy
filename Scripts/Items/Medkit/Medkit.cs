@@ -6,13 +6,13 @@ public partial class Medkit : Item
     [Export] private MedkitHealPlayer _medkitHealPlayer;
     [Export] private MedkitHealOtherPlayer _medkitHealOtherPlayer;
 
-    public override void BindActions(InputActions inputHandler)
+    public override void BindOnHandActions(InputActions inputHandler)
     {
         inputHandler.AttackKeyDown += _medkitHealPlayer.HealItself;
         inputHandler.AlternativeKeyDown += _medkitHealOtherPlayer.HealOtherPlayer;
     }
 
-    public override void UnbindActions(InputActions inputHandler)
+    public override void UnbindOnHandActions(InputActions inputHandler)
     {
         inputHandler.AttackKeyDown -= _medkitHealPlayer.HealItself;
         inputHandler.AlternativeKeyDown -= _medkitHealOtherPlayer.HealOtherPlayer;

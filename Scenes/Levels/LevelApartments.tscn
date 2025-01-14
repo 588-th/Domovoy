@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=3 uid="uid://cs1oc4wf53g30"]
+[gd_scene load_steps=38 format=3 uid="uid://cs1oc4wf53g30"]
 
 [ext_resource type="Texture2D" uid="uid://ejoim3yef42l" path="res://Textures/t_russianFloor.png" id="1_8kcy8"]
 [ext_resource type="Texture2D" uid="uid://dogrre0un6mu6" path="res://Textures/t_lenoleum.png" id="3_vcllc"]
@@ -8,6 +8,9 @@
 [ext_resource type="Script" path="res://Scripts/Spawners/Players/PlayerSpawner.cs" id="6_ys07g"]
 [ext_resource type="Script" path="res://Scripts/Spawners/Players/SpectatorSpawner.cs" id="7_i1acj"]
 [ext_resource type="Script" path="res://Scripts/Spawners/ItemSpawner.cs" id="8_1s2et"]
+[ext_resource type="PackedScene" uid="uid://17h7ix4n16i0" path="res://Scenes/Items/Weapons/Pistol.tscn" id="9_by8uy"]
+[ext_resource type="PackedScene" uid="uid://k7pkap4vw1ub" path="res://Scenes/Items/HeadFlashlight.tscn" id="10_32f7a"]
+[ext_resource type="PackedScene" uid="uid://damhtsrr8py4i" path="res://Scenes/Items/Medkit.tscn" id="11_r348c"]
 [ext_resource type="Script" path="res://Scripts/Net/AuthorityScripter.cs" id="12_h4kt3"]
 [ext_resource type="Script" path="res://Scripts/Round/RoundController.cs" id="13_18je2"]
 [ext_resource type="Script" path="res://Scripts/Round/RoundRoleRoller.cs" id="14_3oodw"]
@@ -31,6 +34,8 @@ background_mode = 1
 background_color = Color(0.0705882, 0.0588235, 0.121569, 1)
 sky = SubResource("Sky_e3qwq")
 tonemap_mode = 3
+volumetric_fog_density = 0.15
+volumetric_fog_emission = Color(0.0807833, 0.0807833, 0.0807833, 1)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_sxb6y"]
 albedo_texture = ExtResource("1_8kcy8")
@@ -160,6 +165,11 @@ size = Vector3(3, 0.25, 3)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.5, 0.37, 2)
 size = Vector3(3, 0.25, 2)
 material = SubResource("StandardMaterial3D_kyugn")
+
+[node name="CSGPolygon3D" type="CSGPolygon3D" parent="Environment/Floor1"]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -6.999, 0.625, 0.9)
+polygon = PackedVector2Array(0, 0, -3.40212, 3.12475, 2.11112, -0.149212, 1, 0)
+depth = 3.0
 
 [node name="Floor2" type="CSGCombiner3D" parent="Environment"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
@@ -457,6 +467,12 @@ light_energy = 0.25
 shadow_enabled = true
 omni_range = 8.15
 
+[node name="OmniLight3D6" type="OmniLight3D" parent="Environment/Light"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.45435, 0.23539)
+light_energy = 0.25
+shadow_enabled = true
+omni_range = 8.15
+
 [node name="OmniLight3D4" type="OmniLight3D" parent="Environment/Light"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.5, 2.83306, 8.235)
 light_energy = 0.25
@@ -526,11 +542,8 @@ transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 5.5, 4
 [node name="Pistol" type="Marker3D" parent="SpawnAchors/AchorsItemSpawners"]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -2.1722, 1.17305, 0.34731)
 
-[node name="Pistol2" type="Marker3D" parent="SpawnAchors/AchorsItemSpawners"]
+[node name="HeadFlashlight" type="Marker3D" parent="SpawnAchors/AchorsItemSpawners"]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -2.10195, 1.17305, 1.04525)
-
-[node name="Rifl" type="Marker3D" parent="SpawnAchors/AchorsItemSpawners"]
-transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, -2.98715, 0.308004, -0.36954)
 
 [node name="Medkit" type="Marker3D" parent="SpawnAchors/AchorsItemSpawners"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.77154, 1.17305, 1.71766)
@@ -561,8 +574,8 @@ _spectatorParent = NodePath("../../Players/Spectators")
 _spawnable_scenes = PackedStringArray("res://Scenes/Items/Weapons/Pistol.tscn", "res://Scenes/Items/Weapons/Rifl.tscn", "res://Scenes/Items/Medkit.tscn")
 spawn_path = NodePath("../../Objects/Items")
 script = ExtResource("8_1s2et")
-_markers = []
-_packedScenes = []
+_markers = [NodePath("../../SpawnAchors/AchorsItemSpawners/Pistol"), NodePath("../../SpawnAchors/AchorsItemSpawners/HeadFlashlight"), NodePath("../../SpawnAchors/AchorsItemSpawners/Medkit")]
+_packedScenes = [ExtResource("9_by8uy"), ExtResource("10_32f7a"), ExtResource("11_r348c")]
 
 [node name="PropSpawner" type="MultiplayerSpawner" parent="Spawners"]
 _spawnable_scenes = PackedStringArray("res://Scenes/Props/Bullet.tscn", "res://Scenes/Props/HumanCorpse.tscn")
