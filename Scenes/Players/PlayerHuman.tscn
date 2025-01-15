@@ -1,4 +1,4 @@
-[gd_scene load_steps=44 format=3 uid="uid://bks72b4kwjk1f"]
+[gd_scene load_steps=48 format=3 uid="uid://bks72b4kwjk1f"]
 
 [ext_resource type="Script" path="res://Scripts/Player/InputVector.cs" id="2_8kxsr"]
 [ext_resource type="Script" path="res://Scripts/Player/PlayerInputVector.cs" id="2_ca8we"]
@@ -53,6 +53,36 @@ scale_min = 0.3
 scale_max = 0.4
 
 [sub_resource type="SphereMesh" id="SphereMesh_pvvem"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_iinux"]
+render_priority = -1
+transparency = 1
+no_depth_test = true
+shading_mode = 0
+billboard_mode = 1
+
+[sub_resource type="Curve" id="Curve_lgtgt"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.250847, 0.7), 0.0, 0.0, 0, 0, Vector2(0.505085, 0.7), 0.0, 0.0, 0, 0, Vector2(0.752542, 0.7), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 5
+
+[sub_resource type="CurveTexture" id="CurveTexture_08qm6"]
+curve = SubResource("Curve_lgtgt")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_3rrb4"]
+emission_shape_scale = Vector3(0.5, 0.5, 0.5)
+emission_shape = 3
+emission_box_extents = Vector3(1, 1, 1)
+direction = Vector3(0, 1, 0)
+spread = 90.0
+initial_velocity_min = 0.1
+initial_velocity_max = 0.1
+gravity = Vector3(0, 0, 0)
+alpha_curve = SubResource("CurveTexture_08qm6")
+turbulence_noise_strength = 20.0
+turbulence_noise_scale = 5.0
+
+[sub_resource type="QuadMesh" id="QuadMesh_66l6p"]
+size = Vector2(0.05, 0.05)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_lvyrn"]
 shader = ExtResource("16_b50nf")
@@ -119,11 +149,6 @@ properties/1/path = NodePath(".:rotation")
 properties/1/spawn = true
 properties/1/replication_mode = 2
 
-[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_axyev"]
-properties/0/path = NodePath(".:light_energy")
-properties/0/spawn = true
-properties/0/replication_mode = 2
-
 [node name="PlayerHuman" type="Node" groups=["Player", "Player:Human"]]
 metadata/PlayerCamera = NodePath("CommonPart/PlayerCamera")
 metadata/PlayerHealth = NodePath("ServerPart/Scripts/PlayerHealth")
@@ -140,6 +165,7 @@ _audioStreamPlayer3D = NodePath("../AudioStreamPlayer3D")
 
 [node name="PlayerCamera" type="Camera3D" parent="CommonPart"]
 transform = Transform3D(1, 0, 0, 0, 1, 1.06581e-14, 0, -1.06581e-14, 1, 0, 0.5, 0)
+cull_mask = 524287
 
 [node name="RayOfLook" type="RayCast3D" parent="CommonPart/PlayerCamera"]
 transform = Transform3D(1, 0, 0, 0, 1, 1.06581e-14, 0, -1.06581e-14, 1, 0, 0, 0)
@@ -191,6 +217,16 @@ lifetime = 3.0
 process_material = SubResource("ParticleProcessMaterial_1ge4m")
 draw_pass_1 = SubResource("SphereMesh_pvvem")
 
+[node name="GPUParticles3D" type="GPUParticles3D" parent="CommonPart/PlayerBody"]
+layers = 524288
+material_override = SubResource("StandardMaterial3D_iinux")
+cast_shadow = 0
+amount = 30
+lifetime = 3.0
+visibility_aabb = AABB(-5, -5, -5, 10, 10, 10)
+process_material = SubResource("ParticleProcessMaterial_3rrb4")
+draw_pass_1 = SubResource("QuadMesh_66l6p")
+
 [node name="Achors" type="Node3D" parent="CommonPart/PlayerBody"]
 
 [node name="achorCamera" type="Marker3D" parent="CommonPart/PlayerBody/Achors"]
@@ -214,7 +250,6 @@ transform = Transform3D(-3.55271e-15, -1, 4.37114e-08, 1, 0, 7.10543e-15, -1.065
 target_position = Vector3(0, -25, 0)
 
 [node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="CommonPart"]
-max_polyphony = 4
 bus = &"SFX"
 
 [node name="ClientServerPart" type="Node" parent="."]
@@ -352,7 +387,7 @@ _humanCorpseScene = ExtResource("27_n646g")
 [node name="PlayerAuraColor" type="Node" parent="ServerPart/Scripts" node_paths=PackedStringArray("_playerHealth", "_geometry")]
 script = ExtResource("19_jh60k")
 _playerHealth = NodePath("../PlayerHealth")
-_geometry = NodePath("../../../CommonPart/PlayerBody/Aura")
+_geometry = NodePath("../../../CommonPart/PlayerBody/GPUParticles3D")
 
 [node name="PlayerHUDParameters" type="Node" parent="ServerPart/Scripts" node_paths=PackedStringArray("_hudParameters", "_playerHealth", "_playerItemEquipper", "_rayOfLook")]
 script = ExtResource("17_ijix5")
@@ -407,7 +442,3 @@ replication_config = SubResource("SceneReplicationConfig_mj3mr")
 [node name="PlayerCameraSynchronizer" type="MultiplayerSynchronizer" parent="Synchronizers"]
 root_path = NodePath("../../CommonPart/PlayerCamera")
 replication_config = SubResource("SceneReplicationConfig_bnnxu")
-
-[node name="PlayerFlashlightSynchronizer" type="MultiplayerSynchronizer" parent="Synchronizers"]
-root_path = NodePath("")
-replication_config = SubResource("SceneReplicationConfig_axyev")

@@ -172,6 +172,7 @@ _audioStreamPlayer3D = NodePath("../AudioStreamPlayer3D")
 
 [node name="PlayerCamera" type="Camera3D" parent="CommonPart"]
 transform = Transform3D(1, 0, 0, 0, 1, 1.06581e-14, 0, -1.06581e-14, 1, 0, 0.5, 0)
+cull_mask = 524287
 
 [node name="PlayerLook" type="Node3D" parent="CommonPart/PlayerCamera"]
 

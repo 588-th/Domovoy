@@ -1,4 +1,4 @@
-[gd_scene load_steps=38 format=3 uid="uid://cs1oc4wf53g30"]
+[gd_scene load_steps=43 format=3 uid="uid://cs1oc4wf53g30"]
 
 [ext_resource type="Texture2D" uid="uid://ejoim3yef42l" path="res://Textures/t_russianFloor.png" id="1_8kcy8"]
 [ext_resource type="Texture2D" uid="uid://dogrre0un6mu6" path="res://Textures/t_lenoleum.png" id="3_vcllc"]
@@ -105,16 +105,47 @@ texture_filter = 0
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_7vd4g"]
 render_priority = 0
 shader = ExtResource("5_rq73e")
-shader_parameter/edge_threshold = 0.5
+shader_parameter/edge_threshold = 0.1
 shader_parameter/line_color = Color(0.241156, 0.241156, 0.241156, 1)
 shader_parameter/background_color = Color(0.408, 0.969, 0.694, 1)
 shader_parameter/background_alpha = 0.0
 shader_parameter/line_alpha = 0.5
+shader_parameter/light_influence = 150.0
 
 [sub_resource type="QuadMesh" id="QuadMesh_s60u0"]
 material = SubResource("ShaderMaterial_7vd4g")
 flip_faces = true
 size = Vector2(2, 2)
+
+[sub_resource type="Curve" id="Curve_0utpg"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.250847, 0.7), 0.0, 0.0, 0, 0, Vector2(0.505085, 0.7), 0.0, 0.0, 0, 0, Vector2(0.752542, 0.7), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 5
+
+[sub_resource type="CurveTexture" id="CurveTexture_4ja7q"]
+curve = SubResource("Curve_0utpg")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_it7qa"]
+emission_shape_scale = Vector3(7.5, 3.5, 12)
+emission_shape = 3
+emission_box_extents = Vector3(1, 1, 1)
+direction = Vector3(0, 0, 0)
+initial_velocity_min = 0.1
+initial_velocity_max = 0.1
+gravity = Vector3(0, 0, 0)
+alpha_curve = SubResource("CurveTexture_4ja7q")
+turbulence_enabled = true
+turbulence_noise_scale = 5.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_v00ec"]
+transparency = 1
+shading_mode = 0
+vertex_color_use_as_albedo = true
+albedo_color = Color(1, 1, 1, 0.0470588)
+billboard_mode = 1
+
+[sub_resource type="QuadMesh" id="QuadMesh_0ijxm"]
+material = SubResource("StandardMaterial3D_v00ec")
+size = Vector2(0.02, 0.02)
 
 [node name="LevelApartments" type="Node3D"]
 
@@ -495,6 +526,14 @@ omni_range = 8.15
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 9, 0)
 extra_cull_margin = 16384.0
 mesh = SubResource("QuadMesh_s60u0")
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="Environment"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 5)
+amount = 25
+lifetime = 10.0
+visibility_aabb = AABB(-8, -4, -12, 16, 8, 25)
+process_material = SubResource("ParticleProcessMaterial_it7qa")
+draw_pass_1 = SubResource("QuadMesh_0ijxm")
 
 [node name="Players" type="Node" parent="."]
 

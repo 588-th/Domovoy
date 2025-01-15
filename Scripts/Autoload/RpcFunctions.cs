@@ -9,6 +9,11 @@ public partial class RpcFunctions : Node
         Instance = this;
     }
 
+    public void ChangeAlbedoOfGeometry(NodePath nodePath, Color color)
+    {
+        Rpc(nameof(RpcChangeAlbedoOfGeometry), nodePath, color);
+    }
+
     public void AddGroup(NodePath nodePath, string group)
     {
         Rpc(nameof(RpcAddGroup), nodePath, group);
@@ -40,5 +45,14 @@ public partial class RpcFunctions : Node
     public void RpcReparent(NodePath nodePath, NodePath parentNodePath)
     {
         GetNode(nodePath).Reparent(GetNode(parentNodePath));
+    }
+
+    [Rpc(MultiplayerApi.RpcMode.AnyPeer, CallLocal = true, TransferMode = MultiplayerPeer.TransferModeEnum.Reliable)]
+    public void RpcChangeAlbedoOfGeometry(NodePath nodePath, Color color)
+    {
+        GeometryInstance3D geometry3DInstance = GetNode(nodePath) as GeometryInstance3D;
+        StandardMaterial3D standardMaterial3D = geometry3DInstance.MaterialOverride.Duplicate() as StandardMaterial3D;
+        geometry3DInstance.MaterialOverride = standardMaterial3D;
+        standardMaterial3D.AlbedoColor = color;
     }
 }
