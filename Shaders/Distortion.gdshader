@@ -34,7 +34,7 @@ float noise(vec3 p) {
 void vertex() {
     // Позиция шума с учётом времени для анимации
     vec3 noise_position = VERTEX * noise_scale + vec3(TIME * spike_speed);
-    
+
     // Генерация шума
     float displacement = noise(noise_position) * spike_intensity;
 

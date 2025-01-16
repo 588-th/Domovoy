@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c8qgmcxxfvt61"
-path="res://.godot/imported/n_brickWall.png-ff0a58cb86b9a747a7231816f0a57f7a.ctex"
+uid="uid://divtbjou65k1y"
+path="res://.godot/imported/FloorBeton.png-a3f9253905ca99c5047cd3f60f07bc43.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Textures/NormalMaps/n_brickWall.png"
-dest_files=["res://.godot/imported/n_brickWall.png-ff0a58cb86b9a747a7231816f0a57f7a.ctex"]
+source_file="res://Textures/FloorBeton.png"
+dest_files=["res://.godot/imported/FloorBeton.png-a3f9253905ca99c5047cd3f60f07bc43.ctex"]
 
 [params]
 
@@ -19,12 +19,12 @@ compress/mode=0
 compress/high_quality=false
 compress/lossy_quality=0.7
 compress/hdr_compression=1
-compress/normal_map=1
+compress/normal_map=0
 compress/channel_pack=0
 mipmaps/generate=true
 mipmaps/limit=-1
-roughness/mode=1
-roughness/src_normal="res://Textures/nor.png"
+roughness/mode=0
+roughness/src_normal=""
 process/fix_alpha_border=true
 process/premult_alpha=false
 process/normal_map_invert_y=false
