@@ -7,18 +7,19 @@ public class IdleState : MovementState
     public override void Enter()
     {
         base.Enter();
-        _playerMovement.IsIdling?.Invoke();
 
+        _playerMovement.MovementActions.InvokeAction("isIdleState");
         _playerMovement.InputActions.JumpKeyDown += OnJumpKeyDown;
-        _playerMovement.IsNotGrounded += OnNotGround;
+        _playerMovement.MovementActions.IsNotGrounded += OnNotGround;
     }
 
     public override void Exit()
     {
         base.Exit();
 
+        _playerMovement.MovementActions.InvokeAction("isNotIdleState");
         _playerMovement.InputActions.JumpKeyDown -= OnJumpKeyDown;
-        _playerMovement.IsNotGrounded -= OnNotGround;
+        _playerMovement.MovementActions.IsNotGrounded -= OnNotGround;
     }
 
     public override void Update(double delta)

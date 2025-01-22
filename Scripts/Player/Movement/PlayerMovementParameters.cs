@@ -2,8 +2,7 @@ using Godot;
 
 public partial class PlayerMovementParameters : Resource
 {
-    [Export] public float StandForwardSpeed = 5f;
-    [Export] public float StandBackwardSpeed = 5f;
+    [Export] public float WalkSpeed = 5f;
     [Export] public float CrouchSpeed = 2f;
     [Export] public float JumpSpeed = 5f;
     [Export] public float JumpForce = 5f;

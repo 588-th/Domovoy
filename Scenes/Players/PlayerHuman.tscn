@@ -1,19 +1,20 @@
-[gd_scene load_steps=48 format=3 uid="uid://bks72b4kwjk1f"]
+[gd_scene load_steps=50 format=3 uid="uid://bks72b4kwjk1f"]
 
 [ext_resource type="Script" path="res://Scripts/Player/InputVector.cs" id="2_8kxsr"]
 [ext_resource type="Script" path="res://Scripts/Player/PlayerInputVector.cs" id="2_ca8we"]
 [ext_resource type="Script" path="res://Scripts/Player/InputActions.cs" id="2_ljfyj"]
 [ext_resource type="ArrayMesh" uid="uid://b2mb176k0pcgp" path="res://Meshes/HiddenCollection_BowlingPin.res" id="2_p3jm5"]
 [ext_resource type="Script" path="res://Scripts/Player/PlayerCamera.cs" id="3_e7wye"]
-[ext_resource type="Material" uid="uid://ddjdohwj58q27" path="res://Materials/mAura.tres" id="3_kqmvr"]
 [ext_resource type="Script" path="res://Scripts/Player/PlayerInputKeys.cs" id="3_ylv55"]
 [ext_resource type="Script" path="res://Scripts/Player/Movement/PlayerMovement.cs" id="4_onyxk"]
 [ext_resource type="Script" path="res://Scripts/Player/HUDParameters.cs" id="4_who5x"]
 [ext_resource type="Script" path="res://Scripts/Player/PlayerHealth.cs" id="5_37vo5"]
 [ext_resource type="Script" path="res://Scripts/Player/ItemInteract/PlayerHotbar.cs" id="6_eq515"]
+[ext_resource type="Script" path="res://Scripts/Player/MovementActions.cs" id="6_ju8pw"]
 [ext_resource type="Script" path="res://Scripts/Player/PropInteract/PlayerPropInteractor.cs" id="7_d01bu"]
 [ext_resource type="Script" path="res://Scripts/Player/ItemInteract/PlayerItemInteractor.cs" id="8_44guu"]
 [ext_resource type="Script" path="res://Scripts/Player/ItemInteract/PlayerItemEquipper.cs" id="9_nr6ef"]
+[ext_resource type="Script" path="res://Scripts/Player/PlayerCameraAnimations.cs" id="10_p0rem"]
 [ext_resource type="PackedScene" uid="uid://c131mixukwjnm" path="res://Scenes/UserInterface/Menu/UIPauseMenu.tscn" id="11_s3mkc"]
 [ext_resource type="Script" path="res://Scripts/AudioPlayer.cs" id="13_bwvh4"]
 [ext_resource type="PackedScene" uid="uid://cojvgyniobwbk" path="res://Scenes/UserInterface/HUD/UICrosshair.tscn" id="13_h4pmd"]
@@ -36,23 +37,6 @@
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_ix7cr"]
 height = 1.72626
 radius = 0.3
-
-[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_1ge4m"]
-lifetime_randomness = 1.0
-emission_shape_scale = Vector3(0.7, 0, 0.7)
-emission_shape = 6
-emission_ring_axis = Vector3(0, 0, 1)
-emission_ring_height = 1.0
-emission_ring_radius = 1.0
-emission_ring_inner_radius = 0.0
-direction = Vector3(0, 1, 0)
-spread = 10.0
-initial_velocity_max = 1.0
-gravity = Vector3(0, 0, 0)
-scale_min = 0.3
-scale_max = 0.4
-
-[sub_resource type="SphereMesh" id="SphereMesh_pvvem"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_iinux"]
 render_priority = -1
@@ -84,6 +68,45 @@ turbulence_noise_scale = 5.0
 [sub_resource type="QuadMesh" id="QuadMesh_66l6p"]
 size = Vector2(0.05, 0.05)
 
+[sub_resource type="Animation" id="Animation_r6j44"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../../CommonPart/CameraHolder/PlayerCamera:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_ybvy8"]
+resource_name = "WALK"
+length = 1.6
+loop_mode = 1
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../../CommonPart/CameraHolder/PlayerCamera:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.4, 0.8, 1.2, 1.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0.05, 0.05, 0), Vector3(0, 0, 0), Vector3(-0.05, 0.05, 0), Vector3(0, 0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_vvpui"]
+_data = {
+"RESET": SubResource("Animation_r6j44"),
+"WALK": SubResource("Animation_ybvy8")
+}
+
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_lvyrn"]
 shader = ExtResource("16_b50nf")
 shader_parameter/alpha = 0.25
@@ -98,16 +121,15 @@ shader_parameter/dither_scale = 1.5
 
 [sub_resource type="Resource" id="Resource_shobs"]
 script = ExtResource("23_sbhbh")
-StandForwardSpeed = 3.5
-StandBackwardSpeed = 3.5
+WalkSpeed = 3.5
 CrouchSpeed = 2.0
 JumpSpeed = 3.5
-JumpForce = 5.0
+JumpForce = 5.5
 MaxJumps = 1
 OnGroundAcceleration = 30.0
 OnAirAcceleration = 20.0
 Gravity = 9.8
-CurrentJumpForce = 5.0
+CurrentJumpForce = 5.5
 CurrentSpeed = 5.0
 CurrentAcceleration = 0.0
 PlayAudioOnlyLocaly = false
@@ -150,9 +172,9 @@ properties/1/spawn = true
 properties/1/replication_mode = 2
 
 [node name="PlayerHuman" type="Node" groups=["Player", "Player:Human"]]
-metadata/PlayerCamera = NodePath("CommonPart/PlayerCamera")
+metadata/PlayerCamera = NodePath("CommonPart/CameraHolder/PlayerCamera")
 metadata/PlayerHealth = NodePath("ServerPart/Scripts/PlayerHealth")
-metadata/RayOfLook = NodePath("CommonPart/PlayerCamera/RayOfLook")
+metadata/RayOfLook = NodePath("CommonPart/CameraHolder/PlayerCamera/RayOfLook")
 metadata/AudioPlayer = NodePath("CommonPart/AudioPlayer")
 
 [node name="CommonPart" type="Node" parent="."]
@@ -163,35 +185,38 @@ _playerRoot = NodePath("../..")
 _audioStreamPlayer = NodePath("../../ClientServerPart/AudioStreamPlayer")
 _audioStreamPlayer3D = NodePath("../AudioStreamPlayer3D")
 
-[node name="PlayerCamera" type="Camera3D" parent="CommonPart"]
-transform = Transform3D(1, 0, 0, 0, 1, 1.06581e-14, 0, -1.06581e-14, 1, 0, 0.5, 0)
+[node name="CameraHolder" type="Node3D" parent="CommonPart"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+
+[node name="PlayerCamera" type="Camera3D" parent="CommonPart/CameraHolder"]
+transform = Transform3D(1, 0, 0, 0, 1, 1.06581e-14, 0, -1.06581e-14, 1, 0, 0, 0)
 cull_mask = 524287
 
-[node name="RayOfLook" type="RayCast3D" parent="CommonPart/PlayerCamera"]
+[node name="RayOfLook" type="RayCast3D" parent="CommonPart/CameraHolder/PlayerCamera"]
 transform = Transform3D(1, 0, 0, 0, 1, 1.06581e-14, 0, -1.06581e-14, 1, 0, 0, 0)
 target_position = Vector3(0, 0, -2.5)
 collision_mask = 526
 hit_back_faces = false
 
-[node name="ObjectInteraction" type="Node3D" parent="CommonPart/PlayerCamera"]
+[node name="ObjectInteraction" type="Node3D" parent="CommonPart/CameraHolder/PlayerCamera"]
 transform = Transform3D(1, 0, 0, 0, 1, 1.06581e-14, 0, -1.06581e-14, 1, 0, 0, 0)
 
-[node name="anchorForDraggedObject" type="Marker3D" parent="CommonPart/PlayerCamera/ObjectInteraction"]
+[node name="anchorForDraggedObject" type="Marker3D" parent="CommonPart/CameraHolder/PlayerCamera/ObjectInteraction"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.5)
 
-[node name="StaticBody3D" type="StaticBody3D" parent="CommonPart/PlayerCamera/ObjectInteraction"]
+[node name="StaticBody3D" type="StaticBody3D" parent="CommonPart/CameraHolder/PlayerCamera/ObjectInteraction"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.5)
 
-[node name="Generic6DOFJoint3D" type="Generic6DOFJoint3D" parent="CommonPart/PlayerCamera/ObjectInteraction"]
+[node name="Generic6DOFJoint3D" type="Generic6DOFJoint3D" parent="CommonPart/CameraHolder/PlayerCamera/ObjectInteraction"]
 node_a = NodePath("../StaticBody3D")
 linear_limit_x/enabled = false
 linear_limit_y/enabled = false
 linear_limit_z/enabled = false
 
-[node name="anchorActiveSlot" type="Marker3D" parent="CommonPart/PlayerCamera"]
+[node name="anchorActiveSlot" type="Marker3D" parent="CommonPart/CameraHolder/PlayerCamera"]
 transform = Transform3D(0.99863, 0, 0.052336, -5.57802e-16, 1, 1.06435e-14, -0.052336, -1.06581e-14, 0.99863, 0.45, -0.4, -0.5)
 
-[node name="anchorQuaternarySlot" type="Marker3D" parent="CommonPart/PlayerCamera"]
+[node name="anchorQuaternarySlot" type="Marker3D" parent="CommonPart/CameraHolder/PlayerCamera"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.259559, -0.18908)
 
 [node name="PlayerBody" type="CharacterBody3D" parent="CommonPart" groups=["Hitbox:Player"]]
@@ -208,16 +233,6 @@ mesh = ExtResource("2_p3jm5")
 shape = SubResource("CylinderShape3D_ix7cr")
 
 [node name="Aura" type="GPUParticles3D" parent="CommonPart/PlayerBody"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
-visible = false
-layers = 524288
-material_override = ExtResource("3_kqmvr")
-amount = 15
-lifetime = 3.0
-process_material = SubResource("ParticleProcessMaterial_1ge4m")
-draw_pass_1 = SubResource("SphereMesh_pvvem")
-
-[node name="GPUParticles3D" type="GPUParticles3D" parent="CommonPart/PlayerBody"]
 layers = 524288
 material_override = SubResource("StandardMaterial3D_iinux")
 cast_shadow = 0
@@ -233,7 +248,7 @@ draw_pass_1 = SubResource("QuadMesh_66l6p")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 
 [node name="RemotePositionToCamera" type="RemoteTransform3D" parent="CommonPart/PlayerBody/Achors/achorCamera"]
-remote_path = NodePath("../../../../PlayerCamera")
+remote_path = NodePath("../../../../CameraHolder")
 update_rotation = false
 update_scale = false
 
@@ -265,6 +280,10 @@ script = ExtResource("2_8kxsr")
 [node name="HUDParameters" type="Node" parent="ClientServerPart/Scripts"]
 script = ExtResource("4_who5x")
 
+[node name="MovementActions" type="Node" parent="ClientServerPart/Scripts" node_paths=PackedStringArray("_playerRoot")]
+script = ExtResource("6_ju8pw")
+_playerRoot = NodePath("../../..")
+
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="ClientServerPart"]
 max_polyphony = 4
 bus = &"SFX"
@@ -283,7 +302,17 @@ _inputVector = NodePath("../../../ClientServerPart/Scripts/InputVector")
 
 [node name="PlayerCamera" type="Node" parent="ClientPart/Scripts" node_paths=PackedStringArray("_playerCamera")]
 script = ExtResource("3_e7wye")
-_playerCamera = NodePath("../../../CommonPart/PlayerCamera")
+_playerCamera = NodePath("../../../CommonPart/CameraHolder/PlayerCamera")
+
+[node name="PlayerCameraAnimation" type="Node" parent="ClientPart/Scripts" node_paths=PackedStringArray("_movementActions", "_animationPlayer")]
+script = ExtResource("10_p0rem")
+_movementActions = NodePath("../../../ClientServerPart/Scripts/MovementActions")
+_animationPlayer = NodePath("../PlayerCameraAnimator")
+
+[node name="PlayerCameraAnimator" type="AnimationPlayer" parent="ClientPart/Scripts"]
+libraries = {
+"": SubResource("AnimationLibrary_vvpui")
+}
 
 [node name="UI" type="Node" parent="ClientPart"]
 
@@ -330,8 +359,9 @@ mouse_filter = 2
 
 [node name="Scripts" type="Node" parent="ServerPart"]
 
-[node name="PlayerMovement" type="Node" parent="ServerPart/Scripts" node_paths=PackedStringArray("InputActions", "InputVector", "PlayerBody", "AudioPlayer")]
+[node name="PlayerMovement" type="Node" parent="ServerPart/Scripts" node_paths=PackedStringArray("MovementActions", "InputActions", "InputVector", "PlayerBody", "AudioPlayer")]
 script = ExtResource("4_onyxk")
+MovementActions = NodePath("../../../ClientServerPart/Scripts/MovementActions")
 InputActions = NodePath("../../../ClientServerPart/Scripts/InputActions")
 InputVector = NodePath("../../../ClientServerPart/Scripts/InputVector")
 PlayerBody = NodePath("../../../CommonPart/PlayerBody")
@@ -352,29 +382,29 @@ playerNode = NodePath("../../..")
 [node name="PlayerPropInteractor" type="Node" parent="ServerPart/Scripts" node_paths=PackedStringArray("_inputActions", "RayOfLook", "PlayerBody", "AnchorForDraggedObject", "StaticBody3D", "Generic6DofJoint3D")]
 script = ExtResource("7_d01bu")
 _inputActions = NodePath("../../../ClientServerPart/Scripts/InputActions")
-RayOfLook = NodePath("../../../CommonPart/PlayerCamera/RayOfLook")
+RayOfLook = NodePath("../../../CommonPart/CameraHolder/PlayerCamera/RayOfLook")
 PlayerBody = NodePath("../../../CommonPart/PlayerBody")
-AnchorForDraggedObject = NodePath("../../../CommonPart/PlayerCamera/ObjectInteraction/anchorForDraggedObject")
-StaticBody3D = NodePath("../../../CommonPart/PlayerCamera/ObjectInteraction/StaticBody3D")
-Generic6DofJoint3D = NodePath("../../../CommonPart/PlayerCamera/ObjectInteraction/Generic6DOFJoint3D")
+AnchorForDraggedObject = NodePath("../../../CommonPart/CameraHolder/PlayerCamera/ObjectInteraction/anchorForDraggedObject")
+StaticBody3D = NodePath("../../../CommonPart/CameraHolder/PlayerCamera/ObjectInteraction/StaticBody3D")
+Generic6DofJoint3D = NodePath("../../../CommonPart/CameraHolder/PlayerCamera/ObjectInteraction/Generic6DOFJoint3D")
 
 [node name="PlayerItemInteractor" type="Node" parent="ServerPart/Scripts" node_paths=PackedStringArray("_inputActions", "_playerHotbar", "_player", "_rayOfLook")]
 script = ExtResource("8_44guu")
 _inputActions = NodePath("../../../ClientServerPart/Scripts/InputActions")
 _playerHotbar = NodePath("../PlayerHotbar")
 _player = NodePath("../../../CommonPart/PlayerBody")
-_rayOfLook = NodePath("../../../CommonPart/PlayerCamera/RayOfLook")
+_rayOfLook = NodePath("../../../CommonPart/CameraHolder/PlayerCamera/RayOfLook")
 
 [node name="PlayerItemEquipper" type="Node" parent="ServerPart/Scripts" node_paths=PackedStringArray("_inputActions", "_audioPlayer", "_playerHotbar", "_anchorHandItem", "_anchorPrimatyItem", "_anchorSecondaryItem", "_anchorTertiaryItem", "_anchorQuaternaryItem")]
 script = ExtResource("9_nr6ef")
 _inputActions = NodePath("../../../ClientServerPart/Scripts/InputActions")
 _audioPlayer = NodePath("../../../CommonPart/AudioPlayer")
 _playerHotbar = NodePath("../PlayerHotbar")
-_anchorHandItem = NodePath("../../../CommonPart/PlayerCamera/anchorActiveSlot")
+_anchorHandItem = NodePath("../../../CommonPart/CameraHolder/PlayerCamera/anchorActiveSlot")
 _anchorPrimatyItem = NodePath("../../../CommonPart/PlayerBody/Achors/anchorPrimatySlot")
 _anchorSecondaryItem = NodePath("../../../CommonPart/PlayerBody/Achors/anchorSecondarySlot")
 _anchorTertiaryItem = NodePath("../../../CommonPart/PlayerBody/Achors/anchorTertiarySlot")
-_anchorQuaternaryItem = NodePath("../../../CommonPart/PlayerCamera/anchorQuaternarySlot")
+_anchorQuaternaryItem = NodePath("../../../CommonPart/CameraHolder/PlayerCamera/anchorQuaternarySlot")
 
 [node name="PlayerDeath" type="Node" parent="ServerPart/Scripts" node_paths=PackedStringArray("_player", "_playerBody", "_rayGround", "_playerHealth")]
 script = ExtResource("15_yvyp7")
@@ -387,18 +417,18 @@ _humanCorpseScene = ExtResource("27_n646g")
 [node name="PlayerAuraColor" type="Node" parent="ServerPart/Scripts" node_paths=PackedStringArray("_playerHealth", "_geometry")]
 script = ExtResource("19_jh60k")
 _playerHealth = NodePath("../PlayerHealth")
-_geometry = NodePath("../../../CommonPart/PlayerBody/GPUParticles3D")
+_geometry = NodePath("../../../CommonPart/PlayerBody/Aura")
 
 [node name="PlayerHUDParameters" type="Node" parent="ServerPart/Scripts" node_paths=PackedStringArray("_hudParameters", "_playerHealth", "_playerItemEquipper", "_rayOfLook")]
 script = ExtResource("17_ijix5")
 _hudParameters = NodePath("../../../ClientServerPart/Scripts/HUDParameters")
 _playerHealth = NodePath("../PlayerHealth")
 _playerItemEquipper = NodePath("../PlayerItemEquipper")
-_rayOfLook = NodePath("../../../CommonPart/PlayerCamera/RayOfLook")
+_rayOfLook = NodePath("../../../CommonPart/CameraHolder/PlayerCamera/RayOfLook")
 
 [node name="RemoteCameraRotation" type="Node" parent="ServerPart/Scripts" node_paths=PackedStringArray("_playerCamera", "_playerBody")]
 script = ExtResource("21_q46bc")
-_playerCamera = NodePath("../../../CommonPart/PlayerCamera")
+_playerCamera = NodePath("../../../CommonPart/CameraHolder/PlayerCamera")
 _playerBody = NodePath("../../../CommonPart/PlayerBody")
 
 [node name="Spawners" type="Node" parent="."]
@@ -417,11 +447,11 @@ spawn_path = NodePath("../../CommonPart/PlayerBody/Achors/anchorTertiarySlot")
 
 [node name="QuaternaryItemSpawner" type="MultiplayerSpawner" parent="Spawners"]
 _spawnable_scenes = PackedStringArray("res://Scenes/Items/HeadFlashlight.tscn")
-spawn_path = NodePath("../../CommonPart/PlayerCamera/anchorQuaternarySlot")
+spawn_path = NodePath("../../CommonPart/CameraHolder/PlayerCamera/anchorQuaternarySlot")
 
 [node name="HoldingItemSpawner" type="MultiplayerSpawner" parent="Spawners"]
 _spawnable_scenes = PackedStringArray("res://Scenes/Items/Weapons/Pistol.tscn", "res://Scenes/Items/Weapons/Rifl.tscn", "res://Scenes/Items/Medkit.tscn", "res://Scenes/Items/HeadFlashlight.tscn")
-spawn_path = NodePath("../../CommonPart/PlayerCamera/anchorActiveSlot")
+spawn_path = NodePath("../../CommonPart/CameraHolder/PlayerCamera/anchorActiveSlot")
 
 [node name="Synchronizers" type="Node" parent="."]
 
@@ -440,5 +470,5 @@ root_path = NodePath("../../CommonPart/PlayerBody")
 replication_config = SubResource("SceneReplicationConfig_mj3mr")
 
 [node name="PlayerCameraSynchronizer" type="MultiplayerSynchronizer" parent="Synchronizers"]
-root_path = NodePath("../../CommonPart/PlayerCamera")
+root_path = NodePath("../../CommonPart/CameraHolder/PlayerCamera")
 replication_config = SubResource("SceneReplicationConfig_bnnxu")

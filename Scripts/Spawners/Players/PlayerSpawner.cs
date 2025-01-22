@@ -53,14 +53,13 @@ public partial class PlayerSpawner : MultiplayerSpawner
 
     private Node SetSpawnPosition(Node playerRoot)
     {
-        int[] peers = Multiplayer.GetPeers();
         int markerNumber = _spawnCount;
 
         CharacterBody3D playerbody = playerRoot.GetNode<CharacterBody3D>("CommonPart/PlayerBody");
         playerbody.Position = _spawnMarkers[markerNumber].Position;
         playerbody.Rotation = _spawnMarkers[markerNumber].Rotation;
 
-        Camera3D playerCamera = playerRoot.GetNode<Camera3D>("CommonPart/PlayerCamera");
+        Camera3D playerCamera = playerRoot.GetNode<Camera3D>("CommonPart/CameraHolder/PlayerCamera");
         playerCamera.Rotation = _spawnMarkers[markerNumber].Rotation;
         return playerRoot;
     }
@@ -85,6 +84,7 @@ public partial class PlayerSpawner : MultiplayerSpawner
         SetMultiplayerAuthoritys(playerRoot, "CommonPart/PlayerBody", 1);
         SetMultiplayerAuthoritys(playerRoot, "CommonPart/AudioPlayer", 1);
         SetMultiplayerAuthoritys(playerRoot, "ClientServerPart/Scripts/HUDParameters", 1);
+        SetMultiplayerAuthoritys(playerRoot, "ClientServerPart/Scripts/MovementActions", 1);
         SetMultiplayerAuthoritys(playerRoot, "Synchronizers/PlayerCameraSynchronizer", authorityID);
         SetMultiplayerAuthoritys(playerRoot, "Synchronizers/InputVectorSynchronizer", authorityID);
     }

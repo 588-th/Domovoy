@@ -7,29 +7,32 @@ public class WalkState : MovementState
     public override void Enter()
     {
         base.Enter();
-        _playerMovement.IsWalking?.Invoke();
-        _playerMovement.PlayerMovementParameters.CurrentAcceleration = _playerMovement.PlayerMovementParameters.OnGroundAcceleration;
 
+        _playerMovement.MovementActions.InvokeAction("isWalkState");
         _playerMovement.InputActions.JumpKeyDown += OnJumpKeyDown;
         _playerMovement.InputActions.CrouchKeyUp += OnCrouchUp;
         _playerMovement.InputActions.CrouchKeyDown += OnCrouchDown;
-        _playerMovement.IsNotGrounded += OnNotGround;
+        _playerMovement.MovementActions.IsNotGrounded += OnNotGround;
+
+        _playerMovement.PlayerMovementParameters.CurrentSpeed = _playerMovement.PlayerMovementParameters.WalkSpeed;
+        _playerMovement.PlayerMovementParameters.CurrentAcceleration = _playerMovement.PlayerMovementParameters.OnGroundAcceleration;
     }
 
     public override void Exit()
     {
         base.Exit();
-        _playerMovement.IsNotWalking?.Invoke();
 
+        _playerMovement.MovementActions.InvokeAction("isNotWalkState");
         _playerMovement.InputActions.JumpKeyDown -= OnJumpKeyDown;
         _playerMovement.InputActions.CrouchKeyUp -= OnCrouchUp;
         _playerMovement.InputActions.CrouchKeyDown -= OnCrouchDown;
-        _playerMovement.IsNotGrounded -= OnNotGround;
+        _playerMovement.MovementActions.IsNotGrounded -= OnNotGround;
     }
 
     public override void Update(double delta)
     {
         base.Update(delta);
+
         CheckInputVector();
         Move(delta);
     }
@@ -40,18 +43,11 @@ public class WalkState : MovementState
         Vector3 inputVector = _playerMovement.InputVector.Vector;
         Vector3 direction = (_playerMovement.PlayerBody.Transform.Basis * inputVector).Normalized();
 
-        if (_playerMovement.PlayerMovementParameters.CurrentSpeed != _playerMovement.PlayerMovementParameters.CrouchSpeed)
-        {
-            _playerMovement.PlayerMovementParameters.CurrentSpeed = inputVector.Z > 0
-                ? _playerMovement.PlayerMovementParameters.StandBackwardSpeed
-                : _playerMovement.PlayerMovementParameters.StandForwardSpeed;
-        }
-
         Vector3 targetVelocity = direction == Vector3.Zero
             ? Vector3.Zero
             : new Vector3(direction.X * _playerMovement.PlayerMovementParameters.CurrentSpeed, 0, direction.Z * _playerMovement.PlayerMovementParameters.CurrentSpeed);
 
-        velocity = velocity.MoveToward(targetVelocity, (float)(_playerMovement.PlayerMovementParameters.CurrentAcceleration * delta));
+        velocity = velocity.MoveToward(targetVelocity, (float)(_playerMovement.PlayerMovementParameters.OnGroundAcceleration * delta));
         _playerMovement.PlayerBody.Velocity = velocity;
     }
 
@@ -78,6 +74,6 @@ public class WalkState : MovementState
 
     private void OnCrouchUp()
     {
-        _playerMovement.PlayerMovementParameters.CurrentSpeed = _playerMovement.PlayerMovementParameters.StandForwardSpeed;
+        _playerMovement.PlayerMovementParameters.CurrentSpeed = _playerMovement.PlayerMovementParameters.WalkSpeed;
     }
 }

@@ -9,15 +9,16 @@ public class JumpState : MovementState
     public override void Enter()
     {
         base.Enter();
-        _playerMovement.IsJumping?.Invoke();
 
+        _playerMovement.MovementActions.InvokeAction("isJumpState");
         _playerMovement.InputActions.JumpKeyDown += OnJumpKeyDown;
-        _playerMovement.IsGrounded += OnGround;
+        _playerMovement.MovementActions.IsGrounded += OnGround;
 
+        _playerMovement.PlayerMovementParameters.CurrentJumpForce = _playerMovement.PlayerMovementParameters.JumpForce;
         _playerMovement.PlayerMovementParameters.CurrentSpeed = _playerMovement.PlayerMovementParameters.JumpSpeed;
         _playerMovement.PlayerMovementParameters.CurrentAcceleration = _playerMovement.PlayerMovementParameters.OnAirAcceleration;
 
-        if (_playerMovement.Grounded)
+        if (_playerMovement.IsGrounded)
             Jump();
     }
 
@@ -25,8 +26,9 @@ public class JumpState : MovementState
     {
         base.Exit();
 
+        _playerMovement.MovementActions.InvokeAction("isNotJumpState");
         _playerMovement.InputActions.JumpKeyDown -= OnJumpKeyDown;
-        _playerMovement.IsGrounded -= OnGround;
+        _playerMovement.MovementActions.IsGrounded -= OnGround;
     }
 
     public override void Update(double delta)

@@ -1,8 +1,7 @@
-[gd_scene load_steps=17 format=3 uid="uid://k7pkap4vw1ub"]
+[gd_scene load_steps=16 format=3 uid="uid://k7pkap4vw1ub"]
 
 [ext_resource type="Script" path="res://Scripts/Items/HeadFlashlight/HeadFlashlight.cs" id="1_lkn76"]
 [ext_resource type="AudioStream" uid="uid://5h7hqp3o4agm" path="res://Audio/SFX/Common/Pickup.mp3" id="2_b0dn4"]
-[ext_resource type="Texture2D" uid="uid://dhv7170e17ans" path="res://Textures/t_flashlight.png" id="2_liwow"]
 [ext_resource type="Script" path="res://Scripts/AudioPlayer.cs" id="3_mckr8"]
 [ext_resource type="AudioStream" uid="uid://blgubek3j4k0s" path="res://Audio/SFX/Firearm/FirearmTakeOnHand.mp3" id="3_oi12e"]
 [ext_resource type="Script" path="res://Scripts/Items/HeadFlashlight/HeadFlashlightBattery.cs" id="6_xfi5a"]
@@ -12,11 +11,10 @@
 [ext_resource type="AudioStream" uid="uid://dwmimfq7ydehc" path="res://Audio/SFX/Flashlight/FlashlighOff.mp3" id="10_6pnoi"]
 [ext_resource type="AudioStream" uid="uid://brcp0ytd6lduk" path="res://Audio/SFX/Flashlight/FlashlightOnDischargedAudio.mp3" id="11_5dcvq"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_iew44"]
-albedo_color = Color(0.2, 0.2, 0.2, 1)
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_21hoq"]
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_22hy7"]
-material = SubResource("StandardMaterial3D_iew44")
+material = SubResource("StandardMaterial3D_21hoq")
 top_radius = 0.1
 bottom_radius = 0.1
 height = 0.05
@@ -59,7 +57,6 @@ shape = SubResource("BoxShape3D_mvwxk")
 
 [node name="Flashlight" type="SpotLight3D" parent="."]
 light_energy = 0.0
-light_projector = ExtResource("2_liwow")
 shadow_enabled = true
 spot_range = 25.0
 spot_angle = 20.0

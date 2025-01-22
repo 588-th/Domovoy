@@ -1,0 +1,30 @@
+[gd_scene load_steps=4 format=3 uid="uid://kd7xhc14fxn3"]
+
+[ext_resource type="ArrayMesh" uid="uid://cquhksoh304af" path="res://Meshes/DomovoyModels_WoodenBox1x2.res" id="1_rswjf"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_lfobg"]
+size = Vector3(1, 1, 2)
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_d5s70"]
+properties/0/path = NodePath(".:position")
+properties/0/spawn = true
+properties/0/replication_mode = 1
+properties/1/path = NodePath(".:rotation")
+properties/1/spawn = true
+properties/1/replication_mode = 1
+properties/2/path = NodePath(".:linear_velocity")
+properties/2/spawn = true
+properties/2/replication_mode = 1
+
+[node name="WoodenBox1x2" type="RigidBody3D" groups=["Object:Prop", "Prop:Draggble"]]
+collision_layer = 2
+collision_mask = 1807
+
+[node name="Model" type="MeshInstance3D" parent="."]
+mesh = ExtResource("1_rswjf")
+
+[node name="Hitbox" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_lfobg")
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_d5s70")

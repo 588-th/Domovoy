@@ -3,6 +3,7 @@ using System;
 
 public partial class PlayerMovement : Node
 {
+    [Export] public MovementActions MovementActions;
     [Export] public InputActions InputActions;
     [Export] public InputVector InputVector;
     [Export] public CharacterBody3D PlayerBody;
@@ -14,15 +15,7 @@ public partial class PlayerMovement : Node
     public WalkState WalkState { get; private set; }
     public JumpState JumpState { get; private set; }
 
-    public Action IsGrounded;
-    public Action IsNotGrounded;
-
-    public Action IsIdling;
-    public Action IsWalking;
-    public Action IsNotWalking;
-    public Action IsJumping;
-
-    public bool Grounded { get; private set; }
+    public bool IsGrounded { get; private set; }
 
     public override void _Ready()
     {
@@ -32,7 +25,6 @@ public partial class PlayerMovement : Node
     public override void _PhysicsProcess(double delta)
     {
         CheckGround();
-
         CurrentState.Update(delta);
         PlayerBody.MoveAndSlide();
     }
@@ -49,24 +41,26 @@ public partial class PlayerMovement : Node
         CurrentState.Enter();
     }
 
-    private void InitializationFields()
+    private async void InitializationFields()
     {
         IdleState = new IdleState(this);
         WalkState = new WalkState(this);
         JumpState = new JumpState(this);
 
         CurrentState = JumpState;
+
+        await ToSignal(GetTree(), "process_frame");
         CurrentState.Enter();
     }
 
     private void CheckGround()
     {
-        bool lastFrame = Grounded;
-        Grounded = PlayerBody.IsOnFloor();
+        bool lastFrame = IsGrounded;
+        IsGrounded = PlayerBody.IsOnFloor();
 
-        if (Grounded && lastFrame != Grounded)
-            IsGrounded?.Invoke();
-        else if (!Grounded && lastFrame != Grounded)
-            IsNotGrounded?.Invoke();
+        if (IsGrounded && lastFrame != IsGrounded)
+            MovementActions.InvokeAction("isGrounded");
+        else if (!IsGrounded && lastFrame != IsGrounded)
+            MovementActions.InvokeAction("isNotGrounded");
     }
 }

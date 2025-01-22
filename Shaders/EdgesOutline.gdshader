@@ -60,7 +60,7 @@ void fragment() {
 
     float light_intensity = texture(LIGHT_TEXTURE, uv).r;
     float adjusted_alpha = mix(line_alpha, 0.0, light_intensity * light_influence);
-	
+
 	if (adjusted_alpha < 0.0f){
 				adjusted_alpha = 0.0f;
 	}

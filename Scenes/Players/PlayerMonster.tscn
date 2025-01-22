@@ -1,4 +1,4 @@
-[gd_scene load_steps=47 format=4 uid="uid://dw2d8yb5aog0t"]
+[gd_scene load_steps=52 format=4 uid="uid://dw2d8yb5aog0t"]
 
 [ext_resource type="Script" path="res://Scripts/AudioPlayer.cs" id="1_cu3h5"]
 [ext_resource type="Script" path="res://Scripts/Player/PlayerInputVector.cs" id="1_l02lm"]
@@ -10,9 +10,11 @@
 [ext_resource type="Script" path="res://Scripts/Player/HUDParameters.cs" id="4_mojhr"]
 [ext_resource type="PackedScene" uid="uid://c131mixukwjnm" path="res://Scenes/UserInterface/Menu/UIPauseMenu.tscn" id="5_evjm4"]
 [ext_resource type="Script" path="res://Scripts/Player/Monster/MonsterVision.cs" id="5_hra6h"]
+[ext_resource type="Script" path="res://Scripts/Player/MovementActions.cs" id="6_dm6b2"]
 [ext_resource type="PackedScene" uid="uid://cojvgyniobwbk" path="res://Scenes/UserInterface/HUD/UICrosshair.tscn" id="7_5q3fu"]
 [ext_resource type="Script" path="res://Scripts/Player/Movement/PlayerMovement.cs" id="8_7rqw8"]
 [ext_resource type="Script" path="res://Scripts/Player/PlayerHealth.cs" id="9_2j7p8"]
+[ext_resource type="Script" path="res://Scripts/Player/PlayerCameraAnimations.cs" id="11_25u0h"]
 [ext_resource type="Script" path="res://Scripts/Player/PropInteract/PlayerPropInteractor.cs" id="11_lwt4p"]
 [ext_resource type="PackedScene" uid="uid://dsm0c68ucl2kg" path="res://Scenes/UserInterface/HUD/UIHealthInfo.tscn" id="11_u87qw"]
 [ext_resource type="PackedScene" uid="uid://cxq88ssuuklm2" path="res://Scenes/UserInterface/HUD/UISanity.tscn" id="12_53pu3"]
@@ -85,6 +87,44 @@ emission_energy_multiplier = 5.0
 material = SubResource("StandardMaterial3D_nbipo")
 size = Vector3(0.1, 0.1, 0.1)
 
+[sub_resource type="Animation" id="Animation_r6j44"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../../CommonPart/CameraHolder/PlayerCamera:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_ybvy8"]
+resource_name = "WALK"
+loop_mode = 1
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../../CommonPart/CameraHolder/PlayerCamera:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.25, 0.5, 0.75, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0.05, 0.05, 0), Vector3(0, 0, 0), Vector3(-0.05, 0.05, 0), Vector3(0, 0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_vvpui"]
+_data = {
+"RESET": SubResource("Animation_r6j44"),
+"WALK": SubResource("Animation_ybvy8")
+}
+
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_3lwg6"]
 shader = ExtResource("14_s0c68")
 shader_parameter/alpha = 0.25
@@ -99,17 +139,16 @@ shader_parameter/dither_scale = 1.5
 
 [sub_resource type="Resource" id="Resource_hw58n"]
 script = ExtResource("15_ao0lo")
-StandForwardSpeed = 4.5
-StandBackwardSpeed = 4.5
+WalkSpeed = 5.0
 CrouchSpeed = 2.0
-JumpSpeed = 4.5
-JumpForce = 5.0
+JumpSpeed = 5.0
+JumpForce = 5.5
 MaxJumps = 1
 OnGroundAcceleration = 40.0
 OnAirAcceleration = 20.0
 Gravity = 9.8
-CurrentJumpForce = 5.0
-CurrentSpeed = 4.5
+CurrentJumpForce = 5.5
+CurrentSpeed = 5.0
 CurrentAcceleration = 0.0
 PlayAudioOnlyLocaly = true
 JumpAudio = ExtResource("13_pj3sh")
@@ -158,7 +197,7 @@ properties/1/spawn = true
 properties/1/replication_mode = 2
 
 [node name="PlayerMonster" type="Node" groups=["Player", "Player:Monster"]]
-metadata/PlayerCamera = NodePath("CommonPart/PlayerCamera")
+metadata/PlayerCamera = NodePath("CommonPart/CameraHolder/PlayerCamera")
 metadata/PlayerHealth = NodePath("ServerPart/Scripts/PlayerHealth")
 metadata/AudioPlayer = NodePath("CommonPart/AudioPlayer")
 
@@ -170,37 +209,40 @@ _playerRoot = NodePath("../..")
 _audioStreamPlayer = NodePath("../../ClientServerPart/AudioStreamPlayer")
 _audioStreamPlayer3D = NodePath("../AudioStreamPlayer3D")
 
-[node name="PlayerCamera" type="Camera3D" parent="CommonPart"]
-transform = Transform3D(1, 0, 0, 0, 1, 1.06581e-14, 0, -1.06581e-14, 1, 0, 0.5, 0)
+[node name="CameraHolder" type="Node3D" parent="CommonPart"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+
+[node name="PlayerCamera" type="Camera3D" parent="CommonPart/CameraHolder"]
+transform = Transform3D(1, 0, 0, 0, 1, 1.06581e-14, 0, -1.06581e-14, 1, 0, 0, 0)
 cull_mask = 524287
 
-[node name="PlayerLook" type="Node3D" parent="CommonPart/PlayerCamera"]
+[node name="PlayerLook" type="Node3D" parent="CommonPart/CameraHolder/PlayerCamera"]
 
-[node name="RayOfLook" type="RayCast3D" parent="CommonPart/PlayerCamera/PlayerLook"]
+[node name="RayOfLook" type="RayCast3D" parent="CommonPart/CameraHolder/PlayerCamera/PlayerLook"]
 target_position = Vector3(0, 0, -2.5)
 collision_mask = 14
 hit_back_faces = false
 
-[node name="RayOfAttack" type="RayCast3D" parent="CommonPart/PlayerCamera/PlayerLook"]
+[node name="RayOfAttack" type="RayCast3D" parent="CommonPart/CameraHolder/PlayerCamera/PlayerLook"]
 target_position = Vector3(0, 0, -2.5)
 collision_mask = 512
 hit_back_faces = false
 
-[node name="ObjectInteraction" type="Node3D" parent="CommonPart/PlayerCamera/PlayerLook"]
+[node name="ObjectInteraction" type="Node3D" parent="CommonPart/CameraHolder/PlayerCamera/PlayerLook"]
 
-[node name="anchorForDraggedObject" type="Marker3D" parent="CommonPart/PlayerCamera/PlayerLook/ObjectInteraction"]
+[node name="anchorForDraggedObject" type="Marker3D" parent="CommonPart/CameraHolder/PlayerCamera/PlayerLook/ObjectInteraction"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.5)
 
-[node name="StaticBody3D" type="StaticBody3D" parent="CommonPart/PlayerCamera/PlayerLook/ObjectInteraction"]
+[node name="StaticBody3D" type="StaticBody3D" parent="CommonPart/CameraHolder/PlayerCamera/PlayerLook/ObjectInteraction"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.5)
 
-[node name="Generic6DOFJoint3D" type="Generic6DOFJoint3D" parent="CommonPart/PlayerCamera/PlayerLook/ObjectInteraction"]
+[node name="Generic6DOFJoint3D" type="Generic6DOFJoint3D" parent="CommonPart/CameraHolder/PlayerCamera/PlayerLook/ObjectInteraction"]
 node_a = NodePath("../StaticBody3D")
 linear_limit_x/enabled = false
 linear_limit_y/enabled = false
 linear_limit_z/enabled = false
 
-[node name="anchorHoldingItem" type="Marker3D" parent="CommonPart/PlayerCamera/PlayerLook"]
+[node name="anchorHoldingItem" type="Marker3D" parent="CommonPart/CameraHolder/PlayerCamera/PlayerLook"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.41989, -0.13983, -1.11052)
 
 [node name="PlayerBody" type="CharacterBody3D" parent="CommonPart" groups=["Hitbox:Player"]]
@@ -230,7 +272,7 @@ shape = SubResource("CylinderShape3D_ix7cr")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 
 [node name="RemotePositionToCamera" type="RemoteTransform3D" parent="CommonPart/PlayerBody/Achors/achorCamera"]
-remote_path = NodePath("../../../../PlayerCamera")
+remote_path = NodePath("../../../../CameraHolder")
 update_rotation = false
 update_scale = false
 
@@ -263,6 +305,10 @@ script = ExtResource("3_p0joe")
 [node name="HUDParameters" type="Node" parent="ClientServerPart/Scripts"]
 script = ExtResource("4_mojhr")
 
+[node name="MovementActions" type="Node" parent="ClientServerPart/Scripts" node_paths=PackedStringArray("_playerRoot")]
+script = ExtResource("6_dm6b2")
+_playerRoot = NodePath("../../..")
+
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="ClientServerPart"]
 max_polyphony = 4
 bus = &"SFX"
@@ -281,13 +327,23 @@ _inputVector = NodePath("../../../ClientServerPart/Scripts/InputVector")
 
 [node name="PlayerCamera" type="Node" parent="ClientPart/Scripts" node_paths=PackedStringArray("_playerCamera")]
 script = ExtResource("4_b45tp")
-_playerCamera = NodePath("../../../CommonPart/PlayerCamera")
+_playerCamera = NodePath("../../../CommonPart/CameraHolder/PlayerCamera")
 
 [node name="MonsterVision" type="Node" parent="ClientPart/Scripts" node_paths=PackedStringArray("_playerCamera", "_playerActions")]
 script = ExtResource("5_hra6h")
-_playerCamera = NodePath("../../../CommonPart/PlayerCamera")
+_playerCamera = NodePath("../../../CommonPart/CameraHolder/PlayerCamera")
 _playerActions = NodePath("../../../ClientServerPart/Scripts/InputActions")
 _auraNumberMask = 20
+
+[node name="PlayerCameraAnimation" type="Node" parent="ClientPart/Scripts" node_paths=PackedStringArray("_movementActions", "_animationPlayer")]
+script = ExtResource("11_25u0h")
+_movementActions = NodePath("../../../ClientServerPart/Scripts/MovementActions")
+_animationPlayer = NodePath("../PlayerCameraAnimator")
+
+[node name="PlayerCameraAnimator" type="AnimationPlayer" parent="ClientPart/Scripts"]
+libraries = {
+"": SubResource("AnimationLibrary_vvpui")
+}
 
 [node name="UI" type="Node" parent="ClientPart"]
 
@@ -331,8 +387,9 @@ mouse_filter = 2
 
 [node name="Scripts" type="Node" parent="ServerPart"]
 
-[node name="PlayerMovement" type="Node" parent="ServerPart/Scripts" node_paths=PackedStringArray("InputActions", "InputVector", "PlayerBody", "AudioPlayer")]
+[node name="PlayerMovement" type="Node" parent="ServerPart/Scripts" node_paths=PackedStringArray("MovementActions", "InputActions", "InputVector", "PlayerBody", "AudioPlayer")]
 script = ExtResource("8_7rqw8")
+MovementActions = NodePath("../../../ClientServerPart/Scripts/MovementActions")
 InputActions = NodePath("../../../ClientServerPart/Scripts/InputActions")
 InputVector = NodePath("../../../ClientServerPart/Scripts/InputVector")
 PlayerBody = NodePath("../../../CommonPart/PlayerBody")
@@ -354,17 +411,17 @@ _humanCorpseScene = ExtResource("21_o67hm")
 [node name="PlayerPropInteractor" type="Node" parent="ServerPart/Scripts" node_paths=PackedStringArray("_inputActions", "RayOfLook", "PlayerBody", "AnchorForDraggedObject", "StaticBody3D", "Generic6DofJoint3D")]
 script = ExtResource("11_lwt4p")
 _inputActions = NodePath("../../../ClientServerPart/Scripts/InputActions")
-RayOfLook = NodePath("../../../CommonPart/PlayerCamera/PlayerLook/RayOfLook")
+RayOfLook = NodePath("../../../CommonPart/CameraHolder/PlayerCamera/PlayerLook/RayOfLook")
 PlayerBody = NodePath("../../../CommonPart/PlayerBody")
-AnchorForDraggedObject = NodePath("../../../CommonPart/PlayerCamera/PlayerLook/ObjectInteraction/anchorForDraggedObject")
-StaticBody3D = NodePath("../../../CommonPart/PlayerCamera/PlayerLook/ObjectInteraction/StaticBody3D")
-Generic6DofJoint3D = NodePath("../../../CommonPart/PlayerCamera/PlayerLook/ObjectInteraction/Generic6DOFJoint3D")
+AnchorForDraggedObject = NodePath("../../../CommonPart/CameraHolder/PlayerCamera/PlayerLook/ObjectInteraction/anchorForDraggedObject")
+StaticBody3D = NodePath("../../../CommonPart/CameraHolder/PlayerCamera/PlayerLook/ObjectInteraction/StaticBody3D")
+Generic6DofJoint3D = NodePath("../../../CommonPart/CameraHolder/PlayerCamera/PlayerLook/ObjectInteraction/Generic6DOFJoint3D")
 
 [node name="PlayerMeleeAttack" type="Node" parent="ServerPart/Scripts" node_paths=PackedStringArray("_inputActions", "_playerObjectInteractor", "_rayOfAttack", "_attackCooldownTimer", "_hardAttackChargeTimer", "_audioPlayer")]
 script = ExtResource("15_0hw5x")
 _inputActions = NodePath("../../../ClientServerPart/Scripts/InputActions")
 _playerObjectInteractor = NodePath("../PlayerPropInteractor")
-_rayOfAttack = NodePath("../../../CommonPart/PlayerCamera/PlayerLook/RayOfAttack")
+_rayOfAttack = NodePath("../../../CommonPart/CameraHolder/PlayerCamera/PlayerLook/RayOfAttack")
 _attackCooldownTimer = NodePath("../../Timers/AttackCooldownTimer")
 _hardAttackChargeTimer = NodePath("../../Timers/HardAttackChargeTimer")
 _audioPlayer = NodePath("../../../CommonPart/AudioPlayer")
@@ -377,14 +434,14 @@ _monsterArea = NodePath("../../../CommonPart/PlayerBody/MonsterArea")
 
 [node name="RemoteCameraRotation" type="Node" parent="ServerPart/Scripts" node_paths=PackedStringArray("_playerCamera", "_playerBody")]
 script = ExtResource("17_es1xv")
-_playerCamera = NodePath("../../../CommonPart/PlayerCamera")
+_playerCamera = NodePath("../../../CommonPart/CameraHolder/PlayerCamera")
 _playerBody = NodePath("../../../CommonPart/PlayerBody")
 
 [node name="PlayerHUDParameters" type="Node" parent="ServerPart/Scripts" node_paths=PackedStringArray("_hudParameters", "_playerHealth", "_rayOfAttack")]
 script = ExtResource("26_k2iwt")
 _hudParameters = NodePath("../../../ClientServerPart/Scripts/HUDParameters")
 _playerHealth = NodePath("../PlayerHealth")
-_rayOfAttack = NodePath("../../../CommonPart/PlayerCamera/PlayerLook/RayOfAttack")
+_rayOfAttack = NodePath("../../../CommonPart/CameraHolder/PlayerCamera/PlayerLook/RayOfAttack")
 
 [node name="Timers" type="Node" parent="ServerPart"]
 
@@ -409,5 +466,5 @@ root_path = NodePath("../../CommonPart/PlayerBody")
 replication_config = SubResource("SceneReplicationConfig_mj3mr")
 
 [node name="PlayerCameraSynchronizer" type="MultiplayerSynchronizer" parent="Synchronizers"]
-root_path = NodePath("../../CommonPart/PlayerCamera")
+root_path = NodePath("../../CommonPart/CameraHolder/PlayerCamera")
 replication_config = SubResource("SceneReplicationConfig_bnnxu")
