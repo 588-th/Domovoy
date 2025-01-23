@@ -72,7 +72,7 @@ _audioStreamPlayer3D = NodePath("../../AudioStreamPlayer3D")
 
 [node name="HeadFlashlightBattery" type="Node" parent="ServerPart"]
 script = ExtResource("6_xfi5a")
-DrainRate = 2.5
+DrainRate = 0.01
 
 [node name="HeadFlashlightFlicker" type="Node" parent="ServerPart" node_paths=PackedStringArray("_flashlight")]
 script = ExtResource("7_guxgo")

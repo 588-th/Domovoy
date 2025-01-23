@@ -1,43 +1,51 @@
 shader_type spatial;
 
-uniform float spike_intensity : hint_range(0.0, 2.0); // Сила выступов
-uniform float noise_scale : hint_range(0.0, 10.0); // Масштаб шума
-uniform float spike_speed : hint_range(0.0, 5.0); // Скорость изменения шума
+uniform float teleport_range_x : hint_range(0.0, 1.0); // Диапазон телепортации по оси X
+uniform float teleport_range_y : hint_range(0.0, 1.0); // Диапазон телепортации по оси Y
+uniform float teleport_range_z : hint_range(0.0, 1.0); // Диапазон телепортации по оси Z
+uniform float teleport_frequency : hint_range(0.0, 100.0); // Частота телепортации
+uniform bool enable_blinking = true; // Включение/выключение мигания
+uniform float blink_frequency : hint_range(0.0, 100.0); // Частота мигания
 
-// Простая функция для создания шума
-float hash(vec3 p) {
+// Простая функция для создания случайных значений
+float hash(float p) {
     p = fract(p * 0.3183099 + 0.1);
     p *= 17.0;
-    return fract(p.x * p.y * p.z * (p.x + p.y + p.z));
+    return fract(p * (p + 31.0));
 }
 
-float noise(vec3 p) {
-    vec3 i = floor(p);
-    vec3 f = fract(p);
-    f = f * f * (3.0 - 2.0 * f);
-
-    return mix(
-        mix(
-            mix(hash(i), hash(i + vec3(1.0, 0.0, 0.0)), f.x),
-            mix(hash(i + vec3(0.0, 1.0, 0.0)), hash(i + vec3(1.0, 1.0, 0.0)), f.x),
-            f.y
-        ),
-        mix(
-            mix(hash(i + vec3(0.0, 0.0, 1.0)), hash(i + vec3(1.0, 0.0, 1.0)), f.x),
-            mix(hash(i + vec3(0.0, 1.0, 1.0)), hash(i + vec3(1.0, 1.0, 1.0)), f.x),
-            f.y
-        ),
-        f.z
-    );
+vec3 random_offset(float seed) {
+    return vec3(
+        hash(seed),
+        hash(seed + 1.0),
+        hash(seed + 2.0)
+    ) * 2.0 - 1.0;
 }
 
 void vertex() {
-    // Позиция шума с учётом времени для анимации
-    vec3 noise_position = VERTEX * noise_scale + vec3(TIME * spike_speed);
+    // Вычисляем текущий "кадр" телепортации на основе частоты
+    float teleport_step = floor(TIME * teleport_frequency);
 
-    // Генерация шума
-    float displacement = noise(noise_position) * spike_intensity;
+    // Генерация случайного смещения
+    vec3 offset = random_offset(teleport_step);
 
-    // Смещение вдоль нормали
-    VERTEX += NORMAL * displacement;
+    // Масштабируем смещение по каждой оси
+    offset.x *= teleport_range_x;
+    offset.y *= teleport_range_y;
+    offset.z *= teleport_range_z;
+
+    // Смещаем всю модель
+    MODELVIEW_MATRIX[3].xyz += offset;
+}
+
+void fragment() {
+    if (enable_blinking) {
+        // Включаем мигание с частотой blink_frequency
+        float blink_phase = fract(TIME * blink_frequency);
+        if (blink_phase < 0.5) {
+            discard; // Убираем пиксели, делая модель невидимой
+        }
+    }
+
+    // Оставляем стандартный фрагментный вывод для видимой модели
 }

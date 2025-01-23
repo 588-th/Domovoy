@@ -1,4 +1,4 @@
-[gd_scene load_steps=50 format=3 uid="uid://bks72b4kwjk1f"]
+[gd_scene load_steps=51 format=3 uid="uid://bks72b4kwjk1f"]
 
 [ext_resource type="Script" path="res://Scripts/Player/InputVector.cs" id="2_8kxsr"]
 [ext_resource type="Script" path="res://Scripts/Player/PlayerInputVector.cs" id="2_ca8we"]
@@ -98,11 +98,29 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0, 0.4, 0.8, 1.2, 1.6),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1),
 "update": 0,
-"values": [Vector3(0, 0, 0), Vector3(0.05, 0.05, 0), Vector3(0, 0, 0), Vector3(-0.05, 0.05, 0), Vector3(0, 0, 0)]
+"values": [Vector3(0, 0, 0), Vector3(0.03, 0.05, 0), Vector3(0, 0, 0), Vector3(-0.03, 0.05, 0), Vector3(0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_xhoir"]
+resource_name = "IDLE"
+loop_mode = 1
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../../CommonPart/CameraHolder/PlayerCamera:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, 0, 0)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_vvpui"]
 _data = {
+"IDLE": SubResource("Animation_xhoir"),
 "RESET": SubResource("Animation_r6j44"),
 "WALK": SubResource("Animation_ybvy8")
 }
@@ -313,6 +331,7 @@ _animationPlayer = NodePath("../PlayerCameraAnimator")
 libraries = {
 "": SubResource("AnimationLibrary_vvpui")
 }
+blend_times = [&"IDLE", &"WALK", 0.5, &"WALK", &"IDLE", 0.2]
 
 [node name="UI" type="Node" parent="ClientPart"]
 
