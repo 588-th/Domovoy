@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=3 uid="uid://7fa0b3shof4a"]
+[gd_scene load_steps=28 format=3 uid="uid://7fa0b3shof4a"]
 
 [ext_resource type="Script" path="res://Scripts/Player/PlayerInputVector.cs" id="1_1rug0"]
 [ext_resource type="Script" path="res://Scripts/AudioPlayer.cs" id="1_4resh"]
@@ -13,14 +13,35 @@
 [ext_resource type="Script" path="res://Scripts/Player/Movement/PlayerMovement.cs" id="8_2bsv7"]
 [ext_resource type="Script" path="res://Scripts/Player/PlayerCameraAnimations.cs" id="9_1j4wq"]
 [ext_resource type="Script" path="res://Scripts/Player/PropInteract/PlayerPropInteractor.cs" id="11_cuem1"]
-[ext_resource type="Shader" path="res://Shaders/Vignette.gdshader" id="11_l0yix"]
-[ext_resource type="Shader" path="res://Shaders/Dithering.gdshader" id="12_dfqgr"]
 [ext_resource type="PackedScene" uid="uid://dneigjq1nfs2b" path="res://Scenes/UserInterface/Menu/UIPlayerList.tscn" id="12_ylh5w"]
+[ext_resource type="PackedScene" uid="uid://bdau24iq4fib8" path="res://Scenes/UserInterface/HUD/UIVignette.tscn" id="13_fsu3j"]
 [ext_resource type="Resource" uid="uid://by7ti8k7bsiet" path="res://ScriptableObjects/PlayerMovementParameters.tres" id="13_xi3vn"]
 [ext_resource type="Script" path="res://Scripts/Player/RemoteCameraRotation.cs" id="14_2swan"]
+[ext_resource type="PackedScene" uid="uid://cq70khnyefibk" path="res://Scenes/UserInterface/HUD/UIDithering.tscn" id="14_46ehg"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_e1mld"]
 radius = 0.3
+
+[sub_resource type="Animation" id="Animation_xhoir"]
+resource_name = "IDLE"
+loop_mode = 1
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../../CommonPart/CameraHolder/PlayerCamera:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_aldqb"]
+resource_name = "JUMP"
+step = 0.05
 
 [sub_resource type="Animation" id="Animation_r6j44"]
 length = 0.001
@@ -52,44 +73,16 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0, 0.4, 0.8, 1.2, 1.6),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1),
 "update": 0,
-"values": [Vector3(0, 0, 0), Vector3(0.03, 0.05, 0), Vector3(0, 0, 0), Vector3(-0.03, 0.05, 0), Vector3(0, 0, 0)]
-}
-
-[sub_resource type="Animation" id="Animation_xhoir"]
-resource_name = "IDLE"
-loop_mode = 1
-step = 0.05
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("../../CommonPart/CameraHolder/PlayerCamera:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 1),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector3(0, 0, 0), Vector3(0, 0, 0)]
+"values": [Vector3(0, 0, 0), Vector3(0.03, 0.04, 0), Vector3(0, 0, 0), Vector3(-0.03, 0.04, 0), Vector3(0, 0, 0)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_vvpui"]
 _data = {
 "IDLE": SubResource("Animation_xhoir"),
+"JUMP": SubResource("Animation_aldqb"),
 "RESET": SubResource("Animation_r6j44"),
 "WALK": SubResource("Animation_ybvy8")
 }
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_0stlg"]
-shader = ExtResource("11_l0yix")
-shader_parameter/alpha = 0.25
-shader_parameter/inner_radius = 0.5
-shader_parameter/outer_radius = 1.25
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_w10hh"]
-shader = ExtResource("12_dfqgr")
-shader_parameter/enable_dithering = true
-shader_parameter/dithering_intensity = 0.065
-shader_parameter/dither_scale = 1.5
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_ghvew"]
 properties/0/path = NodePath(".:Vector")
@@ -246,23 +239,9 @@ _inputActions = NodePath("../../../ClientServerPart/Scripts/InputActions")
 
 [node name="UICrosshair" parent="ClientPart/UI" instance=ExtResource("7_jm5rm")]
 
-[node name="Vignette" type="ColorRect" parent="ClientPart/UI"]
-material = SubResource("ShaderMaterial_0stlg")
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
+[node name="UIVignette" parent="ClientPart/UI" instance=ExtResource("13_fsu3j")]
 
-[node name="Dithering" type="ColorRect" parent="ClientPart/UI"]
-material = SubResource("ShaderMaterial_w10hh")
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
+[node name="UIDithering" parent="ClientPart/UI" instance=ExtResource("14_46ehg")]
 
 [node name="ServerPart" type="Node" parent="."]
 

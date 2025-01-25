@@ -1,4 +1,4 @@
-[gd_scene load_steps=51 format=3 uid="uid://bks72b4kwjk1f"]
+[gd_scene load_steps=52 format=3 uid="uid://bks72b4kwjk1f"]
 
 [ext_resource type="Script" path="res://Scripts/Player/InputVector.cs" id="2_8kxsr"]
 [ext_resource type="Script" path="res://Scripts/Player/PlayerInputVector.cs" id="2_ca8we"]
@@ -24,10 +24,11 @@
 [ext_resource type="PackedScene" uid="uid://cxq88ssuuklm2" path="res://Scenes/UserInterface/HUD/UISanity.tscn" id="14_os3oe"]
 [ext_resource type="PackedScene" uid="uid://dneigjq1nfs2b" path="res://Scenes/UserInterface/Menu/UIPlayerList.tscn" id="15_yqhfc"]
 [ext_resource type="Script" path="res://Scripts/Player/PlayerDeath.cs" id="15_yvyp7"]
-[ext_resource type="Shader" path="res://Shaders/Vignette.gdshader" id="16_b50nf"]
 [ext_resource type="Script" path="res://Scripts/Player/PlayerHUDParameters.cs" id="17_ijix5"]
-[ext_resource type="Shader" path="res://Shaders/Dithering.gdshader" id="17_tnmck"]
+[ext_resource type="PackedScene" uid="uid://bojdshm0oxy1v" path="res://Scenes/UserInterface/HUD/UIWhiteNoise.tscn" id="18_x036k"]
+[ext_resource type="PackedScene" uid="uid://bdau24iq4fib8" path="res://Scenes/UserInterface/HUD/UIVignette.tscn" id="19_7v07l"]
 [ext_resource type="Script" path="res://Scripts/Player/PlayerAuraColor.cs" id="19_jh60k"]
+[ext_resource type="PackedScene" uid="uid://cq70khnyefibk" path="res://Scenes/UserInterface/HUD/UIDithering.tscn" id="20_xcrfi"]
 [ext_resource type="AudioStream" uid="uid://3jamu0u0vmak" path="res://Audio/SFX/Common/Jump.mp3" id="21_8mwle"]
 [ext_resource type="Script" path="res://Scripts/Player/RemoteCameraRotation.cs" id="21_q46bc"]
 [ext_resource type="AudioStream" uid="uid://gmsohkdgi4p5" path="res://Audio/SFX/Common/Landing.mp3" id="22_vp8uq"]
@@ -68,6 +69,27 @@ turbulence_noise_scale = 5.0
 [sub_resource type="QuadMesh" id="QuadMesh_66l6p"]
 size = Vector2(0.05, 0.05)
 
+[sub_resource type="Animation" id="Animation_xhoir"]
+resource_name = "IDLE"
+loop_mode = 1
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../../CommonPart/CameraHolder/PlayerCamera:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_aldqb"]
+resource_name = "JUMP"
+step = 0.05
+
 [sub_resource type="Animation" id="Animation_r6j44"]
 length = 0.001
 tracks/0/type = "value"
@@ -98,44 +120,16 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0, 0.4, 0.8, 1.2, 1.6),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1),
 "update": 0,
-"values": [Vector3(0, 0, 0), Vector3(0.03, 0.05, 0), Vector3(0, 0, 0), Vector3(-0.03, 0.05, 0), Vector3(0, 0, 0)]
-}
-
-[sub_resource type="Animation" id="Animation_xhoir"]
-resource_name = "IDLE"
-loop_mode = 1
-step = 0.05
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("../../CommonPart/CameraHolder/PlayerCamera:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 1),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector3(0, 0, 0), Vector3(0, 0, 0)]
+"values": [Vector3(0, 0, 0), Vector3(0.03, 0.04, 0), Vector3(0, 0, 0), Vector3(-0.03, 0.04, 0), Vector3(0, 0, 0)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_vvpui"]
 _data = {
 "IDLE": SubResource("Animation_xhoir"),
+"JUMP": SubResource("Animation_aldqb"),
 "RESET": SubResource("Animation_r6j44"),
 "WALK": SubResource("Animation_ybvy8")
 }
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_lvyrn"]
-shader = ExtResource("16_b50nf")
-shader_parameter/alpha = 0.25
-shader_parameter/inner_radius = 0.5
-shader_parameter/outer_radius = 1.25
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_cyoqi"]
-shader = ExtResource("17_tnmck")
-shader_parameter/enable_dithering = true
-shader_parameter/dithering_intensity = 0.065
-shader_parameter/dither_scale = 1.5
 
 [sub_resource type="Resource" id="Resource_shobs"]
 script = ExtResource("23_sbhbh")
@@ -189,11 +183,17 @@ properties/1/path = NodePath(".:rotation")
 properties/1/spawn = true
 properties/1/replication_mode = 2
 
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_3ww4u"]
+properties/0/path = NodePath("CommonPart/PlayerBody/Aura:amount")
+properties/0/spawn = true
+properties/0/replication_mode = 2
+
 [node name="PlayerHuman" type="Node" groups=["Player", "Player:Human"]]
 metadata/PlayerCamera = NodePath("CommonPart/CameraHolder/PlayerCamera")
 metadata/PlayerHealth = NodePath("ServerPart/Scripts/PlayerHealth")
 metadata/RayOfLook = NodePath("CommonPart/CameraHolder/PlayerCamera/RayOfLook")
 metadata/AudioPlayer = NodePath("CommonPart/AudioPlayer")
+metadata/CameraHolder = NodePath("CommonPart/CameraHolder")
 
 [node name="CommonPart" type="Node" parent="."]
 
@@ -302,6 +302,8 @@ script = ExtResource("4_who5x")
 script = ExtResource("6_ju8pw")
 _playerRoot = NodePath("../../..")
 
+[node name="HealthActions" type="Node" parent="ClientServerPart/Scripts"]
+
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="ClientServerPart"]
 max_polyphony = 4
 bus = &"SFX"
@@ -351,28 +353,17 @@ _hudParameters = NodePath("../../../ClientServerPart/Scripts/HUDParameters")
 [node name="UIItemInfo" parent="ClientPart/UI" node_paths=PackedStringArray("_hudParameters") instance=ExtResource("14_kviuc")]
 _hudParameters = NodePath("../../../ClientServerPart/Scripts/HUDParameters")
 
+[node name="UICrosshair" parent="ClientPart/UI" instance=ExtResource("13_h4pmd")]
+
 [node name="UISanity" parent="ClientPart/UI" node_paths=PackedStringArray("_hudParameters") instance=ExtResource("14_os3oe")]
 _hudParameters = NodePath("../../../ClientServerPart/Scripts/HUDParameters")
 
-[node name="UICrosshair" parent="ClientPart/UI" instance=ExtResource("13_h4pmd")]
+[node name="UIWhiteNoise" parent="ClientPart/UI" node_paths=PackedStringArray("_hudParameters") instance=ExtResource("18_x036k")]
+_hudParameters = NodePath("../../../ClientServerPart/Scripts/HUDParameters")
 
-[node name="Vignette" type="ColorRect" parent="ClientPart/UI"]
-material = SubResource("ShaderMaterial_lvyrn")
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
+[node name="UIVignette" parent="ClientPart/UI" instance=ExtResource("19_7v07l")]
 
-[node name="Dithering" type="ColorRect" parent="ClientPart/UI"]
-material = SubResource("ShaderMaterial_cyoqi")
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
+[node name="UIDithering" parent="ClientPart/UI" instance=ExtResource("20_xcrfi")]
 
 [node name="ServerPart" type="Node" parent="."]
 
@@ -433,10 +424,12 @@ _rayGround = NodePath("../../../CommonPart/PlayerBody/RayGround")
 _playerHealth = NodePath("../PlayerHealth")
 _humanCorpseScene = ExtResource("27_n646g")
 
-[node name="PlayerAuraColor" type="Node" parent="ServerPart/Scripts" node_paths=PackedStringArray("_playerHealth", "_geometry")]
+[node name="PlayerAuraColor" type="Node" parent="ServerPart/Scripts" node_paths=PackedStringArray("_playerHealth", "_aura")]
 script = ExtResource("19_jh60k")
 _playerHealth = NodePath("../PlayerHealth")
-_geometry = NodePath("../../../CommonPart/PlayerBody/Aura")
+_aura = NodePath("../../../CommonPart/PlayerBody/Aura")
+_maxAmount = 30
+_minAmount = 1
 
 [node name="PlayerHUDParameters" type="Node" parent="ServerPart/Scripts" node_paths=PackedStringArray("_hudParameters", "_playerHealth", "_playerItemEquipper", "_rayOfLook")]
 script = ExtResource("17_ijix5")
@@ -491,3 +484,7 @@ replication_config = SubResource("SceneReplicationConfig_mj3mr")
 [node name="PlayerCameraSynchronizer" type="MultiplayerSynchronizer" parent="Synchronizers"]
 root_path = NodePath("../../CommonPart/CameraHolder/PlayerCamera")
 replication_config = SubResource("SceneReplicationConfig_bnnxu")
+
+[node name="AuraSynchronizer" type="MultiplayerSynchronizer" parent="Synchronizers"]
+root_path = NodePath("../..")
+replication_config = SubResource("SceneReplicationConfig_3ww4u")

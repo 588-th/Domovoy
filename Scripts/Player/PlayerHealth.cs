@@ -6,8 +6,10 @@ public partial class PlayerHealth : Node
     [Export] public int MaxHealth { get; private set; }
     [Export] public int CurrentHealth { get; private set; }
 
-    public Action PlayerHealthChanged;
     public Action PlayerHealthZero;
+    public Action PlayerHealthChanged;
+    public Action PlayerHealthIncrease;
+    public Action PlayerHealthDecrease;
 
     public void IncreaseHealth(int healthUnits)
     {
@@ -17,6 +19,7 @@ public partial class PlayerHealth : Node
             CurrentHealth += healthUnits;
 
         PlayerHealthChanged?.Invoke();
+        PlayerHealthIncrease?.Invoke();
     }
 
     public void DecreaseHealth(int healthUnits)
@@ -30,5 +33,6 @@ public partial class PlayerHealth : Node
             CurrentHealth -= healthUnits;
 
         PlayerHealthChanged?.Invoke();
+        PlayerHealthDecrease?.Invoke();
     }
 }

@@ -3,32 +3,24 @@
   "WorkspaceRootPath": "D:\\Documents\\ProjectsGodot\\BoomerDuel\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{33528F9A-F553-4E74-A408-6E8C24FA54FC}|Godot Projects.csproj|d:\\documents\\projectsgodot\\boomerduel\\scripts\\player\\playercameraanimations.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{33528F9A-F553-4E74-A408-6E8C24FA54FC}|Godot Projects.csproj|solutionrelative:scripts\\player\\playercameraanimations.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{33528F9A-F553-4E74-A408-6E8C24FA54FC}|Godot Projects.csproj|d:\\documents\\projectsgodot\\boomerduel\\scripts\\player\\spectator\\spectatorcamerafollow.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{33528F9A-F553-4E74-A408-6E8C24FA54FC}|Godot Projects.csproj|solutionrelative:scripts\\player\\spectator\\spectatorcamerafollow.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{33528F9A-F553-4E74-A408-6E8C24FA54FC}|Godot Projects.csproj|d:\\documents\\projectsgodot\\boomerduel\\scripts\\player\\movement\\jumpstate.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{33528F9A-F553-4E74-A408-6E8C24FA54FC}|Godot Projects.csproj|solutionrelative:scripts\\player\\movement\\jumpstate.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{33528F9A-F553-4E74-A408-6E8C24FA54FC}|Godot Projects.csproj|d:\\documents\\projectsgodot\\boomerduel\\scripts\\player\\spectator\\hudparameterspectating.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{33528F9A-F553-4E74-A408-6E8C24FA54FC}|Godot Projects.csproj|solutionrelative:scripts\\player\\spectator\\hudparameterspectating.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{33528F9A-F553-4E74-A408-6E8C24FA54FC}|Godot Projects.csproj|d:\\documents\\projectsgodot\\boomerduel\\scripts\\player\\movement\\playermovement.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{33528F9A-F553-4E74-A408-6E8C24FA54FC}|Godot Projects.csproj|solutionrelative:scripts\\player\\movement\\playermovement.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{33528F9A-F553-4E74-A408-6E8C24FA54FC}|Godot Projects.csproj|d:\\documents\\projectsgodot\\boomerduel\\scripts\\player\\movement\\playermovementparameters.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{33528F9A-F553-4E74-A408-6E8C24FA54FC}|Godot Projects.csproj|solutionrelative:scripts\\player\\movement\\playermovementparameters.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{33528F9A-F553-4E74-A408-6E8C24FA54FC}|Godot Projects.csproj|d:\\documents\\projectsgodot\\boomerduel\\scripts\\player\\playerauracolor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{33528F9A-F553-4E74-A408-6E8C24FA54FC}|Godot Projects.csproj|solutionrelative:scripts\\player\\playerauracolor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{33528F9A-F553-4E74-A408-6E8C24FA54FC}|Godot Projects.csproj|d:\\documents\\projectsgodot\\boomerduel\\scripts\\player\\movementactions.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{33528F9A-F553-4E74-A408-6E8C24FA54FC}|Godot Projects.csproj|solutionrelative:scripts\\player\\movementactions.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{33528F9A-F553-4E74-A408-6E8C24FA54FC}|Godot Projects.csproj|d:\\documents\\projectsgodot\\boomerduel\\scripts\\spawners\\players\\playerspawner.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{33528F9A-F553-4E74-A408-6E8C24FA54FC}|Godot Projects.csproj|solutionrelative:scripts\\spawners\\players\\playerspawner.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{33528F9A-F553-4E74-A408-6E8C24FA54FC}|Godot Projects.csproj|d:\\documents\\projectsgodot\\boomerduel\\scripts\\player\\movement\\idlestate.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{33528F9A-F553-4E74-A408-6E8C24FA54FC}|Godot Projects.csproj|solutionrelative:scripts\\player\\movement\\idlestate.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{33528F9A-F553-4E74-A408-6E8C24FA54FC}|Godot Projects.csproj|d:\\documents\\projectsgodot\\boomerduel\\scenes\\userinterface\\uiwhitenoise.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{33528F9A-F553-4E74-A408-6E8C24FA54FC}|Godot Projects.csproj|solutionrelative:scenes\\userinterface\\uiwhitenoise.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -38,81 +30,8 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 1,
+          "SelectedChildIndex": 2,
           "Children": [
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "PlayerSpawner.cs",
-              "DocumentMoniker": "D:\\Documents\\ProjectsGodot\\BoomerDuel\\Scripts\\Spawners\\Players\\PlayerSpawner.cs",
-              "RelativeDocumentMoniker": "Scripts\\Spawners\\Players\\PlayerSpawner.cs",
-              "ToolTip": "D:\\Documents\\ProjectsGodot\\BoomerDuel\\Scripts\\Spawners\\Players\\PlayerSpawner.cs",
-              "RelativeToolTip": "Scripts\\Spawners\\Players\\PlayerSpawner.cs",
-              "ViewState": "AgIAAEQAAAAAAAAAAAAAAE0AAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-01-21T04:27:40.485Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "PlayerCameraAnimations.cs",
-              "DocumentMoniker": "D:\\Documents\\ProjectsGodot\\BoomerDuel\\Scripts\\Player\\PlayerCameraAnimations.cs",
-              "RelativeDocumentMoniker": "Scripts\\Player\\PlayerCameraAnimations.cs",
-              "ToolTip": "D:\\Documents\\ProjectsGodot\\BoomerDuel\\Scripts\\Player\\PlayerCameraAnimations.cs",
-              "RelativeToolTip": "Scripts\\Player\\PlayerCameraAnimations.cs",
-              "ViewState": "AgIAAA8AAAAAAAAAAAAiwBoAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-01-21T04:08:28.372Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "MovementActions.cs",
-              "DocumentMoniker": "D:\\Documents\\ProjectsGodot\\BoomerDuel\\Scripts\\Player\\MovementActions.cs",
-              "RelativeDocumentMoniker": "Scripts\\Player\\MovementActions.cs",
-              "ToolTip": "D:\\Documents\\ProjectsGodot\\BoomerDuel\\Scripts\\Player\\MovementActions.cs",
-              "RelativeToolTip": "Scripts\\Player\\MovementActions.cs",
-              "ViewState": "AgIAABMAAAAAAAAAAAAAACMAAAAFAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-01-21T03:40:15.421Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "JumpState.cs",
-              "DocumentMoniker": "D:\\Documents\\ProjectsGodot\\BoomerDuel\\Scripts\\Player\\Movement\\JumpState.cs",
-              "RelativeDocumentMoniker": "Scripts\\Player\\Movement\\JumpState.cs",
-              "ToolTip": "D:\\Documents\\ProjectsGodot\\BoomerDuel\\Scripts\\Player\\Movement\\JumpState.cs",
-              "RelativeToolTip": "Scripts\\Player\\Movement\\JumpState.cs",
-              "ViewState": "AgIAAAIAAAAAAAAAAAAxwAcAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-01-21T14:26:03.894Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "IdleState.cs",
-              "DocumentMoniker": "D:\\Documents\\ProjectsGodot\\BoomerDuel\\Scripts\\Player\\Movement\\IdleState.cs",
-              "RelativeDocumentMoniker": "Scripts\\Player\\Movement\\IdleState.cs",
-              "ToolTip": "D:\\Documents\\ProjectsGodot\\BoomerDuel\\Scripts\\Player\\Movement\\IdleState.cs",
-              "RelativeToolTip": "Scripts\\Player\\Movement\\IdleState.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAAfAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-01-21T14:09:01.053Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "PlayerMovementParameters.cs",
-              "DocumentMoniker": "D:\\Documents\\ProjectsGodot\\BoomerDuel\\Scripts\\Player\\Movement\\PlayerMovementParameters.cs",
-              "RelativeDocumentMoniker": "Scripts\\Player\\Movement\\PlayerMovementParameters.cs",
-              "ToolTip": "D:\\Documents\\ProjectsGodot\\BoomerDuel\\Scripts\\Player\\Movement\\PlayerMovementParameters.cs",
-              "RelativeToolTip": "Scripts\\Player\\Movement\\PlayerMovementParameters.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAlAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-01-21T16:15:28.596Z"
-            },
             {
               "$type": "Document",
               "DocumentIndex": 2,
@@ -121,9 +40,62 @@
               "RelativeDocumentMoniker": "Scripts\\Player\\Movement\\PlayerMovement.cs",
               "ToolTip": "D:\\Documents\\ProjectsGodot\\BoomerDuel\\Scripts\\Player\\Movement\\PlayerMovement.cs",
               "RelativeToolTip": "Scripts\\Player\\Movement\\PlayerMovement.cs",
-              "ViewState": "AgIAACUAAAAAAAAAAAAAADAAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAABAAAAAAAAAAAAAAABwAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-01-21T03:45:03.351Z"
+              "WhenOpened": "2025-01-25T21:05:05.272Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "HUDParameterSpectating.cs",
+              "DocumentMoniker": "D:\\Documents\\ProjectsGodot\\BoomerDuel\\Scripts\\Player\\Spectator\\HUDParameterSpectating.cs",
+              "RelativeDocumentMoniker": "Scripts\\Player\\Spectator\\HUDParameterSpectating.cs",
+              "ToolTip": "D:\\Documents\\ProjectsGodot\\BoomerDuel\\Scripts\\Player\\Spectator\\HUDParameterSpectating.cs",
+              "RelativeToolTip": "Scripts\\Player\\Spectator\\HUDParameterSpectating.cs",
+              "ViewState": "AgIAAAcAAAAAAAAAAAAAAAcAAAAtAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-01-25T20:58:58.71Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "SpectatorCameraFollow.cs",
+              "DocumentMoniker": "D:\\Documents\\ProjectsGodot\\BoomerDuel\\Scripts\\Player\\Spectator\\SpectatorCameraFollow.cs",
+              "RelativeDocumentMoniker": "Scripts\\Player\\Spectator\\SpectatorCameraFollow.cs",
+              "ToolTip": "D:\\Documents\\ProjectsGodot\\BoomerDuel\\Scripts\\Player\\Spectator\\SpectatorCameraFollow.cs",
+              "RelativeToolTip": "Scripts\\Player\\Spectator\\SpectatorCameraFollow.cs",
+              "ViewState": "AgIAAAUAAAAAAAAAAAAAAAsAAABMAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-01-25T20:57:13.14Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "PlayerAuraColor.cs",
+              "DocumentMoniker": "D:\\Documents\\ProjectsGodot\\BoomerDuel\\Scripts\\Player\\PlayerAuraColor.cs",
+              "RelativeDocumentMoniker": "Scripts\\Player\\PlayerAuraColor.cs",
+              "ToolTip": "D:\\Documents\\ProjectsGodot\\BoomerDuel\\Scripts\\Player\\PlayerAuraColor.cs",
+              "RelativeToolTip": "Scripts\\Player\\PlayerAuraColor.cs",
+              "ViewState": "AgIAABEAAAAAAAAAAAAAABgAAAAgAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-01-25T20:45:46.668Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "UIWhiteNoise.cs",
+              "DocumentMoniker": "D:\\Documents\\ProjectsGodot\\BoomerDuel\\Scenes\\UserInterface\\UIWhiteNoise.cs",
+              "RelativeDocumentMoniker": "Scenes\\UserInterface\\UIWhiteNoise.cs",
+              "ToolTip": "D:\\Documents\\ProjectsGodot\\BoomerDuel\\Scenes\\UserInterface\\UIWhiteNoise.cs",
+              "RelativeToolTip": "Scenes\\UserInterface\\UIWhiteNoise.cs",
+              "ViewState": "AgIAAA0AAAAAAAAAAAAAABoAAAATAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-01-25T20:40:59.172Z",
+              "EditorCaption": ""
             }
           ]
         }

@@ -45,7 +45,8 @@ version_control/autoload_on_startup=true
 
 folder_colors={
 "res://Scenes/": "blue",
-"res://Scripts/": "pink"
+"res://Scripts/": "pink",
+"res://Shaders/": "purple"
 }
 
 [global_group]

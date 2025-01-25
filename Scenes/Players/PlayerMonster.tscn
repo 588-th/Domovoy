@@ -1,4 +1,4 @@
-[gd_scene load_steps=53 format=4 uid="uid://dw2d8yb5aog0t"]
+[gd_scene load_steps=52 format=4 uid="uid://dw2d8yb5aog0t"]
 
 [ext_resource type="Script" path="res://Scripts/AudioPlayer.cs" id="1_cu3h5"]
 [ext_resource type="Script" path="res://Scripts/Player/PlayerInputVector.cs" id="1_l02lm"]
@@ -22,13 +22,13 @@
 [ext_resource type="PackedScene" uid="uid://dneigjq1nfs2b" path="res://Scenes/UserInterface/Menu/UIPlayerList.tscn" id="12_nnmj0"]
 [ext_resource type="AudioStream" uid="uid://3jamu0u0vmak" path="res://Audio/SFX/Common/Jump.mp3" id="13_pj3sh"]
 [ext_resource type="AudioStream" uid="uid://gmsohkdgi4p5" path="res://Audio/SFX/Common/Landing.mp3" id="14_5ujt1"]
-[ext_resource type="Shader" path="res://Shaders/Vignette.gdshader" id="14_s0c68"]
 [ext_resource type="Script" path="res://Scripts/Player/Monster/PlayerMeleeAttack.cs" id="15_0hw5x"]
-[ext_resource type="Shader" path="res://Shaders/Dithering.gdshader" id="15_8b5lt"]
 [ext_resource type="Script" path="res://Scripts/Player/Movement/PlayerMovementParameters.cs" id="15_ao0lo"]
 [ext_resource type="Script" path="res://Scripts/Player/PlayerDeath.cs" id="15_t6oc2"]
 [ext_resource type="Script" path="res://Scripts/Player/RemoteCameraRotation.cs" id="17_es1xv"]
 [ext_resource type="Script" path="res://Scripts/Player/Monster/MonsterParticles.cs" id="18_nqpkp"]
+[ext_resource type="PackedScene" uid="uid://bdau24iq4fib8" path="res://Scenes/UserInterface/HUD/UIVignette.tscn" id="18_vnlix"]
+[ext_resource type="PackedScene" uid="uid://cq70khnyefibk" path="res://Scenes/UserInterface/HUD/UIDithering.tscn" id="19_8qeyf"]
 [ext_resource type="PackedScene" uid="uid://dyq2rw3wcmvjc" path="res://Scenes/Props/HumanCorpse.tscn" id="21_o67hm"]
 [ext_resource type="AudioStream" uid="uid://s470ea3qnwg8" path="res://Audio/SFX/MonsterMissAttackAudio.mp3" id="26_iqfag"]
 [ext_resource type="Script" path="res://Scripts/Player/PlayerHUDParameters.cs" id="26_k2iwt"]
@@ -43,7 +43,7 @@ shader_parameter/teleport_range_y = 0.0
 shader_parameter/teleport_range_z = 0.0
 shader_parameter/teleport_frequency = 20.0
 shader_parameter/enable_blinking = true
-shader_parameter/blink_frequency = 20.0
+shader_parameter/blink_frequency = 25.0
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_228g4"]
 resource_name = "HiddenCollection_BowlingPin"
@@ -90,6 +90,27 @@ emission_energy_multiplier = 5.0
 material = SubResource("StandardMaterial3D_nbipo")
 size = Vector3(0.1, 0.1, 0.1)
 
+[sub_resource type="Animation" id="Animation_xhoir"]
+resource_name = "IDLE"
+loop_mode = 1
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../../CommonPart/CameraHolder/PlayerCamera:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_aldqb"]
+resource_name = "JUMP"
+step = 0.05
+
 [sub_resource type="Animation" id="Animation_r6j44"]
 length = 0.001
 tracks/0/type = "value"
@@ -120,44 +141,16 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0, 0.4, 0.8, 1.2, 1.6),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1),
 "update": 0,
-"values": [Vector3(0, 0, 0), Vector3(0.03, 0.05, 0), Vector3(0, 0, 0), Vector3(-0.03, 0.05, 0), Vector3(0, 0, 0)]
-}
-
-[sub_resource type="Animation" id="Animation_xhoir"]
-resource_name = "IDLE"
-loop_mode = 1
-step = 0.05
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("../../CommonPart/CameraHolder/PlayerCamera:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 1),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector3(0, 0, 0), Vector3(0, 0, 0)]
+"values": [Vector3(0, 0, 0), Vector3(0.03, 0.04, 0), Vector3(0, 0, 0), Vector3(-0.03, 0.04, 0), Vector3(0, 0, 0)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_vvpui"]
 _data = {
 "IDLE": SubResource("Animation_xhoir"),
+"JUMP": SubResource("Animation_aldqb"),
 "RESET": SubResource("Animation_r6j44"),
 "WALK": SubResource("Animation_ybvy8")
 }
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_3lwg6"]
-shader = ExtResource("14_s0c68")
-shader_parameter/alpha = 0.25
-shader_parameter/inner_radius = 0.5
-shader_parameter/outer_radius = 1.25
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_vqiem"]
-shader = ExtResource("15_8b5lt")
-shader_parameter/enable_dithering = true
-shader_parameter/dithering_intensity = 0.065
-shader_parameter/dither_scale = 1.5
 
 [sub_resource type="Resource" id="Resource_hw58n"]
 script = ExtResource("15_ao0lo")
@@ -388,23 +381,9 @@ _hudParameters = NodePath("../../../ClientServerPart/Scripts/HUDParameters")
 
 [node name="UICrosshair" parent="ClientPart/UI" instance=ExtResource("7_5q3fu")]
 
-[node name="Vignette" type="ColorRect" parent="ClientPart/UI"]
-material = SubResource("ShaderMaterial_3lwg6")
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
+[node name="UIVignette" parent="ClientPart/UI" instance=ExtResource("18_vnlix")]
 
-[node name="Dithering" type="ColorRect" parent="ClientPart/UI"]
-material = SubResource("ShaderMaterial_vqiem")
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
+[node name="UIDithering" parent="ClientPart/UI" instance=ExtResource("19_8qeyf")]
 
 [node name="ServerPart" type="Node" parent="."]
 
@@ -424,10 +403,11 @@ script = ExtResource("9_2j7p8")
 MaxHealth = 100
 CurrentHealth = 90
 
-[node name="PlayerDeath" type="Node" parent="ServerPart/Scripts" node_paths=PackedStringArray("_player", "_playerBody", "_playerHealth")]
+[node name="PlayerDeath" type="Node" parent="ServerPart/Scripts" node_paths=PackedStringArray("_player", "_playerBody", "_rayGround", "_playerHealth")]
 script = ExtResource("15_t6oc2")
 _player = NodePath("../../..")
 _playerBody = NodePath("../../../CommonPart/PlayerBody")
+_rayGround = NodePath("../../../CommonPart/PlayerBody/RayGround")
 _playerHealth = NodePath("../PlayerHealth")
 _humanCorpseScene = ExtResource("21_o67hm")
 

@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://dn6bs13u0l2at"]
+[gd_scene load_steps=18 format=3 uid="uid://dn6bs13u0l2at"]
 
 [ext_resource type="Script" path="res://Scripts/Player/HUDParameters.cs" id="1_6eu3q"]
 [ext_resource type="Script" path="res://Scripts/Player/InputActions.cs" id="1_ouwve"]
@@ -12,20 +12,9 @@
 [ext_resource type="PackedScene" uid="uid://c6x7etoas6aiu" path="res://Scenes/UserInterface/HUD/UIItemInfo.tscn" id="8_8yadc"]
 [ext_resource type="PackedScene" uid="uid://cxq88ssuuklm2" path="res://Scenes/UserInterface/HUD/UISanity.tscn" id="9_mqkab"]
 [ext_resource type="Script" path="res://Scripts/Player/Spectator/SpectatorCameraFollow.cs" id="9_ngxsr"]
-[ext_resource type="Shader" path="res://Shaders/Vignette.gdshader" id="10_tmqhd"]
-[ext_resource type="Shader" path="res://Shaders/Dithering.gdshader" id="11_n3rxg"]
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_i6sr7"]
-shader = ExtResource("10_tmqhd")
-shader_parameter/alpha = 0.25
-shader_parameter/inner_radius = 0.5
-shader_parameter/outer_radius = 1.25
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_8xv4o"]
-shader = ExtResource("11_n3rxg")
-shader_parameter/enable_dithering = true
-shader_parameter/dithering_intensity = 0.065
-shader_parameter/dither_scale = 1.5
+[ext_resource type="PackedScene" uid="uid://bojdshm0oxy1v" path="res://Scenes/UserInterface/HUD/UIWhiteNoise.tscn" id="10_1fpbw"]
+[ext_resource type="PackedScene" uid="uid://bdau24iq4fib8" path="res://Scenes/UserInterface/HUD/UIVignette.tscn" id="11_6fxlb"]
+[ext_resource type="PackedScene" uid="uid://cq70khnyefibk" path="res://Scenes/UserInterface/HUD/UIDithering.tscn" id="12_m676i"]
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_vvjep"]
 properties/0/path = NodePath(".:position")
@@ -95,23 +84,12 @@ _hudParameters = NodePath("../../../ClientServerPart/Scripts/HUDParameters")
 [node name="UISanity" parent="ClientPart/UI" node_paths=PackedStringArray("_hudParameters") instance=ExtResource("9_mqkab")]
 _hudParameters = NodePath("../../../ClientServerPart/Scripts/HUDParameters")
 
-[node name="Vignette" type="ColorRect" parent="ClientPart/UI"]
-material = SubResource("ShaderMaterial_i6sr7")
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
+[node name="UIWhiteNoise" parent="ClientPart/UI" node_paths=PackedStringArray("_hudParameters") instance=ExtResource("10_1fpbw")]
+_hudParameters = NodePath("../../../ClientServerPart/Scripts/HUDParameters")
 
-[node name="Dithering" type="ColorRect" parent="ClientPart/UI"]
-material = SubResource("ShaderMaterial_8xv4o")
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
+[node name="UIVignette" parent="ClientPart/UI" instance=ExtResource("11_6fxlb")]
+
+[node name="UIDithering" parent="ClientPart/UI" instance=ExtResource("12_m676i")]
 
 [node name="ServerPart" type="Node" parent="."]
 
