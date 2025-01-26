@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=3 uid="uid://7fa0b3shof4a"]
+[gd_scene load_steps=32 format=3 uid="uid://7fa0b3shof4a"]
 
 [ext_resource type="Script" path="res://Scripts/Player/PlayerInputVector.cs" id="1_1rug0"]
 [ext_resource type="Script" path="res://Scripts/AudioPlayer.cs" id="1_4resh"]
@@ -18,6 +18,10 @@
 [ext_resource type="Resource" uid="uid://by7ti8k7bsiet" path="res://ScriptableObjects/PlayerMovementParameters.tres" id="13_xi3vn"]
 [ext_resource type="Script" path="res://Scripts/Player/RemoteCameraRotation.cs" id="14_2swan"]
 [ext_resource type="PackedScene" uid="uid://cq70khnyefibk" path="res://Scenes/UserInterface/HUD/UIDithering.tscn" id="14_46ehg"]
+[ext_resource type="Script" path="res://Scripts/Player/Movement/PlayerMovementSounds.cs" id="19_l34sy"]
+[ext_resource type="AudioStream" uid="uid://cwuox5lt45k24" path="res://Audio/SFX/Step.mp3" id="20_utodw"]
+[ext_resource type="AudioStream" uid="uid://3jamu0u0vmak" path="res://Audio/SFX/Common/Jump.mp3" id="21_e37e1"]
+[ext_resource type="AudioStream" uid="uid://gmsohkdgi4p5" path="res://Audio/SFX/Common/Landing.mp3" id="22_ux476"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_e1mld"]
 radius = 0.3
@@ -247,13 +251,12 @@ _inputActions = NodePath("../../../ClientServerPart/Scripts/InputActions")
 
 [node name="Scripts" type="Node" parent="ServerPart"]
 
-[node name="PlayerMovement" type="Node" parent="ServerPart/Scripts" node_paths=PackedStringArray("MovementActions", "InputActions", "InputVector", "PlayerBody", "AudioPlayer")]
+[node name="PlayerMovement" type="Node" parent="ServerPart/Scripts" node_paths=PackedStringArray("MovementActions", "InputActions", "InputVector", "PlayerBody")]
 script = ExtResource("8_2bsv7")
 MovementActions = NodePath("../../../ClientServerPart/Scripts/MovementActions")
 InputActions = NodePath("../../../ClientServerPart/Scripts/InputActions")
 InputVector = NodePath("../../../ClientServerPart/Scripts/InputVector")
 PlayerBody = NodePath("../../../CommonPart/PlayerBody")
-AudioPlayer = NodePath("../../../CommonPart/AudioPlayer")
 PlayerMovementParameters = ExtResource("13_xi3vn")
 
 [node name="PlayerPropInteractor" type="Node" parent="ServerPart/Scripts" node_paths=PackedStringArray("_inputActions", "RayOfLook", "PlayerBody", "AnchorForDraggedObject", "StaticBody3D", "Generic6DofJoint3D")]
@@ -269,6 +272,18 @@ Generic6DofJoint3D = NodePath("../../../CommonPart/CameraHolder/PlayerCamera/Pla
 script = ExtResource("14_2swan")
 _playerCamera = NodePath("../../../CommonPart/CameraHolder/PlayerCamera")
 _playerBody = NodePath("../../../CommonPart/PlayerBody")
+
+[node name="PlayerMovementSound" type="Node" parent="ServerPart/Scripts" node_paths=PackedStringArray("_movementActions", "_audioPlayer", "_stepTimer")]
+script = ExtResource("19_l34sy")
+_movementActions = NodePath("../../../ClientServerPart/Scripts/MovementActions")
+_audioPlayer = NodePath("../../../CommonPart/AudioPlayer")
+_stepTimer = NodePath("../../Timer")
+_stepInterval = 0.8
+_stepAudio = ExtResource("20_utodw")
+_jumpAudio = ExtResource("21_e37e1")
+_landAudio = ExtResource("22_ux476")
+
+[node name="Timer" type="Timer" parent="ServerPart"]
 
 [node name="Synchronizers" type="Node" parent="."]
 

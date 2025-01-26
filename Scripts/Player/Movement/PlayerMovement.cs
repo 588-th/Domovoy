@@ -7,7 +7,6 @@ public partial class PlayerMovement : Node
     [Export] public InputActions InputActions;
     [Export] public InputVector InputVector;
     [Export] public CharacterBody3D PlayerBody;
-    [Export] public AudioPlayer AudioPlayer;
 
     [Export] public PlayerMovementParameters PlayerMovementParameters { get; private set; }
     public MovementState CurrentState { get; private set; }

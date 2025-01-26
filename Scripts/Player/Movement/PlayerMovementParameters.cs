@@ -13,8 +13,4 @@ public partial class PlayerMovementParameters : Resource
     [Export] public float CurrentJumpForce = 5f;
     [Export] public float CurrentSpeed = 5f;
     [Export] public float CurrentAcceleration;
-
-    [Export] public bool PlayAudioOnlyLocaly;
-    [Export] public AudioStreamMP3 JumpAudio;
-    [Export] public AudioStreamMP3 LandingAudio;
 }

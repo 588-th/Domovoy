@@ -1,4 +1,4 @@
-[gd_scene load_steps=52 format=4 uid="uid://dw2d8yb5aog0t"]
+[gd_scene load_steps=54 format=4 uid="uid://dw2d8yb5aog0t"]
 
 [ext_resource type="Script" path="res://Scripts/AudioPlayer.cs" id="1_cu3h5"]
 [ext_resource type="Script" path="res://Scripts/Player/PlayerInputVector.cs" id="1_l02lm"]
@@ -34,6 +34,8 @@
 [ext_resource type="Script" path="res://Scripts/Player/PlayerHUDParameters.cs" id="26_k2iwt"]
 [ext_resource type="AudioStream" uid="uid://dhgbfgf43idpd" path="res://Audio/SFX/MonsterHitAttackAudio.mp3" id="27_w1d6b"]
 [ext_resource type="Script" path="res://Scripts/Player/Monster/PlayerMeleeAttackParameters.cs" id="28_g56uk"]
+[ext_resource type="Script" path="res://Scripts/Player/Movement/PlayerMovementSounds.cs" id="33_nwoie"]
+[ext_resource type="AudioStream" uid="uid://cwuox5lt45k24" path="res://Audio/SFX/Step.mp3" id="34_0cklf"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_gxpce"]
 render_priority = 0
@@ -165,9 +167,6 @@ Gravity = 9.8
 CurrentJumpForce = 5.5
 CurrentSpeed = 5.0
 CurrentAcceleration = 0.0
-PlayAudioOnlyLocaly = true
-JumpAudio = ExtResource("13_pj3sh")
-LandingAudio = ExtResource("14_5ujt1")
 
 [sub_resource type="Resource" id="Resource_w6vwx"]
 script = ExtResource("28_g56uk")
@@ -389,13 +388,12 @@ _hudParameters = NodePath("../../../ClientServerPart/Scripts/HUDParameters")
 
 [node name="Scripts" type="Node" parent="ServerPart"]
 
-[node name="PlayerMovement" type="Node" parent="ServerPart/Scripts" node_paths=PackedStringArray("MovementActions", "InputActions", "InputVector", "PlayerBody", "AudioPlayer")]
+[node name="PlayerMovement" type="Node" parent="ServerPart/Scripts" node_paths=PackedStringArray("MovementActions", "InputActions", "InputVector", "PlayerBody")]
 script = ExtResource("8_7rqw8")
 MovementActions = NodePath("../../../ClientServerPart/Scripts/MovementActions")
 InputActions = NodePath("../../../ClientServerPart/Scripts/InputActions")
 InputVector = NodePath("../../../ClientServerPart/Scripts/InputVector")
 PlayerBody = NodePath("../../../CommonPart/PlayerBody")
-AudioPlayer = NodePath("../../../CommonPart/AudioPlayer")
 PlayerMovementParameters = SubResource("Resource_hw58n")
 
 [node name="PlayerHealth" type="Node" parent="ServerPart/Scripts"]
@@ -446,11 +444,24 @@ _hudParameters = NodePath("../../../ClientServerPart/Scripts/HUDParameters")
 _playerHealth = NodePath("../PlayerHealth")
 _rayOfAttack = NodePath("../../../CommonPart/CameraHolder/PlayerCamera/PlayerLook/RayOfAttack")
 
+[node name="PlayerMovementSound" type="Node" parent="ServerPart/Scripts" node_paths=PackedStringArray("_movementActions", "_audioPlayer", "_stepTimer")]
+script = ExtResource("33_nwoie")
+_movementActions = NodePath("../../../ClientServerPart/Scripts/MovementActions")
+_audioPlayer = NodePath("../../../CommonPart/AudioPlayer")
+_stepTimer = NodePath("../../Timers/Timer")
+_stepInterval = 0.8
+_stepAudio = ExtResource("34_0cklf")
+_jumpAudio = ExtResource("13_pj3sh")
+_landAudio = ExtResource("14_5ujt1")
+PlayAudioOnlyLocaly = true
+
 [node name="Timers" type="Node" parent="ServerPart"]
 
 [node name="AttackCooldownTimer" type="Timer" parent="ServerPart/Timers"]
 
 [node name="HardAttackChargeTimer" type="Timer" parent="ServerPart/Timers"]
+
+[node name="Timer" type="Timer" parent="ServerPart/Timers"]
 
 [node name="Synchronizers" type="Node" parent="."]
 

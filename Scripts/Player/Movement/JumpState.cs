@@ -72,10 +72,6 @@ public class JumpState : MovementState
         _playerMovement.PlayerBody.Velocity = new Vector3(velocity.X, 0f, velocity.Z);
         velocity.Y = _playerMovement.PlayerMovementParameters.CurrentJumpForce;
         _playerMovement.PlayerBody.Velocity = velocity;
-
-        _playerMovement.AudioPlayer.PlayAudio(_playerMovement.PlayerMovementParameters.JumpAudio);
-        if (!_playerMovement.PlayerMovementParameters.PlayAudioOnlyLocaly)
-            _playerMovement.AudioPlayer.PlayAudio3DExceptClient(_playerMovement.PlayerMovementParameters.JumpAudio);
     }
 
     private void OnJumpKeyDown()
@@ -89,10 +85,6 @@ public class JumpState : MovementState
     private void OnGround()
     {
         _jumpCount = 0;
-        _playerMovement.ChangeState(_playerMovement.WalkState);
-
-        _playerMovement.AudioPlayer.PlayAudio(_playerMovement.PlayerMovementParameters.LandingAudio);
-        if (!_playerMovement.PlayerMovementParameters.PlayAudioOnlyLocaly)
-            _playerMovement.AudioPlayer.PlayAudio3DExceptClient(_playerMovement.PlayerMovementParameters.LandingAudio);
+        _playerMovement.ChangeState(_playerMovement.IdleState);
     }
 }
