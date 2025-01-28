@@ -9,9 +9,11 @@ public partial class MovementActions : Node
     public Action IsIdleState;
     public Action IsWalkState;
     public Action IsJumpState;
+    public Action IsSneakState;
     public Action IsNotIdleState;
     public Action IsNotWalkState;
     public Action IsNotJumpState;
+    public Action IsNotSneakState;
     public Action IsGrounded;
     public Action IsNotGrounded;
 
@@ -24,9 +26,11 @@ public partial class MovementActions : Node
             {"isIdleState", () => IsIdleState},
             {"isWalkState", () => IsWalkState},
             {"isJumpState", () => IsJumpState},
+            {"isSneakState", () => IsSneakState},
             {"isNotIdleState", () => IsNotWalkState},
             {"isNotWalkState", () => IsNotWalkState},
             {"isNotJumpState", () => IsNotJumpState},
+            {"isNotSneakState", () => IsNotSneakState},
             {"isGrounded", () => IsGrounded},
             {"isNotGrounded", () => IsNotGrounded},
         };

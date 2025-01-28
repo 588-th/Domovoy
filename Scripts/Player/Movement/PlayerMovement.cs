@@ -1,5 +1,4 @@
 using Godot;
-using System;
 
 public partial class PlayerMovement : Node
 {
@@ -13,6 +12,7 @@ public partial class PlayerMovement : Node
     public IdleState IdleState { get; private set; }
     public WalkState WalkState { get; private set; }
     public JumpState JumpState { get; private set; }
+    public SneakState SneakState { get; private set; }
 
     public bool IsGrounded { get; private set; }
 
@@ -45,6 +45,7 @@ public partial class PlayerMovement : Node
         IdleState = new IdleState(this);
         WalkState = new WalkState(this);
         JumpState = new JumpState(this);
+        SneakState = new SneakState(this);
 
         CurrentState = JumpState;
 

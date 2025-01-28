@@ -1,19 +1,20 @@
 using Godot;
+using System;
 
-public class WalkState : MovementState
+public partial class SneakState : MovementState
 {
-    public WalkState(PlayerMovement playerMovement) : base(playerMovement) { }
+    public SneakState(PlayerMovement playerMovement) : base(playerMovement) { }
 
     public override void Enter()
     {
         base.Enter();
 
-        _playerMovement.MovementActions.InvokeAction("isWalkState");
-        _playerMovement.InputActions.SneakKeyDown += OnSneakKeyDown;
+        _playerMovement.MovementActions.InvokeAction("isSneakState");
+        _playerMovement.InputActions.SneakKeyUp += OnSneakKeyUp;
         _playerMovement.InputActions.JumpKeyDown += OnJumpKeyDown;
         _playerMovement.MovementActions.IsNotGrounded += OnNotGround;
 
-        _playerMovement.PlayerMovementParameters.CurrentSpeed = _playerMovement.PlayerMovementParameters.WalkSpeed;
+        _playerMovement.PlayerMovementParameters.CurrentSpeed = _playerMovement.PlayerMovementParameters.SneakSpeed;
         _playerMovement.PlayerMovementParameters.CurrentAcceleration = _playerMovement.PlayerMovementParameters.OnGroundAcceleration;
     }
 
@@ -21,8 +22,8 @@ public class WalkState : MovementState
     {
         base.Exit();
 
-        _playerMovement.MovementActions.InvokeAction("isNotWalkState");
-        _playerMovement.InputActions.SneakKeyDown -= OnSneakKeyDown;
+        _playerMovement.MovementActions.InvokeAction("isNotSneakState");
+        _playerMovement.InputActions.SneakKeyUp -= OnSneakKeyUp;
         _playerMovement.InputActions.JumpKeyDown -= OnJumpKeyDown;
         _playerMovement.MovementActions.IsNotGrounded -= OnNotGround;
     }
@@ -55,16 +56,16 @@ public class WalkState : MovementState
             _playerMovement.ChangeState(_playerMovement.IdleState);
     }
 
-    private void OnSneakKeyDown()
+    private void OnSneakKeyUp()
     {
-        _playerMovement.ChangeState(_playerMovement.SneakState);
+        _playerMovement.ChangeState(_playerMovement.WalkState);
     }
 
     private void OnJumpKeyDown()
     {
         _playerMovement.ChangeState(_playerMovement.JumpState);
     }
-    
+
     private void OnNotGround()
     {
         _playerMovement.ChangeState(_playerMovement.JumpState);

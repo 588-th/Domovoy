@@ -1,4 +1,4 @@
-[gd_scene load_steps=54 format=4 uid="uid://dw2d8yb5aog0t"]
+[gd_scene load_steps=51 format=4 uid="uid://dw2d8yb5aog0t"]
 
 [ext_resource type="Script" path="res://Scripts/AudioPlayer.cs" id="1_cu3h5"]
 [ext_resource type="Script" path="res://Scripts/Player/PlayerInputVector.cs" id="1_l02lm"]
@@ -29,7 +29,6 @@
 [ext_resource type="Script" path="res://Scripts/Player/Monster/MonsterParticles.cs" id="18_nqpkp"]
 [ext_resource type="PackedScene" uid="uid://bdau24iq4fib8" path="res://Scenes/UserInterface/HUD/UIVignette.tscn" id="18_vnlix"]
 [ext_resource type="PackedScene" uid="uid://cq70khnyefibk" path="res://Scenes/UserInterface/HUD/UIDithering.tscn" id="19_8qeyf"]
-[ext_resource type="PackedScene" uid="uid://dyq2rw3wcmvjc" path="res://Scenes/Props/HumanCorpse.tscn" id="21_o67hm"]
 [ext_resource type="AudioStream" uid="uid://s470ea3qnwg8" path="res://Audio/SFX/MonsterMissAttackAudio.mp3" id="26_iqfag"]
 [ext_resource type="Script" path="res://Scripts/Player/PlayerHUDParameters.cs" id="26_k2iwt"]
 [ext_resource type="AudioStream" uid="uid://dhgbfgf43idpd" path="res://Audio/SFX/MonsterHitAttackAudio.mp3" id="27_w1d6b"]
@@ -68,30 +67,6 @@ blend_shape_mode = 0
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_ix7cr"]
 height = 1.6897
 
-[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_tupl5"]
-lifetime_randomness = 1.0
-emission_shape_scale = Vector3(0.7, 0, 0.7)
-emission_shape = 6
-emission_ring_axis = Vector3(0, 0, 1)
-emission_ring_height = 1.0
-emission_ring_radius = 1.0
-emission_ring_inner_radius = 0.0
-direction = Vector3(0, 1, 0)
-spread = 10.0
-initial_velocity_max = 1.0
-gravity = Vector3(0, 0, 0)
-scale_min = 0.3
-scale_max = 0.4
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_nbipo"]
-emission_enabled = true
-emission = Color(1, 0.816667, 0, 1)
-emission_energy_multiplier = 5.0
-
-[sub_resource type="BoxMesh" id="BoxMesh_p8w52"]
-material = SubResource("StandardMaterial3D_nbipo")
-size = Vector3(0.1, 0.1, 0.1)
-
 [sub_resource type="Animation" id="Animation_xhoir"]
 resource_name = "IDLE"
 loop_mode = 1
@@ -128,9 +103,27 @@ tracks/0/keys = {
 "values": [Vector3(0, 0, 0)]
 }
 
+[sub_resource type="Animation" id="Animation_u8sr2"]
+resource_name = "SNEAK"
+length = 1.2
+loop_mode = 1
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../../CommonPart/CameraHolder/PlayerCamera:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3, 0.6, 0.9, 1.2),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0.01, 0.02, 0), Vector3(0, 0, 0), Vector3(-0.01, 0.02, 0), Vector3(0, 0, 0)]
+}
+
 [sub_resource type="Animation" id="Animation_ybvy8"]
 resource_name = "WALK"
-length = 1.6
+length = 1.2
 loop_mode = 1
 step = 0.05
 tracks/0/type = "value"
@@ -140,7 +133,7 @@ tracks/0/path = NodePath("../../CommonPart/CameraHolder/PlayerCamera:position")
 tracks/0/interp = 2
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.4, 0.8, 1.2, 1.6),
+"times": PackedFloat32Array(0, 0.3, 0.6, 0.9, 1.2),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1),
 "update": 0,
 "values": [Vector3(0, 0, 0), Vector3(0.03, 0.04, 0), Vector3(0, 0, 0), Vector3(-0.03, 0.04, 0), Vector3(0, 0, 0)]
@@ -151,13 +144,15 @@ _data = {
 "IDLE": SubResource("Animation_xhoir"),
 "JUMP": SubResource("Animation_aldqb"),
 "RESET": SubResource("Animation_r6j44"),
+"SNEAK": SubResource("Animation_u8sr2"),
 "WALK": SubResource("Animation_ybvy8")
 }
 
 [sub_resource type="Resource" id="Resource_hw58n"]
 script = ExtResource("15_ao0lo")
-WalkSpeed = 5.0
-CrouchSpeed = 2.0
+WalkSpeed = 3.5
+SneakSpeed = 2.0
+CrouchSpeed = 1.0
 JumpSpeed = 5.0
 JumpForce = 5.5
 MaxJumps = 1
@@ -227,7 +222,6 @@ _audioStreamPlayer3D = NodePath("../AudioStreamPlayer3D")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 
 [node name="PlayerCamera" type="Camera3D" parent="CommonPart/CameraHolder"]
-transform = Transform3D(1, 0, 0, 0, 1, 1.06581e-14, 0, -1.06581e-14, 1, 0, 0, 0)
 cull_mask = 524287
 
 [node name="PlayerLook" type="Node3D" parent="CommonPart/CameraHolder/PlayerCamera"]
@@ -289,15 +283,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 remote_path = NodePath("../../../../CameraHolder")
 update_rotation = false
 update_scale = false
-
-[node name="Flame" type="GPUParticles3D" parent="CommonPart/PlayerBody"]
-transform = Transform3D(1, 0, 0, 0, 1, -3.19743e-14, 0, 3.19743e-14, 1, 0, 0.750524, 7.99916e-15)
-visible = false
-emitting = false
-amount = 15
-lifetime = 3.0
-process_material = SubResource("ParticleProcessMaterial_tupl5")
-draw_pass_1 = SubResource("BoxMesh_p8w52")
 
 [node name="RayGround" type="RayCast3D" parent="CommonPart/PlayerBody"]
 target_position = Vector3(0, -25, 0)
@@ -401,13 +386,11 @@ script = ExtResource("9_2j7p8")
 MaxHealth = 100
 CurrentHealth = 90
 
-[node name="PlayerDeath" type="Node" parent="ServerPart/Scripts" node_paths=PackedStringArray("_player", "_playerBody", "_rayGround", "_playerHealth")]
+[node name="PlayerDeath" type="Node" parent="ServerPart/Scripts" node_paths=PackedStringArray("_playerRoot", "_playerHealth", "_playerBody")]
 script = ExtResource("15_t6oc2")
-_player = NodePath("../../..")
-_playerBody = NodePath("../../../CommonPart/PlayerBody")
-_rayGround = NodePath("../../../CommonPart/PlayerBody/RayGround")
+_playerRoot = NodePath("../../..")
 _playerHealth = NodePath("../PlayerHealth")
-_humanCorpseScene = ExtResource("21_o67hm")
+_playerBody = NodePath("../../../CommonPart/PlayerBody")
 
 [node name="PlayerPropInteractor" type="Node" parent="ServerPart/Scripts" node_paths=PackedStringArray("_inputActions", "RayOfLook", "PlayerBody", "AnchorForDraggedObject", "StaticBody3D", "Generic6DofJoint3D")]
 script = ExtResource("11_lwt4p")
@@ -428,9 +411,8 @@ _hardAttackChargeTimer = NodePath("../../Timers/HardAttackChargeTimer")
 _audioPlayer = NodePath("../../../CommonPart/AudioPlayer")
 _meleeAttackParameters = SubResource("Resource_w6vwx")
 
-[node name="MonsterParticles" type="Node" parent="ServerPart/Scripts" node_paths=PackedStringArray("_particles", "_monsterArea")]
+[node name="MonsterParticles" type="Node" parent="ServerPart/Scripts" node_paths=PackedStringArray("_monsterArea")]
 script = ExtResource("18_nqpkp")
-_particles = NodePath("../../../CommonPart/PlayerBody/Flame")
 _monsterArea = NodePath("../../../CommonPart/PlayerBody/MonsterArea")
 
 [node name="RemoteCameraRotation" type="Node" parent="ServerPart/Scripts" node_paths=PackedStringArray("_playerCamera", "_playerBody")]

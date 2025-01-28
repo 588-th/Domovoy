@@ -2,11 +2,18 @@ using Godot;
 
 public partial class PlayerDeath : Node
 {
-    [Export] private Node _player;
-    [Export] private CharacterBody3D _playerBody;
-    [Export] private RayCast3D _rayGround;
+    [Export] private Node _playerRoot;
     [Export] private PlayerHealth _playerHealth;
-    [Export] private PackedScene _humanCorpseScene;
+    [Export] private CharacterBody3D _playerBody;
+
+    [ExportGroup("Spawn Corpse")]
+    [Export] private bool _spawnCorpse;
+    [Export] private RayCast3D _rayGround;
+    [Export] private PackedScene _corpseScene;
+
+    [ExportGroup("Drop Items")]
+    [Export] private bool _dropItems;
+    [Export] private PlayerHotbar _playerHotbar;
 
     public override void _Ready()
     {
@@ -20,34 +27,93 @@ public partial class PlayerDeath : Node
 
     private void KillPlayer()
     {
-        long playerID = long.Parse(_player.Name);
+        long playerID = long.Parse(_playerRoot.Name);
 
-        Node3D humanCorpse = _humanCorpseScene.Instantiate<Node3D>();
-        humanCorpse.Name = playerID.ToString();
-
-        RandomNumberGenerator rng = new RandomNumberGenerator();
-        rng.Randomize();
-        float randomYRotation = Mathf.DegToRad(rng.RandfRange(-30, 30));
-
-        humanCorpse.Rotation = new Vector3(humanCorpse.Rotation.X, _playerBody.Rotation.Y + randomYRotation, 0);
-        humanCorpse.Position = GetCorpsePosition();
-
-        GetTree().GetFirstNodeInGroup("Holder:Props").AddChild(humanCorpse, true);
-
-        _player.GetParent().RemoveChild(_player);
-        _player.QueueFree();
+        DropItems();
+        SpawnCorpse(playerID);
+        DespawnPlayer();
 
         GameEvent.Instance.InvokePlayerDied(playerID);
     }
 
-
-    private Vector3 GetCorpsePosition()
+    private void DropItems()
     {
-        Vector3 spawnPosition = _playerBody.Position;
+        if (!_dropItems)
+            return;
+
+        DropItem(HotbarSlotType.Primary);
+        DropItem(HotbarSlotType.Secondary);
+        DropItem(HotbarSlotType.Tertiary);
+        DropItem(HotbarSlotType.Quaternary);
+    }
+
+    private void DropItem(HotbarSlotType hotbarSlotType)
+    {
+        Item item = _playerHotbar.GetItemFromSlot(hotbarSlotType);
+        if (item == null)
+            return;
+
+        RpcFunctions.Instance.AddGroup(item.GetPath(), "Item:Pickupble");
+
+        Vector3 position = item.GlobalPosition;
+        Vector3 rotation = new();
 
         if (_rayGround.IsColliding())
-            spawnPosition = _rayGround.GetCollisionPoint();
+            position = _rayGround.GetCollisionPoint();
 
-        return spawnPosition;
+        Node holderItems = GetTree().GetFirstNodeInGroup("Holder:Items");
+
+        item.GetParent().RemoveChild(item);
+        holderItems.AddChild(item, true);
+        item.EmitSignal(SignalName.Ready);
+
+        item.Position = position;
+        item.Rotation = rotation;
+
+        item.Freeze = false;
+        item.LinearVelocity = Vector3.Zero;
+        item.AngularVelocity = Vector3.Zero;
+
+        CollisionShape3D collisionShape = item.GetNode<CollisionShape3D>("Hitbox");
+        collisionShape.Disabled = false;
+        _playerHotbar.AbortItem(item);
+    }
+
+    private void SpawnCorpse(long playerID)
+    {
+        if (!_spawnCorpse)
+            return;
+
+        Node3D humanCorpse = _corpseScene.Instantiate<Node3D>();
+        humanCorpse.Name = playerID.ToString();
+        humanCorpse = SetCorpsePosition(humanCorpse);
+        humanCorpse = SetCorpseRotation(humanCorpse);
+        GetTree().GetFirstNodeInGroup("Holder:Props").AddChild(humanCorpse, true);
+    }
+
+    private Node3D SetCorpsePosition(Node3D humanCorpse)
+    {
+        Vector3 spawnPosition = _playerBody.Position;
+        if (_rayGround.IsColliding())
+            spawnPosition = _rayGround.GetCollisionPoint();
+        humanCorpse.Position = spawnPosition;
+
+        return humanCorpse;
+    }
+
+    private Node3D SetCorpseRotation(Node3D humanCorpse)
+    {
+        RandomNumberGenerator rng = new();
+        rng.Randomize();
+        float randomYRotation = Mathf.DegToRad(rng.RandfRange(-30, 30));
+        humanCorpse.Rotation = new Vector3(humanCorpse.Rotation.X, _playerBody.Rotation.Y + randomYRotation, 0);
+
+        return humanCorpse;
+    }
+
+    private void DespawnPlayer()
+    {
+        _playerRoot.GetParent().RemoveChild(_playerRoot);
+        _playerRoot.QueueFree();
     }
 }

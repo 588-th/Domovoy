@@ -10,6 +10,7 @@ public partial class PlayerCameraAnimations : Node
         _movementActions.IsIdleState += PlayIdleAnimation;
         _movementActions.IsWalkState += PlayWalkingAnimation;
         _movementActions.IsJumpState += PlayJumpAnimation;
+        _movementActions.IsSneakState += PlaySneakAnimation;
     }
 
     public override void _ExitTree()
@@ -17,6 +18,7 @@ public partial class PlayerCameraAnimations : Node
         _movementActions.IsIdleState -= PlayIdleAnimation;
         _movementActions.IsWalkState -= PlayWalkingAnimation;
         _movementActions.IsJumpState -= PlayJumpAnimation;
+        _movementActions.IsSneakState -= PlaySneakAnimation;
     }
 
     private void PlayIdleAnimation()
@@ -32,5 +34,10 @@ public partial class PlayerCameraAnimations : Node
     private void PlayJumpAnimation()
     {
         _animationPlayer.Play("JUMP");
+    }
+
+    private void PlaySneakAnimation()
+    {
+        _animationPlayer.Play("SNEAK");
     }
 }

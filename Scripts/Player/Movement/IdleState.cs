@@ -31,7 +31,12 @@ public class IdleState : MovementState
 
     private void CheckInutVector()
     {
-        if (_playerMovement.InputVector.Vector != Vector3.Zero)
+        if (_playerMovement.InputVector.Vector == Vector3.Zero)
+            return;
+
+        if (Input.IsActionPressed("sneak"))
+            _playerMovement.ChangeState(_playerMovement.SneakState);
+        else
             _playerMovement.ChangeState(_playerMovement.WalkState);
     }
 

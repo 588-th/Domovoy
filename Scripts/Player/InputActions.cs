@@ -9,6 +9,7 @@ public partial class InputActions : Node
     public Action DownKeyDown;
     public Action LeftKeyDown;
     public Action RightKeyDown;
+    public Action SneakKeyDown;
     public Action CrouchKeyDown;
     public Action JumpKeyDown;
     public Action InteractKeyDown;
@@ -32,6 +33,7 @@ public partial class InputActions : Node
     public Action DownKeyUp;
     public Action LeftKeyUp;
     public Action RightKeyUp;
+    public Action SneakKeyUp;
     public Action CrouchKeyUp;
     public Action JumpKeyUp;
     public Action InteractKeyUp;
@@ -51,6 +53,7 @@ public partial class InputActions : Node
             {"down", () => DownKeyDown},
             {"left", () => LeftKeyDown},
             {"right", () => RightKeyDown},
+            {"sneak", () => SneakKeyDown},
             {"crouch", () => CrouchKeyDown},
             {"jump", () => JumpKeyDown},
             {"interact", () => InteractKeyDown},
@@ -77,6 +80,7 @@ public partial class InputActions : Node
             {"down", () => DownKeyUp},
             {"left", () => LeftKeyUp},
             {"right", () => RightKeyUp},
+            {"sneak", () => SneakKeyUp},
             {"crouch", () => CrouchKeyUp},
             {"jump", () => JumpKeyUp},
             {"interact", () => InteractKeyUp},
