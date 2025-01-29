@@ -48,6 +48,8 @@ public partial class PlayerItemEquipper : Node
         if (_holdingItem != null)
             EquipItem(_holdingItem);
 
+        _holdingItem = null;
+
         if (!hotbarSlot.IsEmpty())
             TakeItemOnHand(hotbarSlot.Item);
 
@@ -67,6 +69,11 @@ public partial class PlayerItemEquipper : Node
             item.UnbindEquipActions(_inputActions);
             _equipedItems.Remove(item);
         }
+
+        Node holderItems = GetTree().GetFirstNodeInGroup("Holder:Items");
+        item.GetParent().RemoveChild(item);
+        holderItems.AddChild(item, true);
+        item.EmitSignal(SignalName.Ready);
     }
 
     private void EquipItem(Item item)
@@ -83,7 +90,6 @@ public partial class PlayerItemEquipper : Node
         item.Rotation = Vector3.Zero;
 
         _equipedItems.Add(item);
-        _holdingItem = null;
     }
 
     private void TakeItemOnHand(Item item)

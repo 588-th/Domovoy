@@ -9,24 +9,50 @@ public partial class RpcFunctions : Node
         Instance = this;
     }
 
-    public void ChangeAlbedoOfGeometry(NodePath nodePath, Color color)
+    public void Reparent(NodePath nodePath, NodePath parentNodePath)
     {
-        Rpc(nameof(RpcChangeAlbedoOfGeometry), nodePath, color);
+        if (Multiplayer.GetUniqueId() != 1)
+            return;
+
+        Rpc(nameof(RpcReparent), nodePath, parentNodePath);
     }
 
     public void AddGroup(NodePath nodePath, string group)
     {
+        if (Multiplayer.GetUniqueId() != 1)
+            return;
+
         Rpc(nameof(RpcAddGroup), nodePath, group);
     }
 
     public void RemoveGroup(NodePath nodePath, string group)
     {
+        if (Multiplayer.GetUniqueId() != 1)
+            return;
+
         Rpc(nameof(RpcRemoveGroup), nodePath, group);
     }
 
-    public void Reparent(NodePath nodePath, NodePath parentNodePath)
+    public void SetCullMaskCamera3D(NodePath camera3DPath, int maskNumber, bool isEnable)
     {
-        Rpc(nameof(RpcReparent), nodePath, parentNodePath);
+        if (Multiplayer.GetUniqueId() != 1)
+            return;
+
+        Rpc(nameof(RpcSetCullMaskCamera3D), camera3DPath, maskNumber, isEnable);
+    }
+
+    public void ChangeAlbedoOfGeometry(NodePath nodePath, Color color)
+    {
+        if (Multiplayer.GetUniqueId() != 1)
+            return;
+
+        Rpc(nameof(RpcChangeAlbedoOfGeometry), nodePath, color);
+    }
+
+    [Rpc(MultiplayerApi.RpcMode.AnyPeer, CallLocal = true, TransferMode = MultiplayerPeer.TransferModeEnum.Reliable)]
+    public void RpcReparent(NodePath nodePath, NodePath parentNodePath)
+    {
+        GetNode(nodePath).Reparent(GetNode(parentNodePath));
     }
 
     [Rpc(MultiplayerApi.RpcMode.AnyPeer, CallLocal = true, TransferMode = MultiplayerPeer.TransferModeEnum.Reliable)]
@@ -42,9 +68,10 @@ public partial class RpcFunctions : Node
     }
 
     [Rpc(MultiplayerApi.RpcMode.AnyPeer, CallLocal = true, TransferMode = MultiplayerPeer.TransferModeEnum.Reliable)]
-    public void RpcReparent(NodePath nodePath, NodePath parentNodePath)
+    public void RpcSetCullMaskCamera3D(NodePath camera3DPath, int maskNumber, bool isEnable)
     {
-        GetNode(nodePath).Reparent(GetNode(parentNodePath));
+        Camera3D camera3D = GetNode(camera3DPath) as Camera3D;
+        camera3D.SetCullMaskValue(maskNumber, isEnable);
     }
 
     [Rpc(MultiplayerApi.RpcMode.AnyPeer, CallLocal = true, TransferMode = MultiplayerPeer.TransferModeEnum.Reliable)]

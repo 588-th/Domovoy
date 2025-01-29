@@ -3,7 +3,7 @@ using Godot;
 public partial class PlayerMovementSounds : Node
 {
     [Export] private MovementActions _movementActions;
-    [Export] private AudioPlayer _audioPlayer;
+    [Export] private AudioPlayer3D _audioPlayer3D;
     [Export] private Timer _stepTimer;
     [Export] private float _stepInterval;
     [Export] private AudioStreamMP3 _stepAudio;
@@ -55,24 +55,17 @@ public partial class PlayerMovementSounds : Node
         if (!_isWalking)
             return;
 
-        _audioPlayer.PlayAudio(_stepAudio);
-        if (!PlayAudioOnlyLocaly)
-            _audioPlayer.PlayAudio3DExceptClient(_stepAudio);
-
+        _audioPlayer3D.PlayAudio3D(_stepAudio, PlayAudioOnlyLocaly);
         _stepTimer.Start();
     }
 
     private void PlayJumpAudio()
     {
-        _audioPlayer.PlayAudio(_jumpAudio);
-        if (!PlayAudioOnlyLocaly)
-            _audioPlayer.PlayAudio3DExceptClient(_jumpAudio);
+        _audioPlayer3D.PlayAudio3D(_jumpAudio, PlayAudioOnlyLocaly);
     }
 
     private void PlayLandAudio()
     {
-        _audioPlayer.PlayAudio(_landAudio);
-        if (!PlayAudioOnlyLocaly)
-            _audioPlayer.PlayAudio3DExceptClient(_landAudio);
+        _audioPlayer3D.PlayAudio3D(_landAudio, PlayAudioOnlyLocaly);
     }
 }

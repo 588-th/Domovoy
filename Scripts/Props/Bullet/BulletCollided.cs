@@ -50,10 +50,9 @@ public partial class BulletCollided : Node
         var playerRootNode = body.GetMeta("PlayerRoot");
         Node playerRoot = body.GetNode(playerRootNode.ToString());
 
-        var audioPlayerNode = playerRoot.GetMeta("AudioPlayer");
-        AudioPlayer audioPlayer = playerRoot.GetNode(audioPlayerNode.ToString()) as AudioPlayer;
+        var audioPlayerNode = playerRoot.GetMeta("AudioPlayer3D");
+        AudioPlayer3D audioPlayer3D = playerRoot.GetNode(audioPlayerNode.ToString()) as AudioPlayer3D;
 
-        audioPlayer.PlayAudio(_hitAudio);
-        audioPlayer.PlayAudio3DExceptClient(_hitAudio);
+        audioPlayer3D.PlayAudio3D(_hitAudio);
     }
 }

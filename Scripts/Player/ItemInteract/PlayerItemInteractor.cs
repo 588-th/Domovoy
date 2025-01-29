@@ -71,12 +71,6 @@ public partial class PlayerItemInteractor : Node
         Vector3 position = item.GlobalPosition;
         Vector3 rotation = item.GlobalRotation;
 
-        Node holderItems = GetTree().GetFirstNodeInGroup("Holder:Items");
-
-        item.GetParent().RemoveChild(item);
-        holderItems.AddChild(item, true);
-        item.EmitSignal(SignalName.Ready);
-
         item.Position = position;
         item.Rotation = rotation;
 
@@ -90,6 +84,7 @@ public partial class PlayerItemInteractor : Node
 
         CollisionShape3D collisionShape = item.GetNode<CollisionShape3D>("Hitbox");
         collisionShape.Disabled = false;
+
         _playerHotbar.AbortItem(item);
     }
 }

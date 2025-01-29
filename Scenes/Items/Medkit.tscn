@@ -34,11 +34,11 @@ PickupAudio = ExtResource("2_ep5wf")
 TakeOnHandAudio = ExtResource("3_eyfn4")
 
 [node name="Model" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.07, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.08, 0)
 mesh = ExtResource("2_va037")
 
 [node name="Hitbox" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.07, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.08, 0)
 shape = SubResource("BoxShape3D_jkt8x")
 
 [node name="ServerPart" type="Node" parent="."]

@@ -4,7 +4,7 @@ public partial class FirearmReload : Node
 {
     [Export] private Firearm _firearm;
     [Export] private FirearmParameters _firearmParameters;
-    [Export] private AudioPlayer _audioPlayer;
+    [Export] private AudioPlayer3D _audioPlayer3D;
 
     public void Reload()
     {
@@ -13,7 +13,7 @@ public partial class FirearmReload : Node
 
         _firearmParameters.CurrentClips--;
         _firearmParameters.CurrentBulletsInClip = _firearmParameters.BulletsPerClip;
-        _audioPlayer.PlayAudio3D(_firearmParameters.ReloadAudio);
+        _audioPlayer3D.PlayAudio3D(_firearmParameters.ReloadAudio);
         _firearm.ItemUsed?.Invoke();
     }
 }

@@ -4,7 +4,7 @@
 [ext_resource type="Script" path="res://Scripts/Player/InputActions.cs" id="1_ouwve"]
 [ext_resource type="Script" path="res://Scripts/Player/Spectator/SpectatorPlayerChanger.cs" id="2_acyj6"]
 [ext_resource type="Script" path="res://Scripts/Player/PlayerInputKeys.cs" id="3_y84ls"]
-[ext_resource type="Script" path="res://Scripts/Player/PlayerCamera.cs" id="5_16n5l"]
+[ext_resource type="Script" path="res://Scripts/Player/Camera/PlayerCamera.cs" id="5_16n5l"]
 [ext_resource type="Script" path="res://Scripts/Player/Spectator/HUDParameterSpectating.cs" id="6_3li0g"]
 [ext_resource type="PackedScene" uid="uid://c131mixukwjnm" path="res://Scenes/UserInterface/Menu/UIPauseMenu.tscn" id="6_3ocre"]
 [ext_resource type="PackedScene" uid="uid://dneigjq1nfs2b" path="res://Scenes/UserInterface/Menu/UIPlayerList.tscn" id="7_ox3bw"]

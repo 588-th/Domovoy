@@ -10,17 +10,31 @@ public partial class MonsterVision : Node
 
     public override void _Ready()
     {
-        _playerActions.ToggleMonsterVisionDown += ToggleVisionMode;
+        _playerActions.ToggleMonsterVisionDown += ToggleMonsterVision;
     }
 
     public override void _ExitTree()
     {
-        _playerActions.ToggleMonsterVisionDown -= ToggleVisionMode;
+        _playerActions.ToggleMonsterVisionDown -= ToggleMonsterVision;
     }
 
-    private void ToggleVisionMode()
+    private void ToggleMonsterVision()
     {
-        _isVisionEnable = !_isVisionEnable;
-        _playerCamera.SetCullMaskValue(_auraNumberMask, _isVisionEnable);
+        if (_isVisionEnable)
+            ToggleOffMonsterVision();
+        else
+            ToggleOnMonsterVision();
+    }
+
+    private void ToggleOnMonsterVision()
+    {
+        _isVisionEnable = true;
+        RpcFunctions.Instance.SetCullMaskCamera3D(_playerCamera.GetPath(), _auraNumberMask, _isVisionEnable);
+    }
+
+    private void ToggleOffMonsterVision()
+    {
+        _isVisionEnable = false;
+        RpcFunctions.Instance.SetCullMaskCamera3D(_playerCamera.GetPath(), _auraNumberMask, _isVisionEnable);
     }
 }

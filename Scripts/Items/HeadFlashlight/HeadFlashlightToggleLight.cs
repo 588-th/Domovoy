@@ -7,7 +7,7 @@ public partial class HeadFlashlightToggleLight : Node
     [Export] private HeadFlashlightFlicker _headFlashlightFlicker;
     [Export] private float _lightEnergy;
 
-    [Export] private AudioPlayer _audioPlayer;
+    [Export] private AudioPlayer3D _audioPlayer3D;
     [Export] private AudioStreamMP3 _flashlightOnAudio;
     [Export] private AudioStreamMP3 _flashlightOffAudio;
     [Export] private AudioStreamMP3 _flashlightOnDischargedAudio;
@@ -37,20 +37,20 @@ public partial class HeadFlashlightToggleLight : Node
         else if (!_headFlashlightBattery.IsDepleted())
             ToggleOnFlashlight();
         else
-            _audioPlayer.PlayAudio3D(_flashlightOnDischargedAudio);
+            _audioPlayer3D.PlayAudio3D(_flashlightOnDischargedAudio);
     }
 
     private void ToggleOnFlashlight()
     {
         _flashlight.LightEnergy = _lightEnergy;
-        _audioPlayer.PlayAudio3D(_flashlightOnAudio);
+        _audioPlayer3D.PlayAudio3D(_flashlightOnAudio);
         _isFlashlightEnabled = true;
     }
 
     private void ToggleOffFlashlight()
     {
         _flashlight.LightEnergy = 0;
-        _audioPlayer.PlayAudio3D(_flashlightOffAudio);
+        _audioPlayer3D.PlayAudio3D(_flashlightOffAudio);
         _isFlashlightEnabled = false;
     }
 }

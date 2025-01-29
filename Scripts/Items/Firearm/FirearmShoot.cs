@@ -4,7 +4,7 @@ public partial class FirearmShoot : Node
 {
     [Export] private Firearm _firearm;
     [Export] private FirearmParameters _firearmParameters;
-    [Export] private AudioPlayer _audioPlayer;
+    [Export] private AudioPlayer3D _audioPlayer3D;
 
     [Export] private Timer _shootCooldownTimer;
     [Export] private Marker3D _bulletSpawnPosition;
@@ -43,7 +43,7 @@ public partial class FirearmShoot : Node
 
         if (_firearmParameters.CurrentBulletsInClip <= 0)
         {
-            _audioPlayer.PlayAudio3D(_firearmParameters.EmptyShotAudio);
+            _audioPlayer3D.PlayAudio3D(_firearmParameters.EmptyShotAudio);
             return;
         }
 
@@ -52,7 +52,7 @@ public partial class FirearmShoot : Node
 
         SpawnBullet();
         _firearmParameters.CurrentBulletsInClip--;
-        _audioPlayer.PlayAudio3D(_firearmParameters.ShotAudio);
+        _audioPlayer3D.PlayAudio3D(_firearmParameters.ShotAudio);
 
         _firearm.ItemUsed?.Invoke();
     }

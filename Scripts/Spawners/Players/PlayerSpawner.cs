@@ -82,9 +82,10 @@ public partial class PlayerSpawner : MultiplayerSpawner
         SetMultiplayerAuthoritys(playerRoot, "ClientPart", authorityID);
         SetMultiplayerAuthoritys(playerRoot, "ClientServerPart", authorityID);
         SetMultiplayerAuthoritys(playerRoot, "CommonPart/PlayerBody", 1);
-        SetMultiplayerAuthoritys(playerRoot, "CommonPart/AudioPlayer", 1);
+        SetMultiplayerAuthoritys(playerRoot, "CommonPart/CameraHolder/PlayerCamera/Audio3D", 1);
         SetMultiplayerAuthoritys(playerRoot, "ClientServerPart/Scripts/HUDParameters", 1);
         SetMultiplayerAuthoritys(playerRoot, "ClientServerPart/Scripts/MovementActions", 1);
+        SetMultiplayerAuthoritys(playerRoot, "ClientServerPart/AudioPlayer", 1);
         SetMultiplayerAuthoritys(playerRoot, "Synchronizers/PlayerCameraSynchronizer", authorityID);
         SetMultiplayerAuthoritys(playerRoot, "Synchronizers/InputVectorSynchronizer", authorityID);
     }

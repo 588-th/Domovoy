@@ -1,0 +1,68 @@
+[gd_scene load_steps=9 format=3 uid="uid://ckhcqdpgul8ne"]
+
+[ext_resource type="Script" path="res://Scripts/Items/Beacon/Beacon.cs" id="1_0u0xa"]
+[ext_resource type="AudioStream" uid="uid://5h7hqp3o4agm" path="res://Audio/SFX/Common/Pickup.mp3" id="2_xl67n"]
+[ext_resource type="AudioStream" uid="uid://blgubek3j4k0s" path="res://Audio/SFX/Firearm/FirearmTakeOnHand.mp3" id="3_57xe6"]
+[ext_resource type="Script" path="res://Scripts/Items/Beacon/BeaconPlace.cs" id="4_16xf6"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ol6f8"]
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_arvfc"]
+material = SubResource("StandardMaterial3D_ol6f8")
+top_radius = 0.05
+bottom_radius = 0.05
+height = 0.5
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_jblv1"]
+size = Vector3(0.120117, 0.505084, 0.254)
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_yvm04"]
+properties/0/path = NodePath(".:position")
+properties/0/spawn = true
+properties/0/replication_mode = 2
+properties/1/path = NodePath(".:rotation")
+properties/1/spawn = true
+properties/1/replication_mode = 2
+properties/2/path = NodePath(".:freeze")
+properties/2/spawn = true
+properties/2/replication_mode = 2
+properties/3/path = NodePath("Light:light_energy")
+properties/3/spawn = true
+properties/3/replication_mode = 2
+
+[node name="Beacon" type="RigidBody3D" node_paths=PackedStringArray("_beaconPlace") groups=["Item:Pickupble", "Object:Item"]]
+collision_layer = 4
+script = ExtResource("1_0u0xa")
+_beaconPlace = NodePath("ServerPart/BeaconPlace")
+SlotType = 2
+PickupAudio = ExtResource("2_xl67n")
+TakeOnHandAudio = ExtResource("3_57xe6")
+
+[node name="Model" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.255995, 0)
+mesh = SubResource("CylinderMesh_arvfc")
+
+[node name="Hitbox" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.254972, 0)
+shape = SubResource("BoxShape3D_jblv1")
+
+[node name="Light" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.273661, 0)
+light_color = Color(0.833787, 0.874997, 1, 1)
+light_energy = 0.0
+light_volumetric_fog_energy = 0.7
+shadow_enabled = true
+shadow_blur = 10.0
+omni_range = 3.5
+
+[node name="ServerPart" type="Node" parent="."]
+
+[node name="BeaconPlace" type="Node" parent="ServerPart" node_paths=PackedStringArray("_beacon", "_beaconBody", "_light")]
+script = ExtResource("4_16xf6")
+_beacon = NodePath("../..")
+_beaconBody = NodePath("../..")
+_light = NodePath("../../Light")
+_lightEnergy = 0.3
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_yvm04")

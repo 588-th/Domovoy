@@ -59,13 +59,7 @@ public partial class PlayerDeath : Node
         Vector3 rotation = new();
 
         if (_rayGround.IsColliding())
-            position = _rayGround.GetCollisionPoint();
-
-        Node holderItems = GetTree().GetFirstNodeInGroup("Holder:Items");
-
-        item.GetParent().RemoveChild(item);
-        holderItems.AddChild(item, true);
-        item.EmitSignal(SignalName.Ready);
+            position = new Vector3(position.X, _rayGround.GetCollisionPoint().Y, position.Z);
 
         item.Position = position;
         item.Rotation = rotation;

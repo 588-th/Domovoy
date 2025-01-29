@@ -4,7 +4,7 @@ public partial class CorpseFall : Node
 {
     [Export] private RigidBody3D _corpse;
 
-    [Export] private AudioPlayer _audioPlayer;
+    [Export] private AudioPlayer3D _audioPlayer3D;
     [Export] private AudioStreamMP3 _bodyFallAudio;
 
     public override void _Ready()
@@ -19,6 +19,6 @@ public partial class CorpseFall : Node
 
     private void OnCorpseFall(Node body)
     {
-        _audioPlayer.PlayAudio3D(_bodyFallAudio);
+        _audioPlayer3D.PlayAudio3D(_bodyFallAudio);
     }
 }
