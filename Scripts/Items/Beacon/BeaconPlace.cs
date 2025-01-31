@@ -6,6 +6,8 @@ public partial class BeaconPlace : Node
     [Export] private RigidBody3D _beaconBody;
     [Export] private OmniLight3D _light;
     [Export] private float _lightEnergy;
+    [Export] private AudioPlayer3D _audioPlayer3D;
+    [Export] private AudioStreamMP3 _beaconNoise;
 
     public void Place()
     {
@@ -26,6 +28,7 @@ public partial class BeaconPlace : Node
 
         playerHotbar.AbortItem(_beacon);
         SetTransform(rayOfLook);
+        _audioPlayer3D.PlayAudio3D(_beaconNoise);
 
         _light.LightEnergy = _lightEnergy;
         RpcFunctions.Instance.RemoveGroup(_beaconBody.GetPath(), "Object:Item");

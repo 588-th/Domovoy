@@ -185,7 +185,7 @@ texture_filter = 0
 render_priority = 0
 shader = ExtResource("5_rq73e")
 shader_parameter/edge_threshold = 0.1
-shader_parameter/line_color = Color(0.54, 0.54, 0.54, 1)
+shader_parameter/line_color = Color(0.646115, 0.688034, 0.780894, 1)
 shader_parameter/background_color = Color(0.408, 0.969, 0.694, 1)
 shader_parameter/background_alpha = 0.0
 shader_parameter/line_alpha = 0.5
@@ -617,6 +617,7 @@ size = Vector3(1, 2, 1.5)
 
 [node name="OmniLight3D3" type="OmniLight3D" parent="Environment/Light"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.46686, 6.09539, 3.25008)
+light_color = Color(0.887931, 0.914946, 1, 1)
 light_energy = 0.25
 shadow_enabled = true
 shadow_blur = 10.0
@@ -624,6 +625,7 @@ omni_range = 8.15
 
 [node name="OmniLight3D6" type="OmniLight3D" parent="Environment/Light"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.46686, 2.09539, -4.74992)
+light_color = Color(0.887931, 0.914946, 1, 1)
 light_energy = 0.25
 light_volumetric_fog_energy = 0.5
 shadow_enabled = true
@@ -632,6 +634,7 @@ omni_range = 8.15
 
 [node name="OmniLight3D4" type="OmniLight3D" parent="Environment/Light"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.96686, 2.4741, 3.24969)
+light_color = Color(0.887931, 0.914946, 1, 1)
 light_energy = 0.25
 light_volumetric_fog_energy = 0.5
 shadow_enabled = true
@@ -640,6 +643,7 @@ omni_range = 8.15
 
 [node name="OmniLight3D5" type="OmniLight3D" parent="Environment/Light"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.96686, 2.4741, 8.24969)
+light_color = Color(0.887931, 0.914946, 1, 1)
 light_energy = 0.25
 light_volumetric_fog_energy = 0.5
 shadow_enabled = true
@@ -648,6 +652,7 @@ omni_range = 8.15
 
 [node name="OmniLight3D7" type="OmniLight3D" parent="Environment/Light"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0331354, 2.4741, 8.24969)
+light_color = Color(0.887931, 0.914946, 1, 1)
 light_energy = 0.25
 light_volumetric_fog_energy = 0.5
 shadow_enabled = true
@@ -656,6 +661,7 @@ omni_range = 8.15
 
 [node name="OmniLight3D8" type="OmniLight3D" parent="Environment/Light"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.05971, 5.66698, -5.82559)
+light_color = Color(0.887931, 0.914946, 1, 1)
 light_energy = 0.25
 light_volumetric_fog_energy = 0.5
 shadow_enabled = true

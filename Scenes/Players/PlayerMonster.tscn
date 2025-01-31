@@ -21,20 +21,20 @@
 [ext_resource type="PackedScene" uid="uid://cxq88ssuuklm2" path="res://Scenes/UserInterface/HUD/UISanity.tscn" id="12_53pu3"]
 [ext_resource type="PackedScene" uid="uid://chmo08nmfm4af" path="res://Scenes/UserInterface/HUD/UIAttackInfo.tscn" id="12_d611m"]
 [ext_resource type="PackedScene" uid="uid://dneigjq1nfs2b" path="res://Scenes/UserInterface/Menu/UIPlayerList.tscn" id="12_nnmj0"]
-[ext_resource type="AudioStream" uid="uid://3jamu0u0vmak" path="res://Audio/SFX/Common/Jump.mp3" id="13_pj3sh"]
-[ext_resource type="AudioStream" uid="uid://gmsohkdgi4p5" path="res://Audio/SFX/Common/Landing.mp3" id="14_5ujt1"]
 [ext_resource type="Script" path="res://Scripts/Player/Monster/PlayerMeleeAttack.cs" id="15_0hw5x"]
 [ext_resource type="Script" path="res://Scripts/Player/Movement/PlayerMovementParameters.cs" id="15_ao0lo"]
 [ext_resource type="Script" path="res://Scripts/Player/PlayerDeath.cs" id="15_t6oc2"]
 [ext_resource type="Script" path="res://Scripts/Player/Camera/RemoteCameraRotation.cs" id="17_es1xv"]
 [ext_resource type="PackedScene" uid="uid://bdau24iq4fib8" path="res://Scenes/UserInterface/HUD/UIVignette.tscn" id="18_vnlix"]
 [ext_resource type="PackedScene" uid="uid://cq70khnyefibk" path="res://Scenes/UserInterface/HUD/UIDithering.tscn" id="19_8qeyf"]
+[ext_resource type="AudioStream" uid="uid://bdcsxss16vwtc" path="res://Audio/SFX/Movement/StepWalk.mp3" id="23_5f6b8"]
+[ext_resource type="AudioStream" uid="uid://cp8slsw1kde5q" path="res://Audio/SFX/Movement/Jump.mp3" id="24_78spm"]
+[ext_resource type="AudioStream" uid="uid://bnr2qn01if4yl" path="res://Audio/SFX/Movement/Land.mp3" id="25_bbxue"]
 [ext_resource type="AudioStream" uid="uid://s470ea3qnwg8" path="res://Audio/SFX/MonsterMissAttackAudio.mp3" id="26_iqfag"]
 [ext_resource type="Script" path="res://Scripts/Player/PlayerHUDParameters.cs" id="26_k2iwt"]
 [ext_resource type="AudioStream" uid="uid://dhgbfgf43idpd" path="res://Audio/SFX/MonsterHitAttackAudio.mp3" id="27_w1d6b"]
 [ext_resource type="Script" path="res://Scripts/Player/Monster/PlayerMeleeAttackParameters.cs" id="28_g56uk"]
 [ext_resource type="Script" path="res://Scripts/Player/Movement/PlayerMovementSounds.cs" id="33_nwoie"]
-[ext_resource type="AudioStream" uid="uid://cwuox5lt45k24" path="res://Audio/SFX/Step.mp3" id="34_0cklf"]
 
 [sub_resource type="AudioStreamPolyphonic" id="AudioStreamPolyphonic_iug1w"]
 polyphony = 16
@@ -310,12 +310,14 @@ script = ExtResource("4_mojhr")
 script = ExtResource("6_dm6b2")
 _playerRoot = NodePath("../../..")
 
-[node name="AudioPlayer" type="AudioStreamPlayer" parent="ClientServerPart" node_paths=PackedStringArray("_playerRoot")]
+[node name="Node" type="Node" parent="ClientServerPart"]
+
+[node name="AudioPlayer" type="AudioStreamPlayer" parent="ClientServerPart/Node" node_paths=PackedStringArray("_playerRoot")]
 stream = SubResource("AudioStreamPolyphonic_80tfw")
 autoplay = true
 bus = &"SFX"
 script = ExtResource("7_41235")
-_playerRoot = NodePath("../..")
+_playerRoot = NodePath("../../..")
 
 [node name="ClientPart" type="Node" parent="."]
 
@@ -389,10 +391,10 @@ _movementActions = NodePath("../../../ClientServerPart/Scripts/MovementActions")
 _audioPlayer3D = NodePath("../../../CommonPart/CameraHolder/PlayerCamera/Audio3D/AudioPlayer3D")
 _stepTimer = NodePath("../../Timers/StepTimer")
 _stepInterval = 0.8
-_stepAudio = ExtResource("34_0cklf")
-_jumpAudio = ExtResource("13_pj3sh")
-_landAudio = ExtResource("14_5ujt1")
 PlayAudioOnlyLocaly = true
+_stepAudio = ExtResource("23_5f6b8")
+_jumpAudio = ExtResource("24_78spm")
+_landAudio = ExtResource("25_bbxue")
 
 [node name="PlayerHealth" type="Node" parent="ServerPart/Scripts"]
 script = ExtResource("9_2j7p8")

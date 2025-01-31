@@ -1,9 +1,11 @@
-[gd_scene load_steps=9 format=3 uid="uid://ckhcqdpgul8ne"]
+[gd_scene load_steps=12 format=3 uid="uid://ckhcqdpgul8ne"]
 
 [ext_resource type="Script" path="res://Scripts/Items/Beacon/Beacon.cs" id="1_0u0xa"]
 [ext_resource type="AudioStream" uid="uid://5h7hqp3o4agm" path="res://Audio/SFX/Common/Pickup.mp3" id="2_xl67n"]
 [ext_resource type="AudioStream" uid="uid://blgubek3j4k0s" path="res://Audio/SFX/Firearm/FirearmTakeOnHand.mp3" id="3_57xe6"]
+[ext_resource type="Script" path="res://Scripts/Audio/AudioPlayer3D.cs" id="4_6ny4d"]
 [ext_resource type="Script" path="res://Scripts/Items/Beacon/BeaconPlace.cs" id="4_16xf6"]
+[ext_resource type="AudioStream" uid="uid://dnunfvdaqkuap" path="res://Audio/SFX/Beacon/BeaconNoise.mp3" id="6_mjwd1"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ol6f8"]
 
@@ -15,6 +17,9 @@ height = 0.5
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_jblv1"]
 size = Vector3(0.120117, 0.505084, 0.254)
+
+[sub_resource type="AudioStreamPolyphonic" id="AudioStreamPolyphonic_dm1dr"]
+polyphony = 4
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_yvm04"]
 properties/0/path = NodePath(".:position")
@@ -55,14 +60,24 @@ shadow_enabled = true
 shadow_blur = 10.0
 omni_range = 3.5
 
+[node name="AudioPlayer3D" type="AudioStreamPlayer3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0.104521, 0)
+stream = SubResource("AudioStreamPolyphonic_dm1dr")
+autoplay = true
+max_distance = 8.0
+bus = &"SFX"
+script = ExtResource("4_6ny4d")
+
 [node name="ServerPart" type="Node" parent="."]
 
-[node name="BeaconPlace" type="Node" parent="ServerPart" node_paths=PackedStringArray("_beacon", "_beaconBody", "_light")]
+[node name="BeaconPlace" type="Node" parent="ServerPart" node_paths=PackedStringArray("_beacon", "_beaconBody", "_light", "_audioPlayer3D")]
 script = ExtResource("4_16xf6")
 _beacon = NodePath("../..")
 _beaconBody = NodePath("../..")
 _light = NodePath("../../Light")
 _lightEnergy = 0.3
+_audioPlayer3D = NodePath("../../AudioPlayer3D")
+_beaconNoise = ExtResource("6_mjwd1")
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
 replication_config = SubResource("SceneReplicationConfig_yvm04")

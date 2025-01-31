@@ -1,4 +1,5 @@
 using Godot;
+using Godot.Collections;
 
 public partial class PlayerMovementSounds : Node
 {
@@ -6,10 +7,12 @@ public partial class PlayerMovementSounds : Node
     [Export] private AudioPlayer3D _audioPlayer3D;
     [Export] private Timer _stepTimer;
     [Export] private float _stepInterval;
+    [Export] public bool PlayAudioOnlyLocaly;
+
+    [ExportGroup("Audio")]
     [Export] private AudioStreamMP3 _stepAudio;
     [Export] private AudioStreamMP3 _jumpAudio;
     [Export] private AudioStreamMP3 _landAudio;
-    [Export] public bool PlayAudioOnlyLocaly;
 
     private bool _isWalking = false;
 

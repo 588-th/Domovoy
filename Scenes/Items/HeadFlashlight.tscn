@@ -7,9 +7,9 @@
 [ext_resource type="Script" path="res://Scripts/Items/HeadFlashlight/HeadFlashlightBattery.cs" id="6_xfi5a"]
 [ext_resource type="Script" path="res://Scripts/Items/HeadFlashlight/HeadFlashlightFlicker.cs" id="7_guxgo"]
 [ext_resource type="Script" path="res://Scripts/Items/HeadFlashlight/HeadFlashlightToggleLight.cs" id="8_mrvqq"]
-[ext_resource type="AudioStream" uid="uid://bg34se6p4niyk" path="res://Audio/SFX/Flashlight/FlashlighOn.mp3" id="9_pi1m2"]
-[ext_resource type="AudioStream" uid="uid://dwmimfq7ydehc" path="res://Audio/SFX/Flashlight/FlashlighOff.mp3" id="10_6pnoi"]
-[ext_resource type="AudioStream" uid="uid://brcp0ytd6lduk" path="res://Audio/SFX/Flashlight/FlashlightOnDischargedAudio.mp3" id="11_5dcvq"]
+[ext_resource type="AudioStream" uid="uid://ba6b3aeu5rl7h" path="res://Audio/SFX/Flashlight/FlashlighOn.mp3" id="9_pi1m2"]
+[ext_resource type="AudioStream" uid="uid://cuanjv4ckdm5p" path="res://Audio/SFX/Flashlight/FlashlightOnDischarged.mp3" id="10_0ldui"]
+[ext_resource type="AudioStream" uid="uid://wcx8lfpw0755" path="res://Audio/SFX/Flashlight/FlashlighOff.mp3" id="10_6pnoi"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_21hoq"]
 
@@ -92,7 +92,7 @@ _lightEnergy = 2.0
 _audioPlayer3D = NodePath("../../AudioPlayer3D")
 _flashlightOnAudio = ExtResource("9_pi1m2")
 _flashlightOffAudio = ExtResource("10_6pnoi")
-_flashlightOnDischargedAudio = ExtResource("11_5dcvq")
+_flashlightOnDischargedAudio = ExtResource("10_0ldui")
 
 [node name="ItemBodySynchronizer" type="MultiplayerSynchronizer" parent="."]
 replication_config = SubResource("SceneReplicationConfig_hpf56")

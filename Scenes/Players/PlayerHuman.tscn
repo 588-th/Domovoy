@@ -1,4 +1,4 @@
-[gd_scene load_steps=60 format=4 uid="uid://bks72b4kwjk1f"]
+[gd_scene load_steps=62 format=4 uid="uid://bks72b4kwjk1f"]
 
 [ext_resource type="Script" path="res://Scripts/Audio/AudioPlayer3D.cs" id="1_o0yqy"]
 [ext_resource type="Script" path="res://Scripts/Player/InputVector.cs" id="2_8kxsr"]
@@ -29,12 +29,15 @@
 [ext_resource type="PackedScene" uid="uid://bdau24iq4fib8" path="res://Scenes/UserInterface/HUD/UIVignette.tscn" id="19_7v07l"]
 [ext_resource type="Script" path="res://Scripts/Player/PlayerAuraColor.cs" id="19_jh60k"]
 [ext_resource type="PackedScene" uid="uid://cq70khnyefibk" path="res://Scenes/UserInterface/HUD/UIDithering.tscn" id="20_xcrfi"]
-[ext_resource type="AudioStream" uid="uid://3jamu0u0vmak" path="res://Audio/SFX/Common/Jump.mp3" id="21_8mwle"]
 [ext_resource type="Script" path="res://Scripts/Player/Camera/RemoteCameraRotation.cs" id="21_q46bc"]
 [ext_resource type="Script" path="res://Scripts/Player/Movement/PlayerMovementParameters.cs" id="23_sbhbh"]
+[ext_resource type="AudioStream" uid="uid://bdcsxss16vwtc" path="res://Audio/SFX/Movement/StepWalk.mp3" id="24_f1o77"]
+[ext_resource type="AudioStream" uid="uid://cp8slsw1kde5q" path="res://Audio/SFX/Movement/Jump.mp3" id="25_o2hlp"]
+[ext_resource type="AudioStream" uid="uid://bnr2qn01if4yl" path="res://Audio/SFX/Movement/Land.mp3" id="26_1veg0"]
 [ext_resource type="PackedScene" uid="uid://dyq2rw3wcmvjc" path="res://Scenes/Props/HumanCorpse.tscn" id="27_n646g"]
 [ext_resource type="Script" path="res://Scripts/Player/Movement/PlayerMovementSounds.cs" id="33_b25gi"]
-[ext_resource type="AudioStream" uid="uid://cwuox5lt45k24" path="res://Audio/SFX/Step.mp3" id="34_4po01"]
+[ext_resource type="Script" path="res://Scripts/Player/PlayerHealthNoise.cs" id="35_h44ek"]
+[ext_resource type="AudioStream" uid="uid://dqwxyc2b5uau1" path="res://Audio/SFX/WhiteNoise.mp3" id="36_up8j6"]
 
 [sub_resource type="AudioStreamPolyphonic" id="AudioStreamPolyphonic_hspml"]
 polyphony = 16
@@ -208,9 +211,6 @@ CurrentJumpForce = 5.5
 CurrentSpeed = 5.0
 CurrentAcceleration = 0.0
 
-[sub_resource type="AudioStreamMP3" id="AudioStreamMP3_gcsph"]
-data = PackedByteArray("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zJpSRUPRn4Crci2Od6re39rDniqMtyiatLSiBEqLLFqlBo6Xy6WCAAAAIquxcPMw5GRPcCAJySWzRXyKKUjdaNJEzTqdJboIGJifl4uKetFG93nKzbatFnf4YU5pHWooSGiAKtLMLmMIi6TCQAk1LT6WiiqXRhxh1G0lUojAIgAQWiKUcIIraqtckit/DXIqK2ptQ2SK3KrWzNX6rTCx3BU7xKsNeGoNf4l/xF//OoCASABgrlf8GkxBTUUzLjEwMFVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVV//uAZP2ABqNDz35vQAJBBHnvwcAACnCRG72EAAAkgGKjggAEVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVU=")
-
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_ab7he"]
 properties/0/path = NodePath(".:Vector")
 properties/0/spawn = true
@@ -368,11 +368,19 @@ _playerRoot = NodePath("../../..")
 
 [node name="HealthActions" type="Node" parent="ClientServerPart/Scripts"]
 
-[node name="AudioPlayer" type="AudioStreamPlayer" parent="ClientServerPart" node_paths=PackedStringArray("_playerRoot")]
+[node name="Audio" type="Node" parent="ClientServerPart"]
+
+[node name="AudioPlayer" type="AudioStreamPlayer" parent="ClientServerPart/Audio" node_paths=PackedStringArray("_playerRoot")]
 stream = SubResource("AudioStreamPolyphonic_c6ebu")
 autoplay = true
 script = ExtResource("6_dkepa")
-_playerRoot = NodePath("../..")
+_playerRoot = NodePath("../../..")
+
+[node name="HealthNoise" type="AudioStreamPlayer" parent="ClientServerPart/Audio" node_paths=PackedStringArray("_playerRoot")]
+stream = SubResource("AudioStreamPolyphonic_c6ebu")
+autoplay = true
+script = ExtResource("6_dkepa")
+_playerRoot = NodePath("../../..")
 
 [node name="ClientPart" type="Node" parent="."]
 
@@ -452,9 +460,9 @@ _movementActions = NodePath("../../../ClientServerPart/Scripts/MovementActions")
 _audioPlayer3D = NodePath("../../../CommonPart/CameraHolder/PlayerCamera/Audio3D/AudioPlayer3D")
 _stepTimer = NodePath("../../Timers/StepTimer")
 _stepInterval = 0.6
-_stepAudio = ExtResource("34_4po01")
-_jumpAudio = ExtResource("21_8mwle")
-_landAudio = SubResource("AudioStreamMP3_gcsph")
+_stepAudio = ExtResource("24_f1o77")
+_jumpAudio = ExtResource("25_o2hlp")
+_landAudio = ExtResource("26_1veg0")
 
 [node name="PlayerHealth" type="Node" parent="ServerPart/Scripts"]
 script = ExtResource("5_37vo5")
@@ -464,7 +472,7 @@ CurrentHealth = 100
 [node name="PlayerHotbar" type="Node" parent="ServerPart/Scripts" node_paths=PackedStringArray("_inputActions", "_audioPlayer", "playerNode")]
 script = ExtResource("6_eq515")
 _inputActions = NodePath("../../../ClientServerPart/Scripts/InputActions")
-_audioPlayer = NodePath("../../../ClientServerPart/AudioPlayer")
+_audioPlayer = NodePath("../../../ClientServerPart/Audio/AudioPlayer")
 playerNode = NodePath("../../..")
 
 [node name="PlayerPropInteractor" type="Node" parent="ServerPart/Scripts" node_paths=PackedStringArray("_inputActions", "RayOfLook", "PlayerBody", "AnchorForDraggedObject", "StaticBody3D", "Generic6DofJoint3D")]
@@ -486,7 +494,7 @@ _rayOfLook = NodePath("../../../CommonPart/CameraHolder/PlayerCamera/PlayerLook/
 [node name="PlayerItemEquipper" type="Node" parent="ServerPart/Scripts" node_paths=PackedStringArray("_inputActions", "_audioPlayer", "_playerHotbar", "_anchorHandItem", "_anchorPrimatyItem", "_anchorSecondaryItem", "_anchorTertiaryItem", "_anchorQuaternaryItem")]
 script = ExtResource("9_nr6ef")
 _inputActions = NodePath("../../../ClientServerPart/Scripts/InputActions")
-_audioPlayer = NodePath("../../../ClientServerPart/AudioPlayer")
+_audioPlayer = NodePath("../../../ClientServerPart/Audio/AudioPlayer")
 _playerHotbar = NodePath("../PlayerHotbar")
 _anchorHandItem = NodePath("../../../CommonPart/CameraHolder/PlayerCamera/PlayerLook/anchorActiveSlot")
 _anchorPrimatyItem = NodePath("../../../CommonPart/PlayerBody/Achors/anchorPrimatySlot")
@@ -511,6 +519,12 @@ _playerHealth = NodePath("../PlayerHealth")
 _aura = NodePath("../../../CommonPart/PlayerBody/Aura")
 _maxAmount = 30
 _minAmount = 1
+
+[node name="PlayerHealthNoise" type="Node" parent="ServerPart/Scripts" node_paths=PackedStringArray("_playerHealth", "_audioPlayer")]
+script = ExtResource("35_h44ek")
+_playerHealth = NodePath("../PlayerHealth")
+_audioPlayer = NodePath("../../../ClientServerPart/Audio/HealthNoise")
+_healthNoise = ExtResource("36_up8j6")
 
 [node name="PlayerHUDParameters" type="Node" parent="ServerPart/Scripts" node_paths=PackedStringArray("_hudParameters", "_playerHealth", "_playerItemEquipper", "_rayOfLook")]
 script = ExtResource("17_ijix5")

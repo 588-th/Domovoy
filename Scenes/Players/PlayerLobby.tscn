@@ -1,4 +1,4 @@
-[gd_scene load_steps=38 format=4 uid="uid://7fa0b3shof4a"]
+[gd_scene load_steps=39 format=4 uid="uid://7fa0b3shof4a"]
 
 [ext_resource type="Script" path="res://Scripts/Player/PlayerInputVector.cs" id="1_1rug0"]
 [ext_resource type="Script" path="res://Scripts/Audio/AudioPlayer3D.cs" id="1_4resh"]
@@ -15,13 +15,13 @@
 [ext_resource type="Script" path="res://Scripts/Player/PropInteract/PlayerPropInteractor.cs" id="11_cuem1"]
 [ext_resource type="PackedScene" uid="uid://dneigjq1nfs2b" path="res://Scenes/UserInterface/Menu/UIPlayerList.tscn" id="12_ylh5w"]
 [ext_resource type="PackedScene" uid="uid://bdau24iq4fib8" path="res://Scenes/UserInterface/HUD/UIVignette.tscn" id="13_fsu3j"]
-[ext_resource type="Resource" uid="uid://by7ti8k7bsiet" path="res://ScriptableObjects/PlayerMovementParameters.tres" id="13_xi3vn"]
 [ext_resource type="Script" path="res://Scripts/Player/Camera/RemoteCameraRotation.cs" id="14_2swan"]
 [ext_resource type="PackedScene" uid="uid://cq70khnyefibk" path="res://Scenes/UserInterface/HUD/UIDithering.tscn" id="14_46ehg"]
+[ext_resource type="Script" path="res://Scripts/Player/Movement/PlayerMovementParameters.cs" id="16_hba7k"]
+[ext_resource type="AudioStream" uid="uid://bdcsxss16vwtc" path="res://Audio/SFX/Movement/StepWalk.mp3" id="18_sgi5m"]
+[ext_resource type="AudioStream" uid="uid://cp8slsw1kde5q" path="res://Audio/SFX/Movement/Jump.mp3" id="19_3s3ip"]
 [ext_resource type="Script" path="res://Scripts/Player/Movement/PlayerMovementSounds.cs" id="19_l34sy"]
-[ext_resource type="AudioStream" uid="uid://cwuox5lt45k24" path="res://Audio/SFX/Step.mp3" id="20_utodw"]
-[ext_resource type="AudioStream" uid="uid://3jamu0u0vmak" path="res://Audio/SFX/Common/Jump.mp3" id="21_e37e1"]
-[ext_resource type="AudioStream" uid="uid://gmsohkdgi4p5" path="res://Audio/SFX/Common/Landing.mp3" id="22_ux476"]
+[ext_resource type="AudioStream" uid="uid://bnr2qn01if4yl" path="res://Audio/SFX/Movement/Land.mp3" id="20_6g22m"]
 
 [sub_resource type="AudioStreamPolyphonic" id="AudioStreamPolyphonic_0m4cq"]
 polyphony = 16
@@ -149,6 +149,21 @@ _data = {
 "WALK": SubResource("Animation_ybvy8")
 }
 
+[sub_resource type="Resource" id="Resource_d63lc"]
+script = ExtResource("16_hba7k")
+WalkSpeed = 3.5
+SneakSpeed = 2.0
+CrouchSpeed = 2.0
+JumpSpeed = 3.5
+JumpForce = 3.5
+MaxJumps = 1
+OnGroundAcceleration = 30.0
+OnAirAcceleration = 20.0
+Gravity = 9.8
+CurrentJumpForce = 5.0
+CurrentSpeed = 5.0
+CurrentAcceleration = 0.0
+
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_ghvew"]
 properties/0/path = NodePath(".:Vector")
 properties/0/spawn = true
@@ -261,12 +276,14 @@ script = ExtResource("1_xdgfg")
 script = ExtResource("5_2oygj")
 _playerRoot = NodePath("../../..")
 
-[node name="AudioPlayer" type="AudioStreamPlayer" parent="ClientServerPart" node_paths=PackedStringArray("_playerRoot")]
+[node name="Audio" type="Node" parent="ClientServerPart"]
+
+[node name="AudioPlayer" type="AudioStreamPlayer" parent="ClientServerPart/Audio" node_paths=PackedStringArray("_playerRoot")]
 stream = SubResource("AudioStreamPolyphonic_ptbcm")
 autoplay = true
 bus = &"SFX"
 script = ExtResource("5_bc4mc")
-_playerRoot = NodePath("../..")
+_playerRoot = NodePath("../../..")
 
 [node name="ClientPart" type="Node" parent="."]
 
@@ -323,7 +340,7 @@ MovementActions = NodePath("../../../ClientServerPart/Scripts/MovementActions")
 InputActions = NodePath("../../../ClientServerPart/Scripts/InputActions")
 InputVector = NodePath("../../../ClientServerPart/Scripts/InputVector")
 PlayerBody = NodePath("../../../CommonPart/PlayerBody")
-PlayerMovementParameters = ExtResource("13_xi3vn")
+PlayerMovementParameters = SubResource("Resource_d63lc")
 
 [node name="PlayerMovementSound" type="Node" parent="ServerPart/Scripts" node_paths=PackedStringArray("_movementActions", "_audioPlayer3D", "_stepTimer")]
 script = ExtResource("19_l34sy")
@@ -331,9 +348,9 @@ _movementActions = NodePath("../../../ClientServerPart/Scripts/MovementActions")
 _audioPlayer3D = NodePath("../../../CommonPart/CameraHolder/PlayerCamera/Audio3D/AudioPlayer3D")
 _stepTimer = NodePath("../../Timers/StepTimer")
 _stepInterval = 0.8
-_stepAudio = ExtResource("20_utodw")
-_jumpAudio = ExtResource("21_e37e1")
-_landAudio = ExtResource("22_ux476")
+_stepAudio = ExtResource("18_sgi5m")
+_jumpAudio = ExtResource("19_3s3ip")
+_landAudio = ExtResource("20_6g22m")
 
 [node name="PlayerPropInteractor" type="Node" parent="ServerPart/Scripts" node_paths=PackedStringArray("_inputActions", "RayOfLook", "PlayerBody", "AnchorForDraggedObject", "StaticBody3D", "Generic6DofJoint3D")]
 script = ExtResource("11_cuem1")
