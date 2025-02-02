@@ -29,6 +29,7 @@ public partial class HUDParameterSpectating : Node
 
         Subscribe();
 
+        TransferNameData(playerRoot.Name);
         TransferHealthData();
         TransferMaxHealthData();
         TransferItemData();
@@ -52,6 +53,11 @@ public partial class HUDParameterSpectating : Node
         _spectatingPlayerParameters.PlayerHealthMaxUpdated -= TransferMaxHealthData;
         _spectatingPlayerParameters.PlayerHoldingItemUpdated -= TransferItemData;
         _spectatingPlayerParameters.PlayerInteractDataUpdated -= TransferInteractData;
+    }
+
+    private void TransferNameData(string name)
+    {
+        _hudParameters.PlayerName = name;
     }
 
     private void TransferHealthData()

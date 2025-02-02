@@ -2,37 +2,34 @@ using Godot;
 
 public partial class HeadFlashlightToggleLight : Node
 {
-    [Export] private SpotLight3D _flashlight;
     [Export] private HeadFlashlightBattery _headFlashlightBattery;
     [Export] private HeadFlashlightFlicker _headFlashlightFlicker;
+    [Export] private SpotLight3D _flashlight;
     [Export] private float _lightEnergy;
 
+    [ExportGroup("Audio")]
     [Export] private AudioPlayer3D _audioPlayer3D;
     [Export] private AudioStreamMP3 _flashlightOnAudio;
     [Export] private AudioStreamMP3 _flashlightOffAudio;
     [Export] private AudioStreamMP3 _flashlightOnDischargedAudio;
 
-    private bool _isFlashlightEnabled;
+    public bool IsFlashlightEnabled { get; private set; }
 
     public override void _Process(double delta)
     {
-        if (_isFlashlightEnabled)
+        if (!IsFlashlightEnabled)
+            return;
+
+        if (_headFlashlightBattery.IsDepleted())
         {
-            _headFlashlightBattery.Drain((float)delta);
-
-            if (_headFlashlightBattery.IsDepleted())
-            {
-                ToggleOffFlashlight();
-                return;
-            }
-
-            _headFlashlightFlicker.HandleFlicker(_headFlashlightBattery.GetBatteryLife(), (float)delta);
+            ToggleOffFlashlight();
+            return;
         }
     }
 
     public void ToggleFlashlight()
     {
-        if (_isFlashlightEnabled)
+        if (IsFlashlightEnabled)
             ToggleOffFlashlight();
         else if (!_headFlashlightBattery.IsDepleted())
             ToggleOnFlashlight();
@@ -44,13 +41,13 @@ public partial class HeadFlashlightToggleLight : Node
     {
         _flashlight.LightEnergy = _lightEnergy;
         _audioPlayer3D.PlayAudio3D(_flashlightOnAudio);
-        _isFlashlightEnabled = true;
+        IsFlashlightEnabled = true;
     }
 
     private void ToggleOffFlashlight()
     {
         _flashlight.LightEnergy = 0;
         _audioPlayer3D.PlayAudio3D(_flashlightOffAudio);
-        _isFlashlightEnabled = false;
+        IsFlashlightEnabled = false;
     }
 }

@@ -1,4 +1,4 @@
-[gd_scene load_steps=62 format=4 uid="uid://bks72b4kwjk1f"]
+[gd_scene load_steps=63 format=4 uid="uid://bks72b4kwjk1f"]
 
 [ext_resource type="Script" path="res://Scripts/Audio/AudioPlayer3D.cs" id="1_o0yqy"]
 [ext_resource type="Script" path="res://Scripts/Player/InputVector.cs" id="2_8kxsr"]
@@ -17,6 +17,7 @@
 [ext_resource type="Script" path="res://Scripts/Player/ItemInteract/PlayerItemEquipper.cs" id="9_nr6ef"]
 [ext_resource type="Script" path="res://Scripts/Player/Camera/PlayerCameraAnimations.cs" id="10_p0rem"]
 [ext_resource type="PackedScene" uid="uid://c131mixukwjnm" path="res://Scenes/UserInterface/Menu/UIPauseMenu.tscn" id="11_s3mkc"]
+[ext_resource type="Script" path="res://Scripts/Player/ReverbRoom.cs" id="11_y4aya"]
 [ext_resource type="PackedScene" uid="uid://cojvgyniobwbk" path="res://Scenes/UserInterface/HUD/UICrosshair.tscn" id="13_h4pmd"]
 [ext_resource type="PackedScene" uid="uid://dsm0c68ucl2kg" path="res://Scenes/UserInterface/HUD/UIHealthInfo.tscn" id="13_m4wnv"]
 [ext_resource type="PackedScene" uid="uid://cab1adf54c54n" path="res://Scenes/UserInterface/HUD/UIInteractInfo.tscn" id="14_1wxl0"]
@@ -304,6 +305,72 @@ autoplay = true
 bus = &"SFX"
 script = ExtResource("1_o0yqy")
 
+[node name="ReverbRoom" type="Node3D" parent="CommonPart/CameraHolder"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
+visible = false
+
+[node name="RayXPositive" type="RayCast3D" parent="CommonPart/CameraHolder/ReverbRoom"]
+target_position = Vector3(30, 0, 0)
+
+[node name="RayXNegative" type="RayCast3D" parent="CommonPart/CameraHolder/ReverbRoom"]
+target_position = Vector3(-30, 0, 0)
+
+[node name="RayYPositive" type="RayCast3D" parent="CommonPart/CameraHolder/ReverbRoom"]
+target_position = Vector3(0, 30, 0)
+
+[node name="RayYNegative" type="RayCast3D" parent="CommonPart/CameraHolder/ReverbRoom"]
+target_position = Vector3(0, -30, 0)
+
+[node name="RayZPositive" type="RayCast3D" parent="CommonPart/CameraHolder/ReverbRoom"]
+target_position = Vector3(0, 0, 30)
+
+[node name="RayZNegative" type="RayCast3D" parent="CommonPart/CameraHolder/ReverbRoom"]
+target_position = Vector3(0, 0, -30)
+
+[node name="RayXZPositive" type="RayCast3D" parent="CommonPart/CameraHolder/ReverbRoom"]
+target_position = Vector3(30, 0, 30)
+
+[node name="RayXZNegative" type="RayCast3D" parent="CommonPart/CameraHolder/ReverbRoom"]
+target_position = Vector3(-30, 0, -30)
+
+[node name="RayXZPosNeg" type="RayCast3D" parent="CommonPart/CameraHolder/ReverbRoom"]
+target_position = Vector3(30, 0, -30)
+
+[node name="RayXZNegPos" type="RayCast3D" parent="CommonPart/CameraHolder/ReverbRoom"]
+target_position = Vector3(-30, 0, 30)
+
+[node name="RayXYPositive" type="RayCast3D" parent="CommonPart/CameraHolder/ReverbRoom"]
+visible = false
+target_position = Vector3(30, 30, 0)
+
+[node name="RayXYNegative" type="RayCast3D" parent="CommonPart/CameraHolder/ReverbRoom"]
+visible = false
+target_position = Vector3(-30, -30, 0)
+
+[node name="RayXYPosNeg" type="RayCast3D" parent="CommonPart/CameraHolder/ReverbRoom"]
+visible = false
+target_position = Vector3(30, -30, 0)
+
+[node name="RayXYNegPos" type="RayCast3D" parent="CommonPart/CameraHolder/ReverbRoom"]
+visible = false
+target_position = Vector3(-30, 30, 0)
+
+[node name="RayYZPositive" type="RayCast3D" parent="CommonPart/CameraHolder/ReverbRoom"]
+visible = false
+target_position = Vector3(0, 30, 30)
+
+[node name="RayYZNegative" type="RayCast3D" parent="CommonPart/CameraHolder/ReverbRoom"]
+visible = false
+target_position = Vector3(0, -30, -30)
+
+[node name="RayYZPosNeg" type="RayCast3D" parent="CommonPart/CameraHolder/ReverbRoom"]
+visible = false
+target_position = Vector3(0, 30, -30)
+
+[node name="RayYZNegPos" type="RayCast3D" parent="CommonPart/CameraHolder/ReverbRoom"]
+visible = false
+target_position = Vector3(0, -30, 30)
+
 [node name="PlayerBody" type="CharacterBody3D" parent="CommonPart" groups=["Hitbox:Player"]]
 collision_layer = 512
 collision_mask = 523
@@ -327,12 +394,15 @@ visibility_aabb = AABB(-5, -5, -5, 10, 10, 10)
 process_material = SubResource("ParticleProcessMaterial_3rrb4")
 draw_pass_1 = SubResource("QuadMesh_66l6p")
 
+[node name="RayGround" type="RayCast3D" parent="CommonPart/PlayerBody"]
+target_position = Vector3(0, -25, 0)
+
 [node name="Achors" type="Node3D" parent="CommonPart/PlayerBody"]
 
 [node name="achorCamera" type="Marker3D" parent="CommonPart/PlayerBody/Achors"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 
-[node name="RemotePositionToCamera" type="RemoteTransform3D" parent="CommonPart/PlayerBody/Achors/achorCamera"]
+[node name="RemotePositionToCameraHolder" type="RemoteTransform3D" parent="CommonPart/PlayerBody/Achors/achorCamera"]
 remote_path = NodePath("../../../../CameraHolder")
 update_rotation = false
 update_scale = false
@@ -345,9 +415,6 @@ transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0.35, 
 
 [node name="anchorTertiarySlot" type="Marker3D" parent="CommonPart/PlayerBody/Achors"]
 transform = Transform3D(-3.55271e-15, -1, 4.37114e-08, 1, 0, 7.10543e-15, -1.06581e-14, 4.37114e-08, 1, -0.35, -0.25, 0)
-
-[node name="RayGround" type="RayCast3D" parent="CommonPart/PlayerBody"]
-target_position = Vector3(0, -25, 0)
 
 [node name="ClientServerPart" type="Node" parent="."]
 
@@ -373,12 +440,14 @@ _playerRoot = NodePath("../../..")
 [node name="AudioPlayer" type="AudioStreamPlayer" parent="ClientServerPart/Audio" node_paths=PackedStringArray("_playerRoot")]
 stream = SubResource("AudioStreamPolyphonic_c6ebu")
 autoplay = true
+bus = &"SFX"
 script = ExtResource("6_dkepa")
 _playerRoot = NodePath("../../..")
 
 [node name="HealthNoise" type="AudioStreamPlayer" parent="ClientServerPart/Audio" node_paths=PackedStringArray("_playerRoot")]
 stream = SubResource("AudioStreamPolyphonic_c6ebu")
 autoplay = true
+bus = &"SFX"
 script = ExtResource("6_dkepa")
 _playerRoot = NodePath("../../..")
 
@@ -402,6 +471,11 @@ _playerCamera = NodePath("../../../CommonPart/CameraHolder/PlayerCamera")
 script = ExtResource("10_p0rem")
 _movementActions = NodePath("../../../ClientServerPart/Scripts/MovementActions")
 _animationPlayer = NodePath("../../Animations/PlayerCameraAnimator")
+
+[node name="ReverbRoom" type="Node" parent="ClientPart/Scripts" node_paths=PackedStringArray("_playerBody", "_raycasts")]
+script = ExtResource("11_y4aya")
+_playerBody = NodePath("../../../CommonPart/PlayerBody")
+_raycasts = [NodePath("../../../CommonPart/CameraHolder/ReverbRoom/RayXPositive"), NodePath("../../../CommonPart/CameraHolder/ReverbRoom/RayXNegative"), NodePath("../../../CommonPart/CameraHolder/ReverbRoom/RayYPositive"), NodePath("../../../CommonPart/CameraHolder/ReverbRoom/RayYNegative"), NodePath("../../../CommonPart/CameraHolder/ReverbRoom/RayZPositive"), NodePath("../../../CommonPart/CameraHolder/ReverbRoom/RayZNegative"), NodePath("../../../CommonPart/CameraHolder/ReverbRoom/RayXZPositive"), NodePath("../../../CommonPart/CameraHolder/ReverbRoom/RayXZNegative"), NodePath("../../../CommonPart/CameraHolder/ReverbRoom/RayXZPosNeg"), NodePath("../../../CommonPart/CameraHolder/ReverbRoom/RayXZNegPos"), NodePath("../../../CommonPart/CameraHolder/ReverbRoom/RayXYPositive"), NodePath("../../../CommonPart/CameraHolder/ReverbRoom/RayXYNegative"), NodePath("../../../CommonPart/CameraHolder/ReverbRoom/RayXYPosNeg"), NodePath("../../../CommonPart/CameraHolder/ReverbRoom/RayXYNegPos"), NodePath("../../../CommonPart/CameraHolder/ReverbRoom/RayYZPositive"), NodePath("../../../CommonPart/CameraHolder/ReverbRoom/RayYZNegative"), NodePath("../../../CommonPart/CameraHolder/ReverbRoom/RayYZPosNeg"), NodePath("../../../CommonPart/CameraHolder/ReverbRoom/RayYZNegPos")]
 
 [node name="UI" type="Node" parent="ClientPart"]
 

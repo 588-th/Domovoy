@@ -1,4 +1,4 @@
-[gd_scene load_steps=53 format=4 uid="uid://dw2d8yb5aog0t"]
+[gd_scene load_steps=55 format=4 uid="uid://dw2d8yb5aog0t"]
 
 [ext_resource type="Script" path="res://Scripts/Audio/AudioPlayer3D.cs" id="1_cu3h5"]
 [ext_resource type="Script" path="res://Scripts/Player/PlayerInputVector.cs" id="1_l02lm"]
@@ -20,7 +20,9 @@
 [ext_resource type="PackedScene" uid="uid://dsm0c68ucl2kg" path="res://Scenes/UserInterface/HUD/UIHealthInfo.tscn" id="11_u87qw"]
 [ext_resource type="PackedScene" uid="uid://cxq88ssuuklm2" path="res://Scenes/UserInterface/HUD/UISanity.tscn" id="12_53pu3"]
 [ext_resource type="PackedScene" uid="uid://chmo08nmfm4af" path="res://Scenes/UserInterface/HUD/UIAttackInfo.tscn" id="12_d611m"]
+[ext_resource type="Script" path="res://Scripts/Player/SelectAttackingPlayer.cs" id="12_lgf40"]
 [ext_resource type="PackedScene" uid="uid://dneigjq1nfs2b" path="res://Scenes/UserInterface/Menu/UIPlayerList.tscn" id="12_nnmj0"]
+[ext_resource type="Material" uid="uid://x5in56cmsw50" path="res://Materials/sm_attackSelecting.tres" id="13_dkf25"]
 [ext_resource type="Script" path="res://Scripts/Player/Monster/PlayerMeleeAttack.cs" id="15_0hw5x"]
 [ext_resource type="Script" path="res://Scripts/Player/Movement/PlayerMovementParameters.cs" id="15_ao0lo"]
 [ext_resource type="Script" path="res://Scripts/Player/PlayerDeath.cs" id="15_t6oc2"]
@@ -310,9 +312,9 @@ script = ExtResource("4_mojhr")
 script = ExtResource("6_dm6b2")
 _playerRoot = NodePath("../../..")
 
-[node name="Node" type="Node" parent="ClientServerPart"]
+[node name="Audio" type="Node" parent="ClientServerPart"]
 
-[node name="AudioPlayer" type="AudioStreamPlayer" parent="ClientServerPart/Node" node_paths=PackedStringArray("_playerRoot")]
+[node name="AudioPlayer" type="AudioStreamPlayer" parent="ClientServerPart/Audio" node_paths=PackedStringArray("_playerRoot")]
 stream = SubResource("AudioStreamPolyphonic_80tfw")
 autoplay = true
 bus = &"SFX"
@@ -339,6 +341,11 @@ _playerCamera = NodePath("../../../CommonPart/CameraHolder/PlayerCamera")
 script = ExtResource("11_25u0h")
 _movementActions = NodePath("../../../ClientServerPart/Scripts/MovementActions")
 _animationPlayer = NodePath("../../Animations/PlayerCameraAnimator")
+
+[node name="SelectAttackPlayer" type="Node" parent="ClientPart/Scripts" node_paths=PackedStringArray("_rayOfAttack")]
+script = ExtResource("12_lgf40")
+_rayOfAttack = NodePath("../../../CommonPart/CameraHolder/PlayerCamera/PlayerLook/RayOfAttack")
+_attackSelecting = ExtResource("13_dkf25")
 
 [node name="UI" type="Node" parent="ClientPart"]
 

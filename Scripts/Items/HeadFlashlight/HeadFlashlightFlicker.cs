@@ -3,13 +3,23 @@ using System;
 
 public partial class HeadFlashlightFlicker : Node
 {
-    [Export] public SpotLight3D _flashlight;
+    [Export] private HeadFlashlightBattery _headFlashlightBattery;
+    [Export] private HeadFlashlightToggleLight _headFlashlightToggleLight;
+    [Export] private SpotLight3D _flashlight;
     [Export] public float BlinkThreshold = 50f;
     [Export] public float MaxBlinkInterval = 0.5f;
     [Export] public float MinBlinkInterval = 0.1f;
 
     private readonly Random _random = new();
     private float _timeUntilNextBlink = 0f;
+
+    public override void _Process(double delta)
+    {
+        if (!_headFlashlightToggleLight.IsFlashlightEnabled)
+            return;
+
+        HandleFlicker(_headFlashlightBattery.GetBatteryLife(), (float)delta);
+    }
 
     public void HandleFlicker(float batteryLife, float delta)
     {
@@ -38,7 +48,8 @@ public partial class HeadFlashlightFlicker : Node
         resetTimer.OneShot = true;
         resetTimer.Timeout += () =>
         {
-            _flashlight.LightEnergy = 1f;
+            if (_headFlashlightToggleLight.IsFlashlightEnabled)
+                _flashlight.LightEnergy = 1f;
             resetTimer.QueueFree();
         };
         resetTimer.Start();

@@ -5,12 +5,14 @@ public partial class HUDParameters : Node
 {
     private int _playerHealth;
     private int _playerHealthMax;
+    private string _plaeyrName;
     private string _playerHoldingItem;
     private string _playerInteract;
     private string _playerAttack;
 
     public Action PlayerHealthUpdated;
     public Action PlayerHealthMaxUpdated;
+    public Action PlayerNameUpdated;
     public Action PlayerHoldingItemUpdated;
     public Action PlayerInteractDataUpdated;
     public Action PlayerAttackDataUpdated;
@@ -25,6 +27,12 @@ public partial class HUDParameters : Node
     {
         get {  return _playerHealth; }
         set { _playerHealth = value; PlayerHealthUpdated?.Invoke(); }
+    }
+
+    public string PlayerName
+    {
+        get { return _plaeyrName; }
+        set { _plaeyrName = value; PlayerNameUpdated?.Invoke(); }
     }
 
     public string PlayerHoldingItem

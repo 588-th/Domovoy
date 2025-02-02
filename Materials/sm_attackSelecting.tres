@@ -1,0 +1,9 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://x5in56cmsw50"]
+
+[ext_resource type="Shader" path="res://Shaders/AttackSecting.gdshader" id="1_c6jfs"]
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_c6jfs")
+shader_parameter/base_color = Color(0.57, 0.0342, 0.15029, 1)
+shader_parameter/alpha = 0.6

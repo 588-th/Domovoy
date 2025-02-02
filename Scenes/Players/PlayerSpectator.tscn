@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://dn6bs13u0l2at"]
+[gd_scene load_steps=19 format=3 uid="uid://dn6bs13u0l2at"]
 
 [ext_resource type="Script" path="res://Scripts/Player/HUDParameters.cs" id="1_6eu3q"]
 [ext_resource type="Script" path="res://Scripts/Player/InputActions.cs" id="1_ouwve"]
@@ -10,6 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://dneigjq1nfs2b" path="res://Scenes/UserInterface/Menu/UIPlayerList.tscn" id="7_ox3bw"]
 [ext_resource type="PackedScene" uid="uid://dsm0c68ucl2kg" path="res://Scenes/UserInterface/HUD/UIHealthInfo.tscn" id="7_vquiv"]
 [ext_resource type="PackedScene" uid="uid://c6x7etoas6aiu" path="res://Scenes/UserInterface/HUD/UIItemInfo.tscn" id="8_8yadc"]
+[ext_resource type="PackedScene" uid="uid://ctk8b008ddy8p" path="res://Scenes/UserInterface/HUD/UINameInfo.tscn" id="9_ehdeu"]
 [ext_resource type="PackedScene" uid="uid://cxq88ssuuklm2" path="res://Scenes/UserInterface/HUD/UISanity.tscn" id="9_mqkab"]
 [ext_resource type="Script" path="res://Scripts/Player/Spectator/SpectatorCameraFollow.cs" id="9_ngxsr"]
 [ext_resource type="PackedScene" uid="uid://bojdshm0oxy1v" path="res://Scenes/UserInterface/HUD/UIWhiteNoise.tscn" id="10_1fpbw"]
@@ -37,6 +38,9 @@ properties/2/replication_mode = 2
 properties/3/path = NodePath(".:PlayerInteract")
 properties/3/spawn = true
 properties/3/replication_mode = 2
+properties/4/path = NodePath(".:PlayerName")
+properties/4/spawn = true
+properties/4/replication_mode = 2
 
 [node name="PlayerSpectator" type="Node" groups=["Player", "Player:Spectator"]]
 
@@ -79,6 +83,9 @@ _inputActions = NodePath("../../../ClientServerPart/Scripts/InputActions")
 _hudParameters = NodePath("../../../ClientServerPart/Scripts/HUDParameters")
 
 [node name="UIItemInfo" parent="ClientPart/UI" node_paths=PackedStringArray("_hudParameters") instance=ExtResource("8_8yadc")]
+_hudParameters = NodePath("../../../ClientServerPart/Scripts/HUDParameters")
+
+[node name="UINameInfo" parent="ClientPart/UI" node_paths=PackedStringArray("_hudParameters") instance=ExtResource("9_ehdeu")]
 _hudParameters = NodePath("../../../ClientServerPart/Scripts/HUDParameters")
 
 [node name="UISanity" parent="ClientPart/UI" node_paths=PackedStringArray("_hudParameters") instance=ExtResource("9_mqkab")]

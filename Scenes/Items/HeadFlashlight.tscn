@@ -75,19 +75,21 @@ script = ExtResource("3_mckr8")
 
 [node name="ServerPart" type="Node" parent="."]
 
-[node name="HeadFlashlightBattery" type="Node" parent="ServerPart"]
+[node name="HeadFlashlightBattery" type="Node" parent="ServerPart" node_paths=PackedStringArray("_headFlashlightToggleLight")]
 script = ExtResource("6_xfi5a")
-DrainRate = 0.01
+_headFlashlightToggleLight = NodePath("../HeadFlashlightToggleLight")
 
-[node name="HeadFlashlightFlicker" type="Node" parent="ServerPart" node_paths=PackedStringArray("_flashlight")]
+[node name="HeadFlashlightFlicker" type="Node" parent="ServerPart" node_paths=PackedStringArray("_headFlashlightBattery", "_headFlashlightToggleLight", "_flashlight")]
 script = ExtResource("7_guxgo")
+_headFlashlightBattery = NodePath("../HeadFlashlightBattery")
+_headFlashlightToggleLight = NodePath("../HeadFlashlightToggleLight")
 _flashlight = NodePath("../../Flashlight")
 
-[node name="HeadFlashlightToggleLight" type="Node" parent="ServerPart" node_paths=PackedStringArray("_flashlight", "_headFlashlightBattery", "_headFlashlightFlicker", "_audioPlayer3D")]
+[node name="HeadFlashlightToggleLight" type="Node" parent="ServerPart" node_paths=PackedStringArray("_headFlashlightBattery", "_headFlashlightFlicker", "_flashlight", "_audioPlayer3D")]
 script = ExtResource("8_mrvqq")
-_flashlight = NodePath("../../Flashlight")
 _headFlashlightBattery = NodePath("../HeadFlashlightBattery")
 _headFlashlightFlicker = NodePath("../HeadFlashlightFlicker")
+_flashlight = NodePath("../../Flashlight")
 _lightEnergy = 2.0
 _audioPlayer3D = NodePath("../../AudioPlayer3D")
 _flashlightOnAudio = ExtResource("9_pi1m2")

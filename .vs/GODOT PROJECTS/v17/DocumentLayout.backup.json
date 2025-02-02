@@ -3,24 +3,16 @@
   "WorkspaceRootPath": "D:\\Documents\\ProjectsGodot\\BoomerDuel\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{33528F9A-F553-4E74-A408-6E8C24FA54FC}|Godot Projects.csproj|d:\\documents\\projectsgodot\\boomerduel\\scripts\\player\\playerhealthnoise.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{33528F9A-F553-4E74-A408-6E8C24FA54FC}|Godot Projects.csproj|solutionrelative:scripts\\player\\playerhealthnoise.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{33528F9A-F553-4E74-A408-6E8C24FA54FC}|Godot Projects.csproj|d:\\documents\\projectsgodot\\boomerduel\\scripts\\player\\selectattackingplayer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{33528F9A-F553-4E74-A408-6E8C24FA54FC}|Godot Projects.csproj|solutionrelative:scripts\\player\\selectattackingplayer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{33528F9A-F553-4E74-A408-6E8C24FA54FC}|Godot Projects.csproj|d:\\documents\\projectsgodot\\boomerduel\\scripts\\player\\playerhealth.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{33528F9A-F553-4E74-A408-6E8C24FA54FC}|Godot Projects.csproj|solutionrelative:scripts\\player\\playerhealth.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{33528F9A-F553-4E74-A408-6E8C24FA54FC}|Godot Projects.csproj|d:\\documents\\projectsgodot\\boomerduel\\scripts\\player\\playerhudparameters.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{33528F9A-F553-4E74-A408-6E8C24FA54FC}|Godot Projects.csproj|solutionrelative:scripts\\player\\playerhudparameters.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{33528F9A-F553-4E74-A408-6E8C24FA54FC}|Godot Projects.csproj|d:\\documents\\projectsgodot\\boomerduel\\scripts\\items\\beacon\\beaconplace.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{33528F9A-F553-4E74-A408-6E8C24FA54FC}|Godot Projects.csproj|solutionrelative:scripts\\items\\beacon\\beaconplace.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{33528F9A-F553-4E74-A408-6E8C24FA54FC}|Godot Projects.csproj|d:\\documents\\projectsgodot\\boomerduel\\scripts\\player\\movement\\jumpstate.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{33528F9A-F553-4E74-A408-6E8C24FA54FC}|Godot Projects.csproj|solutionrelative:scripts\\player\\movement\\jumpstate.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{33528F9A-F553-4E74-A408-6E8C24FA54FC}|Godot Projects.csproj|d:\\documents\\projectsgodot\\boomerduel\\scripts\\player\\movement\\playermovementsounds.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{33528F9A-F553-4E74-A408-6E8C24FA54FC}|Godot Projects.csproj|solutionrelative:scripts\\player\\movement\\playermovementsounds.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{33528F9A-F553-4E74-A408-6E8C24FA54FC}|Godot Projects.csproj|d:\\documents\\projectsgodot\\boomerduel\\scripts\\player\\monster\\playermeleeattack.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{33528F9A-F553-4E74-A408-6E8C24FA54FC}|Godot Projects.csproj|solutionrelative:scripts\\player\\monster\\playermeleeattack.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -30,71 +22,45 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 0,
+          "SelectedChildIndex": 1,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "PlayerHealthNoise.cs",
-              "DocumentMoniker": "D:\\Documents\\ProjectsGodot\\BoomerDuel\\Scripts\\Player\\PlayerHealthNoise.cs",
-              "RelativeDocumentMoniker": "Scripts\\Player\\PlayerHealthNoise.cs",
-              "ToolTip": "D:\\Documents\\ProjectsGodot\\BoomerDuel\\Scripts\\Player\\PlayerHealthNoise.cs",
-              "RelativeToolTip": "Scripts\\Player\\PlayerHealthNoise.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAAAAAAAAAAAAA==",
+              "DocumentIndex": 1,
+              "Title": "PlayerHUDParameters.cs",
+              "DocumentMoniker": "D:\\Documents\\ProjectsGodot\\BoomerDuel\\Scripts\\Player\\PlayerHUDParameters.cs",
+              "RelativeDocumentMoniker": "Scripts\\Player\\PlayerHUDParameters.cs",
+              "ToolTip": "D:\\Documents\\ProjectsGodot\\BoomerDuel\\Scripts\\Player\\PlayerHUDParameters.cs",
+              "RelativeToolTip": "Scripts\\Player\\PlayerHUDParameters.cs",
+              "ViewState": "AgIAAFYAAAAAAAAAAAAAAG4AAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-01-31T05:57:39.054Z",
+              "WhenOpened": "2025-02-02T06:22:18.05Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "PlayerHealth.cs",
-              "DocumentMoniker": "D:\\Documents\\ProjectsGodot\\BoomerDuel\\Scripts\\Player\\PlayerHealth.cs",
-              "RelativeDocumentMoniker": "Scripts\\Player\\PlayerHealth.cs",
-              "ToolTip": "D:\\Documents\\ProjectsGodot\\BoomerDuel\\Scripts\\Player\\PlayerHealth.cs",
-              "RelativeToolTip": "Scripts\\Player\\PlayerHealth.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAAyAAAAAAAAAA==",
+              "DocumentIndex": 0,
+              "Title": "SelectAttackingPlayer.cs",
+              "DocumentMoniker": "D:\\Documents\\ProjectsGodot\\BoomerDuel\\Scripts\\Player\\SelectAttackingPlayer.cs",
+              "RelativeDocumentMoniker": "Scripts\\Player\\SelectAttackingPlayer.cs",
+              "ToolTip": "D:\\Documents\\ProjectsGodot\\BoomerDuel\\Scripts\\Player\\SelectAttackingPlayer.cs",
+              "RelativeToolTip": "Scripts\\Player\\SelectAttackingPlayer.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAA2AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-01-31T05:23:36.862Z",
+              "WhenOpened": "2025-02-02T06:21:21.194Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 2,
-              "Title": "BeaconPlace.cs",
-              "DocumentMoniker": "D:\\Documents\\ProjectsGodot\\BoomerDuel\\Scripts\\Items\\Beacon\\BeaconPlace.cs",
-              "RelativeDocumentMoniker": "Scripts\\Items\\Beacon\\BeaconPlace.cs",
-              "ToolTip": "D:\\Documents\\ProjectsGodot\\BoomerDuel\\Scripts\\Items\\Beacon\\BeaconPlace.cs",
-              "RelativeToolTip": "Scripts\\Items\\Beacon\\BeaconPlace.cs",
-              "ViewState": "AgIAABEAAAAAAAAAAAAAAB0AAAAgAAAAAAAAAA==",
+              "Title": "PlayerMeleeAttack.cs",
+              "DocumentMoniker": "D:\\Documents\\ProjectsGodot\\BoomerDuel\\Scripts\\Player\\Monster\\PlayerMeleeAttack.cs",
+              "RelativeDocumentMoniker": "Scripts\\Player\\Monster\\PlayerMeleeAttack.cs",
+              "ToolTip": "D:\\Documents\\ProjectsGodot\\BoomerDuel\\Scripts\\Player\\Monster\\PlayerMeleeAttack.cs",
+              "RelativeToolTip": "Scripts\\Player\\Monster\\PlayerMeleeAttack.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-01-31T05:01:29.039Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "JumpState.cs",
-              "DocumentMoniker": "D:\\Documents\\ProjectsGodot\\BoomerDuel\\Scripts\\Player\\Movement\\JumpState.cs",
-              "RelativeDocumentMoniker": "Scripts\\Player\\Movement\\JumpState.cs",
-              "ToolTip": "D:\\Documents\\ProjectsGodot\\BoomerDuel\\Scripts\\Player\\Movement\\JumpState.cs",
-              "RelativeToolTip": "Scripts\\Player\\Movement\\JumpState.cs",
-              "ViewState": "AgIAADAAAAAAAAAAAAAAAD8AAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-01-31T04:25:07.697Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "PlayerMovementSounds.cs",
-              "DocumentMoniker": "D:\\Documents\\ProjectsGodot\\BoomerDuel\\Scripts\\Player\\Movement\\PlayerMovementSounds.cs",
-              "RelativeDocumentMoniker": "Scripts\\Player\\Movement\\PlayerMovementSounds.cs",
-              "ToolTip": "D:\\Documents\\ProjectsGodot\\BoomerDuel\\Scripts\\Player\\Movement\\PlayerMovementSounds.cs",
-              "RelativeToolTip": "Scripts\\Player\\Movement\\PlayerMovementSounds.cs",
-              "ViewState": "AgIAAAIAAAAAAAAAAAAqwA0AAAAvAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-01-31T02:55:43.56Z",
+              "WhenOpened": "2025-02-02T06:18:53.225Z",
               "EditorCaption": ""
             }
           ]
