@@ -33,12 +33,12 @@ public partial class PlayerPropDrag
         _playerPropInteractor.DraggedObject.AddCollisionExceptionWith(_playerPropInteractor.PlayerBody);
         _playerPropInteractor.Generic6DofJoint3D.NodeB = _playerPropInteractor.DraggedObject.GetPath();
 
-        RpcFunctions.Instance.AddGroup(_playerPropInteractor.DraggedObject.GetPath(), "Prop:Dragged");
+        GlobalRpcFunctions.Instance.AddGroup(_playerPropInteractor.DraggedObject.GetPath(), "Prop:Dragged");
     }
 
     public void StopDragging()
     {
-        RpcFunctions.Instance.RemoveGroup(_playerPropInteractor.DraggedObject.GetPath(), "Prop:Dragged");
+        GlobalRpcFunctions.Instance.RemoveGroup(_playerPropInteractor.DraggedObject.GetPath(), "Prop:Dragged");
 
         _playerPropInteractor.DraggedObject.AngularVelocity = Vector3.Zero;
         _playerPropInteractor.DraggedObject.LinearVelocity = Vector3.Zero;

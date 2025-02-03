@@ -45,7 +45,7 @@ public partial class PlayerItemInteractor : Node
             DropItem(equppedItem);
         }
 
-        RpcFunctions.Instance.RemoveGroup(item.GetPath(), "Item:Pickupble");
+        GlobalRpcFunctions.Instance.RemoveGroup(item.GetPath(), "Item:Pickupble");
 
         item.Freeze = true;
         item.LinearVelocity = Vector3.Zero;
@@ -66,7 +66,7 @@ public partial class PlayerItemInteractor : Node
 
     private void DropItem(Item item)
     {
-        RpcFunctions.Instance.AddGroup(item.GetPath(), "Item:Pickupble");
+        GlobalRpcFunctions.Instance.AddGroup(item.GetPath(), "Item:Pickupble");
 
         Vector3 position = item.GlobalPosition;
         Vector3 rotation = item.GlobalRotation;

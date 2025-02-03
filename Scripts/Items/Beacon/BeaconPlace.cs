@@ -31,7 +31,7 @@ public partial class BeaconPlace : Node
         _audioPlayer3D.PlayAudio3D(_beaconNoise);
 
         _light.LightEnergy = _lightEnergy;
-        RpcFunctions.Instance.RemoveGroup(_beaconBody.GetPath(), "Object:Item");
+        GlobalRpcFunctions.Instance.RemoveGroup(_beaconBody.GetPath(), "Object:Item");
     }
 
     private void SetTransform(RayCast3D rayOfLook)

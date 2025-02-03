@@ -29,12 +29,12 @@ public partial class MonsterVision : Node
     private void ToggleOnMonsterVision()
     {
         _isVisionEnable = true;
-        RpcFunctions.Instance.SetCullMaskCamera3D(_playerCamera.GetPath(), _auraNumberMask, _isVisionEnable);
+        GlobalRpcFunctions.Instance.SetCullMaskCamera3D(_playerCamera.GetPath(), _auraNumberMask, _isVisionEnable);
     }
 
     private void ToggleOffMonsterVision()
     {
         _isVisionEnable = false;
-        RpcFunctions.Instance.SetCullMaskCamera3D(_playerCamera.GetPath(), _auraNumberMask, _isVisionEnable);
+        GlobalRpcFunctions.Instance.SetCullMaskCamera3D(_playerCamera.GetPath(), _auraNumberMask, _isVisionEnable);
     }
 }

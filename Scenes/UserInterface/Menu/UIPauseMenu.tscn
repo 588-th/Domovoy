@@ -56,16 +56,16 @@ text = "Disconnect"
 visible = false
 layout_mode = 1
 
-[node name="UIVideoSettings" parent="UISettings/TabContainer" index="1" node_paths=PackedStringArray("_menu", "_settings")]
+[node name="Video" parent="UISettings/TabContainer" index="1" node_paths=PackedStringArray("_menu")]
 _menu = NodePath("../../../UIMenu")
-_settings = NodePath("../..")
 
-[node name="UIMouseSettings" parent="UISettings/TabContainer" index="2" node_paths=PackedStringArray("_menu", "_settings")]
+[node name="Audio" parent="UISettings/TabContainer" index="2" node_paths=PackedStringArray("_menu")]
 _menu = NodePath("../../../UIMenu")
-_settings = NodePath("../..")
 
-[node name="UIMultiplayerSettings" parent="UISettings/TabContainer" index="3" node_paths=PackedStringArray("_menu", "_settings")]
+[node name="Mouse" parent="UISettings/TabContainer" index="3" node_paths=PackedStringArray("_menu")]
 _menu = NodePath("../../../UIMenu")
-_settings = NodePath("../..")
+
+[node name="Multiplayer" parent="UISettings/TabContainer" index="4" node_paths=PackedStringArray("_menu")]
+_menu = NodePath("../../../UIMenu")
 
 [editable path="UISettings"]

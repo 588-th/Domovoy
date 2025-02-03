@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://bojdshm0oxy1v"]
 
 [ext_resource type="Shader" path="res://Shaders/WhiteNoise.gdshader" id="1_bl8ln"]
-[ext_resource type="Script" path="res://Scenes/UserInterface/UIWhiteNoise.cs" id="1_je6b3"]
+[ext_resource type="Script" path="res://Scripts/UserInterface/HUD/UIWhiteNoise.cs" id="1_je6b3"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_o8col"]
 shader = ExtResource("1_bl8ln")

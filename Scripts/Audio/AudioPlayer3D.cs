@@ -3,38 +3,49 @@ using System.Collections.Generic;
 
 public partial class AudioPlayer3D : AudioStreamPlayer3D
 {
-    private Dictionary<string, long> playingVoices = new();
+    [Export] private Node _playerRoot;
+
+    private Dictionary<string, long> _playingSounds = new();
 
     public void PlayAudio3D(AudioStreamMP3 audio, bool onlyLocal = false)
     {
-        if (onlyLocal)
+        if (!onlyLocal)
         {
-            AudioStreamPlaybackPolyphonic audioStreamPlayback = GetStreamPlayback() as AudioStreamPlaybackPolyphonic;
-            if (audioStreamPlayback != null)
-            {
-                long voiceId = audioStreamPlayback.PlayStream(audio);
-                playingVoices[audio.ResourcePath] = voiceId;
-            }
+            Rpc(nameof(RpcPlayAudio3D), GetPath(), audio.ResourcePath);
             return;
         }
 
-        Rpc(nameof(RpcPlayAudio3D), GetPath(), audio.ResourcePath);
+        int peerID = int.Parse(_playerRoot.Name);
+        if (peerID != 1)
+        {
+            RpcId(peerID, nameof(RpcPlayAudio3D), GetPath(), audio.ResourcePath);
+            return;
+        }
+
+        AudioStreamPlaybackPolyphonic audioStreamPlayback = GetStreamPlayback() as AudioStreamPlaybackPolyphonic;
+        long voiceId = audioStreamPlayback.PlayStream(audio);
+        _playingSounds[audio.ResourcePath] = voiceId;
     }
 
     public void StopAudio3D(AudioStreamMP3 audio, bool onlyLocal = false)
     {
-        if (onlyLocal)
+        if (!onlyLocal)
         {
-            AudioStreamPlaybackPolyphonic audioStreamPlayback = GetStreamPlayback() as AudioStreamPlaybackPolyphonic;
-            if (audioStreamPlayback != null && playingVoices.TryGetValue(audio.ResourcePath, out long voiceId))
-            {
-                audioStreamPlayback.StopStream(voiceId);
-                playingVoices.Remove(audio.ResourcePath);
-            }
+            Rpc(nameof(RpcStopAudio3D), GetPath(), audio.ResourcePath);
             return;
         }
 
-        Rpc(nameof(RpcStopAudio3D), GetPath(), audio.ResourcePath);
+        int peerID = int.Parse(_playerRoot.Name);
+        if (peerID != 1)
+        {
+            RpcId(peerID, nameof(RpcStopAudio3D), GetPath(), audio.ResourcePath);
+            return;
+        }
+
+        AudioStreamPlaybackPolyphonic audioStreamPlayback = GetStreamPlayback() as AudioStreamPlaybackPolyphonic;
+        _playingSounds.TryGetValue(audio.ResourcePath, out long voiceId);
+        audioStreamPlayback.StopStream(voiceId);
+        _playingSounds.Remove(audio.ResourcePath);
     }
 
     [Rpc(MultiplayerApi.RpcMode.Authority, CallLocal = true, TransferMode = MultiplayerPeer.TransferModeEnum.Reliable)]
@@ -43,10 +54,10 @@ public partial class AudioPlayer3D : AudioStreamPlayer3D
         AudioStreamPlayer3D streamPlayer3D = GetNode<AudioStreamPlayer3D>(streamPlayer3DPath);
         AudioStreamPlaybackPolyphonic audioStreamPlayback = streamPlayer3D?.GetStreamPlayback() as AudioStreamPlaybackPolyphonic;
 
-        if (audioStreamPlayback != null && playingVoices.TryGetValue(audioPath, out long voiceId))
+        if (audioStreamPlayback != null && _playingSounds.TryGetValue(audioPath, out long voiceId))
         {
             audioStreamPlayback.StopStream(voiceId);
-            playingVoices.Remove(audioPath);
+            _playingSounds.Remove(audioPath);
         }
     }
 
@@ -60,7 +71,7 @@ public partial class AudioPlayer3D : AudioStreamPlayer3D
         {
             AudioStreamMP3 audio = ResourceLoader.Load<AudioStreamMP3>(audioPath);
             long voiceId = audioStreamPlayback.PlayStream(audio);
-            playingVoices[audioPath] = voiceId;
+            _playingSounds[audioPath] = voiceId;
         }
     }
 }

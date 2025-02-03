@@ -31,7 +31,7 @@ public partial class PlayerAuraColor : Node
 
         float alpha = healthPercent;
         Color targetColor = new(1f, 1f, 1f, alpha);
-        RpcFunctions.Instance.ChangeAlbedoOfGeometry(_aura.GetPath(), targetColor);
+        GlobalRpcFunctions.Instance.SetAlbedoOfGeometry(_aura.GetPath(), targetColor);
 
         int particleCount = Mathf.RoundToInt(Mathf.Lerp(_minAmount, _maxAmount, healthPercent));
         _aura.Amount = particleCount;

@@ -22,10 +22,11 @@ buses/default_bus_layout="res://Audio/default_bus_layout.tres"
 [autoload]
 
 MultiplayerConnection="*res://Scripts/Autoload/MultiplayerConnection.cs"
+GlobalRpcFunctions="*res://Scripts/Autoload/GlobalRpcFunctions.cs"
 GameStage="*res://Scripts/Autoload/GameStage.cs"
 GameEvent="*res://Scripts/Autoload/GameEvent.cs"
-RpcFunctions="*res://Scripts/Autoload/RpcFunctions.cs"
 SettingsVideo="*res://Scripts/Autoload/SettingsVideo.cs"
+SettingsAudio="*res://Scripts/Autoload/SettingsAudio.cs"
 SettingsMouse="*res://Scripts/Autoload/SettingsMouse.cs"
 
 [display]

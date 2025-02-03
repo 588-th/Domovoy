@@ -197,7 +197,7 @@ _data = {
 "WALK": SubResource("Animation_ybvy8")
 }
 
-[sub_resource type="Resource" id="Resource_shobs"]
+[sub_resource type="Resource" id="Resource_h85m8"]
 script = ExtResource("23_sbhbh")
 WalkSpeed = 3.5
 SneakSpeed = 2.0
@@ -299,11 +299,12 @@ linear_limit_z/enabled = false
 
 [node name="Audio3D" type="Node3D" parent="CommonPart/CameraHolder/PlayerCamera"]
 
-[node name="AudioPlayer3D" type="AudioStreamPlayer3D" parent="CommonPart/CameraHolder/PlayerCamera/Audio3D"]
+[node name="AudioPlayer3D" type="AudioStreamPlayer3D" parent="CommonPart/CameraHolder/PlayerCamera/Audio3D" node_paths=PackedStringArray("_playerRoot")]
 stream = SubResource("AudioStreamPolyphonic_hspml")
 autoplay = true
 bus = &"SFX"
 script = ExtResource("1_o0yqy")
+_playerRoot = NodePath("../../../../..")
 
 [node name="ReverbRoom" type="Node3D" parent="CommonPart/CameraHolder"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
@@ -526,14 +527,14 @@ MovementActions = NodePath("../../../ClientServerPart/Scripts/MovementActions")
 InputActions = NodePath("../../../ClientServerPart/Scripts/InputActions")
 InputVector = NodePath("../../../ClientServerPart/Scripts/InputVector")
 PlayerBody = NodePath("../../../CommonPart/PlayerBody")
-PlayerMovementParameters = SubResource("Resource_shobs")
+PlayerMovementParameters = SubResource("Resource_h85m8")
 
-[node name="PlayerMovementSounds" type="Node" parent="ServerPart/Scripts" node_paths=PackedStringArray("_movementActions", "_audioPlayer3D", "_stepTimer")]
+[node name="PlayerMovementSounds" type="Node" parent="ServerPart/Scripts" node_paths=PackedStringArray("_movementActions", "_stepTimer", "_audioPlayer3D")]
 script = ExtResource("33_b25gi")
 _movementActions = NodePath("../../../ClientServerPart/Scripts/MovementActions")
-_audioPlayer3D = NodePath("../../../CommonPart/CameraHolder/PlayerCamera/Audio3D/AudioPlayer3D")
 _stepTimer = NodePath("../../Timers/StepTimer")
 _stepInterval = 0.6
+_audioPlayer3D = NodePath("../../../CommonPart/CameraHolder/PlayerCamera/Audio3D/AudioPlayer3D")
 _stepAudio = ExtResource("24_f1o77")
 _jumpAudio = ExtResource("25_o2hlp")
 _landAudio = ExtResource("26_1veg0")

@@ -221,12 +221,13 @@ linear_limit_z/enabled = false
 
 [node name="Audio3D" type="Node3D" parent="CommonPart/CameraHolder/PlayerCamera"]
 
-[node name="AudioPlayer3D" type="AudioStreamPlayer3D" parent="CommonPart/CameraHolder/PlayerCamera/Audio3D"]
+[node name="AudioPlayer3D" type="AudioStreamPlayer3D" parent="CommonPart/CameraHolder/PlayerCamera/Audio3D" node_paths=PackedStringArray("_playerRoot")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 5.32905e-15)
 stream = SubResource("AudioStreamPolyphonic_0m4cq")
 autoplay = true
 bus = &"SFX"
 script = ExtResource("1_4resh")
+_playerRoot = NodePath("../../../../..")
 
 [node name="PlayerBody" type="CharacterBody3D" parent="CommonPart" groups=["Hitbox:Player"]]
 transform = Transform3D(1, 0, 0, 0, 1, 1.06581e-14, 0, -1.06581e-14, 1, 0, 0, 0)
@@ -342,12 +343,12 @@ InputVector = NodePath("../../../ClientServerPart/Scripts/InputVector")
 PlayerBody = NodePath("../../../CommonPart/PlayerBody")
 PlayerMovementParameters = SubResource("Resource_d63lc")
 
-[node name="PlayerMovementSound" type="Node" parent="ServerPart/Scripts" node_paths=PackedStringArray("_movementActions", "_audioPlayer3D", "_stepTimer")]
+[node name="PlayerMovementSound" type="Node" parent="ServerPart/Scripts" node_paths=PackedStringArray("_movementActions", "_stepTimer", "_audioPlayer3D")]
 script = ExtResource("19_l34sy")
 _movementActions = NodePath("../../../ClientServerPart/Scripts/MovementActions")
-_audioPlayer3D = NodePath("../../../CommonPart/CameraHolder/PlayerCamera/Audio3D/AudioPlayer3D")
 _stepTimer = NodePath("../../Timers/StepTimer")
 _stepInterval = 0.8
+_audioPlayer3D = NodePath("../../../CommonPart/CameraHolder/PlayerCamera/Audio3D/AudioPlayer3D")
 _stepAudio = ExtResource("18_sgi5m")
 _jumpAudio = ExtResource("19_3s3ip")
 _landAudio = ExtResource("20_6g22m")

@@ -1,4 +1,4 @@
-[gd_scene load_steps=55 format=4 uid="uid://dw2d8yb5aog0t"]
+[gd_scene load_steps=54 format=4 uid="uid://dw2d8yb5aog0t"]
 
 [ext_resource type="Script" path="res://Scripts/Audio/AudioPlayer3D.cs" id="1_cu3h5"]
 [ext_resource type="Script" path="res://Scripts/Player/PlayerInputVector.cs" id="1_l02lm"]
@@ -13,6 +13,7 @@
 [ext_resource type="Script" path="res://Scripts/Player/Movement/MovementActions.cs" id="6_dm6b2"]
 [ext_resource type="PackedScene" uid="uid://cojvgyniobwbk" path="res://Scenes/UserInterface/HUD/UICrosshair.tscn" id="7_5q3fu"]
 [ext_resource type="Script" path="res://Scripts/Audio/AudioPlayer.cs" id="7_41235"]
+[ext_resource type="Script" path="res://Scripts/Player/MeleeAttackActions.cs" id="7_i4ciw"]
 [ext_resource type="Script" path="res://Scripts/Player/Movement/PlayerMovement.cs" id="8_7rqw8"]
 [ext_resource type="Script" path="res://Scripts/Player/PlayerHealth.cs" id="9_2j7p8"]
 [ext_resource type="Script" path="res://Scripts/Player/Camera/PlayerCameraAnimations.cs" id="11_25u0h"]
@@ -35,7 +36,6 @@
 [ext_resource type="AudioStream" uid="uid://s470ea3qnwg8" path="res://Audio/SFX/MonsterMissAttackAudio.mp3" id="26_iqfag"]
 [ext_resource type="Script" path="res://Scripts/Player/PlayerHUDParameters.cs" id="26_k2iwt"]
 [ext_resource type="AudioStream" uid="uid://dhgbfgf43idpd" path="res://Audio/SFX/MonsterHitAttackAudio.mp3" id="27_w1d6b"]
-[ext_resource type="Script" path="res://Scripts/Player/Monster/PlayerMeleeAttackParameters.cs" id="28_g56uk"]
 [ext_resource type="Script" path="res://Scripts/Player/Movement/PlayerMovementSounds.cs" id="33_nwoie"]
 
 [sub_resource type="AudioStreamPolyphonic" id="AudioStreamPolyphonic_iug1w"]
@@ -156,11 +156,11 @@ _data = {
 "WALK": SubResource("Animation_ybvy8")
 }
 
-[sub_resource type="Resource" id="Resource_hw58n"]
+[sub_resource type="Resource" id="Resource_u25xp"]
 script = ExtResource("15_ao0lo")
-WalkSpeed = 3.5
-SneakSpeed = 2.0
-CrouchSpeed = 1.0
+WalkSpeed = 5.0
+SneakSpeed = 3.0
+CrouchSpeed = 2.0
 JumpSpeed = 5.0
 JumpForce = 5.5
 MaxJumps = 1
@@ -170,13 +170,6 @@ Gravity = 9.8
 CurrentJumpForce = 5.5
 CurrentSpeed = 5.0
 CurrentAcceleration = 0.0
-
-[sub_resource type="Resource" id="Resource_w6vwx"]
-script = ExtResource("28_g56uk")
-AttackCooldownTime = 0.5
-LightAttackDamage = 35
-MissAttackAudio = ExtResource("26_iqfag")
-HitAttackAudio = ExtResource("27_w1d6b")
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_nc3dv"]
 properties/0/path = NodePath(".:Vector")
@@ -254,12 +247,13 @@ linear_limit_z/enabled = false
 
 [node name="Audio3D" type="Node3D" parent="CommonPart/CameraHolder/PlayerCamera"]
 
-[node name="AudioPlayer3D" type="AudioStreamPlayer3D" parent="CommonPart/CameraHolder/PlayerCamera/Audio3D"]
+[node name="AudioPlayer3D" type="AudioStreamPlayer3D" parent="CommonPart/CameraHolder/PlayerCamera/Audio3D" node_paths=PackedStringArray("_playerRoot")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
 stream = SubResource("AudioStreamPolyphonic_iug1w")
 autoplay = true
 bus = &"SFX"
 script = ExtResource("1_cu3h5")
+_playerRoot = NodePath("../../../../..")
 
 [node name="PlayerBody" type="CharacterBody3D" parent="CommonPart" groups=["Hitbox:Player"]]
 collision_layer = 1024
@@ -312,6 +306,10 @@ script = ExtResource("4_mojhr")
 script = ExtResource("6_dm6b2")
 _playerRoot = NodePath("../../..")
 
+[node name="MeleeAttackActions" type="Node" parent="ClientServerPart/Scripts" node_paths=PackedStringArray("_playerRoot")]
+script = ExtResource("7_i4ciw")
+_playerRoot = NodePath("../../..")
+
 [node name="Audio" type="Node" parent="ClientServerPart"]
 
 [node name="AudioPlayer" type="AudioStreamPlayer" parent="ClientServerPart/Audio" node_paths=PackedStringArray("_playerRoot")]
@@ -342,10 +340,13 @@ script = ExtResource("11_25u0h")
 _movementActions = NodePath("../../../ClientServerPart/Scripts/MovementActions")
 _animationPlayer = NodePath("../../Animations/PlayerCameraAnimator")
 
-[node name="SelectAttackPlayer" type="Node" parent="ClientPart/Scripts" node_paths=PackedStringArray("_rayOfAttack")]
+[node name="SelectAttackPlayer" type="Node" parent="ClientPart/Scripts" node_paths=PackedStringArray("_meleeAttackActions", "_rayOfAttack")]
 script = ExtResource("12_lgf40")
+_meleeAttackActions = NodePath("../../../ClientServerPart/Scripts/MeleeAttackActions")
 _rayOfAttack = NodePath("../../../CommonPart/CameraHolder/PlayerCamera/PlayerLook/RayOfAttack")
 _attackSelecting = ExtResource("13_dkf25")
+_attackColor = Color(0.568627, 0.0352941, 0.14902, 1)
+_cooldownColor = Color(0.719656, 0.536598, 0, 1)
 
 [node name="UI" type="Node" parent="ClientPart"]
 
@@ -390,15 +391,15 @@ MovementActions = NodePath("../../../ClientServerPart/Scripts/MovementActions")
 InputActions = NodePath("../../../ClientServerPart/Scripts/InputActions")
 InputVector = NodePath("../../../ClientServerPart/Scripts/InputVector")
 PlayerBody = NodePath("../../../CommonPart/PlayerBody")
-PlayerMovementParameters = SubResource("Resource_hw58n")
+PlayerMovementParameters = SubResource("Resource_u25xp")
 
-[node name="PlayerMovementSound" type="Node" parent="ServerPart/Scripts" node_paths=PackedStringArray("_movementActions", "_audioPlayer3D", "_stepTimer")]
+[node name="PlayerMovementSounds" type="Node" parent="ServerPart/Scripts" node_paths=PackedStringArray("_movementActions", "_stepTimer", "_audioPlayer3D")]
 script = ExtResource("33_nwoie")
 _movementActions = NodePath("../../../ClientServerPart/Scripts/MovementActions")
-_audioPlayer3D = NodePath("../../../CommonPart/CameraHolder/PlayerCamera/Audio3D/AudioPlayer3D")
 _stepTimer = NodePath("../../Timers/StepTimer")
-_stepInterval = 0.8
+_stepInterval = 0.6
 PlayAudioOnlyLocaly = true
+_audioPlayer3D = NodePath("../../../CommonPart/CameraHolder/PlayerCamera/Audio3D/AudioPlayer3D")
 _stepAudio = ExtResource("23_5f6b8")
 _jumpAudio = ExtResource("24_78spm")
 _landAudio = ExtResource("25_bbxue")
@@ -423,14 +424,18 @@ AnchorForDraggedObject = NodePath("../../../CommonPart/CameraHolder/PlayerCamera
 StaticBody3D = NodePath("../../../CommonPart/CameraHolder/PlayerCamera/PlayerLook/ObjectInteraction/StaticBody3D")
 Generic6DofJoint3D = NodePath("../../../CommonPart/CameraHolder/PlayerCamera/PlayerLook/ObjectInteraction/Generic6DOFJoint3D")
 
-[node name="PlayerMeleeAttack" type="Node" parent="ServerPart/Scripts" node_paths=PackedStringArray("_inputActions", "_playerObjectInteractor", "_rayOfAttack", "_attackCooldownTimer", "_audioPlayer3D")]
+[node name="PlayerMeleeAttack" type="Node" parent="ServerPart/Scripts" node_paths=PackedStringArray("_inputActions", "_meleeAttackActions", "_playerPropInteractor", "_attackCooldownTimer", "_rayOfAttack", "_audioPlayer3D")]
 script = ExtResource("15_0hw5x")
 _inputActions = NodePath("../../../ClientServerPart/Scripts/InputActions")
-_playerObjectInteractor = NodePath("../PlayerPropInteractor")
-_rayOfAttack = NodePath("../../../CommonPart/CameraHolder/PlayerCamera/PlayerLook/RayOfAttack")
+_meleeAttackActions = NodePath("../../../ClientServerPart/Scripts/MeleeAttackActions")
+_playerPropInteractor = NodePath("../PlayerPropInteractor")
 _attackCooldownTimer = NodePath("../../Timers/AttackCooldownTimer")
+_rayOfAttack = NodePath("../../../CommonPart/CameraHolder/PlayerCamera/PlayerLook/RayOfAttack")
+_attackCooldownTime = 0.8
+_attackDamage = 35
 _audioPlayer3D = NodePath("../../../CommonPart/CameraHolder/PlayerCamera/Audio3D/AudioPlayer3D")
-_meleeAttackParameters = SubResource("Resource_w6vwx")
+_missAttackAudio = ExtResource("26_iqfag")
+_hitAttackAudio = ExtResource("27_w1d6b")
 
 [node name="MonsterVision" type="Node" parent="ServerPart/Scripts" node_paths=PackedStringArray("_playerCamera", "_playerActions")]
 script = ExtResource("5_hra6h")

@@ -85,6 +85,7 @@ public partial class PlayerSpawner : MultiplayerSpawner
         SetMultiplayerAuthoritys(playerRoot, "CommonPart/CameraHolder/PlayerCamera/Audio3D", 1);
         SetMultiplayerAuthoritys(playerRoot, "ClientServerPart/Scripts/HUDParameters", 1);
         SetMultiplayerAuthoritys(playerRoot, "ClientServerPart/Scripts/MovementActions", 1);
+        SetMultiplayerAuthoritys(playerRoot, "ClientServerPart/Scripts/MeleeAttackActions", 1);
         SetMultiplayerAuthoritys(playerRoot, "ClientServerPart/Audio", 1);
         SetMultiplayerAuthoritys(playerRoot, "Synchronizers/PlayerCameraSynchronizer", authorityID);
         SetMultiplayerAuthoritys(playerRoot, "Synchronizers/InputVectorSynchronizer", authorityID);

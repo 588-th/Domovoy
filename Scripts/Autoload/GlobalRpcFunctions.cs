@@ -1,8 +1,8 @@
 using Godot;
 
-public partial class RpcFunctions : Node
+public partial class GlobalRpcFunctions : Node
 {
-    public static RpcFunctions Instance { get; private set; }
+    public static GlobalRpcFunctions Instance { get; private set; }
 
     public override void _Ready()
     {
@@ -41,12 +41,12 @@ public partial class RpcFunctions : Node
         Rpc(nameof(RpcSetCullMaskCamera3D), camera3DPath, maskNumber, isEnable);
     }
 
-    public void ChangeAlbedoOfGeometry(NodePath nodePath, Color color)
+    public void SetAlbedoOfGeometry(NodePath nodePath, Color color)
     {
         if (Multiplayer.GetUniqueId() != 1)
             return;
 
-        Rpc(nameof(RpcChangeAlbedoOfGeometry), nodePath, color);
+        Rpc(nameof(RpcSetAlbedoOfGeometry), nodePath, color);
     }
 
     [Rpc(MultiplayerApi.RpcMode.AnyPeer, CallLocal = true, TransferMode = MultiplayerPeer.TransferModeEnum.Reliable)]
@@ -75,7 +75,7 @@ public partial class RpcFunctions : Node
     }
 
     [Rpc(MultiplayerApi.RpcMode.AnyPeer, CallLocal = true, TransferMode = MultiplayerPeer.TransferModeEnum.Reliable)]
-    public void RpcChangeAlbedoOfGeometry(NodePath nodePath, Color color)
+    public void RpcSetAlbedoOfGeometry(NodePath nodePath, Color color)
     {
         GeometryInstance3D geometry3DInstance = GetNode(nodePath) as GeometryInstance3D;
         StandardMaterial3D standardMaterial3D = geometry3DInstance.MaterialOverride.Duplicate() as StandardMaterial3D;

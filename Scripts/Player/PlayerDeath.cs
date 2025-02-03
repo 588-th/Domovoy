@@ -53,7 +53,7 @@ public partial class PlayerDeath : Node
         if (item == null)
             return;
 
-        RpcFunctions.Instance.AddGroup(item.GetPath(), "Item:Pickupble");
+        GlobalRpcFunctions.Instance.AddGroup(item.GetPath(), "Item:Pickupble");
 
         Vector3 position = item.GlobalPosition;
         Vector3 rotation = new();

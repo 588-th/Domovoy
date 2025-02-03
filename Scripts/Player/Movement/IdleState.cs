@@ -4,11 +4,15 @@ public class IdleState : MovementState
 {
     public IdleState(PlayerMovement playerMovement) : base(playerMovement) { }
 
+    private bool _isSneakPressed;
+
     public override void Enter()
     {
         base.Enter();
 
         _playerMovement.MovementActions.InvokeAction("isIdleState");
+        _playerMovement.InputActions.SneakKeyDown += OnSneaKeyToggle;
+        _playerMovement.InputActions.SneakKeyUp += OnSneaKeyToggle;
         _playerMovement.InputActions.JumpKeyDown += OnJumpKeyDown;
         _playerMovement.MovementActions.IsNotGrounded += OnNotGround;
     }
@@ -18,6 +22,8 @@ public class IdleState : MovementState
         base.Exit();
 
         _playerMovement.MovementActions.InvokeAction("isNotIdleState");
+        _playerMovement.InputActions.SneakKeyDown -= OnSneaKeyToggle;
+        _playerMovement.InputActions.SneakKeyUp -= OnSneaKeyToggle;
         _playerMovement.InputActions.JumpKeyDown -= OnJumpKeyDown;
         _playerMovement.MovementActions.IsNotGrounded -= OnNotGround;
     }
@@ -34,7 +40,7 @@ public class IdleState : MovementState
         if (_playerMovement.InputVector.Vector == Vector3.Zero)
             return;
 
-        if (Input.IsActionPressed("sneak"))
+        if (_isSneakPressed)
             _playerMovement.ChangeState(_playerMovement.SneakState);
         else
             _playerMovement.ChangeState(_playerMovement.WalkState);
@@ -57,5 +63,10 @@ public class IdleState : MovementState
     private void OnNotGround()
     {
         _playerMovement.ChangeState(_playerMovement.JumpState);
+    }
+
+    private void OnSneaKeyToggle()
+    {
+        _isSneakPressed = !_isSneakPressed;
     }
 }

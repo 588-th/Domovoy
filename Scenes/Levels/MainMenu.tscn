@@ -213,17 +213,17 @@ _uiMenu = NodePath("../UIMenu")
 visible = false
 layout_mode = 1
 
-[node name="UIVideoSettings" parent="UI/UISettings/TabContainer" index="1" node_paths=PackedStringArray("_menu", "_settings")]
+[node name="Video" parent="UI/UISettings/TabContainer" index="1" node_paths=PackedStringArray("_menu")]
 _menu = NodePath("../../../UIMenu")
-_settings = NodePath("../..")
 
-[node name="UIMouseSettings" parent="UI/UISettings/TabContainer" index="2" node_paths=PackedStringArray("_menu", "_settings")]
+[node name="Audio" parent="UI/UISettings/TabContainer" index="2" node_paths=PackedStringArray("_menu")]
 _menu = NodePath("../../../UIMenu")
-_settings = NodePath("../..")
 
-[node name="UIMultiplayerSettings" parent="UI/UISettings/TabContainer" index="3" node_paths=PackedStringArray("_menu", "_settings")]
+[node name="Mouse" parent="UI/UISettings/TabContainer" index="3" node_paths=PackedStringArray("_menu")]
 _menu = NodePath("../../../UIMenu")
-_settings = NodePath("../..")
+
+[node name="Multiplayer" parent="UI/UISettings/TabContainer" index="4" node_paths=PackedStringArray("_menu")]
+_menu = NodePath("../../../UIMenu")
 
 [node name="Vignette" type="ColorRect" parent="UI"]
 material = SubResource("ShaderMaterial_aqc85")
