@@ -29,19 +29,22 @@ public partial class UIMainMenu : Control
 
     private void OnCreateServerButtonPressed()
     {
-        Hide();
+        _UIConnectServer.Hide();
+        _UISettings.Hide();
         _UICreateServer.Show();
     }
 
     private void OnConnectServerButtonPressed()
     {
-        Hide();
+        _UICreateServer.Hide();
+        _UISettings.Hide();
         _UIConnectServer.Show();
     }
 
     private void OnSettingsButtonPressed()
     {
-        Hide();
+        _UICreateServer.Hide();
+        _UIConnectServer.Hide();
         _UISettings.Show();
     }
 

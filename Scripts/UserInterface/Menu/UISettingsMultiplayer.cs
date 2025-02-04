@@ -2,25 +2,19 @@ using Godot;
 
 public partial class UISettingsMultiplayer : Control
 {
-    [Export] private Control _menu;
     [Export] private Control _settings;
-
     [Export] private LineEdit _ipLabel;
     [Export] private LineEdit _portLabel;
-
-    [Export] private Button _applyButton;
-    [Export] private Button _backButton;
+    [Export] private Button _closeButton;
 
     public override void _Ready()
     {
-        _applyButton.Pressed += OnApplyButtonPressed;
-        _backButton.Pressed += OnBackButtonPressed;
+        _closeButton.Pressed += OnCloseButtonPressed;
     }
 
     public override void _ExitTree()
     {
-        _applyButton.Pressed -= OnApplyButtonPressed;
-        _backButton.Pressed -= OnBackButtonPressed;
+        _closeButton.Pressed -= OnCloseButtonPressed;
     }
 
     private void InitializeUI()
@@ -29,15 +23,8 @@ public partial class UISettingsMultiplayer : Control
         _portLabel.Text = SettingsMultiplayer.Instance.Port.ToString();
     }
 
-    private void OnApplyButtonPressed()
+    private void OnCloseButtonPressed()
     {
-        SettingsMultiplayer.Instance.IpAddress = _ipLabel.Text;
-        SettingsMultiplayer.Instance.Port = int.Parse(_portLabel.Text);
-    }
-
-    private void OnBackButtonPressed()
-    {
-        _menu.Show();
         _settings.Hide();
     }
 }

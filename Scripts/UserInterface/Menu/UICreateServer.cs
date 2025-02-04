@@ -3,24 +3,21 @@ using Godot;
 public partial class UICreateServer : Control
 {
     [Export] private Node _mainMenu;
-    [Export] private Control _uiMenu;
-
     [Export] private Button _createServerButton;
-    [Export] private Button _cancelButton;
-
+    [Export] private Button _closeButton;
     [Export] private LineEdit _ipLineEdit;
     [Export] private LineEdit _portLineEdit;
 
     public override void _Ready()
     {
         _createServerButton.Pressed += OnCreateServerButtonPressed;
-        _cancelButton.Pressed += OnCancelButtonPressed;
+        _closeButton.Pressed += OnCloseButtonPressed;
     }
 
     public override void _ExitTree()
     {
         _createServerButton.Pressed -= OnCreateServerButtonPressed;
-        _cancelButton.Pressed -= OnCancelButtonPressed;
+        _closeButton.Pressed -= OnCloseButtonPressed;
     }
 
     private void OnCreateServerButtonPressed()
@@ -30,9 +27,8 @@ public partial class UICreateServer : Control
         _mainMenu.QueueFree();
     }
 
-    private void OnCancelButtonPressed()
+    private void OnCloseButtonPressed()
     {
         Hide();
-        _uiMenu.Show();
     }
 }

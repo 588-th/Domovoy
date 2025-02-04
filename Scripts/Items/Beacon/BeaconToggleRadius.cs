@@ -1,43 +1,63 @@
 using Godot;
 
-public partial class BeaconPlace : Node
+public partial class BeaconToggleRadius : Node
 {
     [Export] private Beacon _beacon;
-    [Export] private BeaconToggleRadius _beaconToggleRadius;
-    [Export] private RigidBody3D _beaconBody;
-    [Export] private OmniLight3D _light;
+    [Export] private MeshInstance3D _radius;
 
-    [ExportGroup("Parameters")]
-    [Export] private float _lightEnergy;
+    private bool _isRadiusEnable;
 
-    [ExportGroup("Audio")]
-    [Export] private AudioPlayer3D _audioPlayer3D;
-    [Export] private AudioStreamMP3 _beaconNoise;
+    public override void _ExitTree()
+    {
+        ToggleOffRadius();
+    }
 
-    public void Place()
+    public override void _Process(double delta)
+    {
+        if (_isRadiusEnable)
+            UpdateRadiusPosition();
+    }
+
+    public void ToggleRadius()
+    {
+        if (_isRadiusEnable)
+            ToggleOffRadius();
+        else
+            ToggleOnRadius();
+    }
+
+    public void ToggleOnRadius()
+    {
+        _isRadiusEnable = true;
+    }
+
+    public void ToggleOffRadius()
+    {
+        GD.Print("aaaddw");
+        _radius.Visible = false;
+        _isRadiusEnable = false;
+    }
+
+    private void UpdateRadiusPosition()
     {
         var rayOfLookMeta = _beacon.HoldingPlayer.GetMeta("RayOfLook");
         RayCast3D rayOfLook = _beacon.HoldingPlayer.GetNode(rayOfLookMeta.ToString()) as RayCast3D;
         if (rayOfLook == null || !rayOfLook.IsColliding())
+        {
+            _radius.Visible = false;
             return;
+        }
 
         CollisionObject3D collider = rayOfLook.GetCollider() as CollisionObject3D;
         int LayerEnvironment = 1;
         if (collider == null || !collider.GetCollisionLayerValue(LayerEnvironment))
+        {
+            _radius.Visible = false;
             return;
+        }
 
-        var playerHotbarMeta = _beacon.HoldingPlayer.GetMeta("PlayerHotbar");
-        PlayerHotbar playerHotbar = _beacon.HoldingPlayer.GetNode(playerHotbarMeta.ToString()) as PlayerHotbar;
-        if (playerHotbar == null)
-            return;
-
-        playerHotbar.AbortItem(_beacon);
         SetTransform(rayOfLook);
-        _beaconToggleRadius.ToggleOffRadius();
-        _audioPlayer3D.PlayAudio3D(_beaconNoise);
-
-        _light.LightEnergy = _lightEnergy;
-        GlobalRpcFunctions.Instance.RemoveGroup(_beaconBody.GetPath(), "Object:Item");
+        _radius.Visible = true;
     }
 
     private void SetTransform(RayCast3D rayOfLook)
@@ -59,6 +79,6 @@ public partial class BeaconPlace : Node
 
         Basis basis = new Basis(x, y, z);
 
-        _beaconBody.GlobalTransform = new Transform3D(basis, collisionPoint);
+        _radius.GlobalTransform = new Transform3D(basis, collisionPoint);
     }
 }

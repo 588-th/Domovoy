@@ -2,88 +2,91 @@ using Godot;
 
 public partial class UIAudioSettings : Node
 {
-    [Export] private Control _menu;
     [Export] private Control _settings;
+    [Export] private Button _closeButton;
+
     [Export] private HSlider _masterHSlider;
     [Export] private HSlider _interfaceHSlider;
     [Export] private HSlider _effectsHSlider;
     [Export] private HSlider _voiceChatHSlider;
-    [Export] private Button _backButton;
 
-    private const string MasterBusName = "Master";
-    private const string InterfaceBusName = "Interface";
-    private const string EffectsBusName = "SFX";
-    private const string VoiceChatBusName = "VoiceChat";
+    [Export] private SpinBox _masterSpinBox;
+    [Export] private SpinBox _interfaceSpinBox;
+    [Export] private SpinBox _effectsSpinBox;
+    [Export] private SpinBox _voiceChatSpinBox;
+
+    [Export] private Button _resetMasterButton;
+    [Export] private Button _resetInterfaceButton;
+    [Export] private Button _resetEffectsButton;
+    [Export] private Button _resetVoiceChatButton;
+
+    private const string MasterBus = "Master";
+    private const string InterfaceBus = "Interface";
+    private const string EffectsBus = "SFX";
+    private const string VoiceChatBus = "VoiceChat";
 
     public override void _Ready()
     {
-        _backButton.Pressed += OnBackButtonPressed;
-        _masterHSlider.ValueChanged += OnMasterHSliderChanged;
-        _interfaceHSlider.ValueChanged += OnInterfaceHSliderChanged;
-        _effectsHSlider.ValueChanged += OnEffectsHSliderChanged;
-        _voiceChatHSlider.ValueChanged += OnVoiceChatHSliderChanged;
+        _closeButton.Pressed += () => _settings.Hide();
 
-        InitializeUI();
+        InitializeSlider(_masterHSlider, _masterSpinBox, _resetMasterButton, MasterBus,
+            () => SettingsAudio.Instance.Master,
+            value => SettingsAudio.Instance.Master = value,
+            SettingsAudio.Instance.DefaultMaster);
+
+        InitializeSlider(_interfaceHSlider, _interfaceSpinBox, _resetInterfaceButton, InterfaceBus,
+            () => SettingsAudio.Instance.Interface,
+            value => SettingsAudio.Instance.Interface = value,
+            SettingsAudio.Instance.DefaultInterface);
+
+        InitializeSlider(_effectsHSlider, _effectsSpinBox, _resetEffectsButton, EffectsBus,
+            () => SettingsAudio.Instance.Effects,
+            value => SettingsAudio.Instance.Effects = value,
+            SettingsAudio.Instance.DefaultEffects);
+
+        InitializeSlider(_voiceChatHSlider, _voiceChatSpinBox, _resetVoiceChatButton, VoiceChatBus,
+            () => SettingsAudio.Instance.VoiceChat,
+            value => SettingsAudio.Instance.VoiceChat = value,
+            SettingsAudio.Instance.DefaultVoiceChat);
     }
 
-    public override void _ExitTree()
+    private void InitializeSlider(HSlider slider, SpinBox spinBox, Button resetButton, string busName,
+        System.Func<int> getSetting, System.Action<int> setSetting, int defaultSetting)
     {
-        _backButton.Pressed -= OnBackButtonPressed;
-        _masterHSlider.ValueChanged -= OnMasterHSliderChanged;
-        _interfaceHSlider.ValueChanged -= OnInterfaceHSliderChanged;
-        _effectsHSlider.ValueChanged -= OnEffectsHSliderChanged;
-        _voiceChatHSlider.ValueChanged -= OnVoiceChatHSliderChanged;
-    }
+        slider.Value = getSetting();
+        spinBox.Value = slider.Value;
+        resetButton.Disabled = getSetting() == defaultSetting;
 
-    private void InitializeUI()
-    {
-        _masterHSlider.Value = SettingsAudio.Instance.Master;
-        _interfaceHSlider.Value = SettingsAudio.Instance.Interface;
-        _effectsHSlider.Value = SettingsAudio.Instance.Effects;
-        _voiceChatHSlider.Value = SettingsAudio.Instance.VoiceChat;
+        slider.ValueChanged += value => 
+        {
+            int intValue = (int)value;
+            setSetting(intValue);
+            spinBox.Value = intValue;
+            resetButton.Disabled = intValue == defaultSetting;
+            ApplyVolume(busName, intValue);
+        };
 
-        ApplyVolume(MasterBusName, SettingsAudio.Instance.Master);
-        ApplyVolume(InterfaceBusName, SettingsAudio.Instance.Interface);
-        ApplyVolume(EffectsBusName, SettingsAudio.Instance.Effects);
-        ApplyVolume(VoiceChatBusName, SettingsAudio.Instance.VoiceChat);
-    }
+        spinBox.ValueChanged += value =>
+        {
+            int intValue = (int)value;
+            setSetting(intValue);
+            slider.Value = intValue;
+            resetButton.Disabled = intValue == defaultSetting;
+            ApplyVolume(busName, intValue);
+        };
 
-    private void OnMasterHSliderChanged(double value)
-    {
-        SettingsAudio.Instance.Master = (int)value;
-        ApplyVolume(MasterBusName, (int)value);
-    }
-
-    private void OnInterfaceHSliderChanged(double value)
-    {
-        SettingsAudio.Instance.Interface = (int)value;
-        ApplyVolume(InterfaceBusName, (int)value);
-    }
-
-    private void OnEffectsHSliderChanged(double value)
-    {
-        SettingsAudio.Instance.Effects = (int)value;
-        ApplyVolume(EffectsBusName, (int)value);
-    }
-
-    private void OnVoiceChatHSliderChanged(double value)
-    {
-        SettingsAudio.Instance.VoiceChat = (int)value;
-        ApplyVolume(VoiceChatBusName, (int)value);
+        resetButton.Pressed += () => 
+        {
+            setSetting(defaultSetting);
+            slider.Value = defaultSetting;
+            spinBox.Value = defaultSetting;
+        };
     }
 
     private void ApplyVolume(string busName, int volume)
     {
         int busIndex = AudioServer.GetBusIndex(busName);
-        if (busIndex == -1)
-            return;
-
-        AudioServer.SetBusVolumeDb(busIndex, volume);
-    }
-
-    private void OnBackButtonPressed()
-    {
-        _menu.Show();
-        _settings.Hide();
+        if (busIndex != -1)
+            AudioServer.SetBusVolumeDb(busIndex, volume);
     }
 }

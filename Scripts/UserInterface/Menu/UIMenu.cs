@@ -36,7 +36,6 @@ public partial class UIMenu : Control
 
     private void OnSettingsButtonPressed()
     {
-        Hide();
         _settings.Show();
     }
 

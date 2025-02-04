@@ -4,13 +4,12 @@ using static Godot.DisplayServer;
 
 public partial class UISettingsVideo : Control
 {
-    [Export] private Control _menu;
     [Export] private Control _settings;
     [Export] private OptionButton _resolutionsOptionButton;
     [Export] private OptionButton _windowModeOptionButton;
     [Export] private SpinBox _fovSpinBox;
     [Export] private HSlider _fovHSlider;
-    [Export] private Button _backButton;
+    [Export] private Button _closeButton;
 
     private readonly Dictionary<string, Vector2I> _resolutions = new()
     {
@@ -35,7 +34,7 @@ public partial class UISettingsVideo : Control
 
     public override void _Ready()
     {
-        _backButton.Pressed += OnBackButtonPressed;
+        _closeButton.Pressed += OnCloseButtonPressed;
         _resolutionsOptionButton.ItemSelected += OnResolutionSelected;
         _windowModeOptionButton.ItemSelected += OnWindowModeSelected;
         _fovSpinBox.ValueChanged += OnFovSpinBoxChanged;
@@ -46,7 +45,7 @@ public partial class UISettingsVideo : Control
 
     public override void _ExitTree()
     {
-        _backButton.Pressed -= OnBackButtonPressed;
+        _closeButton.Pressed -= OnCloseButtonPressed;
         _resolutionsOptionButton.ItemSelected -= OnResolutionSelected;
         _windowModeOptionButton.ItemSelected -= OnWindowModeSelected;
     }
@@ -126,9 +125,8 @@ public partial class UISettingsVideo : Control
         SettingsVideo.Instance.FOV = (float)value;
     }
 
-    private void OnBackButtonPressed()
+    private void OnCloseButtonPressed()
     {
-        _menu.Show();
         _settings.Hide();
     }
 }

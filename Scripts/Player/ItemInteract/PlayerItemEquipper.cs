@@ -73,6 +73,7 @@ public partial class PlayerItemEquipper : Node
         Node holderItems = GetTree().GetFirstNodeInGroup("Holder:Items");
         item.GetParent().RemoveChild(item);
         holderItems.AddChild(item, true);
+
         item.EmitSignal(SignalName.Ready);
     }
 

@@ -1,9 +1,10 @@
-[gd_scene load_steps=21 format=3 uid="uid://ub1dpkmqs866"]
+[gd_scene load_steps=22 format=3 uid="uid://ub1dpkmqs866"]
 
 [ext_resource type="Material" uid="uid://bg0fh2ja3bjby" path="res://Materials/m_brickWall.tres" id="1_ccxnk"]
 [ext_resource type="Texture2D" uid="uid://ejoim3yef42l" path="res://Textures/t_russianFloor.png" id="2_m8xgf"]
 [ext_resource type="PackedScene" uid="uid://cmmaqjm2r7yhn" path="res://Scenes/Props/WoodenBox.tscn" id="3_qcpnr"]
 [ext_resource type="Script" path="res://Scripts/UserInterface/Menu/UIMainMenu.cs" id="4_pd5fp"]
+[ext_resource type="Theme" uid="uid://dbp6r2wyjejft" path="res://Theme.tres" id="4_y0igr"]
 [ext_resource type="PackedScene" uid="uid://dcqotk8dsw1uk" path="res://Scenes/UserInterface/Menu/UICreateServer.tscn" id="5_hi3al"]
 [ext_resource type="PackedScene" uid="uid://b1iw14s2xmw8w" path="res://Scenes/UserInterface/Menu/UIConnectServer.tscn" id="6_2hy65"]
 [ext_resource type="PackedScene" uid="uid://csxytgmqigpea" path="res://Scenes/UserInterface/Menu/UISettings.tscn" id="7_cjp1f"]
@@ -144,7 +145,7 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 0
 size_flags_vertical = 4
-metadata/_edit_use_anchors_ = true
+theme = ExtResource("4_y0igr")
 
 [node name="UIMenu" type="Control" parent="UI" node_paths=PackedStringArray("_createServerButton", "_createClientButton", "_settingsButton", "_exitButton", "_UICreateServer", "_UIConnectServer", "_UISettings")]
 layout_mode = 1
@@ -197,33 +198,22 @@ layout_mode = 2
 size_flags_vertical = 3
 text = "Exit"
 
-[node name="UICreateServer" parent="UI" node_paths=PackedStringArray("_mainMenu", "_uiMenu") instance=ExtResource("5_hi3al")]
+[node name="UICreateServer" parent="UI" node_paths=PackedStringArray("_mainMenu") instance=ExtResource("5_hi3al")]
 visible = false
 layout_mode = 1
 _mainMenu = NodePath("../..")
-_uiMenu = NodePath("../UIMenu")
 
-[node name="UIConnectServer" parent="UI" node_paths=PackedStringArray("_mainMenu", "_uiMenu") instance=ExtResource("6_2hy65")]
+[node name="UIConnectServer" parent="UI" node_paths=PackedStringArray("_mainMenu") instance=ExtResource("6_2hy65")]
 visible = false
 layout_mode = 1
 _mainMenu = NodePath("../..")
-_uiMenu = NodePath("../UIMenu")
 
 [node name="UISettings" parent="UI" instance=ExtResource("7_cjp1f")]
 visible = false
 layout_mode = 1
 
-[node name="Video" parent="UI/UISettings/TabContainer" index="1" node_paths=PackedStringArray("_menu")]
-_menu = NodePath("../../../UIMenu")
-
-[node name="Audio" parent="UI/UISettings/TabContainer" index="2" node_paths=PackedStringArray("_menu")]
-_menu = NodePath("../../../UIMenu")
-
-[node name="Mouse" parent="UI/UISettings/TabContainer" index="3" node_paths=PackedStringArray("_menu")]
-_menu = NodePath("../../../UIMenu")
-
-[node name="Multiplayer" parent="UI/UISettings/TabContainer" index="4" node_paths=PackedStringArray("_menu")]
-_menu = NodePath("../../../UIMenu")
+[node name="MarginContainer" parent="UI/UISettings" index="0"]
+theme_override_constants/margin_left = 255
 
 [node name="Vignette" type="ColorRect" parent="UI"]
 material = SubResource("ShaderMaterial_aqc85")
@@ -245,6 +235,5 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 
-[editable path="UI/UICreateServer"]
 [editable path="UI/UIConnectServer"]
 [editable path="UI/UISettings"]

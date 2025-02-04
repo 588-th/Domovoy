@@ -1,0 +1,58 @@
+[gd_resource type="Theme" load_steps=11 format=3 uid="uid://dbp6r2wyjejft"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gv6xv"]
+bg_color = Color(0.18, 0.18, 0.18, 0.882353)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3o687"]
+bg_color = Color(0.15, 0.15, 0.15, 0.882353)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wuuna"]
+bg_color = Color(0.21, 0.21, 0.21, 0.882353)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_dljx6"]
+bg_color = Color(0.180392, 0.180392, 0.180392, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xough"]
+content_margin_left = 5.0
+content_margin_right = 5.0
+bg_color = Color(0.14902, 0.14902, 0.14902, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1txt3"]
+bg_color = Color(0.0901961, 0.0901961, 0.0901961, 0.882353)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_v3lwg"]
+bg_color = Color(0.09, 0.09, 0.09, 0.882353)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_cddfx"]
+content_margin_left = 15.0
+content_margin_top = 5.0
+content_margin_right = 15.0
+bg_color = Color(0.09, 0.09, 0.09, 0.882353)
+border_width_top = 5
+border_color = Color(0.121569, 0.121569, 0.121569, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_h5c5d"]
+content_margin_left = 15.0
+content_margin_top = 5.0
+content_margin_right = 15.0
+bg_color = Color(0.09, 0.09, 0.09, 0.882353)
+border_width_top = 5
+border_color = Color(0.180392, 0.180392, 0.180392, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_svvvi"]
+content_margin_left = 15.0
+content_margin_top = 5.0
+content_margin_right = 15.0
+bg_color = Color(0.09, 0.09, 0.09, 0.882353)
+
+[resource]
+Button/styles/hover = SubResource("StyleBoxFlat_gv6xv")
+Button/styles/normal = SubResource("StyleBoxFlat_3o687")
+Button/styles/pressed = SubResource("StyleBoxFlat_wuuna")
+LineEdit/styles/focus = SubResource("StyleBoxFlat_dljx6")
+LineEdit/styles/normal = SubResource("StyleBoxFlat_xough")
+Panel/styles/panel = SubResource("StyleBoxFlat_1txt3")
+TabContainer/styles/panel = SubResource("StyleBoxFlat_v3lwg")
+TabContainer/styles/tab_hovered = SubResource("StyleBoxFlat_cddfx")
+TabContainer/styles/tab_selected = SubResource("StyleBoxFlat_h5c5d")
+TabContainer/styles/tab_unselected = SubResource("StyleBoxFlat_svvvi")
