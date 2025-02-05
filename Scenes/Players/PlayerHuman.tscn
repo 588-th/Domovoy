@@ -1,8 +1,9 @@
-[gd_scene load_steps=63 format=4 uid="uid://bks72b4kwjk1f"]
+[gd_scene load_steps=66 format=4 uid="uid://bks72b4kwjk1f"]
 
 [ext_resource type="Script" path="res://Scripts/Audio/AudioPlayer3D.cs" id="1_o0yqy"]
 [ext_resource type="Script" path="res://Scripts/Player/InputVector.cs" id="2_8kxsr"]
 [ext_resource type="Script" path="res://Scripts/Player/PlayerInputVector.cs" id="2_ca8we"]
+[ext_resource type="Script" path="res://Scripts/Player/PlayerVoicePlayer.cs" id="2_epvhi"]
 [ext_resource type="Script" path="res://Scripts/Player/InputActions.cs" id="2_ljfyj"]
 [ext_resource type="Script" path="res://Scripts/Player/Camera/PlayerCamera.cs" id="3_e7wye"]
 [ext_resource type="Script" path="res://Scripts/Player/PlayerInputKeys.cs" id="3_ylv55"]
@@ -18,6 +19,7 @@
 [ext_resource type="Script" path="res://Scripts/Player/Camera/PlayerCameraAnimations.cs" id="10_p0rem"]
 [ext_resource type="PackedScene" uid="uid://c131mixukwjnm" path="res://Scenes/UserInterface/Menu/UIPauseMenu.tscn" id="11_s3mkc"]
 [ext_resource type="Script" path="res://Scripts/Player/ReverbRoom.cs" id="11_y4aya"]
+[ext_resource type="Script" path="res://Scripts/Player/PlayerVoiceRecord.cs" id="12_o81cg"]
 [ext_resource type="PackedScene" uid="uid://cojvgyniobwbk" path="res://Scenes/UserInterface/HUD/UICrosshair.tscn" id="13_h4pmd"]
 [ext_resource type="PackedScene" uid="uid://dsm0c68ucl2kg" path="res://Scenes/UserInterface/HUD/UIHealthInfo.tscn" id="13_m4wnv"]
 [ext_resource type="PackedScene" uid="uid://cab1adf54c54n" path="res://Scenes/UserInterface/HUD/UIInteractInfo.tscn" id="14_1wxl0"]
@@ -42,6 +44,8 @@
 
 [sub_resource type="AudioStreamPolyphonic" id="AudioStreamPolyphonic_hspml"]
 polyphony = 16
+
+[sub_resource type="AudioStreamGenerator" id="AudioStreamGenerator_t62yu"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1ki7f"]
 
@@ -258,7 +262,7 @@ metadata/PlayerHealth = NodePath("ServerPart/Scripts/PlayerHealth")
 metadata/RayOfLook = NodePath("CommonPart/CameraHolder/PlayerCamera/PlayerLook/RayOfLook")
 metadata/CameraHolder = NodePath("CommonPart/CameraHolder")
 metadata/PlayerHotbar = NodePath("ServerPart/Scripts/PlayerHotbar")
-metadata/AudioPlayer3D = NodePath("CommonPart/CameraHolder/PlayerCamera/Audio3D/AudioPlayer3D")
+metadata/AudioPlayer3D = NodePath("CommonPart/CameraHolder/PlayerCamera/Audio3D/Movement")
 
 [node name="CommonPart" type="Node" parent="."]
 
@@ -299,12 +303,19 @@ linear_limit_z/enabled = false
 
 [node name="Audio3D" type="Node3D" parent="CommonPart/CameraHolder/PlayerCamera"]
 
-[node name="AudioPlayer3D" type="AudioStreamPlayer3D" parent="CommonPart/CameraHolder/PlayerCamera/Audio3D" node_paths=PackedStringArray("_playerRoot")]
+[node name="Movement" type="AudioStreamPlayer3D" parent="CommonPart/CameraHolder/PlayerCamera/Audio3D" node_paths=PackedStringArray("_playerRoot")]
 stream = SubResource("AudioStreamPolyphonic_hspml")
 autoplay = true
 bus = &"SFX"
 script = ExtResource("1_o0yqy")
 _playerRoot = NodePath("../../../../..")
+
+[node name="Voice" type="AudioStreamPlayer3D" parent="CommonPart/CameraHolder/PlayerCamera/Audio3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
+stream = SubResource("AudioStreamGenerator_t62yu")
+autoplay = true
+bus = &"RecordVoice"
+script = ExtResource("2_epvhi")
 
 [node name="ReverbRoom" type="Node3D" parent="CommonPart/CameraHolder"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
@@ -473,6 +484,12 @@ script = ExtResource("10_p0rem")
 _movementActions = NodePath("../../../ClientServerPart/Scripts/MovementActions")
 _animationPlayer = NodePath("../../Animations/PlayerCameraAnimator")
 
+[node name="PlayerVoiceRecord" type="Node" parent="ClientPart/Scripts" node_paths=PackedStringArray("_inputActions", "_playerVoicePlayer")]
+script = ExtResource("12_o81cg")
+_inputActions = NodePath("../../../ClientServerPart/Scripts/InputActions")
+_playerVoicePlayer = NodePath("../../../CommonPart/CameraHolder/PlayerCamera/Audio3D/Voice")
+_busName = "RecordVoice"
+
 [node name="ReverbRoom" type="Node" parent="ClientPart/Scripts" node_paths=PackedStringArray("_playerBody", "_raycasts")]
 script = ExtResource("11_y4aya")
 _playerBody = NodePath("../../../CommonPart/PlayerBody")
@@ -534,7 +551,7 @@ script = ExtResource("33_b25gi")
 _movementActions = NodePath("../../../ClientServerPart/Scripts/MovementActions")
 _stepTimer = NodePath("../../Timers/StepTimer")
 _stepInterval = 0.6
-_audioPlayer3D = NodePath("../../../CommonPart/CameraHolder/PlayerCamera/Audio3D/AudioPlayer3D")
+_audioPlayer3D = NodePath("../../../CommonPart/CameraHolder/PlayerCamera/Audio3D/Movement")
 _stepAudio = ExtResource("24_f1o77")
 _jumpAudio = ExtResource("25_o2hlp")
 _landAudio = ExtResource("26_1veg0")

@@ -1,9 +1,12 @@
-[gd_resource type="AudioBusLayout" load_steps=2 format=3 uid="uid://cfb2mfw23oa5q"]
+[gd_resource type="AudioBusLayout" load_steps=3 format=3 uid="uid://cfb2mfw23oa5q"]
 
 [sub_resource type="AudioEffectReverb" id="AudioEffectReverb_3bmxe"]
 resource_name = "Reverb"
 room_size = 0.05
 wet = 0.08
+
+[sub_resource type="AudioEffectCapture" id="AudioEffectCapture_bgygm"]
+resource_name = "Capture"
 
 [resource]
 bus/1/name = &"Interface"
@@ -22,7 +25,15 @@ bus/2/effect/0/effect = SubResource("AudioEffectReverb_3bmxe")
 bus/2/effect/0/enabled = false
 bus/3/name = &"VoiceChat"
 bus/3/solo = false
-bus/3/mute = false
+bus/3/mute = true
 bus/3/bypass_fx = false
 bus/3/volume_db = 0.0
 bus/3/send = &"Master"
+bus/4/name = &"RecordVoice"
+bus/4/solo = false
+bus/4/mute = false
+bus/4/bypass_fx = false
+bus/4/volume_db = 0.0
+bus/4/send = &"VoiceChat"
+bus/4/effect/0/effect = SubResource("AudioEffectCapture_bgygm")
+bus/4/effect/0/enabled = true

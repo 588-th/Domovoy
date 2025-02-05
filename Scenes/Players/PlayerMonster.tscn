@@ -1,8 +1,9 @@
-[gd_scene load_steps=54 format=4 uid="uid://dw2d8yb5aog0t"]
+[gd_scene load_steps=56 format=4 uid="uid://dw2d8yb5aog0t"]
 
 [ext_resource type="Script" path="res://Scripts/Audio/AudioPlayer3D.cs" id="1_cu3h5"]
 [ext_resource type="Script" path="res://Scripts/Player/PlayerInputVector.cs" id="1_l02lm"]
 [ext_resource type="Script" path="res://Scripts/Player/PlayerInputKeys.cs" id="2_5vfog"]
+[ext_resource type="Script" path="res://Scripts/Player/PlayerVoicePlayer.cs" id="2_bi38w"]
 [ext_resource type="Shader" path="res://Shaders/Distortion.gdshader" id="2_j8g4s"]
 [ext_resource type="Script" path="res://Scripts/Player/InputActions.cs" id="2_yphgy"]
 [ext_resource type="Script" path="res://Scripts/Player/InputVector.cs" id="3_p0joe"]
@@ -40,6 +41,8 @@
 
 [sub_resource type="AudioStreamPolyphonic" id="AudioStreamPolyphonic_iug1w"]
 polyphony = 16
+
+[sub_resource type="AudioStreamGenerator" id="AudioStreamGenerator_vtgji"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_gxpce"]
 render_priority = 0
@@ -247,13 +250,20 @@ linear_limit_z/enabled = false
 
 [node name="Audio3D" type="Node3D" parent="CommonPart/CameraHolder/PlayerCamera"]
 
-[node name="AudioPlayer3D" type="AudioStreamPlayer3D" parent="CommonPart/CameraHolder/PlayerCamera/Audio3D" node_paths=PackedStringArray("_playerRoot")]
+[node name="Movement" type="AudioStreamPlayer3D" parent="CommonPart/CameraHolder/PlayerCamera/Audio3D" node_paths=PackedStringArray("_playerRoot")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
 stream = SubResource("AudioStreamPolyphonic_iug1w")
 autoplay = true
 bus = &"SFX"
 script = ExtResource("1_cu3h5")
 _playerRoot = NodePath("../../../../..")
+
+[node name="Voice" type="AudioStreamPlayer3D" parent="CommonPart/CameraHolder/PlayerCamera/Audio3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
+stream = SubResource("AudioStreamGenerator_vtgji")
+autoplay = true
+bus = &"RecordVoice"
+script = ExtResource("2_bi38w")
 
 [node name="PlayerBody" type="CharacterBody3D" parent="CommonPart" groups=["Hitbox:Player"]]
 collision_layer = 1024
@@ -399,7 +409,7 @@ _movementActions = NodePath("../../../ClientServerPart/Scripts/MovementActions")
 _stepTimer = NodePath("../../Timers/StepTimer")
 _stepInterval = 0.6
 PlayAudioOnlyLocaly = true
-_audioPlayer3D = NodePath("../../../CommonPart/CameraHolder/PlayerCamera/Audio3D/AudioPlayer3D")
+_audioPlayer3D = NodePath("../../../CommonPart/CameraHolder/PlayerCamera/Audio3D/Movement")
 _stepAudio = ExtResource("23_5f6b8")
 _jumpAudio = ExtResource("24_78spm")
 _landAudio = ExtResource("25_bbxue")
@@ -433,7 +443,7 @@ _attackCooldownTimer = NodePath("../../Timers/AttackCooldownTimer")
 _rayOfAttack = NodePath("../../../CommonPart/CameraHolder/PlayerCamera/PlayerLook/RayOfAttack")
 _attackCooldownTime = 0.8
 _attackDamage = 35
-_audioPlayer3D = NodePath("../../../CommonPart/CameraHolder/PlayerCamera/Audio3D/AudioPlayer3D")
+_audioPlayer3D = NodePath("../../../CommonPart/CameraHolder/PlayerCamera/Audio3D/Movement")
 _missAttackAudio = ExtResource("26_iqfag")
 _hitAttackAudio = ExtResource("27_w1d6b")
 

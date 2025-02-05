@@ -21,6 +21,7 @@ public partial class InputActions : Node
     public Action SecondarySlotDown;
     public Action TertiarySlotDown;
     public Action QuaternarySlotDown;
+    public Action ToggleMicrophoneDown;
     public Action ToggleMonsterVisionDown;
     public Action ToggleFirearmAutomaticDown;
     public Action ToggleFirearmLaserDown;
@@ -40,6 +41,7 @@ public partial class InputActions : Node
     public Action DropKeyUp;
     public Action AttackKeyUp;
     public Action AlternativeKeyUp;
+    public Action ToggleMicrophoneUp;
 
     private Dictionary<string, Func<Action>> _keyDownActions;
     private Dictionary<string, Func<Action>> _keyUpActions;
@@ -65,6 +67,7 @@ public partial class InputActions : Node
             {"secondarySlot", () => SecondarySlotDown},
             {"tertiarySlot", () => TertiarySlotDown},
             {"quaternarySlot", () => QuaternarySlotDown},
+            {"toggleMicrophone", () => ToggleMicrophoneDown},
             {"toggleMonsterVision", () => ToggleMonsterVisionDown},
             {"toggleFirearmAutomatic", () => ToggleFirearmAutomaticDown},
             {"toggleFirearmLaser", () => ToggleFirearmLaserDown},
@@ -86,7 +89,8 @@ public partial class InputActions : Node
             {"interact", () => InteractKeyUp},
             {"drop", () => DropKeyUp},
             {"attack", () => AttackKeyUp},
-            {"alternative", () => AlternativeKeyUp}
+            {"alternative", () => AlternativeKeyUp},
+            {"toggleMicrophone", () => ToggleMicrophoneUp}
         };
     }
 

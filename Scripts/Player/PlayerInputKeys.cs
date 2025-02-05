@@ -24,6 +24,7 @@ public partial class PlayerInputKeys : Node
         "attack",
         "alternative",
         "reload",
+        "toggleMicrophone",
         "toggleMonsterVision",
         "toggleFirearmAutomatic",
         "toggleFirearmLaser",
