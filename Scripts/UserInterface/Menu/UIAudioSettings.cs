@@ -4,6 +4,7 @@ public partial class UIAudioSettings : Node
 {
     [Export] private Control _settings;
     [Export] private Button _closeButton;
+    [Export] private CheckBox _muteYourselfCheckBox;
 
     [Export] private HSlider _masterHSlider;
     [Export] private HSlider _interfaceHSlider;
@@ -19,11 +20,13 @@ public partial class UIAudioSettings : Node
     [Export] private Button _resetInterfaceButton;
     [Export] private Button _resetEffectsButton;
     [Export] private Button _resetVoiceChatButton;
+    [Export] private Button _resetMuteYourselfButton;
 
     private const string MasterBus = "Master";
     private const string InterfaceBus = "Interface";
     private const string EffectsBus = "SFX";
     private const string VoiceChatBus = "VoiceChat";
+    private const string VoiceSelfMute = "VoiceSelfMute";
 
     public override void _Ready()
     {
@@ -48,6 +51,11 @@ public partial class UIAudioSettings : Node
             () => SettingsAudio.Instance.VoiceChat,
             value => SettingsAudio.Instance.VoiceChat = value,
             SettingsAudio.Instance.DefaultVoiceChat);
+
+        InitializeCheckBox(_muteYourselfCheckBox, _resetMuteYourselfButton, VoiceSelfMute,
+            () => SettingsAudio.Instance.MuteYourself,
+            value => SettingsAudio.Instance.MuteYourself = value,
+            SettingsAudio.Instance.DefaultMuteYourself);
     }
 
     private void InitializeSlider(HSlider slider, SpinBox spinBox, Button resetButton, string busName,
@@ -83,10 +91,34 @@ public partial class UIAudioSettings : Node
         };
     }
 
+    private void InitializeCheckBox(CheckBox checkBox, Button resetButton, string busName,
+        System.Func<bool> getSetting, System.Action<bool> setSetting, bool defaultSetting)
+    {
+        checkBox.ButtonPressed = getSetting();
+
+        checkBox.Pressed += () =>
+        {
+            MuteBus(busName, checkBox.ButtonPressed);
+        };
+
+        resetButton.Pressed += () =>
+        {
+            setSetting(defaultSetting);
+            checkBox.ButtonPressed = defaultSetting;
+        };
+    }
+
     private void ApplyVolume(string busName, int volume)
     {
         int busIndex = AudioServer.GetBusIndex(busName);
         if (busIndex != -1)
             AudioServer.SetBusVolumeDb(busIndex, volume);
+    }
+
+    private void MuteBus(string busName, bool mute)
+    {
+        int busIndex = AudioServer.GetBusIndex(busName);
+        if (busIndex != -1)
+            AudioServer.SetBusMute(busIndex, mute);
     }
 }

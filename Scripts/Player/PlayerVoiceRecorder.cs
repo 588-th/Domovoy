@@ -3,7 +3,7 @@ using System;
 using System.IO;
 using System.IO.Compression;
 
-public partial class PlayerVoiceRecord : Node
+public partial class PlayerVoiceRecorder : AudioStreamPlayer
 {
     [Export] private InputActions _inputActions;
     [Export] private PlayerVoicePlayer _playerVoicePlayer;
@@ -45,6 +45,10 @@ public partial class PlayerVoiceRecord : Node
     private void ToggleMicrophone()
     {
         _isMicrophoneEnabled = !_isMicrophoneEnabled;
+        if (_isMicrophoneEnabled)
+            Play();
+        else
+            Stop();
     }
 
     private float[] GetMicrophoneData(int frames)

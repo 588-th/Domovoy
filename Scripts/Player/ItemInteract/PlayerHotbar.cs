@@ -3,9 +3,9 @@ using System;
 
 public partial class PlayerHotbar : Node
 {
+    [Export] private Node _playerRoot;
     [Export] private InputActions _inputActions;
     [Export] private AudioPlayer _audioPlayer;
-    [Export] private Node playerNode;
 
     private HotbarSlot _activeSlot;
     private HotbarSlot _primarySlot = new(HotbarSlotType.Primary);
@@ -63,7 +63,7 @@ public partial class PlayerHotbar : Node
         if (!IsHotbarSlotEmpty(hotbarSlot.SlotType))
             return;
 
-        item.HoldingPlayer = playerNode;
+        item.HoldingPlayer = _playerRoot;
         hotbarSlot.Item = item;
         if (_activeSlot == hotbarSlot)
             ItemPlacedIntoActiveSlot?.Invoke(item);

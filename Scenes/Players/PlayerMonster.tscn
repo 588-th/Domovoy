@@ -39,10 +39,11 @@
 [ext_resource type="AudioStream" uid="uid://dhgbfgf43idpd" path="res://Audio/SFX/MonsterHitAttackAudio.mp3" id="27_w1d6b"]
 [ext_resource type="Script" path="res://Scripts/Player/Movement/PlayerMovementSounds.cs" id="33_nwoie"]
 
+[sub_resource type="AudioStreamGenerator" id="AudioStreamGenerator_0nix6"]
+mix_rate = 48000.0
+
 [sub_resource type="AudioStreamPolyphonic" id="AudioStreamPolyphonic_iug1w"]
 polyphony = 16
-
-[sub_resource type="AudioStreamGenerator" id="AudioStreamGenerator_vtgji"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_gxpce"]
 render_priority = 0
@@ -210,8 +211,15 @@ properties/1/replication_mode = 2
 metadata/PlayerCamera = NodePath("CommonPart/CameraHolder/PlayerCamera")
 metadata/PlayerHealth = NodePath("ServerPart/Scripts/PlayerHealth")
 metadata/AudioPlayer = NodePath("")
+metadata/AudioPlayer3D = NodePath("CommonPart/CameraHolder/PlayerCamera/Audio3D/Movement")
 
 [node name="CommonPart" type="Node" parent="."]
+
+[node name="Voice" type="AudioStreamPlayer" parent="CommonPart"]
+stream = SubResource("AudioStreamGenerator_0nix6")
+autoplay = true
+bus = &"VoiceChat"
+script = ExtResource("2_bi38w")
 
 [node name="CameraHolder" type="Node3D" parent="CommonPart"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
@@ -257,13 +265,6 @@ autoplay = true
 bus = &"SFX"
 script = ExtResource("1_cu3h5")
 _playerRoot = NodePath("../../../../..")
-
-[node name="Voice" type="AudioStreamPlayer3D" parent="CommonPart/CameraHolder/PlayerCamera/Audio3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
-stream = SubResource("AudioStreamGenerator_vtgji")
-autoplay = true
-bus = &"RecordVoice"
-script = ExtResource("2_bi38w")
 
 [node name="PlayerBody" type="CharacterBody3D" parent="CommonPart" groups=["Hitbox:Player"]]
 collision_layer = 1024

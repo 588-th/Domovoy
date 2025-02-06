@@ -1,4 +1,4 @@
-[gd_scene load_steps=66 format=4 uid="uid://bks72b4kwjk1f"]
+[gd_scene load_steps=67 format=4 uid="uid://bks72b4kwjk1f"]
 
 [ext_resource type="Script" path="res://Scripts/Audio/AudioPlayer3D.cs" id="1_o0yqy"]
 [ext_resource type="Script" path="res://Scripts/Player/InputVector.cs" id="2_8kxsr"]
@@ -19,7 +19,7 @@
 [ext_resource type="Script" path="res://Scripts/Player/Camera/PlayerCameraAnimations.cs" id="10_p0rem"]
 [ext_resource type="PackedScene" uid="uid://c131mixukwjnm" path="res://Scenes/UserInterface/Menu/UIPauseMenu.tscn" id="11_s3mkc"]
 [ext_resource type="Script" path="res://Scripts/Player/ReverbRoom.cs" id="11_y4aya"]
-[ext_resource type="Script" path="res://Scripts/Player/PlayerVoiceRecord.cs" id="12_o81cg"]
+[ext_resource type="Script" path="res://Scripts/Player/PlayerVoiceRecorder.cs" id="12_o81cg"]
 [ext_resource type="PackedScene" uid="uid://cojvgyniobwbk" path="res://Scenes/UserInterface/HUD/UICrosshair.tscn" id="13_h4pmd"]
 [ext_resource type="PackedScene" uid="uid://dsm0c68ucl2kg" path="res://Scenes/UserInterface/HUD/UIHealthInfo.tscn" id="13_m4wnv"]
 [ext_resource type="PackedScene" uid="uid://cab1adf54c54n" path="res://Scenes/UserInterface/HUD/UIInteractInfo.tscn" id="14_1wxl0"]
@@ -42,10 +42,11 @@
 [ext_resource type="Script" path="res://Scripts/Player/PlayerHealthNoise.cs" id="35_h44ek"]
 [ext_resource type="AudioStream" uid="uid://dqwxyc2b5uau1" path="res://Audio/SFX/WhiteNoise.mp3" id="36_up8j6"]
 
+[sub_resource type="AudioStreamGenerator" id="AudioStreamGenerator_skbc1"]
+mix_rate = 48000.0
+
 [sub_resource type="AudioStreamPolyphonic" id="AudioStreamPolyphonic_hspml"]
 polyphony = 16
-
-[sub_resource type="AudioStreamGenerator" id="AudioStreamGenerator_t62yu"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1ki7f"]
 
@@ -201,6 +202,8 @@ _data = {
 "WALK": SubResource("Animation_ybvy8")
 }
 
+[sub_resource type="AudioStreamMicrophone" id="AudioStreamMicrophone_h1e6p"]
+
 [sub_resource type="Resource" id="Resource_h85m8"]
 script = ExtResource("23_sbhbh")
 WalkSpeed = 3.5
@@ -266,6 +269,12 @@ metadata/AudioPlayer3D = NodePath("CommonPart/CameraHolder/PlayerCamera/Audio3D/
 
 [node name="CommonPart" type="Node" parent="."]
 
+[node name="Voice" type="AudioStreamPlayer" parent="CommonPart"]
+stream = SubResource("AudioStreamGenerator_skbc1")
+autoplay = true
+bus = &"VoiceChat"
+script = ExtResource("2_epvhi")
+
 [node name="CameraHolder" type="Node3D" parent="CommonPart"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 
@@ -309,13 +318,6 @@ autoplay = true
 bus = &"SFX"
 script = ExtResource("1_o0yqy")
 _playerRoot = NodePath("../../../../..")
-
-[node name="Voice" type="AudioStreamPlayer3D" parent="CommonPart/CameraHolder/PlayerCamera/Audio3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
-stream = SubResource("AudioStreamGenerator_t62yu")
-autoplay = true
-bus = &"RecordVoice"
-script = ExtResource("2_epvhi")
 
 [node name="ReverbRoom" type="Node3D" parent="CommonPart/CameraHolder"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
@@ -445,8 +447,6 @@ script = ExtResource("4_who5x")
 script = ExtResource("6_ju8pw")
 _playerRoot = NodePath("../../..")
 
-[node name="HealthActions" type="Node" parent="ClientServerPart/Scripts"]
-
 [node name="Audio" type="Node" parent="ClientServerPart"]
 
 [node name="AudioPlayer" type="AudioStreamPlayer" parent="ClientServerPart/Audio" node_paths=PackedStringArray("_playerRoot")]
@@ -483,12 +483,6 @@ _playerCamera = NodePath("../../../CommonPart/CameraHolder/PlayerCamera")
 script = ExtResource("10_p0rem")
 _movementActions = NodePath("../../../ClientServerPart/Scripts/MovementActions")
 _animationPlayer = NodePath("../../Animations/PlayerCameraAnimator")
-
-[node name="PlayerVoiceRecord" type="Node" parent="ClientPart/Scripts" node_paths=PackedStringArray("_inputActions", "_playerVoicePlayer")]
-script = ExtResource("12_o81cg")
-_inputActions = NodePath("../../../ClientServerPart/Scripts/InputActions")
-_playerVoicePlayer = NodePath("../../../CommonPart/CameraHolder/PlayerCamera/Audio3D/Voice")
-_busName = "RecordVoice"
 
 [node name="ReverbRoom" type="Node" parent="ClientPart/Scripts" node_paths=PackedStringArray("_playerBody", "_raycasts")]
 script = ExtResource("11_y4aya")
@@ -534,6 +528,14 @@ libraries = {
 }
 blend_times = [&"IDLE", &"SNEAK", 0.5, &"IDLE", &"WALK", 0.5, &"SNEAK", &"IDLE", 0.2, &"SNEAK", &"WALK", 0.5, &"WALK", &"IDLE", 0.2, &"WALK", &"SNEAK", 0.5]
 
+[node name="PlayerVoiceRecorder" type="AudioStreamPlayer" parent="ClientPart" node_paths=PackedStringArray("_inputActions", "_playerVoicePlayer")]
+stream = SubResource("AudioStreamMicrophone_h1e6p")
+bus = &"VoiceRecorder"
+script = ExtResource("12_o81cg")
+_inputActions = NodePath("../../ClientServerPart/Scripts/InputActions")
+_playerVoicePlayer = NodePath("../../CommonPart/Voice")
+_busName = "VoiceRecorder"
+
 [node name="ServerPart" type="Node" parent="."]
 
 [node name="Scripts" type="Node" parent="ServerPart"]
@@ -561,11 +563,11 @@ script = ExtResource("5_37vo5")
 MaxHealth = 100
 CurrentHealth = 100
 
-[node name="PlayerHotbar" type="Node" parent="ServerPart/Scripts" node_paths=PackedStringArray("_inputActions", "_audioPlayer", "playerNode")]
+[node name="PlayerHotbar" type="Node" parent="ServerPart/Scripts" node_paths=PackedStringArray("_playerRoot", "_inputActions", "_audioPlayer")]
 script = ExtResource("6_eq515")
+_playerRoot = NodePath("../../..")
 _inputActions = NodePath("../../../ClientServerPart/Scripts/InputActions")
 _audioPlayer = NodePath("../../../ClientServerPart/Audio/AudioPlayer")
-playerNode = NodePath("../../..")
 
 [node name="PlayerPropInteractor" type="Node" parent="ServerPart/Scripts" node_paths=PackedStringArray("_inputActions", "RayOfLook", "PlayerBody", "AnchorForDraggedObject", "StaticBody3D", "Generic6DofJoint3D")]
 script = ExtResource("7_d01bu")

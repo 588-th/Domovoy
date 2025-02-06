@@ -1,7 +1,8 @@
-[gd_scene load_steps=19 format=3 uid="uid://dn6bs13u0l2at"]
+[gd_scene load_steps=21 format=3 uid="uid://dn6bs13u0l2at"]
 
 [ext_resource type="Script" path="res://Scripts/Player/HUDParameters.cs" id="1_6eu3q"]
 [ext_resource type="Script" path="res://Scripts/Player/InputActions.cs" id="1_ouwve"]
+[ext_resource type="Script" path="res://Scripts/Player/PlayerVoicePlayer.cs" id="1_q5hjk"]
 [ext_resource type="Script" path="res://Scripts/Player/Spectator/SpectatorPlayerChanger.cs" id="2_acyj6"]
 [ext_resource type="Script" path="res://Scripts/Player/PlayerInputKeys.cs" id="3_y84ls"]
 [ext_resource type="Script" path="res://Scripts/Player/Camera/PlayerCamera.cs" id="5_16n5l"]
@@ -16,6 +17,9 @@
 [ext_resource type="PackedScene" uid="uid://bojdshm0oxy1v" path="res://Scenes/UserInterface/HUD/UIWhiteNoise.tscn" id="10_1fpbw"]
 [ext_resource type="PackedScene" uid="uid://bdau24iq4fib8" path="res://Scenes/UserInterface/HUD/UIVignette.tscn" id="11_6fxlb"]
 [ext_resource type="PackedScene" uid="uid://cq70khnyefibk" path="res://Scenes/UserInterface/HUD/UIDithering.tscn" id="12_m676i"]
+
+[sub_resource type="AudioStreamGenerator" id="AudioStreamGenerator_qtjfk"]
+mix_rate = 48000.0
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_vvjep"]
 properties/0/path = NodePath(".:position")
@@ -43,6 +47,14 @@ properties/4/spawn = true
 properties/4/replication_mode = 2
 
 [node name="PlayerSpectator" type="Node" groups=["Player", "Player:Spectator"]]
+
+[node name="CommonPart" type="Node" parent="."]
+
+[node name="Voice" type="AudioStreamPlayer" parent="CommonPart"]
+stream = SubResource("AudioStreamGenerator_qtjfk")
+autoplay = true
+bus = &"VoiceChat"
+script = ExtResource("1_q5hjk")
 
 [node name="ClientServerPart" type="Node" parent="."]
 

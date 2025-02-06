@@ -4,7 +4,7 @@ using System.IO;
 using System.IO.Compression;
 using System.Collections.Generic;
 
-public partial class PlayerVoicePlayer : AudioStreamPlayer3D
+public partial class PlayerVoicePlayer : AudioStreamPlayer
 {
     private AudioStreamGeneratorPlayback _voicePlayback;
     private List<float> _receiveBuffer = new();
@@ -43,7 +43,6 @@ public partial class PlayerVoicePlayer : AudioStreamPlayer3D
 
         if (_receiveBuffer.Count > MaxBufferSize)
         {
-            GD.Print($"[Warning] Buffer overflow: dropping {_receiveBuffer.Count - MaxBufferSize} samples.");
             _receiveBuffer.RemoveRange(0, _receiveBuffer.Count - MaxBufferSize);
         }
     }

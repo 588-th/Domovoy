@@ -33,7 +33,6 @@ public partial class BeaconToggleRadius : Node
 
     public void ToggleOffRadius()
     {
-        GD.Print("aaaddw");
         _radius.Visible = false;
         _isRadiusEnable = false;
     }

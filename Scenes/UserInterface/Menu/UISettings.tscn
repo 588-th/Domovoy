@@ -116,11 +116,12 @@ grow_horizontal = 2
 grow_vertical = 0
 text = "Close"
 
-[node name="Audio" type="TabBar" parent="MarginContainer/TabContainer" node_paths=PackedStringArray("_settings", "_closeButton", "_masterHSlider", "_interfaceHSlider", "_effectsHSlider", "_voiceChatHSlider", "_masterSpinBox", "_interfaceSpinBox", "_effectsSpinBox", "_voiceChatSpinBox", "_resetMasterButton", "_resetInterfaceButton", "_resetEffectsButton", "_resetVoiceChatButton")]
+[node name="Audio" type="TabBar" parent="MarginContainer/TabContainer" node_paths=PackedStringArray("_settings", "_closeButton", "_muteYourselfCheckBox", "_masterHSlider", "_interfaceHSlider", "_effectsHSlider", "_voiceChatHSlider", "_masterSpinBox", "_interfaceSpinBox", "_effectsSpinBox", "_voiceChatSpinBox", "_resetMasterButton", "_resetInterfaceButton", "_resetEffectsButton", "_resetVoiceChatButton", "_resetMuteYourselfButton")]
 layout_mode = 2
 script = ExtResource("2_smob6")
 _settings = NodePath("../../..")
 _closeButton = NodePath("Close")
+_muteYourselfCheckBox = NodePath("MarginContainer/VBoxContainer/MuteYourself/HBoxContainer/MuteYourselfCheckBox")
 _masterHSlider = NodePath("MarginContainer/VBoxContainer/Master/Master/MasterSlider")
 _interfaceHSlider = NodePath("MarginContainer/VBoxContainer/Interface/Interface/InterfaceSlider")
 _effectsHSlider = NodePath("MarginContainer/VBoxContainer/Effects/Effects/EffectsSlider")
@@ -133,6 +134,7 @@ _resetMasterButton = NodePath("MarginContainer/VBoxContainer/Master/Reset")
 _resetInterfaceButton = NodePath("MarginContainer/VBoxContainer/Interface/Reset")
 _resetEffectsButton = NodePath("MarginContainer/VBoxContainer/Effects/Reset")
 _resetVoiceChatButton = NodePath("MarginContainer/VBoxContainer/VoiceChat/Reset")
+_resetMuteYourselfButton = NodePath("MarginContainer/VBoxContainer/MuteYourself/Reset")
 metadata/_tab_index = 1
 
 [node name="MarginContainer" type="MarginContainer" parent="MarginContainer/TabContainer/Audio"]
@@ -318,6 +320,31 @@ max_value = 50.0
 step = 0.1
 
 [node name="Reset" type="Button" parent="MarginContainer/TabContainer/Audio/MarginContainer/VBoxContainer/VoiceChat"]
+layout_mode = 2
+size_flags_horizontal = 10
+size_flags_vertical = 4
+size_flags_stretch_ratio = 0.1
+disabled = true
+text = "R"
+
+[node name="MuteYourself" type="HBoxContainer" parent="MarginContainer/TabContainer/Audio/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/TabContainer/Audio/MarginContainer/VBoxContainer/MuteYourself"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="MuteYourself" type="Label" parent="MarginContainer/TabContainer/Audio/MarginContainer/VBoxContainer/MuteYourself/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+text = "Mute yourself"
+
+[node name="MuteYourselfCheckBox" type="CheckBox" parent="MarginContainer/TabContainer/Audio/MarginContainer/VBoxContainer/MuteYourself/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 10
+button_pressed = true
+
+[node name="Reset" type="Button" parent="MarginContainer/TabContainer/Audio/MarginContainer/VBoxContainer/MuteYourself"]
 layout_mode = 2
 size_flags_horizontal = 10
 size_flags_vertical = 4

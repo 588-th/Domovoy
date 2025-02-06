@@ -60,6 +60,7 @@ public partial class SpectatorSpawner : MultiplayerSpawner
 
     private void SetAuthority(Node spectatorRoot, int authorityID)
     {
+        SetMultiplayerAuthoritys(spectatorRoot, "CommonPart", authorityID);
         SetMultiplayerAuthoritys(spectatorRoot, "ClientPart", authorityID);
         SetMultiplayerAuthoritys(spectatorRoot, "ClientServerPart", authorityID);
         SetMultiplayerAuthoritys(spectatorRoot, "ClientServerPart/SpectatorCamera", 1);

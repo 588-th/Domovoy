@@ -14,7 +14,7 @@
 [ext_resource type="Script" path="res://Scripts/Player/Movement/PlayerMovement.cs" id="8_2bsv7"]
 [ext_resource type="Script" path="res://Scripts/Player/Camera/PlayerCameraAnimations.cs" id="9_1j4wq"]
 [ext_resource type="Script" path="res://Scripts/Player/PropInteract/PlayerPropInteractor.cs" id="11_cuem1"]
-[ext_resource type="Script" path="res://Scripts/Player/PlayerVoiceRecord.cs" id="11_unrwd"]
+[ext_resource type="Script" path="res://Scripts/Player/PlayerVoiceRecorder.cs" id="11_unrwd"]
 [ext_resource type="PackedScene" uid="uid://dneigjq1nfs2b" path="res://Scenes/UserInterface/Menu/UIPlayerList.tscn" id="12_ylh5w"]
 [ext_resource type="PackedScene" uid="uid://bdau24iq4fib8" path="res://Scenes/UserInterface/HUD/UIVignette.tscn" id="13_fsu3j"]
 [ext_resource type="Script" path="res://Scripts/Player/Camera/RemoteCameraRotation.cs" id="14_2swan"]
@@ -25,11 +25,11 @@
 [ext_resource type="Script" path="res://Scripts/Player/Movement/PlayerMovementSounds.cs" id="19_l34sy"]
 [ext_resource type="AudioStream" uid="uid://bnr2qn01if4yl" path="res://Audio/SFX/Movement/Land.mp3" id="20_6g22m"]
 
-[sub_resource type="AudioStreamPolyphonic" id="AudioStreamPolyphonic_0m4cq"]
-polyphony = 16
-
 [sub_resource type="AudioStreamGenerator" id="AudioStreamGenerator_hq45x"]
 mix_rate = 48000.0
+
+[sub_resource type="AudioStreamPolyphonic" id="AudioStreamPolyphonic_0m4cq"]
+polyphony = 16
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5c43a"]
 
@@ -197,6 +197,12 @@ metadata/PlayerCamera = NodePath("CommonPart/CameraHolder/PlayerCamera")
 
 [node name="CommonPart" type="Node" parent="."]
 
+[node name="Voice" type="AudioStreamPlayer" parent="CommonPart"]
+stream = SubResource("AudioStreamGenerator_hq45x")
+autoplay = true
+bus = &"VoiceChat"
+script = ExtResource("2_jqgbx")
+
 [node name="CameraHolder" type="Node3D" parent="CommonPart"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, -5.32905e-15)
 
@@ -235,12 +241,6 @@ autoplay = true
 bus = &"SFX"
 script = ExtResource("1_4resh")
 _playerRoot = NodePath("../../../../..")
-
-[node name="Voice" type="AudioStreamPlayer3D" parent="CommonPart/CameraHolder/PlayerCamera/Audio3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
-stream = SubResource("AudioStreamGenerator_hq45x")
-autoplay = true
-script = ExtResource("2_jqgbx")
 
 [node name="PlayerBody" type="CharacterBody3D" parent="CommonPart" groups=["Hitbox:Player"]]
 transform = Transform3D(1, 0, 0, 0, 1, 1.06581e-14, 0, -1.06581e-14, 1, 0, 0, 0)
@@ -320,12 +320,6 @@ script = ExtResource("9_1j4wq")
 _movementActions = NodePath("../../../ClientServerPart/Scripts/MovementActions")
 _animationPlayer = NodePath("../../Animations/PlayerCameraAnimator")
 
-[node name="PlayerVoiceRecord" type="Node" parent="ClientPart/Scripts" node_paths=PackedStringArray("_inputActions", "_playerVoicePlayer")]
-script = ExtResource("11_unrwd")
-_inputActions = NodePath("../../../ClientServerPart/Scripts/InputActions")
-_playerVoicePlayer = NodePath("../../../CommonPart/CameraHolder/PlayerCamera/Audio3D/Voice")
-_busName = "RecordVoice"
-
 [node name="UI" type="Node" parent="ClientPart"]
 
 [node name="UIPauseMenu" parent="ClientPart/UI" node_paths=PackedStringArray("_inputActions") instance=ExtResource("5_0kvk8")]
@@ -350,10 +344,13 @@ libraries = {
 }
 blend_times = [&"IDLE", &"SNEAK", 0.5, &"IDLE", &"WALK", 0.5, &"SNEAK", &"IDLE", 0.2, &"SNEAK", &"WALK", 0.5, &"WALK", &"IDLE", 0.2, &"WALK", &"SNEAK", 0.5]
 
-[node name="RecordVoice" type="AudioStreamPlayer" parent="ClientPart"]
+[node name="PlayerVoiceRecorder" type="AudioStreamPlayer" parent="ClientPart" node_paths=PackedStringArray("_inputActions", "_playerVoicePlayer")]
 stream = SubResource("AudioStreamMicrophone_u0ofn")
-autoplay = true
-bus = &"RecordVoice"
+bus = &"VoiceRecorder"
+script = ExtResource("11_unrwd")
+_inputActions = NodePath("../../ClientServerPart/Scripts/InputActions")
+_playerVoicePlayer = NodePath("../../CommonPart/Voice")
+_busName = "VoiceRecorder"
 
 [node name="ServerPart" type="Node" parent="."]
 
