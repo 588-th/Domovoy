@@ -20,6 +20,15 @@ public partial class GameStage : Node
     public override void _Ready()
     {
         Instance = this;
+
+        MultiplayerConnection.Instance.ClientClosed += Instance.ChangeStageToMainMenu;
+        MultiplayerConnection.Instance.ServerClosed += Instance.ChangeStageToMainMenu;
+    }
+
+    public override void _ExitTree()
+    {
+        MultiplayerConnection.Instance.ClientClosed -= Instance.ChangeStageToMainMenu;
+        MultiplayerConnection.Instance.ServerClosed -= Instance.ChangeStageToMainMenu;
     }
 
     public void ChangeStageToMainMenu()

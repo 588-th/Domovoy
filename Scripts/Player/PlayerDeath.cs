@@ -33,7 +33,7 @@ public partial class PlayerDeath : Node
         SpawnCorpse(playerID);
         DespawnPlayer();
 
-        GameEvent.Instance.InvokePlayerDied(playerID);
+        GameEvent.Instance.PlayerDied?.Invoke(playerID);
     }
 
     private void DropItems()

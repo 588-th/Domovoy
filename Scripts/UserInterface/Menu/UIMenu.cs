@@ -8,10 +8,14 @@ public partial class UIMenu : Control
     [Export] private Button _settingsButton;
     [Export] private Button _disconnectButton;
 
+    private bool _isServer;
+
     public override void _Ready()
     {
+        _startRound.Visible = false;
         if (Multiplayer.IsServer())
         {
+            _isServer = true;
             _startRound.Visible = true;
             _startRound.Pressed += OnStartRoundButtonPressed;
         }
@@ -22,8 +26,9 @@ public partial class UIMenu : Control
 
     public override void _ExitTree()
     {
-        if (Multiplayer.IsServer())
+        if (_isServer)
             _startRound.Pressed -= OnStartRoundButtonPressed;
+
         _settingsButton.Pressed -= OnSettingsButtonPressed;
         _disconnectButton.Pressed -= OnDisconnectButtonPressed;
     }

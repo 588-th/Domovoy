@@ -11,14 +11,14 @@ public partial class RoundRoleSpawner : Node
 
     public override void _Ready()
     {
-        GameEvent.Instance.playerDied += OnPlayerDied;
+        GameEvent.Instance.PlayerDied += OnPlayerDied;
         Multiplayer.PeerConnected += OnPeerConnected;
         Multiplayer.PeerDisconnected += OnPeerDisconnected;
     }
 
     public override void _ExitTree()
     {
-        GameEvent.Instance.playerDied -= OnPlayerDied;
+        GameEvent.Instance.PlayerDied -= OnPlayerDied;
         Multiplayer.PeerConnected -= OnPeerConnected;
         Multiplayer.PeerDisconnected -= OnPeerDisconnected;
     }

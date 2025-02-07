@@ -10,6 +10,7 @@ public partial class Item : RigidBody3D
     public Node HoldingPlayer;
 
     public Action ItemUsed;
+    public Action<Item> ItemFree;
 
     public virtual void BindOnHandActions(InputActions inputAction)
     {
@@ -34,5 +35,12 @@ public partial class Item : RigidBody3D
     public virtual string GetItemInfo()
     {
         return "";
+    }
+
+    protected void FreeItem()
+    {
+        ItemFree?.Invoke(this);
+        GetParent().RemoveChild(this);
+        QueueFree();
     }
 }

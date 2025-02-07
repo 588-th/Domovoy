@@ -5,8 +5,8 @@ public partial class MultiplayerConnection : Node
 {
     public static MultiplayerConnection Instance { get; private set; }
 
-    private enum EnumConnectionState { None, Server, Client }
-    private EnumConnectionState connectionState = EnumConnectionState.None;
+    public enum EnumConnectionState { None, Server, Client }
+    public EnumConnectionState ConnectionState = EnumConnectionState.None;
 
     public Action ServerCreated;
     public Action ServerClosed;
@@ -21,7 +21,7 @@ public partial class MultiplayerConnection : Node
 
     public void CreateServer(int port)
     {
-        if (connectionState != EnumConnectionState.None)
+        if (ConnectionState != EnumConnectionState.None)
             return;
 
         ENetMultiplayerPeer peer = new();
@@ -31,13 +31,13 @@ public partial class MultiplayerConnection : Node
             return;
 
         Multiplayer.MultiplayerPeer = peer;
-        connectionState = EnumConnectionState.Server;
+        ConnectionState = EnumConnectionState.Server;
         ServerCreated?.Invoke();
     }
 
     public void CloseServer()
     {
-        if (connectionState != EnumConnectionState.Server)
+        if (ConnectionState != EnumConnectionState.Server)
             return;
 
         foreach (var peerID in Multiplayer.GetPeers())
@@ -47,7 +47,7 @@ public partial class MultiplayerConnection : Node
         {
             Multiplayer.MultiplayerPeer.Dispose();
             Multiplayer.MultiplayerPeer = null;
-            connectionState = EnumConnectionState.None;
+            ConnectionState = EnumConnectionState.None;
             ServerClosed?.Invoke();
         }
         else
@@ -56,7 +56,7 @@ public partial class MultiplayerConnection : Node
 
     public void CreateClient(string ip, int port)
     {
-        if (connectionState != EnumConnectionState.None)
+        if (ConnectionState != EnumConnectionState.None)
             return;
 
         ENetMultiplayerPeer peer = new();
@@ -70,14 +70,14 @@ public partial class MultiplayerConnection : Node
 
         Multiplayer.ServerDisconnected += CloseClient;
 
-        connectionState = EnumConnectionState.Client;
+        ConnectionState = EnumConnectionState.Client;
         Multiplayer.MultiplayerPeer = peer;
         ClientCreated?.Invoke();
     }
 
     public void CloseClient()
     {
-        if (connectionState != EnumConnectionState.Client)
+        if (ConnectionState != EnumConnectionState.Client)
             return;
 
         if (Multiplayer.MultiplayerPeer.GetConnectionStatus() == MultiplayerPeer.ConnectionStatus.Connecting)
@@ -87,7 +87,7 @@ public partial class MultiplayerConnection : Node
 
         Multiplayer.MultiplayerPeer.Dispose();
         Multiplayer.MultiplayerPeer = null;
-        connectionState = EnumConnectionState.None;
+        ConnectionState = EnumConnectionState.None;
         ClientClosed?.Invoke();
     }
 
@@ -98,7 +98,7 @@ public partial class MultiplayerConnection : Node
             Multiplayer.MultiplayerPeer.PeerDisconnected -= OnAllPeerDisconnected;
             Multiplayer.MultiplayerPeer.Dispose();
             Multiplayer.MultiplayerPeer = null;
-            connectionState = EnumConnectionState.None;
+            ConnectionState = EnumConnectionState.None;
             ServerClosed?.Invoke();
         }
     }

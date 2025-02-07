@@ -17,6 +17,7 @@ public partial class PlayerHotbar : Node
     public Action<Item> ItemPlacedIntoActiveSlot;
     public Action<Item> ItemPlacedIntoInactiveSlot;
     public Action<Item> ItemAborted;
+    public Action<Item> ItemFree;
 
     public override void _Ready()
     {
@@ -72,6 +73,8 @@ public partial class PlayerHotbar : Node
             _audioPlayer.PlayAudio(item.PickupAudio);
             ItemPlacedIntoInactiveSlot?.Invoke(item);
         }
+
+        item.ItemFree += OnItemFree;
     }
 
     public void AbortItem(Item item)
@@ -79,6 +82,14 @@ public partial class PlayerHotbar : Node
         item.HoldingPlayer = null;
         GetSlot(item.SlotType).Item = null;
         ItemAborted?.Invoke(item);
+    }
+
+    private void OnItemFree(Item item)
+    {
+        item.ItemFree -= OnItemFree;
+        item.HoldingPlayer = null;
+        GetSlot(item.SlotType).Item = null;
+        ItemFree?.Invoke(item);
     }
 
     private void ActivateSlot(HotbarSlot hotbarSlot)

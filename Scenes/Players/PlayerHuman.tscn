@@ -286,7 +286,7 @@ cull_mask = 524287
 [node name="RayOfLook" type="RayCast3D" parent="CommonPart/CameraHolder/PlayerCamera/PlayerLook"]
 transform = Transform3D(1, 0, 0, 0, 1, 1.06581e-14, 0, -1.06581e-14, 1, 0, 0, 0)
 target_position = Vector3(0, 0, -2.5)
-collision_mask = 527
+collision_mask = 559
 hit_back_faces = false
 
 [node name="anchorActiveSlot" type="Marker3D" parent="CommonPart/CameraHolder/PlayerCamera/PlayerLook"]
@@ -643,7 +643,7 @@ _spawnable_scenes = PackedStringArray("res://Scenes/Items/Weapons/Rifl.tscn")
 spawn_path = NodePath("../../CommonPart/PlayerBody/Achors/anchorPrimatySlot")
 
 [node name="SecondaryItemSpawner" type="MultiplayerSpawner" parent="Spawners"]
-_spawnable_scenes = PackedStringArray("res://Scenes/Items/Weapons/Pistol.tscn")
+_spawnable_scenes = PackedStringArray("res://Scenes/Items/Weapons/Pistol.tscn", "res://Scenes/Items/Fuse.tscn")
 spawn_path = NodePath("../../CommonPart/PlayerBody/Achors/anchorSecondarySlot")
 
 [node name="TertiaryItemSpawner" type="MultiplayerSpawner" parent="Spawners"]
@@ -655,7 +655,7 @@ _spawnable_scenes = PackedStringArray("res://Scenes/Items/HeadFlashlight.tscn")
 spawn_path = NodePath("../../CommonPart/CameraHolder/PlayerCamera/PlayerLook/anchorQuaternarySlot")
 
 [node name="HoldingItemSpawner" type="MultiplayerSpawner" parent="Spawners"]
-_spawnable_scenes = PackedStringArray("res://Scenes/Items/Weapons/Pistol.tscn", "res://Scenes/Items/Weapons/Rifl.tscn", "res://Scenes/Items/Medkit.tscn", "res://Scenes/Items/HeadFlashlight.tscn", "res://Scenes/Items/Beacon.tscn")
+_spawnable_scenes = PackedStringArray("res://Scenes/Items/Weapons/Pistol.tscn", "res://Scenes/Items/Weapons/Rifl.tscn", "res://Scenes/Items/Medkit.tscn", "res://Scenes/Items/HeadFlashlight.tscn", "res://Scenes/Items/Beacon.tscn", "res://Scenes/Items/Fuse.tscn")
 spawn_path = NodePath("../../CommonPart/CameraHolder/PlayerCamera/PlayerLook/anchorActiveSlot")
 
 [node name="Synchronizers" type="Node" parent="."]

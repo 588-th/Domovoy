@@ -8,9 +8,6 @@ public partial class GameStageSpawner : Node
 
     public override void _Ready()
     {
-        MultiplayerConnection.Instance.ClientClosed += GameStage.Instance.ChangeStageToMainMenu;
-        MultiplayerConnection.Instance.ServerClosed += GameStage.Instance.ChangeStageToMainMenu;
-
         GameStage.Instance.MainMenuStage += StartMainMenu;
         GameStage.Instance.LobbyStage += StartLobby;
         GameStage.Instance.RoundStage += StartRound;
@@ -18,9 +15,6 @@ public partial class GameStageSpawner : Node
 
     public override void _ExitTree()
     {
-        MultiplayerConnection.Instance.ClientClosed -= GameStage.Instance.ChangeStageToMainMenu;
-        MultiplayerConnection.Instance.ServerClosed -= GameStage.Instance.ChangeStageToMainMenu;
-
         GameStage.Instance.MainMenuStage -= StartMainMenu;
         GameStage.Instance.LobbyStage -= StartLobby;
         GameStage.Instance.RoundStage -= StartRound;

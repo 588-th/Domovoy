@@ -28,6 +28,7 @@ public partial class PlayerItemEquipper : Node
         _playerHotbar.ItemPlacedIntoInactiveSlot += EquipItem;
         _playerHotbar.ActiveSlotChanged += OnActiveSlotChanged;
         _playerHotbar.ItemAborted += OnItemAborted;
+        _playerHotbar.ItemFree += OnItemFree;
     }
 
     public override void _ExitTree()
@@ -36,11 +37,12 @@ public partial class PlayerItemEquipper : Node
         _playerHotbar.ItemPlacedIntoInactiveSlot -= EquipItem;
         _playerHotbar.ActiveSlotChanged -= OnActiveSlotChanged;
         _playerHotbar.ItemAborted -= OnItemAborted;
+        _playerHotbar.ItemFree -= OnItemFree;
     }
 
     public Item GetHoldingItem()
     {
-        return _holdingItem; 
+        return _holdingItem;
     }
 
     private void OnActiveSlotChanged(HotbarSlot hotbarSlot)
@@ -54,6 +56,21 @@ public partial class PlayerItemEquipper : Node
             TakeItemOnHand(hotbarSlot.Item);
 
         ActiveSlotChanged?.Invoke(hotbarSlot.Item);
+    }
+
+    private void OnItemFree(Item item)
+    {
+        if (_holdingItem == item)
+        {
+            item.UnbindOnHandActions(_inputActions);
+            ItemOnActiveSlotChanged?.Invoke(item);
+            _holdingItem = null;
+        }
+        else
+        {
+            item.UnbindEquipActions(_inputActions);
+            _equipedItems.Remove(item);
+        }
     }
 
     private void OnItemAborted(Item item)

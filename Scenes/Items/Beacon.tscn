@@ -9,10 +9,10 @@
 [ext_resource type="AudioStream" uid="uid://dnunfvdaqkuap" path="res://Audio/SFX/Beacon/BeaconNoise.mp3" id="6_mjwd1"]
 [ext_resource type="Script" path="res://Scripts/Items/Beacon/BeaconToggleRadius.cs" id="8_eym4q"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ol6f8"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jff1n"]
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_arvfc"]
-material = SubResource("StandardMaterial3D_ol6f8")
+material = SubResource("StandardMaterial3D_jff1n")
 top_radius = 0.05
 bottom_radius = 0.05
 height = 0.5
@@ -23,7 +23,7 @@ size = Vector3(0.120117, 0.505084, 0.254)
 [sub_resource type="AudioStreamPolyphonic" id="AudioStreamPolyphonic_dm1dr"]
 polyphony = 4
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_gq77r"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_sa5lc"]
 render_priority = 0
 shader = ExtResource("5_ohoau")
 shader_parameter/color1 = Color(1, 1, 1, 0)
@@ -33,7 +33,7 @@ shader_parameter/fresnel_sharpness = 14.03
 
 [sub_resource type="SphereMesh" id="SphereMesh_j7v0s"]
 lightmap_size_hint = Vector2i(33, 17)
-material = SubResource("ShaderMaterial_gq77r")
+material = SubResource("ShaderMaterial_sa5lc")
 radius = 1.5
 height = 3.0
 radial_segments = 16

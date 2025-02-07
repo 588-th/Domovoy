@@ -9,6 +9,14 @@ public partial class GlobalRpcFunctions : Node
         Instance = this;
     }
 
+    public void SetVisibility(NodePath nodePath, bool isVisible)
+    {
+        if (Multiplayer.GetUniqueId() != 1)
+            return;
+
+        Rpc(nameof(RpcSetVisibility), nodePath, isVisible);
+    }
+
     public void Reparent(NodePath nodePath, NodePath parentNodePath)
     {
         if (Multiplayer.GetUniqueId() != 1)
@@ -53,6 +61,13 @@ public partial class GlobalRpcFunctions : Node
     public void RpcReparent(NodePath nodePath, NodePath parentNodePath)
     {
         GetNode(nodePath).Reparent(GetNode(parentNodePath));
+    }
+
+    [Rpc(MultiplayerApi.RpcMode.AnyPeer, CallLocal = true, TransferMode = MultiplayerPeer.TransferModeEnum.Reliable)]
+    public void RpcSetVisibility(NodePath nodePath, bool isVisible)
+    {
+        if (GetNode(nodePath) is Node3D node3D)
+            node3D.Visible = isVisible;
     }
 
     [Rpc(MultiplayerApi.RpcMode.AnyPeer, CallLocal = true, TransferMode = MultiplayerPeer.TransferModeEnum.Reliable)]

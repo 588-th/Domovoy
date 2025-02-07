@@ -1,0 +1,101 @@
+[gd_scene load_steps=9 format=3 uid="uid://bsqm2lxpoa1xh"]
+
+[ext_resource type="Script" path="res://Scripts/Net/ServerPartRemover.cs" id="1_865fp"]
+[ext_resource type="Script" path="res://Scripts/Shield/ShieldFuseSetting.cs" id="2_ls0ym"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_gilb4"]
+size = Vector3(0.35, 0.45, 0.1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_d8prf"]
+albedo_color = Color(1, 0.976667, 0.3, 1)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_hsjmy"]
+material = SubResource("StandardMaterial3D_d8prf")
+top_radius = 0.05
+bottom_radius = 0.05
+height = 0.2
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_knx5i"]
+shading_mode = 0
+albedo_color = Color(0.4, 1, 0.69, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_oc36b"]
+material = SubResource("StandardMaterial3D_knx5i")
+radius = 0.01
+height = 0.01
+is_hemisphere = true
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_c3pbj"]
+size = Vector3(0.357422, 0.455322, 0.104492)
+
+[node name="Shield" type="StaticBody3D" groups=["Object:Shield"]]
+collision_layer = 32
+collision_mask = 1806
+metadata/ShieldFuseSetting = NodePath("ServerPart/ShieldFuseSetting")
+
+[node name="Model" type="MeshInstance3D" parent="."]
+mesh = SubResource("BoxMesh_gilb4")
+
+[node name="Node3D" type="Node3D" parent="Model"]
+visible = false
+
+[node name="Fuse" type="MeshInstance3D" parent="Model/Node3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.119975, 0.048095, 0.0273561)
+mesh = SubResource("CylinderMesh_hsjmy")
+skeleton = NodePath("../..")
+
+[node name="Light" type="OmniLight3D" parent="Model/Node3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.123219, 0.179096, 0.046723)
+light_color = Color(0.4, 1, 0.690196, 1)
+light_energy = 0.02
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Model/Node3D"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, -0.123219, 0.179096, 0.046723)
+mesh = SubResource("SphereMesh_oc36b")
+
+[node name="Node3D2" type="Node3D" parent="Model"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.117415, 0, 0)
+visible = false
+
+[node name="Fuse" type="MeshInstance3D" parent="Model/Node3D2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.119975, 0.048095, 0.0273561)
+mesh = SubResource("CylinderMesh_hsjmy")
+skeleton = NodePath("../..")
+
+[node name="Light" type="OmniLight3D" parent="Model/Node3D2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.123219, 0.179096, 0.046723)
+light_color = Color(0.4, 1, 0.690196, 1)
+light_energy = 0.02
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Model/Node3D2"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, -0.123219, 0.179096, 0.046723)
+mesh = SubResource("SphereMesh_oc36b")
+
+[node name="Node3D3" type="Node3D" parent="Model"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.234872, 0, 0)
+visible = false
+
+[node name="Fuse" type="MeshInstance3D" parent="Model/Node3D3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.119975, 0.048095, 0.0273561)
+mesh = SubResource("CylinderMesh_hsjmy")
+skeleton = NodePath("../..")
+
+[node name="Light" type="OmniLight3D" parent="Model/Node3D3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.123219, 0.179096, 0.046723)
+light_color = Color(0.4, 1, 0.690196, 1)
+light_energy = 0.02
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Model/Node3D3"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, -0.123219, 0.179096, 0.046723)
+mesh = SubResource("SphereMesh_oc36b")
+
+[node name="Hitbox" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_c3pbj")
+
+[node name="ServerPart" type="Node" parent="." node_paths=PackedStringArray("_serverParts")]
+script = ExtResource("1_865fp")
+_serverParts = [NodePath(".")]
+
+[node name="ShieldFuseSetting" type="Node" parent="ServerPart" node_paths=PackedStringArray("_fuses")]
+script = ExtResource("2_ls0ym")
+_fuses = [NodePath("../../Model/Node3D"), NodePath("../../Model/Node3D2"), NodePath("../../Model/Node3D3")]

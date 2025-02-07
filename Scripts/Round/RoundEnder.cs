@@ -5,12 +5,12 @@ public partial class RoundEnder : Node
 {
     public override void _Ready()
     {
-        GameEvent.Instance.playerDied += CheckPlayers;
+        GameEvent.Instance.PlayerDied += CheckPlayers;
     }
 
     public override void _ExitTree()
     {
-        GameEvent.Instance.playerDied -= CheckPlayers;
+        GameEvent.Instance.PlayerDied -= CheckPlayers;
     }
 
     private void CheckPlayers(long id)
