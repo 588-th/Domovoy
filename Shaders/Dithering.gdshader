@@ -20,7 +20,6 @@ const float dither8x8[64] = float[](
 void fragment() {
     vec4 screen_color = texture(screen_texture, SCREEN_UV);
 
-    // Вычисление яркости (черно-белый уровень)
     float brightness = dot(screen_color.rgb, vec3(0.299, 0.587, 0.114));
     float dithered_brightness = brightness;
 

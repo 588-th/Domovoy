@@ -1,0 +1,71 @@
+[gd_scene load_steps=4 format=3 uid="uid://c131mixukwjnm"]
+
+[ext_resource type="Theme" uid="uid://dbp6r2wyjejft" path="res://Themes/Theme.tres" id="1_sxrp4"]
+[ext_resource type="Script" path="res://Scripts/UserInterface/Menu/UIMenuPause.cs" id="2_2skps"]
+[ext_resource type="PackedScene" uid="uid://csxytgmqigpea" path="res://Scenes/UserInterface/Windows/UIWindowSettings.tscn" id="3_yvdk6"]
+
+[node name="UIMenuPause" type="Control" node_paths=PackedStringArray("_UIWindowSettings", "_buttonStartRound", "_buttonSettings", "_buttonDisconnect")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_sxrp4")
+script = ExtResource("2_2skps")
+_UIWindowSettings = NodePath("UIWindowSettings")
+_buttonStartRound = NodePath("UIMenu/MarginContainer/VBoxContainer/ButtonStartRound")
+_buttonSettings = NodePath("UIMenu/MarginContainer/VBoxContainer/ButtonSettings")
+_buttonDisconnect = NodePath("UIMenu/MarginContainer/VBoxContainer/ButtonDisconnect")
+
+[node name="UIMenu" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="UIMenu"]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = -100.0
+offset_right = 225.0
+offset_bottom = 100.0
+grow_vertical = 2
+theme_override_constants/margin_left = 50
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UIMenu/MarginContainer"]
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_constants/separation = 10
+
+[node name="ButtonStartRound" type="Button" parent="UIMenu/MarginContainer/VBoxContainer"]
+visible = false
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+size_flags_vertical = 6
+text = "StartRound"
+
+[node name="ButtonSettings" type="Button" parent="UIMenu/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+size_flags_vertical = 3
+text = "Settings"
+
+[node name="ButtonDisconnect" type="Button" parent="UIMenu/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+size_flags_vertical = 3
+text = "Disconnect"
+
+[node name="UIWindowSettings" parent="." instance=ExtResource("3_yvdk6")]
+visible = false
+layout_mode = 1
+
+[node name="MarginContainer" parent="UIWindowSettings" index="0"]
+theme_override_constants/margin_left = 255
+
+[editable path="UIWindowSettings"]

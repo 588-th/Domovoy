@@ -2,9 +2,9 @@ using Godot;
 
 public partial class RoundRoleSpawner : Node
 {
-    [Export] private PlayerSpawner _playerHumanSpawner;
-    [Export] private PlayerSpawner _playerMonsterSpawner;
-    [Export] private SpectatorSpawner _playerSpectatorSpawner;
+    [Export] private SpawnerPlayer _playerHumanSpawner;
+    [Export] private SpawnerPlayer _playerMonsterSpawner;
+    [Export] private SpawnerSpectator _playerSpectatorSpawner;
     [Export] private PackedScene _playerHumanScene;
     [Export] private PackedScene _playerMonsterScene;
     [Export] private PackedScene _playerSpectatorScene;

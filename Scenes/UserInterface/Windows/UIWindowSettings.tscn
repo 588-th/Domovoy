@@ -1,0 +1,436 @@
+[gd_scene load_steps=5 format=3 uid="uid://csxytgmqigpea"]
+
+[ext_resource type="Theme" uid="uid://dbp6r2wyjejft" path="res://Themes/Theme.tres" id="1_76ok0"]
+[ext_resource type="Script" path="res://Scripts/UserInterface/Menu/UISettingsVideo.cs" id="1_jcenu"]
+[ext_resource type="Script" path="res://Scripts/UserInterface/Menu/UISettingsMouse.cs" id="2_5yfvq"]
+[ext_resource type="Script" path="res://Scripts/UserInterface/Menu/UISettingsAudio.cs" id="2_smob6"]
+
+[node name="UIWindowSettings" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme = ExtResource("1_76ok0")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = -190.0
+offset_right = 377.0
+offset_bottom = 190.0
+grow_vertical = 2
+mouse_filter = 2
+theme_override_constants/margin_left = 50
+
+[node name="TabContainer" type="TabContainer" parent="MarginContainer"]
+layout_mode = 2
+tab_alignment = 1
+current_tab = 0
+clip_tabs = false
+
+[node name="Video" type="TabBar" parent="MarginContainer/TabContainer" node_paths=PackedStringArray("_UIWindowSettings", "_optionButtonWindowMode", "_optionButtonResolutions", "_spinBoxFOV", "_hSliderFOV", "_buttonClose")]
+layout_mode = 2
+script = ExtResource("1_jcenu")
+_UIWindowSettings = NodePath("../../..")
+_optionButtonWindowMode = NodePath("MarginContainer/VBoxContainer/VBoxWindowMode/OptionButtonWindowMode")
+_optionButtonResolutions = NodePath("MarginContainer/VBoxContainer/VBoxResolution/OptionButtonResolution")
+_spinBoxFOV = NodePath("MarginContainer/VBoxContainer/VBoxFOV/HBoxContainer/SpinBoxFOV")
+_hSliderFOV = NodePath("MarginContainer/VBoxContainer/VBoxFOV/HSliderFOV")
+_buttonClose = NodePath("ButtonCloseVideo")
+metadata/_tab_index = 0
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/TabContainer/Video"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 15
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 15
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/TabContainer/Video/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 15
+
+[node name="VBoxWindowMode" type="VBoxContainer" parent="MarginContainer/TabContainer/Video/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="LabelWindowMode" type="Label" parent="MarginContainer/TabContainer/Video/MarginContainer/VBoxContainer/VBoxWindowMode"]
+layout_mode = 2
+text = "Window Mode"
+
+[node name="OptionButtonWindowMode" type="OptionButton" parent="MarginContainer/TabContainer/Video/MarginContainer/VBoxContainer/VBoxWindowMode"]
+layout_mode = 2
+
+[node name="VBoxResolution" type="VBoxContainer" parent="MarginContainer/TabContainer/Video/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="LabelResolution" type="Label" parent="MarginContainer/TabContainer/Video/MarginContainer/VBoxContainer/VBoxResolution"]
+layout_mode = 2
+text = "Resolution"
+
+[node name="OptionButtonResolution" type="OptionButton" parent="MarginContainer/TabContainer/Video/MarginContainer/VBoxContainer/VBoxResolution"]
+layout_mode = 2
+
+[node name="VBoxFOV" type="VBoxContainer" parent="MarginContainer/TabContainer/Video/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/TabContainer/Video/MarginContainer/VBoxContainer/VBoxFOV"]
+layout_mode = 2
+
+[node name="LabelFOV" type="Label" parent="MarginContainer/TabContainer/Video/MarginContainer/VBoxContainer/VBoxFOV/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+text = "FOV"
+
+[node name="SpinBoxFOV" type="SpinBox" parent="MarginContainer/TabContainer/Video/MarginContainer/VBoxContainer/VBoxFOV/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 10
+min_value = 1.0
+max_value = 179.0
+value = 75.0
+
+[node name="HSliderFOV" type="HSlider" parent="MarginContainer/TabContainer/Video/MarginContainer/VBoxContainer/VBoxFOV"]
+layout_mode = 2
+min_value = 1.0
+max_value = 179.0
+value = 75.0
+
+[node name="ButtonCloseVideo" type="Button" parent="MarginContainer/TabContainer/Video"]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -31.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "Close"
+
+[node name="Audio" type="TabBar" parent="MarginContainer/TabContainer" node_paths=PackedStringArray("_UIWindowSettings", "_hSliderMaster", "_hSliderInterface", "_hSliderEffects", "_hSliderVoiceChat", "_spinBoxMaster", "_spinBoxInterface", "_spinBoxEffects", "_spinBoxVoiceChat", "_checkBoxMuteYourself", "_buttonResetMaster", "_buttonResetInterface", "_buttonResetEffects", "_buttonResetVoiceChat", "_buttonResetMuteYourself", "_buttonClose")]
+visible = false
+layout_mode = 2
+script = ExtResource("2_smob6")
+_UIWindowSettings = NodePath("../../..")
+_hSliderMaster = NodePath("MarginContainer/VBoxContainer/HBoxMaster/VBoxContainer/HSliderMaster")
+_hSliderInterface = NodePath("MarginContainer/VBoxContainer/HBoxInterface/VBoxContainer/HSliderInterface")
+_hSliderEffects = NodePath("MarginContainer/VBoxContainer/HBoxEffects/VBoxContainer/HSliderEffects")
+_hSliderVoiceChat = NodePath("MarginContainer/VBoxContainer/HBoxVoiceChat/VBoxContainer/HSliderVoiceChat")
+_spinBoxMaster = NodePath("MarginContainer/VBoxContainer/HBoxMaster/VBoxContainer/HBoxContainer/SpinBoxMaster")
+_spinBoxInterface = NodePath("MarginContainer/VBoxContainer/HBoxInterface/VBoxContainer/HBoxContainer/SpinBoxInterface")
+_spinBoxEffects = NodePath("MarginContainer/VBoxContainer/HBoxEffects/VBoxContainer/HBoxContainer/SpinBoxEffects")
+_spinBoxVoiceChat = NodePath("MarginContainer/VBoxContainer/HBoxVoiceChat/VBoxContainer/HBoxContainer/SpinBoxVoiceChat")
+_checkBoxMuteYourself = NodePath("MarginContainer/VBoxContainer/HBoxMuteYourself/HBoxContainer/CheckBoxMuteYourself")
+_buttonResetMaster = NodePath("MarginContainer/VBoxContainer/HBoxMaster/ButtonResetMaster")
+_buttonResetInterface = NodePath("MarginContainer/VBoxContainer/HBoxInterface/ButtonResetInterface")
+_buttonResetEffects = NodePath("MarginContainer/VBoxContainer/HBoxEffects/ButtonResetEffects")
+_buttonResetVoiceChat = NodePath("MarginContainer/VBoxContainer/HBoxVoiceChat/ButtonResetVoiceChat")
+_buttonResetMuteYourself = NodePath("MarginContainer/VBoxContainer/HBoxMuteYourself/ButtonResetMuteYourself")
+_buttonClose = NodePath("ButtonCloseAudio")
+metadata/_tab_index = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/TabContainer/Audio"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 15
+theme_override_constants/margin_top = 15
+theme_override_constants/margin_right = 15
+theme_override_constants/margin_bottom = 15
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/TabContainer/Audio/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 10
+
+[node name="HBoxMaster" type="HBoxContainer" parent="MarginContainer/TabContainer/Audio/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/TabContainer/Audio/MarginContainer/VBoxContainer/HBoxMaster"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/TabContainer/Audio/MarginContainer/VBoxContainer/HBoxMaster/VBoxContainer"]
+layout_mode = 2
+
+[node name="LabelMaster" type="Label" parent="MarginContainer/TabContainer/Audio/MarginContainer/VBoxContainer/HBoxMaster/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "Master"
+
+[node name="SpinBoxMaster" type="SpinBox" parent="MarginContainer/TabContainer/Audio/MarginContainer/VBoxContainer/HBoxMaster/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 10
+min_value = -50.0
+max_value = 50.0
+rounded = true
+alignment = 2
+
+[node name="LabelDB" type="Label" parent="MarginContainer/TabContainer/Audio/MarginContainer/VBoxContainer/HBoxMaster/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 10
+size_flags_stretch_ratio = 0.0
+text = "db"
+
+[node name="HSliderMaster" type="HSlider" parent="MarginContainer/TabContainer/Audio/MarginContainer/VBoxContainer/HBoxMaster/VBoxContainer"]
+layout_mode = 2
+min_value = -50.0
+max_value = 50.0
+step = 0.1
+
+[node name="ButtonResetMaster" type="Button" parent="MarginContainer/TabContainer/Audio/MarginContainer/VBoxContainer/HBoxMaster"]
+layout_mode = 2
+size_flags_horizontal = 10
+size_flags_vertical = 4
+size_flags_stretch_ratio = 0.1
+disabled = true
+text = "R"
+
+[node name="HBoxInterface" type="HBoxContainer" parent="MarginContainer/TabContainer/Audio/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/TabContainer/Audio/MarginContainer/VBoxContainer/HBoxInterface"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/TabContainer/Audio/MarginContainer/VBoxContainer/HBoxInterface/VBoxContainer"]
+layout_mode = 2
+
+[node name="LabelInterface" type="Label" parent="MarginContainer/TabContainer/Audio/MarginContainer/VBoxContainer/HBoxInterface/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+text = "Interface
+"
+
+[node name="SpinBoxInterface" type="SpinBox" parent="MarginContainer/TabContainer/Audio/MarginContainer/VBoxContainer/HBoxInterface/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 10
+min_value = -50.0
+max_value = 50.0
+rounded = true
+alignment = 2
+
+[node name="LabelDB" type="Label" parent="MarginContainer/TabContainer/Audio/MarginContainer/VBoxContainer/HBoxInterface/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 10
+size_flags_stretch_ratio = 0.0
+text = "db"
+
+[node name="HSliderInterface" type="HSlider" parent="MarginContainer/TabContainer/Audio/MarginContainer/VBoxContainer/HBoxInterface/VBoxContainer"]
+layout_mode = 2
+min_value = -50.0
+max_value = 50.0
+step = 0.1
+
+[node name="ButtonResetInterface" type="Button" parent="MarginContainer/TabContainer/Audio/MarginContainer/VBoxContainer/HBoxInterface"]
+layout_mode = 2
+size_flags_horizontal = 10
+size_flags_vertical = 4
+size_flags_stretch_ratio = 0.1
+disabled = true
+text = "R"
+
+[node name="HBoxEffects" type="HBoxContainer" parent="MarginContainer/TabContainer/Audio/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/TabContainer/Audio/MarginContainer/VBoxContainer/HBoxEffects"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/TabContainer/Audio/MarginContainer/VBoxContainer/HBoxEffects/VBoxContainer"]
+layout_mode = 2
+
+[node name="LabelEffects" type="Label" parent="MarginContainer/TabContainer/Audio/MarginContainer/VBoxContainer/HBoxEffects/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+text = "Effects
+"
+
+[node name="SpinBoxEffects" type="SpinBox" parent="MarginContainer/TabContainer/Audio/MarginContainer/VBoxContainer/HBoxEffects/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 10
+min_value = -50.0
+max_value = 50.0
+rounded = true
+alignment = 2
+
+[node name="LabelDB" type="Label" parent="MarginContainer/TabContainer/Audio/MarginContainer/VBoxContainer/HBoxEffects/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 10
+size_flags_stretch_ratio = 0.0
+text = "db"
+
+[node name="HSliderEffects" type="HSlider" parent="MarginContainer/TabContainer/Audio/MarginContainer/VBoxContainer/HBoxEffects/VBoxContainer"]
+layout_mode = 2
+min_value = -50.0
+max_value = 50.0
+step = 0.1
+
+[node name="ButtonResetEffects" type="Button" parent="MarginContainer/TabContainer/Audio/MarginContainer/VBoxContainer/HBoxEffects"]
+layout_mode = 2
+size_flags_horizontal = 10
+size_flags_vertical = 4
+size_flags_stretch_ratio = 0.1
+disabled = true
+text = "R"
+
+[node name="HBoxVoiceChat" type="HBoxContainer" parent="MarginContainer/TabContainer/Audio/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/TabContainer/Audio/MarginContainer/VBoxContainer/HBoxVoiceChat"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/TabContainer/Audio/MarginContainer/VBoxContainer/HBoxVoiceChat/VBoxContainer"]
+layout_mode = 2
+
+[node name="LabelVoiceChat" type="Label" parent="MarginContainer/TabContainer/Audio/MarginContainer/VBoxContainer/HBoxVoiceChat/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+text = "Voice Chat"
+
+[node name="SpinBoxVoiceChat" type="SpinBox" parent="MarginContainer/TabContainer/Audio/MarginContainer/VBoxContainer/HBoxVoiceChat/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 10
+min_value = -50.0
+max_value = 50.0
+rounded = true
+alignment = 2
+
+[node name="LabelDB" type="Label" parent="MarginContainer/TabContainer/Audio/MarginContainer/VBoxContainer/HBoxVoiceChat/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 10
+size_flags_stretch_ratio = 0.0
+text = "db"
+
+[node name="HSliderVoiceChat" type="HSlider" parent="MarginContainer/TabContainer/Audio/MarginContainer/VBoxContainer/HBoxVoiceChat/VBoxContainer"]
+layout_mode = 2
+min_value = -50.0
+max_value = 50.0
+step = 0.1
+
+[node name="ButtonResetVoiceChat" type="Button" parent="MarginContainer/TabContainer/Audio/MarginContainer/VBoxContainer/HBoxVoiceChat"]
+layout_mode = 2
+size_flags_horizontal = 10
+size_flags_vertical = 4
+size_flags_stretch_ratio = 0.1
+disabled = true
+text = "R"
+
+[node name="HBoxMuteYourself" type="HBoxContainer" parent="MarginContainer/TabContainer/Audio/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/TabContainer/Audio/MarginContainer/VBoxContainer/HBoxMuteYourself"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="LabelMuteYourself" type="Label" parent="MarginContainer/TabContainer/Audio/MarginContainer/VBoxContainer/HBoxMuteYourself/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+text = "Mute yourself"
+
+[node name="CheckBoxMuteYourself" type="CheckBox" parent="MarginContainer/TabContainer/Audio/MarginContainer/VBoxContainer/HBoxMuteYourself/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 10
+button_pressed = true
+
+[node name="ButtonResetMuteYourself" type="Button" parent="MarginContainer/TabContainer/Audio/MarginContainer/VBoxContainer/HBoxMuteYourself"]
+layout_mode = 2
+size_flags_horizontal = 10
+size_flags_vertical = 4
+size_flags_stretch_ratio = 0.1
+disabled = true
+text = "R"
+
+[node name="ButtonCloseAudio" type="Button" parent="MarginContainer/TabContainer/Audio"]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -31.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "Close"
+
+[node name="Mouse" type="TabBar" parent="MarginContainer/TabContainer" node_paths=PackedStringArray("_UIWindowSettings", "_spinBoxSensivity", "_hSliderSensivity", "_buttonResetSensivity", "_buttonClose")]
+visible = false
+layout_mode = 2
+script = ExtResource("2_5yfvq")
+_UIWindowSettings = NodePath("../../..")
+_spinBoxSensivity = NodePath("MarginContainer/VBoxContainer/HBoxSensivity/VBoxContainer/HBoxContainer/SpinBoxSensivity")
+_hSliderSensivity = NodePath("MarginContainer/VBoxContainer/HBoxSensivity/VBoxContainer/HSliderSensivity")
+_buttonResetSensivity = NodePath("MarginContainer/VBoxContainer/HBoxSensivity/ButtonResetSensivity")
+_buttonClose = NodePath("ButtonCloseMouse")
+metadata/_tab_index = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/TabContainer/Mouse"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 15
+theme_override_constants/margin_top = 15
+theme_override_constants/margin_right = 15
+theme_override_constants/margin_bottom = 5
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/TabContainer/Mouse/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="HBoxSensivity" type="HBoxContainer" parent="MarginContainer/TabContainer/Mouse/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/TabContainer/Mouse/MarginContainer/VBoxContainer/HBoxSensivity"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/TabContainer/Mouse/MarginContainer/VBoxContainer/HBoxSensivity/VBoxContainer"]
+layout_mode = 2
+
+[node name="LabelSensivity" type="Label" parent="MarginContainer/TabContainer/Mouse/MarginContainer/VBoxContainer/HBoxSensivity/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "Sensivity"
+
+[node name="SpinBoxSensivity" type="SpinBox" parent="MarginContainer/TabContainer/Mouse/MarginContainer/VBoxContainer/HBoxSensivity/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 10
+max_value = 10.0
+step = 0.1
+alignment = 2
+
+[node name="HSliderSensivity" type="HSlider" parent="MarginContainer/TabContainer/Mouse/MarginContainer/VBoxContainer/HBoxSensivity/VBoxContainer"]
+layout_mode = 2
+max_value = 10.0
+step = 0.1
+value = 3.0
+
+[node name="ButtonResetSensivity" type="Button" parent="MarginContainer/TabContainer/Mouse/MarginContainer/VBoxContainer/HBoxSensivity"]
+layout_mode = 2
+size_flags_horizontal = 10
+size_flags_vertical = 4
+size_flags_stretch_ratio = 0.1
+disabled = true
+text = "R"
+
+[node name="ButtonCloseMouse" type="Button" parent="MarginContainer/TabContainer/Mouse"]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -31.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "Close"

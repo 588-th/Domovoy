@@ -4,12 +4,12 @@ using static Godot.DisplayServer;
 
 public partial class UISettingsVideo : Control
 {
-    [Export] private Control _settings;
-    [Export] private OptionButton _resolutionsOptionButton;
-    [Export] private OptionButton _windowModeOptionButton;
-    [Export] private SpinBox _fovSpinBox;
-    [Export] private HSlider _fovHSlider;
-    [Export] private Button _closeButton;
+    [Export] private Control _UIWindowSettings;
+    [Export] private OptionButton _optionButtonWindowMode;
+    [Export] private OptionButton _optionButtonResolutions;
+    [Export] private SpinBox _spinBoxFOV;
+    [Export] private HSlider _hSliderFOV;
+    [Export] private Button _buttonClose;
 
     private readonly Dictionary<string, Vector2I> _resolutions = new()
     {
@@ -34,77 +34,69 @@ public partial class UISettingsVideo : Control
 
     public override void _Ready()
     {
-        _closeButton.Pressed += OnCloseButtonPressed;
-        _resolutionsOptionButton.ItemSelected += OnResolutionSelected;
-        _windowModeOptionButton.ItemSelected += OnWindowModeSelected;
-        _fovSpinBox.ValueChanged += OnFovSpinBoxChanged;
-        _fovHSlider.ValueChanged += OnFovHSliderBoxChanged;
+        _optionButtonWindowMode.ItemSelected += OnWindowModeSelected;
+        _optionButtonResolutions.ItemSelected += OnResolutionSelected;
+        _spinBoxFOV.ValueChanged += OnFovSpinBoxChanged;
+        _hSliderFOV.ValueChanged += OnFovHSliderBoxChanged;
+        _buttonClose.Pressed += OnCloseButtonPressed;
 
         InitializeUI();
     }
 
     public override void _ExitTree()
     {
-        _closeButton.Pressed -= OnCloseButtonPressed;
-        _resolutionsOptionButton.ItemSelected -= OnResolutionSelected;
-        _windowModeOptionButton.ItemSelected -= OnWindowModeSelected;
+        _optionButtonWindowMode.ItemSelected -= OnWindowModeSelected;
+        _optionButtonResolutions.ItemSelected -= OnResolutionSelected;
+        _spinBoxFOV.ValueChanged -= OnFovSpinBoxChanged;
+        _hSliderFOV.ValueChanged -= OnFovHSliderBoxChanged;
+        _buttonClose.Pressed -= OnCloseButtonPressed;
     }
 
     private void InitializeUI()
     {
-        LoadFOV();
-        LoadResolution();
         LoadWindowMode();
-    }
-
-    private void LoadFOV()
-    {
-        _fovSpinBox.Value = SettingsVideo.Instance.FOV;
-        _fovHSlider.Value = SettingsVideo.Instance.FOV;
-    }
-
-    private void LoadResolution()
-    {
-        _resolutionsOptionButton.Selected = -1;
-        Vector2I currentResolution = GetWindow().Size;
-
-        int resolutionIndex = 0;
-        foreach (var resolution in _resolutions.Keys)
-        {
-            _resolutionsOptionButton.AddItem(resolution);
-            if (_resolutions[resolution] == currentResolution)
-            {
-                _resolutionsOptionButton.Selected = resolutionIndex;
-            }
-            resolutionIndex++;
-        }
+        LoadResolution();
+        LoadFOV();
     }
 
     private void LoadWindowMode()
     {
-        _windowModeOptionButton.Selected = -1;
+        _optionButtonWindowMode.Selected = -1;
         int currentMode = (int)GetWindow().Mode;
 
         int modeIndex = 0;
         foreach (var windowMode in _windowModes)
         {
-            _windowModeOptionButton.AddItem(windowMode.ToString());
+            _optionButtonWindowMode.AddItem(windowMode.ToString());
             if ((int)windowMode == currentMode)
             {
-                _windowModeOptionButton.Selected = modeIndex;
+                _optionButtonWindowMode.Selected = modeIndex;
             }
             modeIndex++;
         }
     }
 
-    private void OnResolutionSelected(long id)
+    private void LoadResolution()
     {
-        string selectedResolution = _resolutionsOptionButton.GetItemText((int)id);
-        WindowSetSize(_resolutions[selectedResolution]);
+        _optionButtonResolutions.Selected = -1;
+        Vector2I currentResolution = GetWindow().Size;
 
-        Vector2I screenCenter = ScreenGetPosition() + ScreenGetSize() / 2;
-        Vector2I windowSize = GetWindow().GetSizeWithDecorations();
-        GetWindow().Position = screenCenter - windowSize / 2;
+        int resolutionIndex = 0;
+        foreach (var resolution in _resolutions.Keys)
+        {
+            _optionButtonResolutions.AddItem(resolution);
+            if (_resolutions[resolution] == currentResolution)
+            {
+                _optionButtonResolutions.Selected = resolutionIndex;
+            }
+            resolutionIndex++;
+        }
+    }
+
+    private void LoadFOV()
+    {
+        _spinBoxFOV.Value = SettingsVideo.Instance.FOV;
+        _hSliderFOV.Value = SettingsVideo.Instance.FOV;
     }
 
     private void OnWindowModeSelected(long id)
@@ -113,20 +105,30 @@ public partial class UISettingsVideo : Control
         WindowSetMode(selectedMode);
     }
 
+    private void OnResolutionSelected(long id)
+    {
+        string selectedResolution = _optionButtonResolutions.GetItemText((int)id);
+        WindowSetSize(_resolutions[selectedResolution]);
+
+        Vector2I screenCenter = ScreenGetPosition() + ScreenGetSize() / 2;
+        Vector2I windowSize = GetWindow().GetSizeWithDecorations();
+        GetWindow().Position = screenCenter - windowSize / 2;
+    }
+
     public void OnFovSpinBoxChanged(double value)
     {
-        _fovHSlider.Value = value;
+        _hSliderFOV.Value = value;
         SettingsVideo.Instance.FOV = (float)value;
     }
 
     public void OnFovHSliderBoxChanged(double value)
     {
-        _fovSpinBox.Value = value;
+        _spinBoxFOV.Value = value;
         SettingsVideo.Instance.FOV = (float)value;
     }
 
     private void OnCloseButtonPressed()
     {
-        _settings.Hide();
+        _UIWindowSettings.Hide();
     }
 }

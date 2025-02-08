@@ -1,28 +1,28 @@
 [gd_scene load_steps=39 format=3 uid="uid://cs1oc4wf53g30"]
 
 [ext_resource type="Shader" path="res://Shaders/EdgesOutline.gdshader" id="5_rq73e"]
-[ext_resource type="Script" path="res://Scripts/Spawners/Players/PlayerSpawner.cs" id="6_ys07g"]
-[ext_resource type="Script" path="res://Scripts/Spawners/Players/SpectatorSpawner.cs" id="7_i1acj"]
-[ext_resource type="Script" path="res://Scripts/Spawners/ItemSpawner.cs" id="8_1s2et"]
-[ext_resource type="PackedScene" uid="uid://17h7ix4n16i0" path="res://Scenes/Items/Weapons/Pistol.tscn" id="9_by8uy"]
-[ext_resource type="PackedScene" uid="uid://k7pkap4vw1ub" path="res://Scenes/Items/HeadFlashlight.tscn" id="10_32f7a"]
-[ext_resource type="PackedScene" uid="uid://damhtsrr8py4i" path="res://Scenes/Items/Medkit.tscn" id="11_r348c"]
+[ext_resource type="Script" path="res://Scripts/Spawners/SpawnerPlayer.cs" id="6_ys07g"]
+[ext_resource type="Script" path="res://Scripts/Spawners/SpawnerSpectator.cs" id="7_i1acj"]
+[ext_resource type="Script" path="res://Scripts/Spawners/SpawnerItem.cs" id="8_1s2et"]
+[ext_resource type="PackedScene" uid="uid://17h7ix4n16i0" path="res://Scenes/Items/ItemPistol.tscn" id="9_by8uy"]
+[ext_resource type="PackedScene" uid="uid://k7pkap4vw1ub" path="res://Scenes/Items/ItemHeadFlashlight.tscn" id="10_32f7a"]
+[ext_resource type="PackedScene" uid="uid://damhtsrr8py4i" path="res://Scenes/Items/ItemMedkit.tscn" id="11_r348c"]
 [ext_resource type="Script" path="res://Scripts/Net/AuthorityScripter.cs" id="12_h4kt3"]
 [ext_resource type="ArrayMesh" uid="uid://mrq0hl0qc62p" path="res://Meshes/DomovoyModels_Shelving.res" id="12_tm7oy"]
 [ext_resource type="Script" path="res://Scripts/Round/RoundController.cs" id="13_18je2"]
 [ext_resource type="Script" path="res://Scripts/Round/RoundRoleRoller.cs" id="14_3oodw"]
-[ext_resource type="PackedScene" uid="uid://csc1xh8fex06u" path="res://Scenes/Items/Fuse.tscn" id="14_lottk"]
+[ext_resource type="PackedScene" uid="uid://csc1xh8fex06u" path="res://Scenes/Items/ItemFuse.tscn" id="14_lottk"]
 [ext_resource type="Script" path="res://Scripts/Round/RoundRoleSpawner.cs" id="15_p3uip"]
 [ext_resource type="PackedScene" uid="uid://bks72b4kwjk1f" path="res://Scenes/Players/PlayerHuman.tscn" id="16_5qkqi"]
 [ext_resource type="PackedScene" uid="uid://dw2d8yb5aog0t" path="res://Scenes/Players/PlayerMonster.tscn" id="17_8hs2g"]
 [ext_resource type="PackedScene" uid="uid://dn6bs13u0l2at" path="res://Scenes/Players/PlayerSpectator.tscn" id="18_fbcs7"]
 [ext_resource type="Script" path="res://Scripts/Round/RoundEnder.cs" id="19_7yevq"]
-[ext_resource type="PackedScene" uid="uid://ckhcqdpgul8ne" path="res://Scenes/Items/Beacon.tscn" id="21_2xhpi"]
+[ext_resource type="PackedScene" uid="uid://ckhcqdpgul8ne" path="res://Scenes/Items/ItemBeacon.tscn" id="21_2xhpi"]
 [ext_resource type="Script" path="res://Scripts/Round/RoundLightOn.cs" id="22_e4wfl"]
 [ext_resource type="PackedScene" uid="uid://bsqm2lxpoa1xh" path="res://Scenes/Shield/Shield.tscn" id="22_qq8o6"]
-[ext_resource type="PackedScene" uid="uid://ccudxsemgg202" path="res://Scenes/Props/WoodenBox0_5x2.tscn" id="26_m2jot"]
-[ext_resource type="PackedScene" uid="uid://cgdmyru54ecfs" path="res://Scenes/Props/WoodenBox1x1.tscn" id="27_84ujm"]
-[ext_resource type="PackedScene" uid="uid://kd7xhc14fxn3" path="res://Scenes/Props/WoodenBox1x2.tscn" id="28_rknfa"]
+[ext_resource type="PackedScene" uid="uid://ccudxsemgg202" path="res://Scenes/Props/PropWoodenBox0_5x2.tscn" id="26_m2jot"]
+[ext_resource type="PackedScene" uid="uid://cgdmyru54ecfs" path="res://Scenes/Props/PropWoodenBox1x1.tscn" id="27_84ujm"]
+[ext_resource type="PackedScene" uid="uid://kd7xhc14fxn3" path="res://Scenes/Props/PropWoodenBox1x2.tscn" id="28_rknfa"]
 [ext_resource type="ArrayMesh" uid="uid://dfonb5bfp8mds" path="res://Meshes/Apartments22_Apartments.res" id="31_esnio"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_i0mip"]
@@ -90,7 +90,7 @@ render_priority = 0
 shader = ExtResource("5_rq73e")
 shader_parameter/edge_threshold = 0.1
 shader_parameter/line_color = Color(0.646115, 0.688034, 0.780894, 1)
-shader_parameter/background_color = Color(0.408, 0.969, 0.694, 1)
+shader_parameter/background_color = Color(1, 1, 1, 1)
 shader_parameter/background_alpha = 0.0
 shader_parameter/line_alpha = 0.5
 shader_parameter/light_influence = 150.0
@@ -107,10 +107,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.519, 0, 0)
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="Environment"]
 environment = SubResource("Environment_pg2lb")
-
-[node name="120f1f" type="Node" parent="Environment"]
-
-[node name="676767" type="Node" parent="Environment"]
 
 [node name="Light" type="Node" parent="Environment"]
 
@@ -255,89 +251,89 @@ mesh = SubResource("QuadMesh_s60u0")
 
 [node name="Props" type="Node" parent="Objects" groups=["Holder:Props"]]
 
-[node name="WoodenBox0_5x2" parent="Objects/Props" instance=ExtResource("26_m2jot")]
+[node name="PropWoodenBox0_5x2" parent="Objects/Props" instance=ExtResource("26_m2jot")]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 3.16656, 0.327646, -10.2416)
 
-[node name="WoodenBox1x1" parent="Objects/Props" instance=ExtResource("27_84ujm")]
+[node name="PropWoodenBox1x1" parent="Objects/Props" instance=ExtResource("27_84ujm")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.74173, 0.520041, -9.24291)
 
-[node name="WoodenBox1x2" parent="Objects/Props" instance=ExtResource("28_rknfa")]
+[node name="PropWoodenBox1x2" parent="Objects/Props" instance=ExtResource("28_rknfa")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.97532, 0.520041, -9.64275)
 
 [node name="Items" type="Node" parent="Objects" groups=["Holder:Items"]]
 
 [node name="SpawnAchors" type="Node" parent="."]
 
-[node name="AchorsPlayerHumanSpawners" type="Node" parent="SpawnAchors"]
+[node name="AchorPlayerHuman" type="Node" parent="SpawnAchors"]
 
-[node name="FirstPlayer" type="Marker3D" parent="SpawnAchors/AchorsPlayerHumanSpawners"]
+[node name="PlayerHuman1" type="Marker3D" parent="SpawnAchors/AchorPlayerHuman"]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -2.47689, 1, -6.48)
 
-[node name="SecondPlayer" type="Marker3D" parent="SpawnAchors/AchorsPlayerHumanSpawners"]
+[node name="PlayerHuman2" type="Marker3D" parent="SpawnAchors/AchorPlayerHuman"]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -0.429503, 1.03441, -6.47012)
 
-[node name="ThirdPlayer" type="Marker3D" parent="SpawnAchors/AchorsPlayerHumanSpawners"]
+[node name="PlayerHuman3" type="Marker3D" parent="SpawnAchors/AchorPlayerHuman"]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 1.12895, 1, -4.48)
 
-[node name="AchorsPlayerMonsterSpawners" type="Node" parent="SpawnAchors"]
+[node name="AchorPlayerMonster" type="Node" parent="SpawnAchors"]
 
-[node name="FirstPlayer" type="Marker3D" parent="SpawnAchors/AchorsPlayerMonsterSpawners"]
+[node name="PlayerMonster" type="Marker3D" parent="SpawnAchors/AchorPlayerMonster"]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 3.68978, 4.5, -3.14667)
 
-[node name="AchorsItemSpawners" type="Node" parent="SpawnAchors"]
+[node name="AchorItem" type="Node" parent="SpawnAchors"]
 
-[node name="Pistol" type="Marker3D" parent="SpawnAchors/AchorsItemSpawners"]
+[node name="ItemPistol" type="Marker3D" parent="SpawnAchors/AchorItem"]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -3.98242, 1.17305, -5.15967)
 
-[node name="HeadFlashlight" type="Marker3D" parent="SpawnAchors/AchorsItemSpawners"]
+[node name="ItemHeadFlashlight" type="Marker3D" parent="SpawnAchors/AchorItem"]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -4.01778, 1.17305, -4.3985)
 
-[node name="Medkit" type="Marker3D" parent="SpawnAchors/AchorsItemSpawners"]
+[node name="ItemMedkit" type="Marker3D" parent="SpawnAchors/AchorItem"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.02785, 1.17305, -3.66856)
 
-[node name="Beacon" type="Marker3D" parent="SpawnAchors/AchorsItemSpawners"]
+[node name="ItemBeacon" type="Marker3D" parent="SpawnAchors/AchorItem"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.01025, 1.17305, -3.66793)
 
-[node name="Fuse" type="Marker3D" parent="SpawnAchors/AchorsItemSpawners"]
+[node name="ItemFuse1" type="Marker3D" parent="SpawnAchors/AchorItem"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.01025, 1.17305, -4.62115)
 
-[node name="Fuse2" type="Marker3D" parent="SpawnAchors/AchorsItemSpawners"]
+[node name="ItemFuse2" type="Marker3D" parent="SpawnAchors/AchorItem"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.01025, 1.17305, -4.84784)
 
-[node name="Fuse3" type="Marker3D" parent="SpawnAchors/AchorsItemSpawners"]
+[node name="ItemFuse3" type="Marker3D" parent="SpawnAchors/AchorItem"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.01025, 1.17305, -5.05194)
 
 [node name="Spawners" type="Node" parent="."]
 
-[node name="PlayerHumanSpawner" type="MultiplayerSpawner" parent="Spawners" node_paths=PackedStringArray("_playersParent", "_spawnMarkers")]
+[node name="SpawnerPlayerHuman" type="MultiplayerSpawner" parent="Spawners" node_paths=PackedStringArray("_playersParent", "_spawnMarkers")]
 _spawnable_scenes = PackedStringArray("res://Scenes/Players/PlayerHuman.tscn")
 spawn_path = NodePath("../../Players/Humans")
 script = ExtResource("6_ys07g")
 _playersParent = NodePath("../../Players/Humans")
-_spawnMarkers = [NodePath("../../SpawnAchors/AchorsPlayerHumanSpawners/FirstPlayer"), NodePath("../../SpawnAchors/AchorsPlayerHumanSpawners/SecondPlayer"), NodePath("../../SpawnAchors/AchorsPlayerHumanSpawners/ThirdPlayer")]
+_spawnMarkers = [NodePath("../../SpawnAchors/AchorPlayerHuman/PlayerHuman1"), NodePath("../../SpawnAchors/AchorPlayerHuman/PlayerHuman2"), NodePath("../../SpawnAchors/AchorPlayerHuman/PlayerHuman3")]
 
-[node name="PlayerMonsterSpawner" type="MultiplayerSpawner" parent="Spawners" node_paths=PackedStringArray("_playersParent", "_spawnMarkers")]
+[node name="SpawnerPlayerMonster" type="MultiplayerSpawner" parent="Spawners" node_paths=PackedStringArray("_playersParent", "_spawnMarkers")]
 _spawnable_scenes = PackedStringArray("res://Scenes/Players/PlayerMonster.tscn")
 spawn_path = NodePath("../../Players/Monsters")
 script = ExtResource("6_ys07g")
 _playersParent = NodePath("../../Players/Monsters")
-_spawnMarkers = [NodePath("../../SpawnAchors/AchorsPlayerMonsterSpawners/FirstPlayer")]
+_spawnMarkers = [NodePath("../../SpawnAchors/AchorPlayerMonster/PlayerMonster")]
 
-[node name="PlayerSpectatorSpawner" type="MultiplayerSpawner" parent="Spawners" node_paths=PackedStringArray("_spectatorParent")]
+[node name="SpawnerPlayerSpectator" type="MultiplayerSpawner" parent="Spawners" node_paths=PackedStringArray("_spectatorParent")]
 _spawnable_scenes = PackedStringArray("res://Scenes/Players/PlayerSpectator.tscn")
 spawn_path = NodePath("../../Players/Spectators")
 script = ExtResource("7_i1acj")
 _spectatorParent = NodePath("../../Players/Spectators")
 
-[node name="ItemSpawner" type="MultiplayerSpawner" parent="Spawners" node_paths=PackedStringArray("_markers")]
-_spawnable_scenes = PackedStringArray("res://Scenes/Items/Weapons/Pistol.tscn", "res://Scenes/Items/Weapons/Rifl.tscn", "res://Scenes/Items/Medkit.tscn", "res://Scenes/Items/HeadFlashlight.tscn", "res://Scenes/Items/Beacon.tscn", "res://Scenes/Items/Fuse.tscn")
+[node name="SpawnerItem" type="MultiplayerSpawner" parent="Spawners" node_paths=PackedStringArray("_markers")]
+_spawnable_scenes = PackedStringArray("res://Scenes/Items/ItemBeacon.tscn", "res://Scenes/Items/ItemFuse.tscn", "res://Scenes/Items/ItemHeadFlashlight.tscn", "res://Scenes/Items/ItemMedkit.tscn", "res://Scenes/Items/ItemPistol.tscn")
 spawn_path = NodePath("../../Objects/Items")
 script = ExtResource("8_1s2et")
-_markers = [NodePath("../../SpawnAchors/AchorsItemSpawners/Pistol"), NodePath("../../SpawnAchors/AchorsItemSpawners/HeadFlashlight"), NodePath("../../SpawnAchors/AchorsItemSpawners/Medkit"), NodePath("../../SpawnAchors/AchorsItemSpawners/Beacon"), NodePath("../../SpawnAchors/AchorsItemSpawners/Fuse"), NodePath("../../SpawnAchors/AchorsItemSpawners/Fuse2"), NodePath("../../SpawnAchors/AchorsItemSpawners/Fuse3")]
+_markers = [NodePath("../../SpawnAchors/AchorItem/ItemPistol"), NodePath("../../SpawnAchors/AchorItem/ItemHeadFlashlight"), NodePath("../../SpawnAchors/AchorItem/ItemMedkit"), NodePath("../../SpawnAchors/AchorItem/ItemBeacon"), NodePath("../../SpawnAchors/AchorItem/ItemFuse1"), NodePath("../../SpawnAchors/AchorItem/ItemFuse2"), NodePath("../../SpawnAchors/AchorItem/ItemFuse3")]
 _packedScenes = [ExtResource("9_by8uy"), ExtResource("10_32f7a"), ExtResource("11_r348c"), ExtResource("21_2xhpi"), ExtResource("14_lottk"), ExtResource("14_lottk"), ExtResource("14_lottk")]
 
-[node name="PropSpawner" type="MultiplayerSpawner" parent="Spawners"]
-_spawnable_scenes = PackedStringArray("res://Scenes/Props/Bullet.tscn", "res://Scenes/Props/HumanCorpse.tscn")
+[node name="SpawnerProp" type="MultiplayerSpawner" parent="Spawners"]
+_spawnable_scenes = PackedStringArray("res://Scenes/Props/PropBullet.tscn")
 spawn_path = NodePath("../../Objects/Props")
 
 [node name="Round" type="Node" parent="."]
@@ -347,16 +343,16 @@ script = ExtResource("12_h4kt3")
 script = ExtResource("13_18je2")
 _roundRoleRoller = NodePath("../RoundRoleRoller")
 _roundSpawnSystem = NodePath("../RoundRoleSpawner")
-_itemSpawner = NodePath("../../Spawners/ItemSpawner")
+_itemSpawner = NodePath("../../Spawners/SpawnerItem")
 
 [node name="RoundRoleRoller" type="Node" parent="Round"]
 script = ExtResource("14_3oodw")
 
 [node name="RoundRoleSpawner" type="Node" parent="Round" node_paths=PackedStringArray("_playerHumanSpawner", "_playerMonsterSpawner", "_playerSpectatorSpawner")]
 script = ExtResource("15_p3uip")
-_playerHumanSpawner = NodePath("../../Spawners/PlayerHumanSpawner")
-_playerMonsterSpawner = NodePath("../../Spawners/PlayerMonsterSpawner")
-_playerSpectatorSpawner = NodePath("../../Spawners/PlayerSpectatorSpawner")
+_playerHumanSpawner = NodePath("../../Spawners/SpawnerPlayerHuman")
+_playerMonsterSpawner = NodePath("../../Spawners/SpawnerPlayerMonster")
+_playerSpectatorSpawner = NodePath("../../Spawners/SpawnerPlayerSpectator")
 _playerHumanScene = ExtResource("16_5qkqi")
 _playerMonsterScene = ExtResource("17_8hs2g")
 _playerSpectatorScene = ExtResource("18_fbcs7")

@@ -10,18 +10,17 @@ public class IdleState : MovementState
     {
         base.Enter();
 
-        _playerMovement.MovementActions.InvokeAction("isIdleState");
         _playerMovement.InputActions.SneakKeyDown += OnSneaKeyToggle;
         _playerMovement.InputActions.SneakKeyUp += OnSneaKeyToggle;
         _playerMovement.InputActions.JumpKeyDown += OnJumpKeyDown;
         _playerMovement.MovementActions.IsNotGrounded += OnNotGround;
+        _playerMovement.MovementActions.InvokeAction("isIdleState");
     }
 
     public override void Exit()
     {
         base.Exit();
 
-        _playerMovement.MovementActions.InvokeAction("isNotIdleState");
         _playerMovement.InputActions.SneakKeyDown -= OnSneaKeyToggle;
         _playerMovement.InputActions.SneakKeyUp -= OnSneaKeyToggle;
         _playerMovement.InputActions.JumpKeyDown -= OnJumpKeyDown;
@@ -31,8 +30,14 @@ public class IdleState : MovementState
     public override void Update(double delta)
     {
         base.Update(delta);
+
         CheckInutVector();
         Move(delta);
+    }
+
+    public override void ExitActionInvoke()
+    {
+        _playerMovement.MovementActions.InvokeAction("isNotIdleState");
     }
 
     private void CheckInutVector()
@@ -51,7 +56,7 @@ public class IdleState : MovementState
         Vector3 velocity = _playerMovement.PlayerBody.Velocity;
         Vector3 targetVelocity = Vector3.Zero;
 
-        velocity = velocity.MoveToward(targetVelocity, (float)(_playerMovement.PlayerMovementParameters.CurrentAcceleration * delta));
+        velocity = velocity.MoveToward(targetVelocity, (float)(_playerMovement.CurrentAcceleration * delta));
         _playerMovement.PlayerBody.Velocity = velocity;
     }
 

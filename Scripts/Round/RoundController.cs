@@ -6,7 +6,7 @@ public partial class RoundController : Node
 {
     [Export] private RoundRoleRoller _roundRoleRoller;
     [Export] private RoundRoleSpawner _roundSpawnSystem;
-    [Export] private ItemSpawner _itemSpawner;
+    [Export] private SpawnerItem _itemSpawner;
 
     public override void _Ready()
     {

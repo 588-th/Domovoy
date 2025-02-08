@@ -9,9 +9,10 @@ public partial class PlayerPropInteractor : Node
     [Export] public StaticBody3D StaticBody3D;
     [Export] public Generic6DofJoint3D Generic6DofJoint3D;
 
+    [ExportGroup("Parameters")]
     [Export] public float DragSpeed = 25.0f;
     [Export] public float RotationSpeed = 0.5f;
-    [Export] public float ThrowForce = 10.0f;
+    [Export] public float ThrowForce = 8.0f;
     [Export] public float MaxDropInertia = 10f;
     [Export] public float DropInertiaModifier = 1f;
 

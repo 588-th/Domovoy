@@ -9,11 +9,11 @@
 [ext_resource type="ArrayMesh" uid="uid://cxdg8kcralgnt" path="res://Meshes/HiddenCollection_Poster3.res" id="7_u6hp1"]
 [ext_resource type="ArrayMesh" uid="uid://bjel8qxk853nq" path="res://Meshes/HiddenCollection_Poster4.res" id="8_vb3tm"]
 [ext_resource type="ArrayMesh" uid="uid://c6pcolew5pp02" path="res://Meshes/HiddenCollection_Poster5.res" id="9_qypwh"]
-[ext_resource type="PackedScene" uid="uid://doi6koxvp4aya" path="res://Scenes/Props/BowlingBall.tscn" id="10_s3kvw"]
-[ext_resource type="PackedScene" uid="uid://cmmaqjm2r7yhn" path="res://Scenes/Props/WoodenBox.tscn" id="11_bfqfi"]
-[ext_resource type="PackedScene" uid="uid://ijuv211yjc0w" path="res://Scenes/Props/BowlingPin.tscn" id="12_jf7di"]
-[ext_resource type="Script" path="res://Scripts/Spawners/Players/PlayerSpawner.cs" id="13_1ilnm"]
-[ext_resource type="Script" path="res://Scripts/Spawners/LobbySpawnSystem.cs" id="14_vg0c8"]
+[ext_resource type="PackedScene" uid="uid://doi6koxvp4aya" path="res://Scenes/Props/PropBowlingBall.tscn" id="10_s3kvw"]
+[ext_resource type="PackedScene" uid="uid://cmmaqjm2r7yhn" path="res://Scenes/Props/PropWoodenBox.tscn" id="11_bfqfi"]
+[ext_resource type="PackedScene" uid="uid://ijuv211yjc0w" path="res://Scenes/Props/PropBowlingPin.tscn" id="12_jf7di"]
+[ext_resource type="Script" path="res://Scripts/Spawners/SpawnerPlayer.cs" id="13_1ilnm"]
+[ext_resource type="Script" path="res://Scripts/Spawners/SpawnSystemLobby.cs" id="14_vg0c8"]
 [ext_resource type="PackedScene" uid="uid://7fa0b3shof4a" path="res://Scenes/Players/PlayerLobby.tscn" id="15_t2e1i"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_auiyk"]
@@ -95,18 +95,18 @@ size = Vector2(0.01, 0.01)
 [node name="LevelLobby" type="Node3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.13511, -1.73959, 0.220598)
 
-[node name="AchorsPlayerSpawners" type="Node" parent="."]
+[node name="SpawnAchors" type="Node" parent="."]
 
-[node name="FirstPlayer" type="Marker3D" parent="AchorsPlayerSpawners"]
+[node name="PlayerLobby1" type="Marker3D" parent="SpawnAchors"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 3)
 
-[node name="SecondPlayer" type="Marker3D" parent="AchorsPlayerSpawners"]
+[node name="PlayerLobby2" type="Marker3D" parent="SpawnAchors"]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 1, -3)
 
-[node name="ThirdPlayer" type="Marker3D" parent="AchorsPlayerSpawners"]
+[node name="PlayerLobby3" type="Marker3D" parent="SpawnAchors"]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -2, 1, 0)
 
-[node name="FourthPlayer" type="Marker3D" parent="AchorsPlayerSpawners"]
+[node name="PlayerLobby4" type="Marker3D" parent="SpawnAchors"]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 2, 1, 0)
 
 [node name="Environment" type="Node" parent="."]
@@ -210,41 +210,39 @@ visibility_aabb = AABB(-3, 0, -4, 6, 3, 8)
 process_material = SubResource("ParticleProcessMaterial_aw1ym")
 draw_pass_1 = SubResource("QuadMesh_356pf")
 
-[node name="Bodys" type="Node" parent="."]
+[node name="Players" type="Node" parent="."]
 
-[node name="Players" type="Node" parent="Bodys"]
+[node name="Objects" type="Node" parent="."]
 
-[node name="Objects" type="Node" parent="Bodys"]
+[node name="Props" type="Node" parent="Objects" groups=["Holder:Props"]]
 
-[node name="Props" type="Node" parent="Bodys/Objects" groups=["Holder:Props"]]
-
-[node name="BowlingBall" parent="Bodys/Objects/Props" instance=ExtResource("10_s3kvw")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.15978, -0.00956458, -3.04804)
-
-[node name="Box" parent="Bodys/Objects/Props" instance=ExtResource("11_bfqfi")]
+[node name="PropBox" parent="Objects/Props" instance=ExtResource("11_bfqfi")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.26701, 0.2863, -3.18047)
 
-[node name="BowlingPin" parent="Bodys/Objects/Props" instance=ExtResource("12_jf7di")]
+[node name="PropBowlingBall" parent="Objects/Props" instance=ExtResource("10_s3kvw")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.15978, -0.00956458, -3.04804)
+
+[node name="PropBowlingPin1" parent="Objects/Props" instance=ExtResource("12_jf7di")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.51125, 0.112604, -3.45978)
 
-[node name="BowlingPin2" parent="Bodys/Objects/Props" instance=ExtResource("12_jf7di")]
+[node name="PropBowlingPin2" parent="Objects/Props" instance=ExtResource("12_jf7di")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.51454, 0.112604, -3.7061)
 
-[node name="BowlingPin3" parent="Bodys/Objects/Props" instance=ExtResource("12_jf7di")]
+[node name="PropBowlingPin3" parent="Objects/Props" instance=ExtResource("12_jf7di")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.69888, 0.112604, -3.63397)
 
-[node name="Items" type="Node" parent="Bodys/Objects" groups=["Holder:Items"]]
+[node name="Items" type="Node" parent="Objects" groups=["Holder:Items"]]
 
 [node name="Spawners" type="Node" parent="."]
 
-[node name="PlayerSpawner" type="MultiplayerSpawner" parent="Spawners" node_paths=PackedStringArray("_playersParent", "_spawnMarkers")]
+[node name="SpawnerPlayerLobby" type="MultiplayerSpawner" parent="Spawners" node_paths=PackedStringArray("_playersParent", "_spawnMarkers")]
 _spawnable_scenes = PackedStringArray("res://Scenes/Players/PlayerLobby.tscn")
-spawn_path = NodePath("../../Bodys/Players")
+spawn_path = NodePath("../../Players")
 script = ExtResource("13_1ilnm")
-_playersParent = NodePath("../../Bodys/Players")
-_spawnMarkers = [NodePath("../../AchorsPlayerSpawners/FirstPlayer"), NodePath("../../AchorsPlayerSpawners/SecondPlayer"), NodePath("../../AchorsPlayerSpawners/ThirdPlayer"), NodePath("../../AchorsPlayerSpawners/FourthPlayer")]
+_playersParent = NodePath("../../Players")
+_spawnMarkers = [NodePath("../../SpawnAchors/PlayerLobby1"), NodePath("../../SpawnAchors/PlayerLobby2"), NodePath("../../SpawnAchors/PlayerLobby3"), NodePath("../../SpawnAchors/PlayerLobby4")]
 
-[node name="LobbySpawnSystem" type="Node" parent="Spawners" node_paths=PackedStringArray("_playerSpawner")]
+[node name="SpawnSystemLobby" type="Node" parent="Spawners" node_paths=PackedStringArray("_playerSpawner")]
 script = ExtResource("14_vg0c8")
-_playerSpawner = NodePath("../PlayerSpawner")
+_playerSpawner = NodePath("../SpawnerPlayerLobby")
 _playerLobbyScene = ExtResource("15_t2e1i")

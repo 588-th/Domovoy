@@ -21,4 +21,9 @@ public abstract class MovementState
     {
 
     }
+
+    public virtual void ExitActionInvoke()
+    {
+
+    }
 }

@@ -11,14 +11,12 @@ uniform float fresnel_sharpness = 1.0;
 
 void fragment() {
 	float depth = texture(depth_texture, SCREEN_UV).x;
-	//vec3 ndc = vec3(SCREEN_UV, depth) * 2.0 - 1.0;
 	vec3 ndc = vec3(SCREEN_UV * 2.0 - 1.0, depth);
 	vec4 view = INV_PROJECTION_MATRIX * vec4(ndc, 1.0);
 	view.xyz /= view.w;
 	float linear_depth = -view.z;
 
 	float object_depth = FRAGCOORD.z;
-	//vec3 object_ndc = vec3(SCREEN_UV, object_depth) * 2.0 - 1.0;
 	vec3 object_ndc = vec3(SCREEN_UV * 2.0 - 1.0, object_depth);
 	vec4 object_view = INV_PROJECTION_MATRIX * vec4(object_ndc, 1.0);
 	object_view.xyz /= object_view.w;

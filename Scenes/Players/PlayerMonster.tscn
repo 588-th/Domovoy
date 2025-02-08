@@ -1,4 +1,4 @@
-[gd_scene load_steps=56 format=4 uid="uid://dw2d8yb5aog0t"]
+[gd_scene load_steps=54 format=4 uid="uid://dw2d8yb5aog0t"]
 
 [ext_resource type="Script" path="res://Scripts/Audio/AudioPlayer3D.cs" id="1_cu3h5"]
 [ext_resource type="Script" path="res://Scripts/Player/PlayerInputVector.cs" id="1_l02lm"]
@@ -9,28 +9,27 @@
 [ext_resource type="Script" path="res://Scripts/Player/InputVector.cs" id="3_p0joe"]
 [ext_resource type="Script" path="res://Scripts/Player/Camera/PlayerCamera.cs" id="4_b45tp"]
 [ext_resource type="Script" path="res://Scripts/Player/HUDParameters.cs" id="4_mojhr"]
-[ext_resource type="PackedScene" uid="uid://c131mixukwjnm" path="res://Scenes/UserInterface/Menu/UIPauseMenu.tscn" id="5_evjm4"]
-[ext_resource type="Script" path="res://Scripts/Player/Monster/MonsterVision.cs" id="5_hra6h"]
+[ext_resource type="PackedScene" uid="uid://c131mixukwjnm" path="res://Scenes/UserInterface/Menu/UIMenuPause.tscn" id="5_evjm4"]
+[ext_resource type="Script" path="res://Scripts/Player/Monster/PlayerAuraVision.cs" id="5_hra6h"]
 [ext_resource type="Script" path="res://Scripts/Player/Movement/MovementActions.cs" id="6_dm6b2"]
-[ext_resource type="PackedScene" uid="uid://cojvgyniobwbk" path="res://Scenes/UserInterface/HUD/UICrosshair.tscn" id="7_5q3fu"]
+[ext_resource type="PackedScene" uid="uid://cojvgyniobwbk" path="res://Scenes/UserInterface/HUD/UIHUDCrosshair.tscn" id="7_5q3fu"]
 [ext_resource type="Script" path="res://Scripts/Audio/AudioPlayer.cs" id="7_41235"]
-[ext_resource type="Script" path="res://Scripts/Player/MeleeAttackActions.cs" id="7_i4ciw"]
+[ext_resource type="Script" path="res://Scripts/Player/Monster/MeleeAttackActions.cs" id="7_i4ciw"]
 [ext_resource type="Script" path="res://Scripts/Player/Movement/PlayerMovement.cs" id="8_7rqw8"]
 [ext_resource type="Script" path="res://Scripts/Player/PlayerHealth.cs" id="9_2j7p8"]
 [ext_resource type="Script" path="res://Scripts/Player/Camera/PlayerCameraAnimations.cs" id="11_25u0h"]
 [ext_resource type="Script" path="res://Scripts/Player/PropInteract/PlayerPropInteractor.cs" id="11_lwt4p"]
-[ext_resource type="PackedScene" uid="uid://dsm0c68ucl2kg" path="res://Scenes/UserInterface/HUD/UIHealthInfo.tscn" id="11_u87qw"]
-[ext_resource type="PackedScene" uid="uid://cxq88ssuuklm2" path="res://Scenes/UserInterface/HUD/UISanity.tscn" id="12_53pu3"]
-[ext_resource type="PackedScene" uid="uid://chmo08nmfm4af" path="res://Scenes/UserInterface/HUD/UIAttackInfo.tscn" id="12_d611m"]
+[ext_resource type="PackedScene" uid="uid://dsm0c68ucl2kg" path="res://Scenes/UserInterface/HUD/UIHUDHealth.tscn" id="11_u87qw"]
+[ext_resource type="PackedScene" uid="uid://cxq88ssuuklm2" path="res://Scenes/UserInterface/Effects/UIEffectSanity.tscn" id="12_53pu3"]
+[ext_resource type="PackedScene" uid="uid://chmo08nmfm4af" path="res://Scenes/UserInterface/HUD/UIHUDAttack.tscn" id="12_d611m"]
 [ext_resource type="Script" path="res://Scripts/Player/SelectAttackingPlayer.cs" id="12_lgf40"]
-[ext_resource type="PackedScene" uid="uid://dneigjq1nfs2b" path="res://Scenes/UserInterface/Menu/UIPlayerList.tscn" id="12_nnmj0"]
+[ext_resource type="PackedScene" uid="uid://dneigjq1nfs2b" path="res://Scenes/UserInterface/Windows/UIWindowPlayerList.tscn" id="12_nnmj0"]
 [ext_resource type="Material" uid="uid://x5in56cmsw50" path="res://Materials/sm_attackSelecting.tres" id="13_dkf25"]
 [ext_resource type="Script" path="res://Scripts/Player/Monster/PlayerMeleeAttack.cs" id="15_0hw5x"]
-[ext_resource type="Script" path="res://Scripts/Player/Movement/PlayerMovementParameters.cs" id="15_ao0lo"]
 [ext_resource type="Script" path="res://Scripts/Player/PlayerDeath.cs" id="15_t6oc2"]
-[ext_resource type="Script" path="res://Scripts/Player/Camera/RemoteCameraRotation.cs" id="17_es1xv"]
-[ext_resource type="PackedScene" uid="uid://bdau24iq4fib8" path="res://Scenes/UserInterface/HUD/UIVignette.tscn" id="18_vnlix"]
-[ext_resource type="PackedScene" uid="uid://cq70khnyefibk" path="res://Scenes/UserInterface/HUD/UIDithering.tscn" id="19_8qeyf"]
+[ext_resource type="Script" path="res://Scripts/Player/Camera/PlayerCameraRemoteRotation.cs" id="17_es1xv"]
+[ext_resource type="PackedScene" uid="uid://bdau24iq4fib8" path="res://Scenes/UserInterface/Effects/UIEffectVignette.tscn" id="18_vnlix"]
+[ext_resource type="PackedScene" uid="uid://cq70khnyefibk" path="res://Scenes/UserInterface/Effects/UIEffectDithering.tscn" id="19_8qeyf"]
 [ext_resource type="AudioStream" uid="uid://bdcsxss16vwtc" path="res://Audio/SFX/Movement/StepWalk.mp3" id="23_5f6b8"]
 [ext_resource type="AudioStream" uid="uid://cp8slsw1kde5q" path="res://Audio/SFX/Movement/Jump.mp3" id="24_78spm"]
 [ext_resource type="AudioStream" uid="uid://bnr2qn01if4yl" path="res://Audio/SFX/Movement/Land.mp3" id="25_bbxue"]
@@ -160,21 +159,6 @@ _data = {
 "WALK": SubResource("Animation_ybvy8")
 }
 
-[sub_resource type="Resource" id="Resource_u25xp"]
-script = ExtResource("15_ao0lo")
-WalkSpeed = 5.0
-SneakSpeed = 3.0
-CrouchSpeed = 2.0
-JumpSpeed = 5.0
-JumpForce = 5.5
-MaxJumps = 1
-OnGroundAcceleration = 40.0
-OnAirAcceleration = 20.0
-Gravity = 9.8
-CurrentJumpForce = 5.5
-CurrentSpeed = 5.0
-CurrentAcceleration = 0.0
-
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_nc3dv"]
 properties/0/path = NodePath(".:Vector")
 properties/0/spawn = true
@@ -215,7 +199,9 @@ metadata/AudioPlayer3D = NodePath("CommonPart/CameraHolder/PlayerCamera/Audio3D/
 
 [node name="CommonPart" type="Node" parent="."]
 
-[node name="Voice" type="AudioStreamPlayer" parent="CommonPart"]
+[node name="Audio" type="Node" parent="CommonPart"]
+
+[node name="VoicePlayer" type="AudioStreamPlayer" parent="CommonPart/Audio"]
 stream = SubResource("AudioStreamGenerator_0nix6")
 autoplay = true
 bus = &"VoiceChat"
@@ -262,7 +248,6 @@ linear_limit_z/enabled = false
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
 stream = SubResource("AudioStreamPolyphonic_iug1w")
 autoplay = true
-bus = &"SFX"
 script = ExtResource("1_cu3h5")
 _playerRoot = NodePath("../../../../..")
 
@@ -326,7 +311,6 @@ _playerRoot = NodePath("../../..")
 [node name="AudioPlayer" type="AudioStreamPlayer" parent="ClientServerPart/Audio" node_paths=PackedStringArray("_playerRoot")]
 stream = SubResource("AudioStreamPolyphonic_80tfw")
 autoplay = true
-bus = &"SFX"
 script = ExtResource("7_41235")
 _playerRoot = NodePath("../../..")
 
@@ -349,7 +333,7 @@ _playerCamera = NodePath("../../../CommonPart/CameraHolder/PlayerCamera")
 [node name="PlayerCameraAnimation" type="Node" parent="ClientPart/Scripts" node_paths=PackedStringArray("_movementActions", "_animationPlayer")]
 script = ExtResource("11_25u0h")
 _movementActions = NodePath("../../../ClientServerPart/Scripts/MovementActions")
-_animationPlayer = NodePath("../../Animations/PlayerCameraAnimator")
+_animationPlayer = NodePath("../../Animations/AnimatorPlayerCamera")
 
 [node name="SelectAttackPlayer" type="Node" parent="ClientPart/Scripts" node_paths=PackedStringArray("_meleeAttackActions", "_rayOfAttack")]
 script = ExtResource("12_lgf40")
@@ -361,31 +345,31 @@ _cooldownColor = Color(0.719656, 0.536598, 0, 1)
 
 [node name="UI" type="Node" parent="ClientPart"]
 
-[node name="UIPauseMenu" parent="ClientPart/UI" node_paths=PackedStringArray("_inputActions") instance=ExtResource("5_evjm4")]
+[node name="UIMenuPause" parent="ClientPart/UI" node_paths=PackedStringArray("_inputActions") instance=ExtResource("5_evjm4")]
 mouse_filter = 1
 _inputActions = NodePath("../../../ClientServerPart/Scripts/InputActions")
 
-[node name="UIPlayerList" parent="ClientPart/UI" node_paths=PackedStringArray("_inputActions") instance=ExtResource("12_nnmj0")]
+[node name="UIWindowPlayerList" parent="ClientPart/UI" node_paths=PackedStringArray("_inputActions") instance=ExtResource("12_nnmj0")]
 _inputActions = NodePath("../../../ClientServerPart/Scripts/InputActions")
 
-[node name="UIHealthInfo" parent="ClientPart/UI" node_paths=PackedStringArray("_hudParameters") instance=ExtResource("11_u87qw")]
+[node name="UIHUDHealth" parent="ClientPart/UI" node_paths=PackedStringArray("_hudParameters") instance=ExtResource("11_u87qw")]
 _hudParameters = NodePath("../../../ClientServerPart/Scripts/HUDParameters")
 
-[node name="UIAttackInfo" parent="ClientPart/UI" node_paths=PackedStringArray("_hudParameters") instance=ExtResource("12_d611m")]
+[node name="UIHUDAttack" parent="ClientPart/UI" node_paths=PackedStringArray("_hudParameters") instance=ExtResource("12_d611m")]
 _hudParameters = NodePath("../../../ClientServerPart/Scripts/HUDParameters")
 
-[node name="UISanity" parent="ClientPart/UI" node_paths=PackedStringArray("_hudParameters") instance=ExtResource("12_53pu3")]
+[node name="UIHUDCrosshair" parent="ClientPart/UI" instance=ExtResource("7_5q3fu")]
+
+[node name="UIEffectSanity" parent="ClientPart/UI" node_paths=PackedStringArray("_hudParameters") instance=ExtResource("12_53pu3")]
 _hudParameters = NodePath("../../../ClientServerPart/Scripts/HUDParameters")
 
-[node name="UICrosshair" parent="ClientPart/UI" instance=ExtResource("7_5q3fu")]
+[node name="UIEffectVignette" parent="ClientPart/UI" instance=ExtResource("18_vnlix")]
 
-[node name="UIVignette" parent="ClientPart/UI" instance=ExtResource("18_vnlix")]
-
-[node name="UIDithering" parent="ClientPart/UI" instance=ExtResource("19_8qeyf")]
+[node name="UIEffectDithering" parent="ClientPart/UI" instance=ExtResource("19_8qeyf")]
 
 [node name="Animations" type="Node" parent="ClientPart"]
 
-[node name="PlayerCameraAnimator" type="AnimationPlayer" parent="ClientPart/Animations"]
+[node name="AnimatorPlayerCamera" type="AnimationPlayer" parent="ClientPart/Animations"]
 root_node = NodePath("../../Scripts")
 libraries = {
 "": SubResource("AnimationLibrary_vvpui")
@@ -402,7 +386,14 @@ MovementActions = NodePath("../../../ClientServerPart/Scripts/MovementActions")
 InputActions = NodePath("../../../ClientServerPart/Scripts/InputActions")
 InputVector = NodePath("../../../ClientServerPart/Scripts/InputVector")
 PlayerBody = NodePath("../../../CommonPart/PlayerBody")
-PlayerMovementParameters = SubResource("Resource_u25xp")
+SpeedWalk = 5.0
+SpeedSneak = 3.0
+SpeedCrouch = 2.0
+SpeedJump = 5.0
+AccelerationOnGround = 40.0
+AccelerationOnAir = 30.0
+CurrentSpeed = 5.0
+CurrentAcceleration = 30.0
 
 [node name="PlayerMovementSounds" type="Node" parent="ServerPart/Scripts" node_paths=PackedStringArray("_movementActions", "_stepTimer", "_audioPlayer3D")]
 script = ExtResource("33_nwoie")
@@ -448,7 +439,7 @@ _audioPlayer3D = NodePath("../../../CommonPart/CameraHolder/PlayerCamera/Audio3D
 _missAttackAudio = ExtResource("26_iqfag")
 _hitAttackAudio = ExtResource("27_w1d6b")
 
-[node name="MonsterVision" type="Node" parent="ServerPart/Scripts" node_paths=PackedStringArray("_playerCamera", "_playerActions")]
+[node name="PlayerAuraVision" type="Node" parent="ServerPart/Scripts" node_paths=PackedStringArray("_playerCamera", "_playerActions")]
 script = ExtResource("5_hra6h")
 _playerCamera = NodePath("../../../CommonPart/CameraHolder/PlayerCamera")
 _playerActions = NodePath("../../../ClientServerPart/Scripts/InputActions")
@@ -460,7 +451,7 @@ _hudParameters = NodePath("../../../ClientServerPart/Scripts/HUDParameters")
 _playerHealth = NodePath("../PlayerHealth")
 _rayOfAttack = NodePath("../../../CommonPart/CameraHolder/PlayerCamera/PlayerLook/RayOfAttack")
 
-[node name="RemoteCameraRotation" type="Node" parent="ServerPart/Scripts" node_paths=PackedStringArray("_playerCamera", "_playerBody")]
+[node name="PlayerCameraRemoteRotation" type="Node" parent="ServerPart/Scripts" node_paths=PackedStringArray("_playerCamera", "_playerBody")]
 script = ExtResource("17_es1xv")
 _playerCamera = NodePath("../../../CommonPart/CameraHolder/PlayerCamera")
 _playerBody = NodePath("../../../CommonPart/PlayerBody")
@@ -475,20 +466,20 @@ _playerBody = NodePath("../../../CommonPart/PlayerBody")
 
 [node name="Synchronizers" type="Node" parent="."]
 
-[node name="InputVectorSynchronizer" type="MultiplayerSynchronizer" parent="Synchronizers"]
+[node name="SynchronizerInputVector" type="MultiplayerSynchronizer" parent="Synchronizers"]
 root_path = NodePath("../../ClientServerPart/Scripts/InputVector")
 replication_config = SubResource("SceneReplicationConfig_nc3dv")
 public_visibility = false
 
-[node name="HUDParametersSynchronizer" type="MultiplayerSynchronizer" parent="Synchronizers"]
+[node name="SynchronizerHUDParameters" type="MultiplayerSynchronizer" parent="Synchronizers"]
 root_path = NodePath("../../ClientServerPart/Scripts/HUDParameters")
 replication_config = SubResource("SceneReplicationConfig_5l6a7")
 public_visibility = false
 
-[node name="PlayerBodySynchronizer" type="MultiplayerSynchronizer" parent="Synchronizers"]
+[node name="SynchronizerPlayerBody" type="MultiplayerSynchronizer" parent="Synchronizers"]
 root_path = NodePath("../../CommonPart/PlayerBody")
 replication_config = SubResource("SceneReplicationConfig_mj3mr")
 
-[node name="PlayerCameraSynchronizer" type="MultiplayerSynchronizer" parent="Synchronizers"]
+[node name="SynchronizerPlayerCamera" type="MultiplayerSynchronizer" parent="Synchronizers"]
 root_path = NodePath("../../CommonPart/CameraHolder/PlayerCamera")
 replication_config = SubResource("SceneReplicationConfig_bnnxu")

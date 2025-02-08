@@ -7,7 +7,20 @@ public partial class PlayerMovement : Node
     [Export] public InputVector InputVector;
     [Export] public CharacterBody3D PlayerBody;
 
-    [Export] public PlayerMovementParameters PlayerMovementParameters { get; private set; }
+    [ExportGroup("Parameters")]
+    [Export] public float SpeedWalk = 3.5f;
+    [Export] public float SpeedSneak = 2f;
+    [Export] public float SpeedCrouch = 1f;
+    [Export] public float SpeedJump = 3.5f;
+    [Export] public float ForceJump = 5f;
+    [Export] public float AccelerationOnGround = 30f;
+    [Export] public float AccelerationOnAir = 20f;
+    [Export] public float CurrentForceJump = 5f;
+    [Export] public float CurrentSpeed = 3.5f;
+    [Export] public float CurrentAcceleration = 20f;
+    [Export] public float Gravity = 9.8f;
+    [Export] public int MaxJumps = 1;
+
     public MovementState CurrentState { get; private set; }
     public IdleState IdleState { get; private set; }
     public WalkState WalkState { get; private set; }
@@ -35,6 +48,7 @@ public partial class PlayerMovement : Node
 
     public void ChangeState(MovementState newState)
     {
+        CurrentState.ExitActionInvoke();
         CurrentState.Exit();
         CurrentState = newState;
         CurrentState.Enter();

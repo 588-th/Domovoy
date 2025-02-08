@@ -1,0 +1,57 @@
+[gd_scene load_steps=9 format=3 uid="uid://csc1xh8fex06u"]
+
+[ext_resource type="Script" path="res://Scripts/Items/Fuse/Fuse.cs" id="1_f8hyk"]
+[ext_resource type="AudioStream" uid="uid://5h7hqp3o4agm" path="res://Audio/SFX/Common/Pickup.mp3" id="2_qn6y6"]
+[ext_resource type="AudioStream" uid="uid://blgubek3j4k0s" path="res://Audio/SFX/Firearm/FirearmTakeOnHand.mp3" id="3_lxu13"]
+[ext_resource type="Script" path="res://Scripts/Items/Fuse/FuseSetting.cs" id="4_554r6"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_cryig"]
+albedo_color = Color(1, 0.976667, 0.3, 1)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_audvj"]
+material = SubResource("StandardMaterial3D_cryig")
+top_radius = 0.05
+bottom_radius = 0.05
+height = 0.2
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_3p7ly"]
+size = Vector3(0.120117, 0.20874, 0.103516)
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_anbob"]
+properties/0/path = NodePath(".:position")
+properties/0/spawn = true
+properties/0/replication_mode = 2
+properties/1/path = NodePath(".:rotation")
+properties/1/spawn = true
+properties/1/replication_mode = 2
+properties/2/path = NodePath(".:freeze")
+properties/2/spawn = true
+properties/2/replication_mode = 2
+
+[node name="ItemFuse" type="RigidBody3D" node_paths=PackedStringArray("_fuseSetting") groups=["Item:Pickupble", "Object:Item"]]
+collision_layer = 4
+script = ExtResource("1_f8hyk")
+_fuseSetting = NodePath("ServerPart/FuseSetting")
+SlotType = 2
+PickupAudio = ExtResource("2_qn6y6")
+TakeOnHandAudio = ExtResource("3_lxu13")
+
+[node name="Model" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.112791, 0)
+mesh = SubResource("CylinderMesh_audvj")
+
+[node name="Hitbox" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.111768, 0)
+shape = SubResource("BoxShape3D_3p7ly")
+
+[node name="ServerPart" type="Node" parent="."]
+
+[node name="FuseSetting" type="Node" parent="ServerPart" node_paths=PackedStringArray("_fuse")]
+script = ExtResource("4_554r6")
+_fuse = NodePath("../..")
+
+[node name="Synchronizer" type="Node" parent="."]
+
+[node name="ItemBodySynchronizer" type="MultiplayerSynchronizer" parent="Synchronizer"]
+root_path = NodePath("../..")
+replication_config = SubResource("SceneReplicationConfig_anbob")

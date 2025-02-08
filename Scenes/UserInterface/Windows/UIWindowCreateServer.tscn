@@ -1,0 +1,96 @@
+[gd_scene load_steps=2 format=3 uid="uid://dcqotk8dsw1uk"]
+
+[ext_resource type="Script" path="res://Scripts/UserInterface/Windows/UIWindowCreateServer.cs" id="1_e6vv1"]
+
+[node name="UIWindowCreateServer" type="Control" node_paths=PackedStringArray("_buttonCreateServer", "_buttonClose", "_lineEditIP", "_lineEditPort")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("1_e6vv1")
+_buttonCreateServer = NodePath("MarginContainer/Panel/HBoxContainer/ButtonCreateServer")
+_buttonClose = NodePath("MarginContainer/Panel/HBoxContainer/ButtonClose")
+_lineEditIP = NodePath("MarginContainer/Panel/MarginContainer/VBoxContainer/VBoxIP/LineEditIP")
+_lineEditPort = NodePath("MarginContainer/Panel/MarginContainer/VBoxContainer/VBoxPort/LineEditPort")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = -94.17
+offset_right = 482.935
+offset_bottom = 94.17
+grow_vertical = 2
+mouse_filter = 2
+theme_override_constants/margin_left = 255
+
+[node name="Panel" type="Panel" parent="MarginContainer"]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 15
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 15
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/Panel/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 15
+
+[node name="VBoxIP" type="VBoxContainer" parent="MarginContainer/Panel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="LabelIP" type="Label" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/VBoxIP"]
+layout_mode = 2
+text = "IP"
+
+[node name="LineEditIP" type="LineEdit" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/VBoxIP"]
+layout_mode = 2
+text = "127.0.0.1"
+placeholder_text = "ip"
+
+[node name="VBoxPort" type="VBoxContainer" parent="MarginContainer/Panel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="LinePort" type="Label" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/VBoxPort"]
+layout_mode = 2
+text = "Port"
+
+[node name="LineEditPort" type="LineEdit" parent="MarginContainer/Panel/MarginContainer/VBoxContainer/VBoxPort"]
+layout_mode = 2
+text = "7000"
+placeholder_text = "port"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/Panel"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -113.5
+offset_top = -31.0
+offset_right = 113.5
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="ButtonClose" type="Button" parent="MarginContainer/Panel/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 8
+text = "Close"
+
+[node name="ButtonCreateServer" type="Button" parent="MarginContainer/Panel/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 8
+text = "Create"

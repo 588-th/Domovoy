@@ -1,27 +1,28 @@
 [gd_scene load_steps=6 format=3 uid="uid://dst5dqfam7u6p"]
 
-[ext_resource type="PackedScene" uid="uid://ub1dpkmqs866" path="res://Scenes/Levels/MainMenu.tscn" id="1_aogaf"]
-[ext_resource type="Script" path="res://Scripts/Spawners/LevelSpawner.cs" id="1_opl21"]
-[ext_resource type="Script" path="res://Scripts/Spawners/GameStageSpawner.cs" id="2_hki6v"]
+[ext_resource type="PackedScene" uid="uid://ub1dpkmqs866" path="res://Scenes/Levels/LevelMainMenu.tscn" id="1_aogaf"]
+[ext_resource type="Script" path="res://Scripts/Spawners/SpawnerLevel.cs" id="1_opl21"]
+[ext_resource type="Script" path="res://Scripts/Spawners/SpawnSystemLevel.cs" id="2_hki6v"]
 [ext_resource type="PackedScene" uid="uid://c352e57r1w1l0" path="res://Scenes/Levels/LevelLobby.tscn" id="5_6lppg"]
 [ext_resource type="PackedScene" uid="uid://cs1oc4wf53g30" path="res://Scenes/Levels/LevelApartments.tscn" id="5_lucyf"]
 
 [node name="World" type="Node"]
 
-[node name="Level" type="Node" parent="." groups=["Holder:Level"]]
+[node name="HolderLevel" type="Node" parent="." groups=["Holder:Level"]]
 
-[node name="MainMenu" parent="Level" instance=ExtResource("1_aogaf")]
+[node name="LevelMainMenu" parent="HolderLevel" instance=ExtResource("1_aogaf")]
 
 [node name="Spawners" type="Node" parent="."]
 
-[node name="LevelSpawner" type="MultiplayerSpawner" parent="Spawners" node_paths=PackedStringArray("_levelParent")]
-_spawnable_scenes = PackedStringArray("res://Scenes/Levels/LevelLobby.tscn", "res://Scenes/Levels/LevelRound.tscn", "res://Scenes/Levels/LevelApartments.tscn")
-spawn_path = NodePath("../../Level")
+[node name="SpawnerLevel" type="MultiplayerSpawner" parent="Spawners" node_paths=PackedStringArray("_holderLevel")]
+_spawnable_scenes = PackedStringArray("res://Scenes/Levels/LevelLobby.tscn", "res://Scenes/Levels/LevelApartments.tscn")
+spawn_path = NodePath("../../HolderLevel")
+spawn_limit = 1
 script = ExtResource("1_opl21")
-_levelParent = NodePath("../../Level")
+_holderLevel = NodePath("../../HolderLevel")
 
-[node name="GameStageSpawner" type="Node" parent="Spawners" node_paths=PackedStringArray("_levelSpawner")]
+[node name="SpawnSystemLevel" type="Node" parent="Spawners" node_paths=PackedStringArray("_levelSpawner")]
 script = ExtResource("2_hki6v")
-_levelSpawner = NodePath("../LevelSpawner")
+_levelSpawner = NodePath("../SpawnerLevel")
 _lobbyLevelScene = ExtResource("5_6lppg")
 _roundLevelScene = ExtResource("5_lucyf")

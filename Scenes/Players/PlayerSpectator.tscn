@@ -6,17 +6,17 @@
 [ext_resource type="Script" path="res://Scripts/Player/Spectator/SpectatorPlayerChanger.cs" id="2_acyj6"]
 [ext_resource type="Script" path="res://Scripts/Player/PlayerInputKeys.cs" id="3_y84ls"]
 [ext_resource type="Script" path="res://Scripts/Player/Camera/PlayerCamera.cs" id="5_16n5l"]
-[ext_resource type="Script" path="res://Scripts/Player/Spectator/HUDParameterSpectating.cs" id="6_3li0g"]
-[ext_resource type="PackedScene" uid="uid://c131mixukwjnm" path="res://Scenes/UserInterface/Menu/UIPauseMenu.tscn" id="6_3ocre"]
-[ext_resource type="PackedScene" uid="uid://dneigjq1nfs2b" path="res://Scenes/UserInterface/Menu/UIPlayerList.tscn" id="7_ox3bw"]
-[ext_resource type="PackedScene" uid="uid://dsm0c68ucl2kg" path="res://Scenes/UserInterface/HUD/UIHealthInfo.tscn" id="7_vquiv"]
-[ext_resource type="PackedScene" uid="uid://c6x7etoas6aiu" path="res://Scenes/UserInterface/HUD/UIItemInfo.tscn" id="8_8yadc"]
-[ext_resource type="PackedScene" uid="uid://ctk8b008ddy8p" path="res://Scenes/UserInterface/HUD/UINameInfo.tscn" id="9_ehdeu"]
-[ext_resource type="PackedScene" uid="uid://cxq88ssuuklm2" path="res://Scenes/UserInterface/HUD/UISanity.tscn" id="9_mqkab"]
+[ext_resource type="Script" path="res://Scripts/Player/Spectator/SpectatorHUDParameters.cs" id="6_3li0g"]
+[ext_resource type="PackedScene" uid="uid://c131mixukwjnm" path="res://Scenes/UserInterface/Menu/UIMenuPause.tscn" id="6_3ocre"]
+[ext_resource type="PackedScene" uid="uid://dneigjq1nfs2b" path="res://Scenes/UserInterface/Windows/UIWindowPlayerList.tscn" id="7_ox3bw"]
+[ext_resource type="PackedScene" uid="uid://dsm0c68ucl2kg" path="res://Scenes/UserInterface/HUD/UIHUDHealth.tscn" id="7_vquiv"]
+[ext_resource type="PackedScene" uid="uid://c6x7etoas6aiu" path="res://Scenes/UserInterface/HUD/UIHUDItem.tscn" id="8_8yadc"]
+[ext_resource type="PackedScene" uid="uid://ctk8b008ddy8p" path="res://Scenes/UserInterface/HUD/UIHUDName.tscn" id="9_ehdeu"]
+[ext_resource type="PackedScene" uid="uid://cxq88ssuuklm2" path="res://Scenes/UserInterface/Effects/UIEffectSanity.tscn" id="9_mqkab"]
 [ext_resource type="Script" path="res://Scripts/Player/Spectator/SpectatorCameraFollow.cs" id="9_ngxsr"]
-[ext_resource type="PackedScene" uid="uid://bojdshm0oxy1v" path="res://Scenes/UserInterface/HUD/UIWhiteNoise.tscn" id="10_1fpbw"]
-[ext_resource type="PackedScene" uid="uid://bdau24iq4fib8" path="res://Scenes/UserInterface/HUD/UIVignette.tscn" id="11_6fxlb"]
-[ext_resource type="PackedScene" uid="uid://cq70khnyefibk" path="res://Scenes/UserInterface/HUD/UIDithering.tscn" id="12_m676i"]
+[ext_resource type="PackedScene" uid="uid://bojdshm0oxy1v" path="res://Scenes/UserInterface/Effects/UIEffectWhiteNoise.tscn" id="10_1fpbw"]
+[ext_resource type="PackedScene" uid="uid://bdau24iq4fib8" path="res://Scenes/UserInterface/Effects/UIEffectVignette.tscn" id="11_6fxlb"]
+[ext_resource type="PackedScene" uid="uid://cq70khnyefibk" path="res://Scenes/UserInterface/Effects/UIEffectDithering.tscn" id="12_m676i"]
 
 [sub_resource type="AudioStreamGenerator" id="AudioStreamGenerator_qtjfk"]
 mix_rate = 48000.0
@@ -50,7 +50,9 @@ properties/4/replication_mode = 2
 
 [node name="CommonPart" type="Node" parent="."]
 
-[node name="Voice" type="AudioStreamPlayer" parent="CommonPart"]
+[node name="Audio" type="Node" parent="CommonPart"]
+
+[node name="VoicePlayer" type="AudioStreamPlayer" parent="CommonPart/Audio"]
 stream = SubResource("AudioStreamGenerator_qtjfk")
 autoplay = true
 bus = &"VoiceChat"
@@ -84,38 +86,33 @@ _playerCanMoveCamera = false
 
 [node name="UI" type="Node" parent="ClientPart"]
 
-[node name="UIPauseMenu" parent="ClientPart/UI" node_paths=PackedStringArray("_inputActions") instance=ExtResource("6_3ocre")]
+[node name="UIMenuPause" parent="ClientPart/UI" node_paths=PackedStringArray("_inputActions") instance=ExtResource("6_3ocre")]
 mouse_filter = 1
 _inputActions = NodePath("../../../ClientServerPart/Scripts/InputActions")
 
-[node name="UIPlayerList" parent="ClientPart/UI" node_paths=PackedStringArray("_inputActions") instance=ExtResource("7_ox3bw")]
+[node name="UIWindowPlayerList" parent="ClientPart/UI" node_paths=PackedStringArray("_inputActions") instance=ExtResource("7_ox3bw")]
 _inputActions = NodePath("../../../ClientServerPart/Scripts/InputActions")
 
-[node name="UIHealthInfo" parent="ClientPart/UI" node_paths=PackedStringArray("_hudParameters") instance=ExtResource("7_vquiv")]
+[node name="UIHUDHealth" parent="ClientPart/UI" node_paths=PackedStringArray("_hudParameters") instance=ExtResource("7_vquiv")]
 _hudParameters = NodePath("../../../ClientServerPart/Scripts/HUDParameters")
 
-[node name="UIItemInfo" parent="ClientPart/UI" node_paths=PackedStringArray("_hudParameters") instance=ExtResource("8_8yadc")]
+[node name="UIHUDItem" parent="ClientPart/UI" node_paths=PackedStringArray("_hudParameters") instance=ExtResource("8_8yadc")]
 _hudParameters = NodePath("../../../ClientServerPart/Scripts/HUDParameters")
 
-[node name="UINameInfo" parent="ClientPart/UI" node_paths=PackedStringArray("_hudParameters") instance=ExtResource("9_ehdeu")]
+[node name="UIHUDName" parent="ClientPart/UI" node_paths=PackedStringArray("_hudParameters") instance=ExtResource("9_ehdeu")]
 _hudParameters = NodePath("../../../ClientServerPart/Scripts/HUDParameters")
 
-[node name="UISanity" parent="ClientPart/UI" node_paths=PackedStringArray("_hudParameters") instance=ExtResource("9_mqkab")]
+[node name="UIEffectSanity" parent="ClientPart/UI" node_paths=PackedStringArray("_hudParameters") instance=ExtResource("9_mqkab")]
 _hudParameters = NodePath("../../../ClientServerPart/Scripts/HUDParameters")
 
-[node name="UIWhiteNoise" parent="ClientPart/UI" node_paths=PackedStringArray("_hudParameters") instance=ExtResource("10_1fpbw")]
+[node name="UIEffectWhiteNoise" parent="ClientPart/UI" node_paths=PackedStringArray("_hudParameters") instance=ExtResource("10_1fpbw")]
 _hudParameters = NodePath("../../../ClientServerPart/Scripts/HUDParameters")
 
-[node name="UIVignette" parent="ClientPart/UI" instance=ExtResource("11_6fxlb")]
+[node name="UIEffectVignette" parent="ClientPart/UI" instance=ExtResource("11_6fxlb")]
 
-[node name="UIDithering" parent="ClientPart/UI" instance=ExtResource("12_m676i")]
+[node name="UIEffectDithering" parent="ClientPart/UI" instance=ExtResource("12_m676i")]
 
 [node name="ServerPart" type="Node" parent="."]
-
-[node name="HUDParameterSpectating" type="Node" parent="ServerPart" node_paths=PackedStringArray("_hudParameters", "_spectatorPlayerChanger")]
-script = ExtResource("6_3li0g")
-_hudParameters = NodePath("../../ClientServerPart/Scripts/HUDParameters")
-_spectatorPlayerChanger = NodePath("../SpectatorPlayerChanger")
 
 [node name="SpectatorCameraFollow" type="Node" parent="ServerPart" node_paths=PackedStringArray("_spectatorPlayerChanger", "_spectatorCamera")]
 script = ExtResource("9_ngxsr")
@@ -126,14 +123,19 @@ _spectatorCamera = NodePath("../../ClientServerPart/SpectatorCamera")
 script = ExtResource("2_acyj6")
 _inputActions = NodePath("../../ClientServerPart/Scripts/InputActions")
 
+[node name="SpectatorHUDParameters" type="Node" parent="ServerPart" node_paths=PackedStringArray("_hudParameters", "_spectatorPlayerChanger")]
+script = ExtResource("6_3li0g")
+_hudParameters = NodePath("../../ClientServerPart/Scripts/HUDParameters")
+_spectatorPlayerChanger = NodePath("../SpectatorPlayerChanger")
+
 [node name="Synchronizers" type="Node" parent="."]
 
-[node name="SpectatorCameraSynchronizer" type="MultiplayerSynchronizer" parent="Synchronizers"]
+[node name="SynchronizerSpectatorCamera" type="MultiplayerSynchronizer" parent="Synchronizers"]
 root_path = NodePath("../../ClientServerPart/SpectatorCamera")
 replication_config = SubResource("SceneReplicationConfig_vvjep")
 public_visibility = false
 
-[node name="HUDParametersSynchronizer" type="MultiplayerSynchronizer" parent="Synchronizers"]
+[node name="SynchronizerHUDParameters" type="MultiplayerSynchronizer" parent="Synchronizers"]
 root_path = NodePath("../../ClientServerPart/Scripts/HUDParameters")
 replication_config = SubResource("SceneReplicationConfig_ttufj")
 public_visibility = false

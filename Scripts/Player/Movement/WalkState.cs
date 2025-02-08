@@ -8,20 +8,19 @@ public class WalkState : MovementState
     {
         base.Enter();
 
-        _playerMovement.MovementActions.InvokeAction("isWalkState");
         _playerMovement.InputActions.SneakKeyDown += OnSneakKeyDown;
         _playerMovement.InputActions.JumpKeyDown += OnJumpKeyDown;
         _playerMovement.MovementActions.IsNotGrounded += OnNotGround;
+        _playerMovement.MovementActions.InvokeAction("isWalkState");
 
-        _playerMovement.PlayerMovementParameters.CurrentSpeed = _playerMovement.PlayerMovementParameters.WalkSpeed;
-        _playerMovement.PlayerMovementParameters.CurrentAcceleration = _playerMovement.PlayerMovementParameters.OnGroundAcceleration;
+        _playerMovement.CurrentSpeed = _playerMovement.SpeedWalk;
+        _playerMovement.CurrentAcceleration = _playerMovement.AccelerationOnGround;
     }
 
     public override void Exit()
     {
         base.Exit();
 
-        _playerMovement.MovementActions.InvokeAction("isNotWalkState");
         _playerMovement.InputActions.SneakKeyDown -= OnSneakKeyDown;
         _playerMovement.InputActions.JumpKeyDown -= OnJumpKeyDown;
         _playerMovement.MovementActions.IsNotGrounded -= OnNotGround;
@@ -35,6 +34,11 @@ public class WalkState : MovementState
         Move(delta);
     }
 
+    public override void ExitActionInvoke()
+    {
+        _playerMovement.MovementActions.InvokeAction("isNotWalkState");
+    }
+
     private void Move(double delta)
     {
         Vector3 velocity = _playerMovement.PlayerBody.Velocity;
@@ -43,9 +47,9 @@ public class WalkState : MovementState
 
         Vector3 targetVelocity = direction == Vector3.Zero
             ? Vector3.Zero
-            : new Vector3(direction.X * _playerMovement.PlayerMovementParameters.CurrentSpeed, 0, direction.Z * _playerMovement.PlayerMovementParameters.CurrentSpeed);
+            : new Vector3(direction.X * _playerMovement.CurrentSpeed, 0, direction.Z * _playerMovement.CurrentSpeed);
 
-        velocity = velocity.MoveToward(targetVelocity, (float)(_playerMovement.PlayerMovementParameters.OnGroundAcceleration * delta));
+        velocity = velocity.MoveToward(targetVelocity, (float)(_playerMovement.AccelerationOnGround * delta));
         _playerMovement.PlayerBody.Velocity = velocity;
     }
 

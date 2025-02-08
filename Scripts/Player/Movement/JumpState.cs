@@ -10,13 +10,13 @@ public class JumpState : MovementState
     {
         base.Enter();
 
-        _playerMovement.MovementActions.InvokeAction("isJumpState");
         _playerMovement.InputActions.JumpKeyDown += OnJumpKeyDown;
         _playerMovement.MovementActions.IsGrounded += OnGround;
+        _playerMovement.MovementActions.InvokeAction("isJumpState");
 
-        _playerMovement.PlayerMovementParameters.CurrentJumpForce = _playerMovement.PlayerMovementParameters.JumpForce;
-        _playerMovement.PlayerMovementParameters.CurrentSpeed = _playerMovement.PlayerMovementParameters.JumpSpeed;
-        _playerMovement.PlayerMovementParameters.CurrentAcceleration = _playerMovement.PlayerMovementParameters.OnAirAcceleration;
+        _playerMovement.CurrentForceJump = _playerMovement.ForceJump;
+        _playerMovement.CurrentSpeed = _playerMovement.SpeedJump;
+        _playerMovement.CurrentAcceleration = _playerMovement.AccelerationOnAir;
 
         if (_playerMovement.IsGrounded)
             Jump();
@@ -26,7 +26,6 @@ public class JumpState : MovementState
     {
         base.Exit();
 
-        _playerMovement.MovementActions.InvokeAction("isNotJumpState");
         _playerMovement.InputActions.JumpKeyDown -= OnJumpKeyDown;
         _playerMovement.MovementActions.IsGrounded -= OnGround;
     }
@@ -34,8 +33,14 @@ public class JumpState : MovementState
     public override void Update(double delta)
     {
         base.Update(delta);
+
         Move(delta);
         Fall(delta);
+    }
+
+    public override void ExitActionInvoke()
+    {
+        _playerMovement.MovementActions.InvokeAction("isNotJumpState");
     }
 
     private void Move(double delta)
@@ -49,10 +54,10 @@ public class JumpState : MovementState
 
         if (direction != Vector3.Zero)
         {
-            targetVelocity.X = direction.X * _playerMovement.PlayerMovementParameters.CurrentSpeed;
-            targetVelocity.Z = direction.Z * _playerMovement.PlayerMovementParameters.CurrentSpeed;
+            targetVelocity.X = direction.X * _playerMovement.CurrentSpeed;
+            targetVelocity.Z = direction.Z * _playerMovement.CurrentSpeed;
 
-            velocity = velocity.MoveToward(targetVelocity, (float)(_playerMovement.PlayerMovementParameters.CurrentAcceleration * delta));
+            velocity = velocity.MoveToward(targetVelocity, (float)(_playerMovement.CurrentAcceleration * delta));
         }
 
         _playerMovement.PlayerBody.Velocity = velocity;
@@ -61,7 +66,7 @@ public class JumpState : MovementState
     private void Fall(double delta)
     {
         Vector3 velocity = _playerMovement.PlayerBody.Velocity;
-        velocity.Y -= _playerMovement.PlayerMovementParameters.Gravity * (float)delta;
+        velocity.Y -= _playerMovement.Gravity * (float)delta;
         _playerMovement.PlayerBody.Velocity = velocity;
     }
 
@@ -70,13 +75,13 @@ public class JumpState : MovementState
         _jumpCount++;
         Vector3 velocity = _playerMovement.PlayerBody.Velocity;
         _playerMovement.PlayerBody.Velocity = new Vector3(velocity.X, 0f, velocity.Z);
-        velocity.Y = _playerMovement.PlayerMovementParameters.CurrentJumpForce;
+        velocity.Y = _playerMovement.CurrentForceJump;
         _playerMovement.PlayerBody.Velocity = velocity;
     }
 
     private void OnJumpKeyDown()
     {
-        if (_jumpCount < _playerMovement.PlayerMovementParameters.MaxJumps)
+        if (_jumpCount < _playerMovement.MaxJumps)
         {
             Jump();
         }

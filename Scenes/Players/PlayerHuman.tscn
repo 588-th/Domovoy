@@ -1,4 +1,4 @@
-[gd_scene load_steps=67 format=4 uid="uid://bks72b4kwjk1f"]
+[gd_scene load_steps=65 format=4 uid="uid://bks72b4kwjk1f"]
 
 [ext_resource type="Script" path="res://Scripts/Audio/AudioPlayer3D.cs" id="1_o0yqy"]
 [ext_resource type="Script" path="res://Scripts/Player/InputVector.cs" id="2_8kxsr"]
@@ -17,27 +17,26 @@
 [ext_resource type="Script" path="res://Scripts/Player/ItemInteract/PlayerItemInteractor.cs" id="8_44guu"]
 [ext_resource type="Script" path="res://Scripts/Player/ItemInteract/PlayerItemEquipper.cs" id="9_nr6ef"]
 [ext_resource type="Script" path="res://Scripts/Player/Camera/PlayerCameraAnimations.cs" id="10_p0rem"]
-[ext_resource type="PackedScene" uid="uid://c131mixukwjnm" path="res://Scenes/UserInterface/Menu/UIPauseMenu.tscn" id="11_s3mkc"]
+[ext_resource type="PackedScene" uid="uid://c131mixukwjnm" path="res://Scenes/UserInterface/Menu/UIMenuPause.tscn" id="11_s3mkc"]
 [ext_resource type="Script" path="res://Scripts/Player/ReverbRoom.cs" id="11_y4aya"]
 [ext_resource type="Script" path="res://Scripts/Player/PlayerVoiceRecorder.cs" id="12_o81cg"]
-[ext_resource type="PackedScene" uid="uid://cojvgyniobwbk" path="res://Scenes/UserInterface/HUD/UICrosshair.tscn" id="13_h4pmd"]
-[ext_resource type="PackedScene" uid="uid://dsm0c68ucl2kg" path="res://Scenes/UserInterface/HUD/UIHealthInfo.tscn" id="13_m4wnv"]
-[ext_resource type="PackedScene" uid="uid://cab1adf54c54n" path="res://Scenes/UserInterface/HUD/UIInteractInfo.tscn" id="14_1wxl0"]
-[ext_resource type="PackedScene" uid="uid://c6x7etoas6aiu" path="res://Scenes/UserInterface/HUD/UIItemInfo.tscn" id="14_kviuc"]
-[ext_resource type="PackedScene" uid="uid://cxq88ssuuklm2" path="res://Scenes/UserInterface/HUD/UISanity.tscn" id="14_os3oe"]
-[ext_resource type="PackedScene" uid="uid://dneigjq1nfs2b" path="res://Scenes/UserInterface/Menu/UIPlayerList.tscn" id="15_yqhfc"]
+[ext_resource type="PackedScene" uid="uid://cojvgyniobwbk" path="res://Scenes/UserInterface/HUD/UIHUDCrosshair.tscn" id="13_h4pmd"]
+[ext_resource type="PackedScene" uid="uid://dsm0c68ucl2kg" path="res://Scenes/UserInterface/HUD/UIHUDHealth.tscn" id="13_m4wnv"]
+[ext_resource type="PackedScene" uid="uid://cab1adf54c54n" path="res://Scenes/UserInterface/HUD/UIHUDInteract.tscn" id="14_1wxl0"]
+[ext_resource type="PackedScene" uid="uid://c6x7etoas6aiu" path="res://Scenes/UserInterface/HUD/UIHUDItem.tscn" id="14_kviuc"]
+[ext_resource type="PackedScene" uid="uid://cxq88ssuuklm2" path="res://Scenes/UserInterface/Effects/UIEffectSanity.tscn" id="14_os3oe"]
+[ext_resource type="PackedScene" uid="uid://dneigjq1nfs2b" path="res://Scenes/UserInterface/Windows/UIWindowPlayerList.tscn" id="15_yqhfc"]
 [ext_resource type="Script" path="res://Scripts/Player/PlayerDeath.cs" id="15_yvyp7"]
 [ext_resource type="Script" path="res://Scripts/Player/PlayerHUDParameters.cs" id="17_ijix5"]
-[ext_resource type="PackedScene" uid="uid://bojdshm0oxy1v" path="res://Scenes/UserInterface/HUD/UIWhiteNoise.tscn" id="18_x036k"]
-[ext_resource type="PackedScene" uid="uid://bdau24iq4fib8" path="res://Scenes/UserInterface/HUD/UIVignette.tscn" id="19_7v07l"]
+[ext_resource type="PackedScene" uid="uid://bojdshm0oxy1v" path="res://Scenes/UserInterface/Effects/UIEffectWhiteNoise.tscn" id="18_x036k"]
+[ext_resource type="PackedScene" uid="uid://bdau24iq4fib8" path="res://Scenes/UserInterface/Effects/UIEffectVignette.tscn" id="19_7v07l"]
 [ext_resource type="Script" path="res://Scripts/Player/PlayerAuraColor.cs" id="19_jh60k"]
-[ext_resource type="PackedScene" uid="uid://cq70khnyefibk" path="res://Scenes/UserInterface/HUD/UIDithering.tscn" id="20_xcrfi"]
-[ext_resource type="Script" path="res://Scripts/Player/Camera/RemoteCameraRotation.cs" id="21_q46bc"]
-[ext_resource type="Script" path="res://Scripts/Player/Movement/PlayerMovementParameters.cs" id="23_sbhbh"]
+[ext_resource type="PackedScene" uid="uid://cq70khnyefibk" path="res://Scenes/UserInterface/Effects/UIEffectDithering.tscn" id="20_xcrfi"]
+[ext_resource type="Script" path="res://Scripts/Player/Camera/PlayerCameraRemoteRotation.cs" id="21_q46bc"]
 [ext_resource type="AudioStream" uid="uid://bdcsxss16vwtc" path="res://Audio/SFX/Movement/StepWalk.mp3" id="24_f1o77"]
 [ext_resource type="AudioStream" uid="uid://cp8slsw1kde5q" path="res://Audio/SFX/Movement/Jump.mp3" id="25_o2hlp"]
 [ext_resource type="AudioStream" uid="uid://bnr2qn01if4yl" path="res://Audio/SFX/Movement/Land.mp3" id="26_1veg0"]
-[ext_resource type="PackedScene" uid="uid://dyq2rw3wcmvjc" path="res://Scenes/Props/HumanCorpse.tscn" id="27_n646g"]
+[ext_resource type="PackedScene" uid="uid://dyq2rw3wcmvjc" path="res://Scenes/Props/PropHumanCorpse.tscn" id="27_n646g"]
 [ext_resource type="Script" path="res://Scripts/Player/Movement/PlayerMovementSounds.cs" id="33_b25gi"]
 [ext_resource type="Script" path="res://Scripts/Player/PlayerHealthNoise.cs" id="35_h44ek"]
 [ext_resource type="AudioStream" uid="uid://dqwxyc2b5uau1" path="res://Audio/SFX/WhiteNoise.mp3" id="36_up8j6"]
@@ -204,21 +203,6 @@ _data = {
 
 [sub_resource type="AudioStreamMicrophone" id="AudioStreamMicrophone_h1e6p"]
 
-[sub_resource type="Resource" id="Resource_h85m8"]
-script = ExtResource("23_sbhbh")
-WalkSpeed = 3.5
-SneakSpeed = 2.0
-CrouchSpeed = 1.0
-JumpSpeed = 3.5
-JumpForce = 5.5
-MaxJumps = 1
-OnGroundAcceleration = 30.0
-OnAirAcceleration = 20.0
-Gravity = 9.8
-CurrentJumpForce = 5.5
-CurrentSpeed = 5.0
-CurrentAcceleration = 0.0
-
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_ab7he"]
 properties/0/path = NodePath(".:Vector")
 properties/0/spawn = true
@@ -269,7 +253,9 @@ metadata/AudioPlayer3D = NodePath("CommonPart/CameraHolder/PlayerCamera/Audio3D/
 
 [node name="CommonPart" type="Node" parent="."]
 
-[node name="Voice" type="AudioStreamPlayer" parent="CommonPart"]
+[node name="Audio" type="Node" parent="CommonPart"]
+
+[node name="VoicePlayer" type="AudioStreamPlayer" parent="CommonPart/Audio"]
 stream = SubResource("AudioStreamGenerator_skbc1")
 autoplay = true
 bus = &"VoiceChat"
@@ -315,7 +301,6 @@ linear_limit_z/enabled = false
 [node name="Movement" type="AudioStreamPlayer3D" parent="CommonPart/CameraHolder/PlayerCamera/Audio3D" node_paths=PackedStringArray("_playerRoot")]
 stream = SubResource("AudioStreamPolyphonic_hspml")
 autoplay = true
-bus = &"SFX"
 script = ExtResource("1_o0yqy")
 _playerRoot = NodePath("../../../../..")
 
@@ -452,14 +437,12 @@ _playerRoot = NodePath("../../..")
 [node name="AudioPlayer" type="AudioStreamPlayer" parent="ClientServerPart/Audio" node_paths=PackedStringArray("_playerRoot")]
 stream = SubResource("AudioStreamPolyphonic_c6ebu")
 autoplay = true
-bus = &"SFX"
 script = ExtResource("6_dkepa")
 _playerRoot = NodePath("../../..")
 
 [node name="HealthNoise" type="AudioStreamPlayer" parent="ClientServerPart/Audio" node_paths=PackedStringArray("_playerRoot")]
 stream = SubResource("AudioStreamPolyphonic_c6ebu")
 autoplay = true
-bus = &"SFX"
 script = ExtResource("6_dkepa")
 _playerRoot = NodePath("../../..")
 
@@ -482,7 +465,7 @@ _playerCamera = NodePath("../../../CommonPart/CameraHolder/PlayerCamera")
 [node name="PlayerCameraAnimation" type="Node" parent="ClientPart/Scripts" node_paths=PackedStringArray("_movementActions", "_animationPlayer")]
 script = ExtResource("10_p0rem")
 _movementActions = NodePath("../../../ClientServerPart/Scripts/MovementActions")
-_animationPlayer = NodePath("../../Animations/PlayerCameraAnimator")
+_animationPlayer = NodePath("../../Animations/AnimatorPlayerCamera")
 
 [node name="ReverbRoom" type="Node" parent="ClientPart/Scripts" node_paths=PackedStringArray("_playerBody", "_raycasts")]
 script = ExtResource("11_y4aya")
@@ -491,49 +474,51 @@ _raycasts = [NodePath("../../../CommonPart/CameraHolder/ReverbRoom/RayXPositive"
 
 [node name="UI" type="Node" parent="ClientPart"]
 
-[node name="UIPauseMenu" parent="ClientPart/UI" node_paths=PackedStringArray("_inputActions") instance=ExtResource("11_s3mkc")]
+[node name="UIMenuPause" parent="ClientPart/UI" node_paths=PackedStringArray("_inputActions") instance=ExtResource("11_s3mkc")]
 mouse_filter = 1
 _inputActions = NodePath("../../../ClientServerPart/Scripts/InputActions")
 
-[node name="UIPlayerList" parent="ClientPart/UI" node_paths=PackedStringArray("_inputActions") instance=ExtResource("15_yqhfc")]
+[node name="UIWindowPlayerList" parent="ClientPart/UI" node_paths=PackedStringArray("_inputActions") instance=ExtResource("15_yqhfc")]
 _inputActions = NodePath("../../../ClientServerPart/Scripts/InputActions")
 
-[node name="UIInteractInfo" parent="ClientPart/UI" node_paths=PackedStringArray("_hudParameters") instance=ExtResource("14_1wxl0")]
+[node name="UIHUDInteract" parent="ClientPart/UI" node_paths=PackedStringArray("_hudParameters") instance=ExtResource("14_1wxl0")]
 _hudParameters = NodePath("../../../ClientServerPart/Scripts/HUDParameters")
 
-[node name="UIHealthInfo" parent="ClientPart/UI" node_paths=PackedStringArray("_hudParameters") instance=ExtResource("13_m4wnv")]
+[node name="UIHUDHealth" parent="ClientPart/UI" node_paths=PackedStringArray("_hudParameters") instance=ExtResource("13_m4wnv")]
 _hudParameters = NodePath("../../../ClientServerPart/Scripts/HUDParameters")
 
-[node name="UIItemInfo" parent="ClientPart/UI" node_paths=PackedStringArray("_hudParameters") instance=ExtResource("14_kviuc")]
+[node name="UIHUDItem" parent="ClientPart/UI" node_paths=PackedStringArray("_hudParameters") instance=ExtResource("14_kviuc")]
 _hudParameters = NodePath("../../../ClientServerPart/Scripts/HUDParameters")
 
-[node name="UICrosshair" parent="ClientPart/UI" instance=ExtResource("13_h4pmd")]
+[node name="UIHUDCrosshair" parent="ClientPart/UI" instance=ExtResource("13_h4pmd")]
 
-[node name="UISanity" parent="ClientPart/UI" node_paths=PackedStringArray("_hudParameters") instance=ExtResource("14_os3oe")]
+[node name="UIEffectSanity" parent="ClientPart/UI" node_paths=PackedStringArray("_hudParameters") instance=ExtResource("14_os3oe")]
 _hudParameters = NodePath("../../../ClientServerPart/Scripts/HUDParameters")
 
-[node name="UIWhiteNoise" parent="ClientPart/UI" node_paths=PackedStringArray("_hudParameters") instance=ExtResource("18_x036k")]
+[node name="UIEffectWhiteNoise" parent="ClientPart/UI" node_paths=PackedStringArray("_hudParameters") instance=ExtResource("18_x036k")]
 _hudParameters = NodePath("../../../ClientServerPart/Scripts/HUDParameters")
 
-[node name="UIVignette" parent="ClientPart/UI" instance=ExtResource("19_7v07l")]
+[node name="UIEffectVignette" parent="ClientPart/UI" instance=ExtResource("19_7v07l")]
 
-[node name="UIDithering" parent="ClientPart/UI" instance=ExtResource("20_xcrfi")]
+[node name="UIEffectDithering" parent="ClientPart/UI" instance=ExtResource("20_xcrfi")]
 
 [node name="Animations" type="Node" parent="ClientPart"]
 
-[node name="PlayerCameraAnimator" type="AnimationPlayer" parent="ClientPart/Animations"]
+[node name="AnimatorPlayerCamera" type="AnimationPlayer" parent="ClientPart/Animations"]
 root_node = NodePath("../../Scripts")
 libraries = {
 "": SubResource("AnimationLibrary_vvpui")
 }
 blend_times = [&"IDLE", &"SNEAK", 0.5, &"IDLE", &"WALK", 0.5, &"SNEAK", &"IDLE", 0.2, &"SNEAK", &"WALK", 0.5, &"WALK", &"IDLE", 0.2, &"WALK", &"SNEAK", 0.5]
 
-[node name="PlayerVoiceRecorder" type="AudioStreamPlayer" parent="ClientPart" node_paths=PackedStringArray("_inputActions", "_playerVoicePlayer")]
+[node name="Audio" type="Node" parent="ClientPart"]
+
+[node name="VoiceRecorder" type="AudioStreamPlayer" parent="ClientPart/Audio" node_paths=PackedStringArray("_inputActions", "_playerVoicePlayer")]
 stream = SubResource("AudioStreamMicrophone_h1e6p")
 bus = &"VoiceRecorder"
 script = ExtResource("12_o81cg")
-_inputActions = NodePath("../../ClientServerPart/Scripts/InputActions")
-_playerVoicePlayer = NodePath("../../CommonPart/Voice")
+_inputActions = NodePath("../../../ClientServerPart/Scripts/InputActions")
+_playerVoicePlayer = NodePath("../../../CommonPart/Audio/VoicePlayer")
 _busName = "VoiceRecorder"
 
 [node name="ServerPart" type="Node" parent="."]
@@ -546,7 +531,6 @@ MovementActions = NodePath("../../../ClientServerPart/Scripts/MovementActions")
 InputActions = NodePath("../../../ClientServerPart/Scripts/InputActions")
 InputVector = NodePath("../../../ClientServerPart/Scripts/InputVector")
 PlayerBody = NodePath("../../../CommonPart/PlayerBody")
-PlayerMovementParameters = SubResource("Resource_h85m8")
 
 [node name="PlayerMovementSounds" type="Node" parent="ServerPart/Scripts" node_paths=PackedStringArray("_movementActions", "_stepTimer", "_audioPlayer3D")]
 script = ExtResource("33_b25gi")
@@ -627,7 +611,7 @@ _playerHealth = NodePath("../PlayerHealth")
 _playerItemEquipper = NodePath("../PlayerItemEquipper")
 _rayOfLook = NodePath("../../../CommonPart/CameraHolder/PlayerCamera/PlayerLook/RayOfLook")
 
-[node name="RemoteCameraRotation" type="Node" parent="ServerPart/Scripts" node_paths=PackedStringArray("_playerCamera", "_playerBody")]
+[node name="PlayerCameraRemoteRotation" type="Node" parent="ServerPart/Scripts" node_paths=PackedStringArray("_playerCamera", "_playerBody")]
 script = ExtResource("21_q46bc")
 _playerCamera = NodePath("../../../CommonPart/CameraHolder/PlayerCamera")
 _playerBody = NodePath("../../../CommonPart/PlayerBody")
@@ -638,46 +622,46 @@ _playerBody = NodePath("../../../CommonPart/PlayerBody")
 
 [node name="Spawners" type="Node" parent="."]
 
-[node name="PrimaryItemSpawner" type="MultiplayerSpawner" parent="Spawners"]
-_spawnable_scenes = PackedStringArray("res://Scenes/Items/Weapons/Rifl.tscn")
+[node name="ItemSpawnerPrimary" type="MultiplayerSpawner" parent="Spawners"]
+_spawnable_scenes = PackedStringArray("res://Scenes/Items/ItemPistol.tscn")
 spawn_path = NodePath("../../CommonPart/PlayerBody/Achors/anchorPrimatySlot")
 
-[node name="SecondaryItemSpawner" type="MultiplayerSpawner" parent="Spawners"]
-_spawnable_scenes = PackedStringArray("res://Scenes/Items/Weapons/Pistol.tscn", "res://Scenes/Items/Fuse.tscn")
+[node name="ItemSpawnerSecondary" type="MultiplayerSpawner" parent="Spawners"]
+_spawnable_scenes = PackedStringArray("res://Scenes/Items/ItemBeacon.tscn", "res://Scenes/Items/ItemMedkit.tscn")
 spawn_path = NodePath("../../CommonPart/PlayerBody/Achors/anchorSecondarySlot")
 
-[node name="TertiaryItemSpawner" type="MultiplayerSpawner" parent="Spawners"]
-_spawnable_scenes = PackedStringArray("res://Scenes/Items/Medkit.tscn", "res://Scenes/Items/Beacon.tscn")
+[node name="ItemSpawnerTertiary" type="MultiplayerSpawner" parent="Spawners"]
+_spawnable_scenes = PackedStringArray("res://Scenes/Items/ItemFuse.tscn")
 spawn_path = NodePath("../../CommonPart/PlayerBody/Achors/anchorTertiarySlot")
 
-[node name="QuaternaryItemSpawner" type="MultiplayerSpawner" parent="Spawners"]
-_spawnable_scenes = PackedStringArray("res://Scenes/Items/HeadFlashlight.tscn")
+[node name="ItemSpawnerQuaternary" type="MultiplayerSpawner" parent="Spawners"]
+_spawnable_scenes = PackedStringArray("res://Scenes/Items/ItemHeadFlashlight.tscn")
 spawn_path = NodePath("../../CommonPart/CameraHolder/PlayerCamera/PlayerLook/anchorQuaternarySlot")
 
-[node name="HoldingItemSpawner" type="MultiplayerSpawner" parent="Spawners"]
-_spawnable_scenes = PackedStringArray("res://Scenes/Items/Weapons/Pistol.tscn", "res://Scenes/Items/Weapons/Rifl.tscn", "res://Scenes/Items/Medkit.tscn", "res://Scenes/Items/HeadFlashlight.tscn", "res://Scenes/Items/Beacon.tscn", "res://Scenes/Items/Fuse.tscn")
+[node name="ItemSpawnerHolding" type="MultiplayerSpawner" parent="Spawners"]
+_spawnable_scenes = PackedStringArray("res://Scenes/Items/ItemBeacon.tscn", "res://Scenes/Items/ItemFuse.tscn", "res://Scenes/Items/ItemHeadFlashlight.tscn", "res://Scenes/Items/ItemMedkit.tscn", "res://Scenes/Items/ItemPistol.tscn")
 spawn_path = NodePath("../../CommonPart/CameraHolder/PlayerCamera/PlayerLook/anchorActiveSlot")
 
 [node name="Synchronizers" type="Node" parent="."]
 
-[node name="InputVectorSynchronizer" type="MultiplayerSynchronizer" parent="Synchronizers"]
+[node name="SynchronizerInputVector" type="MultiplayerSynchronizer" parent="Synchronizers"]
 root_path = NodePath("../../ClientServerPart/Scripts/InputVector")
 replication_config = SubResource("SceneReplicationConfig_ab7he")
 public_visibility = false
 
-[node name="HUDParametersSynchronizer" type="MultiplayerSynchronizer" parent="Synchronizers"]
+[node name="SynchronizerHUDParameters" type="MultiplayerSynchronizer" parent="Synchronizers"]
 root_path = NodePath("../../ClientServerPart/Scripts/HUDParameters")
 replication_config = SubResource("SceneReplicationConfig_0erm0")
 public_visibility = false
 
-[node name="PlayerBodySynchronizer" type="MultiplayerSynchronizer" parent="Synchronizers"]
+[node name="SynchronizerPlayerBody" type="MultiplayerSynchronizer" parent="Synchronizers"]
 root_path = NodePath("../../CommonPart/PlayerBody")
 replication_config = SubResource("SceneReplicationConfig_mj3mr")
 
-[node name="PlayerCameraSynchronizer" type="MultiplayerSynchronizer" parent="Synchronizers"]
+[node name="SynchronizerPlayerCamera" type="MultiplayerSynchronizer" parent="Synchronizers"]
 root_path = NodePath("../../CommonPart/CameraHolder/PlayerCamera")
 replication_config = SubResource("SceneReplicationConfig_bnnxu")
 
-[node name="AuraSynchronizer" type="MultiplayerSynchronizer" parent="Synchronizers"]
+[node name="SynchronizerAura" type="MultiplayerSynchronizer" parent="Synchronizers"]
 root_path = NodePath("../..")
 replication_config = SubResource("SceneReplicationConfig_3ww4u")
