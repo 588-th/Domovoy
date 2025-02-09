@@ -235,14 +235,14 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.69888, 0.112604, -3.63397)
 
 [node name="Spawners" type="Node" parent="."]
 
-[node name="SpawnerPlayerLobby" type="MultiplayerSpawner" parent="Spawners" node_paths=PackedStringArray("_playersParent", "_spawnMarkers")]
+[node name="SpawnerPlayerLobby" type="MultiplayerSpawner" parent="Spawners" node_paths=PackedStringArray("_playersParent")]
 _spawnable_scenes = PackedStringArray("res://Scenes/Players/PlayerLobby.tscn")
 spawn_path = NodePath("../../Players")
 script = ExtResource("13_1ilnm")
 _playersParent = NodePath("../../Players")
-_spawnMarkers = [NodePath("../../SpawnAchors/PlayerLobby1"), NodePath("../../SpawnAchors/PlayerLobby2"), NodePath("../../SpawnAchors/PlayerLobby3"), NodePath("../../SpawnAchors/PlayerLobby4")]
 
-[node name="SpawnSystemLobby" type="Node" parent="Spawners" node_paths=PackedStringArray("_playerSpawner")]
+[node name="SpawnSystemLobby" type="Node" parent="Spawners" node_paths=PackedStringArray("_spawnerPlayerLobby", "_spawnMarkersLobby")]
 script = ExtResource("14_vg0c8")
-_playerSpawner = NodePath("../SpawnerPlayerLobby")
-_playerLobbyScene = ExtResource("15_t2e1i")
+_spawnerPlayerLobby = NodePath("../SpawnerPlayerLobby")
+_playerSceneLobby = ExtResource("15_t2e1i")
+_spawnMarkersLobby = [NodePath("../../SpawnAchors/PlayerLobby1"), NodePath("../../SpawnAchors/PlayerLobby2"), NodePath("../../SpawnAchors/PlayerLobby3"), NodePath("../../SpawnAchors/PlayerLobby4")]

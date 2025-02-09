@@ -4,9 +4,12 @@ public partial class PlayerAuraVision : Node
 {
     [Export] private Camera3D _playerCamera;
     [Export] private InputActions _playerActions;
-    [Export] private int _auraNumberMask;
 
-    private bool _isVisionEnable;
+    [ExportGroup("Parameters")]
+    [Export] private int _auraNumberMask = 20;
+    [Export] public bool IsVisionEnable = true;
+
+    private bool _isVisionOn;
 
     public override void _Ready()
     {
@@ -18,23 +21,23 @@ public partial class PlayerAuraVision : Node
         _playerActions.ToggleMonsterVisionDown -= ToggleMonsterVision;
     }
 
-    private void ToggleMonsterVision()
+    public void ToggleMonsterVision()
     {
-        if (_isVisionEnable)
+        if (_isVisionOn)
             ToggleOffMonsterVision();
-        else
+        else if (IsVisionEnable)
             ToggleOnMonsterVision();
     }
 
-    private void ToggleOnMonsterVision()
+    public void ToggleOnMonsterVision()
     {
-        _isVisionEnable = true;
-        GlobalRpcFunctions.Instance.SetCullMaskCamera3D(_playerCamera.GetPath(), _auraNumberMask, _isVisionEnable);
+        _isVisionOn = true;
+        GlobalRpcFunctions.Instance.SetCullMaskCamera3D(_playerCamera.GetPath(), _auraNumberMask, _isVisionOn);
     }
 
-    private void ToggleOffMonsterVision()
+    public void ToggleOffMonsterVision()
     {
-        _isVisionEnable = false;
-        GlobalRpcFunctions.Instance.SetCullMaskCamera3D(_playerCamera.GetPath(), _auraNumberMask, _isVisionEnable);
+        _isVisionOn = false;
+        GlobalRpcFunctions.Instance.SetCullMaskCamera3D(_playerCamera.GetPath(), _auraNumberMask, _isVisionOn);
     }
 }

@@ -1,4 +1,4 @@
-[gd_scene load_steps=54 format=4 uid="uid://dw2d8yb5aog0t"]
+[gd_scene load_steps=55 format=4 uid="uid://dw2d8yb5aog0t"]
 
 [ext_resource type="Script" path="res://Scripts/Audio/AudioPlayer3D.cs" id="1_cu3h5"]
 [ext_resource type="Script" path="res://Scripts/Player/PlayerInputVector.cs" id="1_l02lm"]
@@ -37,6 +37,7 @@
 [ext_resource type="Script" path="res://Scripts/Player/PlayerHUDParameters.cs" id="26_k2iwt"]
 [ext_resource type="AudioStream" uid="uid://dhgbfgf43idpd" path="res://Audio/SFX/MonsterHitAttackAudio.mp3" id="27_w1d6b"]
 [ext_resource type="Script" path="res://Scripts/Player/Movement/PlayerMovementSounds.cs" id="33_nwoie"]
+[ext_resource type="Script" path="res://Scripts/Player/Monster/PlayerMonsterNerf.cs" id="38_wvj4j"]
 
 [sub_resource type="AudioStreamGenerator" id="AudioStreamGenerator_0nix6"]
 mix_rate = 48000.0
@@ -443,7 +444,6 @@ _hitAttackAudio = ExtResource("27_w1d6b")
 script = ExtResource("5_hra6h")
 _playerCamera = NodePath("../../../CommonPart/CameraHolder/PlayerCamera")
 _playerActions = NodePath("../../../ClientServerPart/Scripts/InputActions")
-_auraNumberMask = 20
 
 [node name="PlayerHUDParameters" type="Node" parent="ServerPart/Scripts" node_paths=PackedStringArray("_hudParameters", "_playerHealth", "_rayOfAttack")]
 script = ExtResource("26_k2iwt")
@@ -455,6 +455,11 @@ _rayOfAttack = NodePath("../../../CommonPart/CameraHolder/PlayerCamera/PlayerLoo
 script = ExtResource("17_es1xv")
 _playerCamera = NodePath("../../../CommonPart/CameraHolder/PlayerCamera")
 _playerBody = NodePath("../../../CommonPart/PlayerBody")
+
+[node name="PlayerMonsterNerf" type="Node" parent="ServerPart/Scripts" node_paths=PackedStringArray("_playerMovement", "_playerAuraVision")]
+script = ExtResource("38_wvj4j")
+_playerMovement = NodePath("../PlayerMovement")
+_playerAuraVision = NodePath("../PlayerAuraVision")
 
 [node name="Timers" type="Node" parent="ServerPart"]
 

@@ -4,7 +4,6 @@ using Godot.Collections;
 public partial class SpawnerPlayer : MultiplayerSpawner
 {
     [Export] private Node _playersParent;
-    [Export] private Array<Marker3D> _spawnMarkers;
     private int _spawnCount;
 
     public override void _Ready()
@@ -12,30 +11,28 @@ public partial class SpawnerPlayer : MultiplayerSpawner
         SpawnFunction = new Callable(this, nameof(CustomSpawnFunction));
     }
 
-    public void SpawnPlayer(long peerID, PackedScene playerScene)
+    public void SpawnPlayer(long peerID, PackedScene playerScene, Marker3D marker)
     {
-        Dictionary spawnData = new()
+        Spawn(new Dictionary
         {
-            {"peerID", peerID},
-            {"playerScene", playerScene.ResourcePath}
-        };
-
-        Spawn(spawnData);
+            { "peerID", peerID },
+            { "scene", playerScene.ResourcePath },
+            { "marker", marker.GetPath() }
+        });
     }
 
     private Node CustomSpawnFunction(Variant data)
     {
         Dictionary spawnData = (Dictionary)data;
+        PackedScene playerScene = ResourceLoader.Load<PackedScene>((string)spawnData["scene"]);
+        Marker3D marker3D = GetNode(spawnData["marker"].ToString()) as Marker3D;
+        Node playerRoot = playerScene.Instantiate();
 
         long peerID = (long)spawnData["peerID"];
-        string playerScenePath = (string)spawnData["playerScene"];
-        PackedScene playerScene = ResourceLoader.Load<PackedScene>(playerScenePath);
-
-        Node playerRoot = playerScene.Instantiate();
         playerRoot.Name = peerID.ToString();
 
-        playerRoot = SetSpawnPosition(playerRoot);
-        playerRoot = SetNetSettings(playerRoot, peerID);
+        SetSpawnPosition(playerRoot, marker3D);
+        SetNetSettings(playerRoot, peerID);
 
         _spawnCount++;
         return playerRoot;
@@ -43,28 +40,21 @@ public partial class SpawnerPlayer : MultiplayerSpawner
 
     public void DespawnPlayer(int peerID)
     {
-        if (_playersParent.HasNode(peerID.ToString()))
-        {
-            Node playerNode = _playersParent.GetNode(peerID.ToString());
-            playerNode.QueueFree();
-            _spawnCount--;
-        }
+        _playersParent.GetNodeOrNull(peerID.ToString())?.QueueFree();
+        _spawnCount--;
     }
 
-    private Node SetSpawnPosition(Node playerRoot)
+    private void SetSpawnPosition(Node playerRoot, Marker3D marker3D)
     {
-        int markerNumber = _spawnCount;
-
-        CharacterBody3D playerbody = playerRoot.GetNode<CharacterBody3D>("CommonPart/PlayerBody");
-        playerbody.Position = _spawnMarkers[markerNumber].Position;
-        playerbody.Rotation = _spawnMarkers[markerNumber].Rotation;
-
+        CharacterBody3D playerBody = playerRoot.GetNode<CharacterBody3D>("CommonPart/PlayerBody");
         Camera3D playerCamera = playerRoot.GetNode<Camera3D>("CommonPart/CameraHolder/PlayerCamera");
-        playerCamera.Rotation = _spawnMarkers[markerNumber].Rotation;
-        return playerRoot;
+
+        playerBody.Position = marker3D.Position;
+        playerBody.Rotation = marker3D.Rotation;
+        playerCamera.Rotation = marker3D.Rotation;
     }
 
-    private Node SetNetSettings(Node playerRoot, long peerID)
+    private void SetNetSettings(Node playerRoot, long peerID)
     {
         int uniqueID = Multiplayer.GetUniqueId();
         int authorityID = (int)peerID;
@@ -72,8 +62,6 @@ public partial class SpawnerPlayer : MultiplayerSpawner
         SetAuthority(playerRoot, authorityID);
         SetSyncronizersVisibility(playerRoot, authorityID);
         FreeParts(playerRoot, authorityID, uniqueID);
-
-        return playerRoot;
     }
 
     private void SetAuthority(Node playerRoot, int authorityID)
@@ -87,16 +75,16 @@ public partial class SpawnerPlayer : MultiplayerSpawner
         SetMultiplayerAuthoritys(playerRoot, "ClientServerPart/Scripts/MovementActions", 1);
         SetMultiplayerAuthoritys(playerRoot, "ClientServerPart/Scripts/MeleeAttackActions", 1);
         SetMultiplayerAuthoritys(playerRoot, "ClientServerPart/Audio", 1);
-        SetMultiplayerAuthoritys(playerRoot, "Synchronizers/PlayerCameraSynchronizer", authorityID);
-        SetMultiplayerAuthoritys(playerRoot, "Synchronizers/InputVectorSynchronizer", authorityID);
+        SetMultiplayerAuthoritys(playerRoot, "Synchronizers/SynchronizerPlayerCamera", authorityID);
+        SetMultiplayerAuthoritys(playerRoot, "Synchronizers/SynchronizerInputVector", authorityID);
     }
 
     private void SetSyncronizersVisibility(Node playerRoot, int authorityID)
     {
-        SetVisibility(playerRoot, "Synchronizers/HUDParametersSynchronizer", 1, true);
-        SetVisibility(playerRoot, "Synchronizers/HUDParametersSynchronizer", authorityID, true);
-        SetVisibility(playerRoot, "Synchronizers/InputVectorSynchronizer", 1, true);
-        SetVisibility(playerRoot, "Synchronizers/InputVectorSynchronizer", authorityID, true);
+        SetVisibility(playerRoot, "Synchronizers/SynchronizerHUDParameters", 1, true);
+        SetVisibility(playerRoot, "Synchronizers/SynchronizerHUDParameters", authorityID, true);
+        SetVisibility(playerRoot, "Synchronizers/SynchronizerInputVector", 1, true);
+        SetVisibility(playerRoot, "Synchronizers/SynchronizerInputVector", authorityID, true);
     }
 
     private void FreeParts(Node playerRoot, int authorityID, int uniqueID)

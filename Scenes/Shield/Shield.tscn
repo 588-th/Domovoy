@@ -1,7 +1,10 @@
-[gd_scene load_steps=9 format=3 uid="uid://bsqm2lxpoa1xh"]
+[gd_scene load_steps=13 format=3 uid="uid://bsqm2lxpoa1xh"]
 
 [ext_resource type="Script" path="res://Scripts/Net/ServerPartRemover.cs" id="1_865fp"]
+[ext_resource type="Script" path="res://Scripts/Audio/AudioPlayer3D.cs" id="1_leu11"]
 [ext_resource type="Script" path="res://Scripts/Shield/ShieldFuseSetting.cs" id="2_ls0ym"]
+[ext_resource type="AudioStream" uid="uid://d2xonfye53eh1" path="res://Audio/SFX/Shield/SetFuseAudio.mp3" id="4_uq122"]
+[ext_resource type="AudioStream" uid="uid://defupaj7wmco5" path="res://Audio/SFX/Shield/FixShieldAudio.mp3" id="5_du0wy"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_gilb4"]
 size = Vector3(0.35, 0.45, 0.1)
@@ -28,6 +31,9 @@ is_hemisphere = true
 [sub_resource type="BoxShape3D" id="BoxShape3D_c3pbj"]
 size = Vector3(0.357422, 0.455322, 0.104492)
 
+[sub_resource type="AudioStreamPolyphonic" id="AudioStreamPolyphonic_uvka1"]
+polyphony = 4
+
 [node name="Shield" type="StaticBody3D" groups=["Object:Shield"]]
 collision_layer = 32
 collision_mask = 1806
@@ -48,6 +54,8 @@ skeleton = NodePath("../..")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.123219, 0.179096, 0.046723)
 light_color = Color(0.4, 1, 0.690196, 1)
 light_energy = 0.02
+shadow_enabled = true
+shadow_blur = 10.0
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Model/Node3D"]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, -0.123219, 0.179096, 0.046723)
@@ -66,6 +74,8 @@ skeleton = NodePath("../..")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.123219, 0.179096, 0.046723)
 light_color = Color(0.4, 1, 0.690196, 1)
 light_energy = 0.02
+shadow_enabled = true
+shadow_blur = 10.0
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Model/Node3D2"]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, -0.123219, 0.179096, 0.046723)
@@ -84,6 +94,8 @@ skeleton = NodePath("../..")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.123219, 0.179096, 0.046723)
 light_color = Color(0.4, 1, 0.690196, 1)
 light_energy = 0.02
+shadow_enabled = true
+shadow_blur = 10.0
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Model/Node3D3"]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, -0.123219, 0.179096, 0.046723)
@@ -92,10 +104,20 @@ mesh = SubResource("SphereMesh_oc36b")
 [node name="Hitbox" type="CollisionShape3D" parent="."]
 shape = SubResource("BoxShape3D_c3pbj")
 
+[node name="AudioPlayer3D" type="AudioStreamPlayer3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0.104521, 0)
+stream = SubResource("AudioStreamPolyphonic_uvka1")
+autoplay = true
+bus = &"Effects"
+script = ExtResource("1_leu11")
+
 [node name="ServerPart" type="Node" parent="." node_paths=PackedStringArray("_serverParts")]
 script = ExtResource("1_865fp")
 _serverParts = [NodePath(".")]
 
-[node name="ShieldFuseSetting" type="Node" parent="ServerPart" node_paths=PackedStringArray("_fuses")]
+[node name="ShieldFuseSetting" type="Node" parent="ServerPart" node_paths=PackedStringArray("_fuses", "_audioPlayer3D")]
 script = ExtResource("2_ls0ym")
 _fuses = [NodePath("../../Model/Node3D"), NodePath("../../Model/Node3D2"), NodePath("../../Model/Node3D3")]
+_audioPlayer3D = NodePath("../../AudioPlayer3D")
+_setFuseAudio = ExtResource("4_uq122")
+_fixShieldAudio = ExtResource("5_du0wy")

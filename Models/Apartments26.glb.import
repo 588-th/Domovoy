@@ -3,13 +3,13 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://bjj3ylbv4aqac"
-path="res://.godot/imported/Apartments20.glb-abd0bfa9a87b7e9eb18a4b0149dc1cfc.scn"
+uid="uid://80xit3gruc1a"
+path="res://.godot/imported/Apartments26.glb-bfbc436d4c49434dd460bb6dc78614e4.scn"
 
 [deps]
 
-source_file="res://Models/Apartments20.glb"
-dest_files=["res://.godot/imported/Apartments20.glb-abd0bfa9a87b7e9eb18a4b0149dc1cfc.scn"]
+source_file="res://Models/Apartments26.glb"
+dest_files=["res://.godot/imported/Apartments26.glb-bfbc436d4c49434dd460bb6dc78614e4.scn"]
 
 [params]
 
@@ -33,14 +33,14 @@ animation/import_rest_as_RESET=false
 import_script/path=""
 _subresources={
 "meshes": {
-"Apartments20_Apartments": {
+"Apartments26_Apartments": {
 "generate/lightmap_uv": 0,
 "generate/lods": 0,
 "generate/shadow_meshes": 0,
 "lods/normal_merge_angle": 60.0,
 "lods/normal_split_angle": 25.0,
 "save_to_file/enabled": true,
-"save_to_file/path": "res://Meshes/Apartments20_Apartments.res"
+"save_to_file/path": "res://Meshes/Apartments26_Apartments.res"
 }
 }
 }
