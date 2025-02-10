@@ -370,7 +370,7 @@ target_position = Vector3(0, 30, -30)
 visible = false
 target_position = Vector3(0, -30, 30)
 
-[node name="PlayerBody" type="CharacterBody3D" parent="CommonPart" groups=["Hitbox:Player"]]
+[node name="PlayerBody" type="CharacterBody3D" parent="CommonPart" groups=["Hitbox:Player", "Hitbox:PlayerHuman"]]
 collision_layer = 512
 collision_mask = 523
 floor_max_angle = 1.0472
@@ -450,13 +450,15 @@ _playerRoot = NodePath("../../..")
 
 [node name="Scripts" type="Node" parent="ClientPart"]
 
-[node name="PlayerInputKeys" type="Node" parent="ClientPart/Scripts" node_paths=PackedStringArray("_inputActions")]
+[node name="PlayerInputKeys" type="Node" parent="ClientPart/Scripts" node_paths=PackedStringArray("_inputActions", "_UIMenuPause")]
 script = ExtResource("3_ylv55")
 _inputActions = NodePath("../../../ClientServerPart/Scripts/InputActions")
+_UIMenuPause = NodePath("../../UI/UIMenuPause")
 
-[node name="PlayerInputVector" type="Node" parent="ClientPart/Scripts" node_paths=PackedStringArray("_inputVector")]
+[node name="PlayerInputVector" type="Node" parent="ClientPart/Scripts" node_paths=PackedStringArray("_inputVector", "_UIMenuPause")]
 script = ExtResource("2_ca8we")
 _inputVector = NodePath("../../../ClientServerPart/Scripts/InputVector")
+_UIMenuPause = NodePath("../../UI/UIMenuPause")
 
 [node name="PlayerCamera" type="Node" parent="ClientPart/Scripts" node_paths=PackedStringArray("_playerCamera")]
 script = ExtResource("3_e7wye")

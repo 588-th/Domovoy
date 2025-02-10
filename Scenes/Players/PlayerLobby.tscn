@@ -287,13 +287,15 @@ _playerRoot = NodePath("../../..")
 
 [node name="Scripts" type="Node" parent="ClientPart"]
 
-[node name="PlayerInputKeys" type="Node" parent="ClientPart/Scripts" node_paths=PackedStringArray("_inputActions")]
+[node name="PlayerInputKeys" type="Node" parent="ClientPart/Scripts" node_paths=PackedStringArray("_inputActions", "_UIMenuPause")]
 script = ExtResource("4_63mi2")
 _inputActions = NodePath("../../../ClientServerPart/Scripts/InputActions")
+_UIMenuPause = NodePath("../../UI/UIMenuPause")
 
-[node name="PlayerInputVector" type="Node" parent="ClientPart/Scripts" node_paths=PackedStringArray("_inputVector")]
+[node name="PlayerInputVector" type="Node" parent="ClientPart/Scripts" node_paths=PackedStringArray("_inputVector", "_UIMenuPause")]
 script = ExtResource("1_1rug0")
 _inputVector = NodePath("../../../ClientServerPart/Scripts/InputVector")
+_UIMenuPause = NodePath("../../UI/UIMenuPause")
 
 [node name="PlayerCamera" type="Node" parent="ClientPart/Scripts" node_paths=PackedStringArray("_playerCamera")]
 script = ExtResource("4_in0gx")

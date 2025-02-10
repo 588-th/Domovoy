@@ -75,9 +75,10 @@ script = ExtResource("1_6eu3q")
 
 [node name="Scripts" type="Node" parent="ClientPart"]
 
-[node name="PlayerInputKeys" type="Node" parent="ClientPart/Scripts" node_paths=PackedStringArray("_inputActions")]
+[node name="PlayerInputKeys" type="Node" parent="ClientPart/Scripts" node_paths=PackedStringArray("_inputActions", "_UIMenuPause")]
 script = ExtResource("3_y84ls")
 _inputActions = NodePath("../../../ClientServerPart/Scripts/InputActions")
+_UIMenuPause = NodePath("../../UI/UIMenuPause")
 
 [node name="PlayerCamera" type="Node" parent="ClientPart/Scripts" node_paths=PackedStringArray("_playerCamera")]
 script = ExtResource("5_16n5l")

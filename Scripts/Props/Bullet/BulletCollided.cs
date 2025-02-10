@@ -4,7 +4,12 @@ public partial class BulletCollided : Node
 {
     [Export] private RigidBody3D _bulletRigidBody;
     [Export] private BulletDestroy _bulletDestroy;
-    [Export] private AudioStreamMP3 _hitAudio;
+
+    [ExportGroup("Audio")]
+    [Export] private PackedScene _audio3DSourseScene;
+    [Export] private AudioStreamMP3 _hitHumanAudio;
+    [Export] private AudioStreamMP3 _hitMonsterAudio;
+    [Export] private AudioStreamMP3 _hitObjectAudio;
 
     public override void _Ready()
     {
@@ -47,12 +52,15 @@ public partial class BulletCollided : Node
 
     private void PlayHitAudio(Node body)
     {
-        var playerRootNode = body.GetMeta("PlayerRoot");
-        Node playerRoot = body.GetNode(playerRootNode.ToString());
+        Node3D audio3DSourse = _audio3DSourseScene.Instantiate() as Node3D;
+        Node holderProps = GetTree().GetFirstNodeInGroup("Holder:Props");
+        holderProps.AddChild(audio3DSourse, true);
+        audio3DSourse.GlobalPosition = _bulletRigidBody.GlobalPosition;
 
-        var audioPlayerNode = playerRoot.GetMeta("AudioPlayer3D");
-        AudioPlayer3D audioPlayer3D = playerRoot.GetNode(audioPlayerNode.ToString()) as AudioPlayer3D;
-
-        audioPlayer3D.PlayAudio3D(_hitAudio);
+        AudioPlayer3D audioPlayer3D = audio3DSourse.FindChild("Audio3D") as AudioPlayer3D;
+        if (body.IsInGroup("Hitbox:PlayerHuman"))
+            audioPlayer3D.PlayAudio3D(_hitHumanAudio);
+        else if (body.IsInGroup("Hitbox:PlayerMonster"))
+            audioPlayer3D.PlayAudio3D(_hitMonsterAudio);
     }
 }

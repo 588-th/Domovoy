@@ -1,11 +1,13 @@
-[gd_scene load_steps=10 format=3 uid="uid://bk1k3s1o2gys8"]
+[gd_scene load_steps=12 format=3 uid="uid://bk1k3s1o2gys8"]
 
 [ext_resource type="Material" uid="uid://bf3rygs7earu8" path="res://Materials/bullet.tres" id="1_8air1"]
 [ext_resource type="Script" path="res://Scripts/Net/AuthorityScripter.cs" id="2_8n1xe"]
 [ext_resource type="Script" path="res://Scripts/Props/Bullet/BulletLife.cs" id="3_mge40"]
 [ext_resource type="Script" path="res://Scripts/Props/Bullet/BulletCollided.cs" id="4_u5mv4"]
-[ext_resource type="AudioStream" uid="uid://bq0lq87liuagh" path="res://Audio/SFX/Firearm/BulletHit.mp3" id="6_lf21y"]
+[ext_resource type="PackedScene" uid="uid://bni1sbwhra5xc" path="res://Scenes/Props/Audio3DSource.tscn" id="5_ph0wl"]
+[ext_resource type="AudioStream" uid="uid://bq0lq87liuagh" path="res://Audio/SFX/Bullet/BulletHitHuman.mp3" id="6_1oay2"]
 [ext_resource type="Script" path="res://Scripts/Props/Bullet/BulletDestroy.cs" id="6_v225l"]
+[ext_resource type="AudioStream" uid="uid://cncms44fejcki" path="res://Audio/SFX/Bullet/BulletHitMonster1.mp3" id="7_rt7v7"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_7d6uw"]
 material = ExtResource("1_8air1")
@@ -48,7 +50,9 @@ _bulletDestroy = NodePath("../BulletDestroy")
 script = ExtResource("4_u5mv4")
 _bulletRigidBody = NodePath("../..")
 _bulletDestroy = NodePath("../BulletDestroy")
-_hitAudio = ExtResource("6_lf21y")
+_audio3DSourseScene = ExtResource("5_ph0wl")
+_hitHumanAudio = ExtResource("6_1oay2")
+_hitMonsterAudio = ExtResource("7_rt7v7")
 
 [node name="BulletDestroy" type="Node" parent="Scripts" node_paths=PackedStringArray("_bulletRigidBody")]
 script = ExtResource("6_v225l")

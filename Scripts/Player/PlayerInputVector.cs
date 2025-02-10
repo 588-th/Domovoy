@@ -2,10 +2,17 @@ using Godot;
 
 public partial class PlayerInputVector : Node
 {
-    [Export] InputVector _inputVector;
+    [Export] private InputVector _inputVector;
+    [Export] private UIMenuPause _UIMenuPause;
 
     public override void _Process(double delta)
     {
+        if (_UIMenuPause.IsPaused)
+        {
+            _inputVector.Vector = new();
+            return;
+        }
+
         CalculateInputVector();
     }
 

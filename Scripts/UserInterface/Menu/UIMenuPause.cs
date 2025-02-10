@@ -9,7 +9,7 @@ public partial class UIMenuPause : Control
     [Export] private Button _buttonSettings;
     [Export] private Button _buttonDisconnect;
 
-    private bool _isPaused;
+    public bool IsPaused { get; private set; }
     private bool _isServer;
 
     public override void _Ready()
@@ -42,7 +42,7 @@ public partial class UIMenuPause : Control
 
     private void OnEscapeKeyPressed()
     {
-        if (_isPaused)
+        if (IsPaused)
             HidePauseMenu();
         else
             ShowPauseMenu();
@@ -50,14 +50,14 @@ public partial class UIMenuPause : Control
 
     public void ShowPauseMenu()
     {
-        _isPaused = true;
+        IsPaused = true;
         Input.MouseMode = Input.MouseModeEnum.Visible;
         Show();
     }
 
     public void HidePauseMenu()
     {
-        _isPaused = false;
+        IsPaused = false;
         Input.MouseMode = Input.MouseModeEnum.Captured;
         Hide();
     }

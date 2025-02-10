@@ -64,8 +64,3 @@ text = "Disconnect"
 [node name="UIWindowSettings" parent="." instance=ExtResource("3_yvdk6")]
 visible = false
 layout_mode = 1
-
-[node name="MarginContainer" parent="UIWindowSettings" index="0"]
-theme_override_constants/margin_left = 255
-
-[editable path="UIWindowSettings"]

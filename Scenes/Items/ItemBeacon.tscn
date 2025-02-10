@@ -89,6 +89,7 @@ omni_range = 3.5
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0.104521, 0)
 stream = SubResource("AudioStreamPolyphonic_qekew")
 autoplay = true
+max_distance = 8.0
 bus = &"Effects"
 script = ExtResource("4_6ny4d")
 

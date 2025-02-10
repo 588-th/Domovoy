@@ -29,6 +29,7 @@ GameEvent="*res://Scripts/Autoload/GameEvent.cs"
 SettingsVideo="*res://Scripts/Autoload/SettingsVideo.cs"
 SettingsAudio="*res://Scripts/Autoload/SettingsAudio.cs"
 SettingsMouse="*res://Scripts/Autoload/SettingsMouse.cs"
+SettingsControl="*res://Scripts/Autoload/SettingsControl.cs"
 
 [display]
 
@@ -71,6 +72,8 @@ Prop:Dragged=""
 Prop:Draggble=""
 Holder:Level=""
 Object:Shield=""
+Hitbox:PlayerHuman=""
+Hitbox:PlayerMonster=""
 
 [importer_defaults]
 
