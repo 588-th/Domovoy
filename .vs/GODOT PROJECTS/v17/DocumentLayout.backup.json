@@ -3,6 +3,10 @@
   "WorkspaceRootPath": "D:\\Documents\\ProjectsGodot\\BoomerDuel\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{33528F9A-F553-4E74-A408-6E8C24FA54FC}|Godot Projects.csproj|d:\\documents\\projectsgodot\\boomerduel\\scripts\\pathfollow.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{33528F9A-F553-4E74-A408-6E8C24FA54FC}|Godot Projects.csproj|solutionrelative:scripts\\pathfollow.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{33528F9A-F553-4E74-A408-6E8C24FA54FC}|Godot Projects.csproj|d:\\documents\\projectsgodot\\boomerduel\\scripts\\round\\roundlightoff.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{33528F9A-F553-4E74-A408-6E8C24FA54FC}|Godot Projects.csproj|solutionrelative:scripts\\round\\roundlightoff.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
@@ -34,11 +38,24 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 1,
+          "SelectedChildIndex": 0,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 0,
+              "Title": "PathFollow.cs",
+              "DocumentMoniker": "D:\\Documents\\ProjectsGodot\\BoomerDuel\\Scripts\\PathFollow.cs",
+              "RelativeDocumentMoniker": "Scripts\\PathFollow.cs",
+              "ToolTip": "D:\\Documents\\ProjectsGodot\\BoomerDuel\\Scripts\\PathFollow.cs*",
+              "RelativeToolTip": "Scripts\\PathFollow.cs*",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAIAAAAmAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-02-10T14:00:18.269Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
               "Title": "RoundLightOn.cs",
               "DocumentMoniker": "D:\\Documents\\ProjectsGodot\\BoomerDuel\\Scripts\\Round\\RoundLightOn.cs",
               "RelativeDocumentMoniker": "Scripts\\Round\\RoundLightOn.cs",
@@ -50,20 +67,19 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 1,
               "Title": "RoundLightOff.cs",
               "DocumentMoniker": "D:\\Documents\\ProjectsGodot\\BoomerDuel\\Scripts\\Round\\RoundLightOff.cs",
               "RelativeDocumentMoniker": "Scripts\\Round\\RoundLightOff.cs",
               "ToolTip": "D:\\Documents\\ProjectsGodot\\BoomerDuel\\Scripts\\Round\\RoundLightOff.cs",
               "RelativeToolTip": "Scripts\\Round\\RoundLightOff.cs",
-              "ViewState": "AgIAAAMAAAAAAAAAAAAAAA8AAAAFAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAqwA8AAAAFAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-02-09T13:23:10.595Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-02-09T13:23:10.595Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 3,
               "Title": "SpawnerPlayer.cs",
               "DocumentMoniker": "D:\\Documents\\ProjectsGodot\\BoomerDuel\\Scripts\\Spawners\\SpawnerPlayer.cs",
               "RelativeDocumentMoniker": "Scripts\\Spawners\\SpawnerPlayer.cs",
@@ -75,7 +91,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 6,
               "Title": "SpawnSystemRound.cs",
               "DocumentMoniker": "D:\\Documents\\ProjectsGodot\\BoomerDuel\\Scripts\\Spawners\\SpawnSystemRound.cs",
               "RelativeDocumentMoniker": "Scripts\\Spawners\\SpawnSystemRound.cs",
@@ -87,7 +103,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 4,
               "Title": "BulletCollided.cs",
               "DocumentMoniker": "D:\\Documents\\ProjectsGodot\\BoomerDuel\\Scripts\\Props\\Bullet\\BulletCollided.cs",
               "RelativeDocumentMoniker": "Scripts\\Props\\Bullet\\BulletCollided.cs",
@@ -99,7 +115,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 5,
               "Title": "PlayerInputKeys.cs",
               "DocumentMoniker": "D:\\Documents\\ProjectsGodot\\BoomerDuel\\Scripts\\Player\\PlayerInputKeys.cs",
               "RelativeDocumentMoniker": "Scripts\\Player\\PlayerInputKeys.cs",

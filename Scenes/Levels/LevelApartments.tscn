@@ -37,13 +37,13 @@ sky_horizon_color = Color(0.700422, 0.784078, 0.886842, 1)
 ground_bottom_color = Color(0.490242, 0.640343, 0.668584, 1)
 ground_horizon_color = Color(0.700422, 0.784078, 0.886842, 1)
 
-[sub_resource type="Sky" id="Sky_e3qwq"]
+[sub_resource type="Sky" id="Sky_wf8xv"]
 sky_material = SubResource("ProceduralSkyMaterial_i0mip")
 
 [sub_resource type="Environment" id="Environment_pg2lb"]
 background_mode = 1
 background_color = Color(0.0705882, 0.0588235, 0.121569, 1)
-sky = SubResource("Sky_e3qwq")
+sky = SubResource("Sky_wf8xv")
 tonemap_mode = 3
 volumetric_fog_enabled = true
 volumetric_fog_emission = Color(0.0807833, 0.0807833, 0.0807833, 1)

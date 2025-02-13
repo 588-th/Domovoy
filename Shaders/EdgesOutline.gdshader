@@ -38,7 +38,7 @@ void fragment() {
     float dne = texture(DEPTH_TEXTURE, uv + vec2(offset.x, -offset.y)).r;
     float dsw = texture(DEPTH_TEXTURE, uv + vec2(-offset.x, offset.y)).r;
     float dse = texture(DEPTH_TEXTURE, uv + vec2(offset.x, offset.y)).r;
-    
+
     float center_depth = texture(DEPTH_TEXTURE, uv).r;
 
     mat3 depth_differences = mat3(
