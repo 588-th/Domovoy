@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://csxytgmqigpea"]
+[gd_scene load_steps=8 format=3 uid="uid://csxytgmqigpea"]
 
 [ext_resource type="Theme" uid="uid://dbp6r2wyjejft" path="res://Themes/Theme.tres" id="1_76ok0"]
 [ext_resource type="Script" path="res://Scripts/UserInterface/Menu/UISettingsVideo.cs" id="1_jcenu"]
@@ -6,6 +6,7 @@
 [ext_resource type="Script" path="res://Scripts/UserInterface/Menu/UISettingsAudio.cs" id="2_smob6"]
 [ext_resource type="Script" path="res://Scripts/UserInterface/Menu/UISettingsControl.cs" id="5_h5r5e"]
 [ext_resource type="PackedScene" uid="uid://d2k6qh072kj5d" path="res://Scenes/UserInterface/Windows/ControlAction.tscn" id="6_eu3ns"]
+[ext_resource type="Script" path="res://Scripts/UserInterface/Menu/UISettingsRound.cs" id="7_ygg7y"]
 
 [node name="UIWindowSettings" type="Control"]
 layout_mode = 3
@@ -31,10 +32,11 @@ offset_bottom = 190.0
 grow_horizontal = 2
 grow_vertical = 2
 tab_alignment = 1
-current_tab = 0
+current_tab = 1
 clip_tabs = false
 
 [node name="Video" type="TabBar" parent="TabContainer" node_paths=PackedStringArray("_UIWindowSettings", "_optionButtonWindowMode", "_optionButtonResolutions", "_spinBoxFOV", "_hSliderFOV", "_buttonClose")]
+visible = false
 layout_mode = 2
 script = ExtResource("1_jcenu")
 _UIWindowSettings = NodePath("../..")
@@ -116,7 +118,6 @@ grow_vertical = 0
 text = "Close"
 
 [node name="Audio" type="TabBar" parent="TabContainer" node_paths=PackedStringArray("_UIWindowSettings", "_hSliderMaster", "_hSliderInterface", "_hSliderEffects", "_hSliderVoiceChat", "_spinBoxMaster", "_spinBoxInterface", "_spinBoxEffects", "_spinBoxVoiceChat", "_checkBoxMuteYourself", "_buttonResetMaster", "_buttonResetInterface", "_buttonResetEffects", "_buttonResetVoiceChat", "_buttonResetMuteYourself", "_buttonClose")]
-visible = false
 layout_mode = 2
 script = ExtResource("2_smob6")
 _UIWindowSettings = NodePath("../..")
@@ -470,6 +471,52 @@ size_flags_horizontal = 3
 layout_mode = 2
 
 [node name="ButtonCloseControl" type="Button" parent="TabContainer/Control"]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -31.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "Close"
+
+[node name="Round" type="TabBar" parent="TabContainer" node_paths=PackedStringArray("_UIWindowSettings", "_optionButtonMap", "_buttonClose")]
+visible = false
+layout_mode = 2
+script = ExtResource("7_ygg7y")
+_UIWindowSettings = NodePath("../..")
+_optionButtonMap = NodePath("MarginContainer/VBoxContainer/VBoxMap/OptionButtonMap")
+_buttonClose = NodePath("ButtonCloseRound")
+metadata/_tab_index = 4
+
+[node name="MarginContainer" type="MarginContainer" parent="TabContainer/Round"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_bottom = -34.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 15
+theme_override_constants/margin_top = 15
+theme_override_constants/margin_right = 15
+theme_override_constants/margin_bottom = 5
+
+[node name="VBoxContainer" type="VBoxContainer" parent="TabContainer/Round/MarginContainer"]
+layout_mode = 2
+
+[node name="VBoxMap" type="VBoxContainer" parent="TabContainer/Round/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="LabelMap" type="Label" parent="TabContainer/Round/MarginContainer/VBoxContainer/VBoxMap"]
+layout_mode = 2
+text = "Map"
+
+[node name="OptionButtonMap" type="OptionButton" parent="TabContainer/Round/MarginContainer/VBoxContainer/VBoxMap"]
+layout_mode = 2
+
+[node name="ButtonCloseRound" type="Button" parent="TabContainer/Round"]
 layout_mode = 1
 anchors_preset = 12
 anchor_top = 1.0

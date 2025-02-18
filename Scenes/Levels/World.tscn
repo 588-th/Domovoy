@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=3 uid="uid://dst5dqfam7u6p"]
+[gd_scene load_steps=7 format=3 uid="uid://dst5dqfam7u6p"]
 
 [ext_resource type="PackedScene" uid="uid://ub1dpkmqs866" path="res://Scenes/Levels/LevelMainMenu.tscn" id="1_aogaf"]
 [ext_resource type="Script" path="res://Scripts/Spawners/SpawnerLevel.cs" id="1_opl21"]
 [ext_resource type="Script" path="res://Scripts/Spawners/SpawnSystemLevel.cs" id="2_hki6v"]
 [ext_resource type="PackedScene" uid="uid://c352e57r1w1l0" path="res://Scenes/Levels/LevelLobby.tscn" id="5_6lppg"]
-[ext_resource type="PackedScene" uid="uid://cs1oc4wf53g30" path="res://Scenes/Levels/LevelApartments.tscn" id="5_lucyf"]
+[ext_resource type="PackedScene" uid="uid://b0om0rffw68dn" path="res://Scenes/Levels/LevelApartments.tscn" id="5_lucyf"]
+[ext_resource type="PackedScene" uid="uid://d0ssexeexm1mh" path="res://Scenes/Levels/LevelBunker.tscn" id="6_fdk6c"]
 
 [node name="World" type="Node"]
 
@@ -15,14 +16,13 @@
 [node name="Spawners" type="Node" parent="."]
 
 [node name="SpawnerLevel" type="MultiplayerSpawner" parent="Spawners" node_paths=PackedStringArray("_holderLevel")]
-_spawnable_scenes = PackedStringArray("res://Scenes/Levels/LevelLobby.tscn", "res://Scenes/Levels/LevelApartments.tscn")
+_spawnable_scenes = PackedStringArray("res://Scenes/Levels/LevelLobby.tscn")
 spawn_path = NodePath("../../HolderLevel")
-spawn_limit = 1
 script = ExtResource("1_opl21")
 _holderLevel = NodePath("../../HolderLevel")
 
-[node name="SpawnSystemLevel" type="Node" parent="Spawners" node_paths=PackedStringArray("_levelSpawner")]
+[node name="SpawnSystemLevel" type="Node" parent="Spawners" node_paths=PackedStringArray("_levelSpawner") groups=["SpawnSystem:Level"]]
 script = ExtResource("2_hki6v")
 _levelSpawner = NodePath("../SpawnerLevel")
 _lobbyLevelScene = ExtResource("5_6lppg")
-_roundLevelScene = ExtResource("5_lucyf")
+RoundLevelScene = Array[PackedScene]([ExtResource("5_lucyf"), ExtResource("6_fdk6c")])

@@ -1,10 +1,12 @@
 using Godot;
+using Godot.Collections;
 
 public partial class SpawnSystemLevel : Node
 {
     [Export] private SpawnerLevel _levelSpawner;
     [Export] private PackedScene _lobbyLevelScene;
-    [Export] private PackedScene _roundLevelScene;
+
+    [Export] public Array<PackedScene> RoundLevelScene { get; private set; }
 
     public override void _Ready()
     {
@@ -34,6 +36,6 @@ public partial class SpawnSystemLevel : Node
     public void StartRound()
     {
         _levelSpawner.DespawnLevel();
-        _levelSpawner.SpawnLevel(_roundLevelScene);
+        _levelSpawner.SpawnLevel(SettingsRound.Instance.Map);
     }
 }

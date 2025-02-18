@@ -1,9 +1,13 @@
-[gd_scene load_steps=23 format=4 uid="uid://c352e57r1w1l0"]
+[gd_scene load_steps=27 format=4 uid="uid://c352e57r1w1l0"]
 
 [ext_resource type="Shader" path="res://Shaders/Distortion.gdshader" id="2_dloa6"]
 [ext_resource type="Script" path="res://Scripts/PathFollow.cs" id="3_876hd"]
+[ext_resource type="Texture2D" uid="uid://b58bimfvig55u" path="res://Textures/t_brickWall.png" id="3_xswrg"]
 [ext_resource type="PackedScene" uid="uid://cgdmyru54ecfs" path="res://Scenes/Props/PropWoodenBox1x1.tscn" id="4_h8kq7"]
 [ext_resource type="ArrayMesh" uid="uid://byj6mqb045ftt" path="res://Meshes/Lobby2_Lobby.res" id="5_242q0"]
+[ext_resource type="Texture2D" uid="uid://7d323tehmos3" path="res://Textures/im_apartments.png" id="6_f3d7b"]
+[ext_resource type="Script" path="res://Scripts/Lobby/LobbyLevelImage.cs" id="9_j6psv"]
+[ext_resource type="Texture2D" uid="uid://b8j4mmhohmfqj" path="res://Textures/t_box.png" id="11_fiit0"]
 [ext_resource type="Script" path="res://Scripts/Spawners/SpawnerPlayer.cs" id="13_1ilnm"]
 [ext_resource type="Script" path="res://Scripts/Spawners/SpawnSystemLobby.cs" id="14_vg0c8"]
 [ext_resource type="PackedScene" uid="uid://7fa0b3shof4a" path="res://Scenes/Players/PlayerLobby.tscn" id="15_t2e1i"]
@@ -154,6 +158,11 @@ mesh = SubResource("BoxMesh_qhxef")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0952644, 0)
 mesh = SubResource("BoxMesh_ft6vy")
 
+[node name="Sprite3D" type="Sprite3D" parent="Environment"]
+transform = Transform3D(1, 0, 0, 0, 0.96744, 0.253099, 0, -0.253099, 0.96744, 0, 2.42589, 7.306)
+pixel_size = 0.001
+texture = ExtResource("3_xswrg")
+
 [node name="Light" type="Node" parent="."]
 
 [node name="OmniLight3D" type="OmniLight3D" parent="Light"]
@@ -172,6 +181,21 @@ omni_range = 8.15
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0.615545, 7)
 
 [node name="Items" type="Node" parent="Objects" groups=["Holder:Items"]]
+
+[node name="ServerPart" type="Node" parent="."]
+
+[node name="Scripts" type="Node" parent="ServerPart"]
+
+[node name="LobbyLevelImage" type="Node" parent="ServerPart/Scripts" node_paths=PackedStringArray("_levelImage")]
+script = ExtResource("9_j6psv")
+_levelImage = NodePath("../../../Environment/Sprite3D")
+_apartmentImage = ExtResource("6_f3d7b")
+_bunkerImage = ExtResource("11_fiit0")
+
+[node name="PathFollow" type="Node" parent="ServerPart/Scripts" node_paths=PackedStringArray("_pathFollow3D")]
+script = ExtResource("3_876hd")
+_pathFollow3D = NodePath("../../../Environment/Path3D/PathFollow3D")
+_speed = 1.5
 
 [node name="SpawnAchors" type="Node" parent="."]
 
@@ -200,15 +224,6 @@ script = ExtResource("14_vg0c8")
 _spawnerPlayerLobby = NodePath("../SpawnerPlayerLobby")
 _playerSceneLobby = ExtResource("15_t2e1i")
 _spawnMarkersLobby = [NodePath("../../SpawnAchors/PlayerLobby1"), NodePath("../../SpawnAchors/PlayerLobby2"), NodePath("../../SpawnAchors/PlayerLobby3"), NodePath("../../SpawnAchors/PlayerLobby4")]
-
-[node name="ServerPart" type="Node" parent="."]
-
-[node name="Scripts" type="Node" parent="ServerPart"]
-
-[node name="PathFollow" type="Node" parent="ServerPart/Scripts" node_paths=PackedStringArray("_pathFollow3D")]
-script = ExtResource("3_876hd")
-_pathFollow3D = NodePath("../../../Environment/Path3D/PathFollow3D")
-_speed = 1.5
 
 [node name="Synchronizers" type="Node" parent="."]
 

@@ -47,11 +47,11 @@ public partial class SpawnerLevel : MultiplayerSpawner
 
     private void FreeParts(Node levelRoot, int authorityID, int uniqueID)
     {
-        if (uniqueID != authorityID)
-            levelRoot.GetNode("ClientPart")?.Free();
-        if (uniqueID != 1)
-            levelRoot.GetNode("ServerPart")?.Free();
-        if (uniqueID != authorityID && uniqueID != 1)
-            levelRoot.GetNode("ClientServerPart")?.Free();
+        if (uniqueID != authorityID && levelRoot.HasNode("ClientPart"))
+            levelRoot.GetNode("ClientPart").Free();
+        if (uniqueID != 1 && levelRoot.HasNode("ServerPart"))
+            levelRoot.GetNode("ServerPart").Free();
+        if (uniqueID != authorityID && uniqueID != 1 && levelRoot.HasNode("ClientServerPart"))
+            levelRoot.GetNode("ClientServerPart").Free();
     }
 }

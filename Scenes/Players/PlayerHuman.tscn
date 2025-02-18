@@ -517,7 +517,6 @@ blend_times = [&"IDLE", &"SNEAK", 0.5, &"IDLE", &"WALK", 0.5, &"SNEAK", &"IDLE",
 
 [node name="VoiceRecorder" type="AudioStreamPlayer" parent="ClientPart/Audio" node_paths=PackedStringArray("_inputActions", "_playerVoicePlayer")]
 stream = SubResource("AudioStreamMicrophone_h1e6p")
-bus = &"VoiceRecorder"
 script = ExtResource("12_o81cg")
 _inputActions = NodePath("../../../ClientServerPart/Scripts/InputActions")
 _playerVoicePlayer = NodePath("../../../CommonPart/Audio/VoicePlayer")
