@@ -52,12 +52,12 @@ public partial class PlayerHUDParameters : Node
 
     private void TransferHealthData()
     {
-        _hudParameters.PlayerHealth = _playerHealth.CurrentHealth;
+        _hudParameters.PlayerHealth = _playerHealth.GetCurrentHealth();
     }
 
     private void TransferMaxHealthData()
     {
-        _hudParameters.PlayerHealthMax = _playerHealth.MaxHealth;
+        _hudParameters.PlayerHealthMax = _playerHealth.GetMaxHealth();
     }
 
     private void TransferItemData(Item item)

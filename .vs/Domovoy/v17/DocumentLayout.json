@@ -1,12 +1,177 @@
 {
   "Version": 1,
   "WorkspaceRootPath": "C:\\Users\\588th\\Documents\\ProjectsGodot\\Domovoy\\",
-  "Documents": [],
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{7291B729-5C39-4A32-ABF7-A214F024033A}|Domovoy.csproj|c:\\users\\588th\\documents\\projectsgodot\\domovoy\\scripts\\player\\playerauracolor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7291B729-5C39-4A32-ABF7-A214F024033A}|Domovoy.csproj|solutionrelative:scripts\\player\\playerauracolor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7291B729-5C39-4A32-ABF7-A214F024033A}|Domovoy.csproj|c:\\users\\588th\\documents\\projectsgodot\\domovoy\\scripts\\userinterface\\effects\\uieffectsanity.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7291B729-5C39-4A32-ABF7-A214F024033A}|Domovoy.csproj|solutionrelative:scripts\\userinterface\\effects\\uieffectsanity.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7291B729-5C39-4A32-ABF7-A214F024033A}|Domovoy.csproj|c:\\users\\588th\\documents\\projectsgodot\\domovoy\\scripts\\player\\spectator\\spectatorplayerchanger.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7291B729-5C39-4A32-ABF7-A214F024033A}|Domovoy.csproj|solutionrelative:scripts\\player\\spectator\\spectatorplayerchanger.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7291B729-5C39-4A32-ABF7-A214F024033A}|Domovoy.csproj|c:\\users\\588th\\documents\\projectsgodot\\domovoy\\scripts\\lobby\\lobbylevelimage.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7291B729-5C39-4A32-ABF7-A214F024033A}|Domovoy.csproj|solutionrelative:scripts\\lobby\\lobbylevelimage.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7291B729-5C39-4A32-ABF7-A214F024033A}|Domovoy.csproj|c:\\users\\588th\\documents\\projectsgodot\\domovoy\\scripts\\spawners\\spawnsystemround.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7291B729-5C39-4A32-ABF7-A214F024033A}|Domovoy.csproj|solutionrelative:scripts\\spawners\\spawnsystemround.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7291B729-5C39-4A32-ABF7-A214F024033A}|Domovoy.csproj|c:\\users\\588th\\documents\\projectsgodot\\domovoy\\scripts\\autoload\\globalrpcfunctions.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7291B729-5C39-4A32-ABF7-A214F024033A}|Domovoy.csproj|solutionrelative:scripts\\autoload\\globalrpcfunctions.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7291B729-5C39-4A32-ABF7-A214F024033A}|Domovoy.csproj|c:\\users\\588th\\documents\\projectsgodot\\domovoy\\scripts\\player\\playerhealth.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7291B729-5C39-4A32-ABF7-A214F024033A}|Domovoy.csproj|solutionrelative:scripts\\player\\playerhealth.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7291B729-5C39-4A32-ABF7-A214F024033A}|Domovoy.csproj|c:\\users\\588th\\documents\\projectsgodot\\domovoy\\scripts\\player\\monstersettings.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7291B729-5C39-4A32-ABF7-A214F024033A}|Domovoy.csproj|solutionrelative:scripts\\player\\monstersettings.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7291B729-5C39-4A32-ABF7-A214F024033A}|Domovoy.csproj|c:\\users\\588th\\documents\\projectsgodot\\domovoy\\scripts\\player\\humansettings.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7291B729-5C39-4A32-ABF7-A214F024033A}|Domovoy.csproj|solutionrelative:scripts\\player\\humansettings.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
   "DocumentGroupContainers": [
     {
       "Orientation": 0,
       "VerticalTabListWidth": 256,
-      "DocumentGroups": []
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 5,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{aa2115a1-9712-457b-9047-dbb71ca2cdd2}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "SpawnSystemRound.cs",
+              "DocumentMoniker": "C:\\Users\\588th\\Documents\\ProjectsGodot\\Domovoy\\Scripts\\Spawners\\SpawnSystemRound.cs",
+              "RelativeDocumentMoniker": "Scripts\\Spawners\\SpawnSystemRound.cs",
+              "ToolTip": "C:\\Users\\588th\\Documents\\ProjectsGodot\\Domovoy\\Scripts\\Spawners\\SpawnSystemRound.cs",
+              "RelativeToolTip": "Scripts\\Spawners\\SpawnSystemRound.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABcAAAAIAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-02-20T12:13:39.929Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "LobbyLevelImage.cs",
+              "DocumentMoniker": "C:\\Users\\588th\\Documents\\ProjectsGodot\\Domovoy\\Scripts\\Lobby\\LobbyLevelImage.cs",
+              "RelativeDocumentMoniker": "Scripts\\Lobby\\LobbyLevelImage.cs",
+              "ToolTip": "C:\\Users\\588th\\Documents\\ProjectsGodot\\Domovoy\\Scripts\\Lobby\\LobbyLevelImage.cs",
+              "RelativeToolTip": "Scripts\\Lobby\\LobbyLevelImage.cs",
+              "ViewState": "AgIAAAIAAAAAAAAAAAAxwAsAAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-02-20T12:08:40.295Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "SpectatorPlayerChanger.cs",
+              "DocumentMoniker": "C:\\Users\\588th\\Documents\\ProjectsGodot\\Domovoy\\Scripts\\Player\\Spectator\\SpectatorPlayerChanger.cs",
+              "RelativeDocumentMoniker": "Scripts\\Player\\Spectator\\SpectatorPlayerChanger.cs",
+              "ToolTip": "C:\\Users\\588th\\Documents\\ProjectsGodot\\Domovoy\\Scripts\\Player\\Spectator\\SpectatorPlayerChanger.cs",
+              "RelativeToolTip": "Scripts\\Player\\Spectator\\SpectatorPlayerChanger.cs",
+              "ViewState": "AgIAAAMAAAAAAAAAAAAAABIAAAAcAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-02-20T11:55:46.904Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "UIEffectSanity.cs",
+              "DocumentMoniker": "C:\\Users\\588th\\Documents\\ProjectsGodot\\Domovoy\\Scripts\\UserInterface\\Effects\\UIEffectSanity.cs",
+              "RelativeDocumentMoniker": "Scripts\\UserInterface\\Effects\\UIEffectSanity.cs",
+              "ToolTip": "C:\\Users\\588th\\Documents\\ProjectsGodot\\Domovoy\\Scripts\\UserInterface\\Effects\\UIEffectSanity.cs",
+              "RelativeToolTip": "Scripts\\UserInterface\\Effects\\UIEffectSanity.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAArAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-02-20T11:42:32.183Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "PlayerAuraColor.cs",
+              "DocumentMoniker": "C:\\Users\\588th\\Documents\\ProjectsGodot\\Domovoy\\Scripts\\Player\\PlayerAuraColor.cs",
+              "RelativeDocumentMoniker": "Scripts\\Player\\PlayerAuraColor.cs",
+              "ToolTip": "C:\\Users\\588th\\Documents\\ProjectsGodot\\Domovoy\\Scripts\\Player\\PlayerAuraColor.cs",
+              "RelativeToolTip": "Scripts\\Player\\PlayerAuraColor.cs",
+              "ViewState": "AgIAABAAAAAAAAAAAAAgwBgAAAAgAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-02-20T11:38:10.603Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "PlayerHealth.cs",
+              "DocumentMoniker": "C:\\Users\\588th\\Documents\\ProjectsGodot\\Domovoy\\Scripts\\Player\\PlayerHealth.cs",
+              "RelativeDocumentMoniker": "Scripts\\Player\\PlayerHealth.cs",
+              "ToolTip": "C:\\Users\\588th\\Documents\\ProjectsGodot\\Domovoy\\Scripts\\Player\\PlayerHealth.cs",
+              "RelativeToolTip": "Scripts\\Player\\PlayerHealth.cs",
+              "ViewState": "AgIAACYAAAAAAAAAAAAIwAcAAAAuAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-02-20T11:31:17.295Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "GlobalRpcFunctions.cs",
+              "DocumentMoniker": "C:\\Users\\588th\\Documents\\ProjectsGodot\\Domovoy\\Scripts\\Autoload\\GlobalRpcFunctions.cs",
+              "RelativeDocumentMoniker": "Scripts\\Autoload\\GlobalRpcFunctions.cs",
+              "ToolTip": "C:\\Users\\588th\\Documents\\ProjectsGodot\\Domovoy\\Scripts\\Autoload\\GlobalRpcFunctions.cs",
+              "RelativeToolTip": "Scripts\\Autoload\\GlobalRpcFunctions.cs",
+              "ViewState": "AgIAAAYAAAAAAAAAAAA0wBMAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-02-20T11:29:19.725Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "MonsterSettings.cs",
+              "DocumentMoniker": "C:\\Users\\588th\\Documents\\ProjectsGodot\\Domovoy\\Scripts\\Player\\MonsterSettings.cs",
+              "RelativeDocumentMoniker": "Scripts\\Player\\MonsterSettings.cs",
+              "ToolTip": "C:\\Users\\588th\\Documents\\ProjectsGodot\\Domovoy\\Scripts\\Player\\MonsterSettings.cs",
+              "RelativeToolTip": "Scripts\\Player\\MonsterSettings.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-02-20T11:29:11.792Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "HumanSettings.cs",
+              "DocumentMoniker": "C:\\Users\\588th\\Documents\\ProjectsGodot\\Domovoy\\Scripts\\Player\\HumanSettings.cs",
+              "RelativeDocumentMoniker": "Scripts\\Player\\HumanSettings.cs",
+              "ToolTip": "C:\\Users\\588th\\Documents\\ProjectsGodot\\Domovoy\\Scripts\\Player\\HumanSettings.cs",
+              "RelativeToolTip": "Scripts\\Player\\HumanSettings.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-02-20T11:29:01.982Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
     }
   ]
 }

@@ -11,11 +11,11 @@ public partial class GlobalRpcFunctions : Node
 
     public void SetTextureToSprite3D(NodePath sprite3DPath, string textureResource)
     {
-        Rpc(nameof(RpcSetVisibility), sprite3DPath, textureResource);
+        Rpc(nameof(RpcSetTextureToSprite3D), sprite3DPath, textureResource);
     }
 
     [Rpc(MultiplayerApi.RpcMode.AnyPeer, CallLocal = true, TransferMode = MultiplayerPeer.TransferModeEnum.Reliable)]
-    public void RpcSetVisibility(NodePath sprite3DPath, string textureResource)
+    public void RpcSetTextureToSprite3D(NodePath sprite3DPath, string textureResource)
     {
         if (GetNode(sprite3DPath) is Sprite3D sprite3D)
             sprite3D.Texture = ResourceLoader.Load<Texture2D>(textureResource);

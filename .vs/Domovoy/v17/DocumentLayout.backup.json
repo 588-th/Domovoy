@@ -3,44 +3,20 @@
   "WorkspaceRootPath": "C:\\Users\\588th\\Documents\\ProjectsGodot\\Domovoy\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{7291B729-5C39-4A32-ABF7-A214F024033A}|Domovoy.csproj|c:\\users\\588th\\documents\\projectsgodot\\domovoy\\scripts\\lobby\\lobbylevelimage.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{7291B729-5C39-4A32-ABF7-A214F024033A}|Domovoy.csproj|solutionrelative:scripts\\lobby\\lobbylevelimage.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{7291B729-5C39-4A32-ABF7-A214F024033A}|Domovoy.csproj|c:\\users\\588th\\documents\\projectsgodot\\domovoy\\scripts\\userinterface\\menu\\uisettingsaudio.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{7291B729-5C39-4A32-ABF7-A214F024033A}|Domovoy.csproj|solutionrelative:scripts\\userinterface\\menu\\uisettingsaudio.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{7291B729-5C39-4A32-ABF7-A214F024033A}|Domovoy.csproj|c:\\users\\588th\\documents\\projectsgodot\\domovoy\\scripts\\autoload\\settingsround.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{7291B729-5C39-4A32-ABF7-A214F024033A}|Domovoy.csproj|solutionrelative:scripts\\autoload\\settingsround.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{7291B729-5C39-4A32-ABF7-A214F024033A}|Domovoy.csproj|c:\\users\\588th\\documents\\projectsgodot\\domovoy\\scripts\\player\\playerhealth.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7291B729-5C39-4A32-ABF7-A214F024033A}|Domovoy.csproj|solutionrelative:scripts\\player\\playerhealth.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{7291B729-5C39-4A32-ABF7-A214F024033A}|Domovoy.csproj|c:\\users\\588th\\documents\\projectsgodot\\domovoy\\scripts\\autoload\\globalrpcfunctions.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{7291B729-5C39-4A32-ABF7-A214F024033A}|Domovoy.csproj|solutionrelative:scripts\\autoload\\globalrpcfunctions.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{7291B729-5C39-4A32-ABF7-A214F024033A}|Domovoy.csproj|c:\\users\\588th\\documents\\projectsgodot\\domovoy\\scripts\\userinterface\\menu\\uisettingsround.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{7291B729-5C39-4A32-ABF7-A214F024033A}|Domovoy.csproj|solutionrelative:scripts\\userinterface\\menu\\uisettingsround.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{7291B729-5C39-4A32-ABF7-A214F024033A}|Domovoy.csproj|c:\\users\\588th\\documents\\projectsgodot\\domovoy\\scripts\\player\\monstersettings.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7291B729-5C39-4A32-ABF7-A214F024033A}|Domovoy.csproj|solutionrelative:scripts\\player\\monstersettings.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{7291B729-5C39-4A32-ABF7-A214F024033A}|Domovoy.csproj|c:\\users\\588th\\documents\\projectsgodot\\domovoy\\scripts\\player\\playervoicerecorder.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{7291B729-5C39-4A32-ABF7-A214F024033A}|Domovoy.csproj|solutionrelative:scripts\\player\\playervoicerecorder.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{7291B729-5C39-4A32-ABF7-A214F024033A}|Domovoy.csproj|c:\\users\\588th\\documents\\projectsgodot\\domovoy\\scripts\\player\\playerinputkeys.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{7291B729-5C39-4A32-ABF7-A214F024033A}|Domovoy.csproj|solutionrelative:scripts\\player\\playerinputkeys.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{7291B729-5C39-4A32-ABF7-A214F024033A}|Domovoy.csproj|c:\\users\\588th\\documents\\projectsgodot\\domovoy\\scripts\\player\\playervoiceplayer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{7291B729-5C39-4A32-ABF7-A214F024033A}|Domovoy.csproj|solutionrelative:scripts\\player\\playervoiceplayer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{7291B729-5C39-4A32-ABF7-A214F024033A}|Domovoy.csproj|c:\\users\\588th\\documents\\projectsgodot\\domovoy\\scripts\\userinterface\\menu\\uisettingsmouse.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{7291B729-5C39-4A32-ABF7-A214F024033A}|Domovoy.csproj|solutionrelative:scripts\\userinterface\\menu\\uisettingsmouse.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{7291B729-5C39-4A32-ABF7-A214F024033A}|Domovoy.csproj|c:\\users\\588th\\documents\\projectsgodot\\domovoy\\scripts\\spawners\\spawnsystemlobby.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{7291B729-5C39-4A32-ABF7-A214F024033A}|Domovoy.csproj|solutionrelative:scripts\\spawners\\spawnsystemlobby.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{7291B729-5C39-4A32-ABF7-A214F024033A}|Domovoy.csproj|c:\\users\\588th\\documents\\projectsgodot\\domovoy\\scripts\\player\\humansettings.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7291B729-5C39-4A32-ABF7-A214F024033A}|Domovoy.csproj|solutionrelative:scripts\\player\\humansettings.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -53,128 +29,60 @@
           "SelectedChildIndex": 1,
           "Children": [
             {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "GlobalRpcFunctions.cs",
-              "DocumentMoniker": "C:\\Users\\588th\\Documents\\ProjectsGodot\\Domovoy\\Scripts\\Autoload\\GlobalRpcFunctions.cs",
-              "RelativeDocumentMoniker": "Scripts\\Autoload\\GlobalRpcFunctions.cs",
-              "ToolTip": "C:\\Users\\588th\\Documents\\ProjectsGodot\\Domovoy\\Scripts\\Autoload\\GlobalRpcFunctions.cs",
-              "RelativeToolTip": "Scripts\\Autoload\\GlobalRpcFunctions.cs",
-              "ViewState": "AgIAAAYAAAAAAAAAAAAAwBUAAAAFAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-02-18T23:00:05.104Z",
-              "EditorCaption": ""
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{aa2115a1-9712-457b-9047-dbb71ca2cdd2}"
             },
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "LobbyLevelImage.cs",
-              "DocumentMoniker": "C:\\Users\\588th\\Documents\\ProjectsGodot\\Domovoy\\Scripts\\Lobby\\LobbyLevelImage.cs",
-              "RelativeDocumentMoniker": "Scripts\\Lobby\\LobbyLevelImage.cs",
-              "ToolTip": "C:\\Users\\588th\\Documents\\ProjectsGodot\\Domovoy\\Scripts\\Lobby\\LobbyLevelImage.cs",
-              "RelativeToolTip": "Scripts\\Lobby\\LobbyLevelImage.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAeAAAAAAAAAA==",
+              "Title": "PlayerHealth.cs",
+              "DocumentMoniker": "C:\\Users\\588th\\Documents\\ProjectsGodot\\Domovoy\\Scripts\\Player\\PlayerHealth.cs",
+              "RelativeDocumentMoniker": "Scripts\\Player\\PlayerHealth.cs",
+              "ToolTip": "C:\\Users\\588th\\Documents\\ProjectsGodot\\Domovoy\\Scripts\\Player\\PlayerHealth.cs",
+              "RelativeToolTip": "Scripts\\Player\\PlayerHealth.cs",
+              "ViewState": "AgIAABMAAAAAAAAAAAAgwCEAAAAhAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-02-15T18:07:50.652Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "SettingsRound.cs",
-              "DocumentMoniker": "C:\\Users\\588th\\Documents\\ProjectsGodot\\Domovoy\\Scripts\\Autoload\\SettingsRound.cs",
-              "RelativeDocumentMoniker": "Scripts\\Autoload\\SettingsRound.cs",
-              "ToolTip": "C:\\Users\\588th\\Documents\\ProjectsGodot\\Domovoy\\Scripts\\Autoload\\SettingsRound.cs",
-              "RelativeToolTip": "Scripts\\Autoload\\SettingsRound.cs",
-              "ViewState": "AgIAAAMAAAAAAAAAAAAAAAoAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-02-15T18:35:17.518Z",
+              "WhenOpened": "2025-02-20T11:31:17.295Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "UISettingsAudio.cs",
-              "DocumentMoniker": "C:\\Users\\588th\\Documents\\ProjectsGodot\\Domovoy\\Scripts\\UserInterface\\Menu\\UISettingsAudio.cs",
-              "RelativeDocumentMoniker": "Scripts\\UserInterface\\Menu\\UISettingsAudio.cs",
-              "ToolTip": "C:\\Users\\588th\\Documents\\ProjectsGodot\\Domovoy\\Scripts\\UserInterface\\Menu\\UISettingsAudio.cs",
-              "RelativeToolTip": "Scripts\\UserInterface\\Menu\\UISettingsAudio.cs",
-              "ViewState": "AgIAADIAAAAAAAAAAAAQwBwAAAA0AAAAAAAAAA==",
+              "Title": "GlobalRpcFunctions.cs",
+              "DocumentMoniker": "C:\\Users\\588th\\Documents\\ProjectsGodot\\Domovoy\\Scripts\\Autoload\\GlobalRpcFunctions.cs",
+              "RelativeDocumentMoniker": "Scripts\\Autoload\\GlobalRpcFunctions.cs",
+              "ToolTip": "C:\\Users\\588th\\Documents\\ProjectsGodot\\Domovoy\\Scripts\\Autoload\\GlobalRpcFunctions.cs",
+              "RelativeToolTip": "Scripts\\Autoload\\GlobalRpcFunctions.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAGoAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-02-15T18:18:51.391Z",
+              "WhenOpened": "2025-02-20T11:29:19.725Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
-              "Title": "PlayerVoicePlayer.cs",
-              "DocumentMoniker": "C:\\Users\\588th\\Documents\\ProjectsGodot\\Domovoy\\Scripts\\Player\\PlayerVoicePlayer.cs",
-              "RelativeDocumentMoniker": "Scripts\\Player\\PlayerVoicePlayer.cs",
-              "ToolTip": "C:\\Users\\588th\\Documents\\ProjectsGodot\\Domovoy\\Scripts\\Player\\PlayerVoicePlayer.cs",
-              "RelativeToolTip": "Scripts\\Player\\PlayerVoicePlayer.cs",
-              "ViewState": "AgIAAAsAAAAAAAAAAAAQwAAAAAAAAAAAAAAAAA==",
+              "DocumentIndex": 2,
+              "Title": "MonsterSettings.cs",
+              "DocumentMoniker": "C:\\Users\\588th\\Documents\\ProjectsGodot\\Domovoy\\Scripts\\Player\\MonsterSettings.cs",
+              "RelativeDocumentMoniker": "Scripts\\Player\\MonsterSettings.cs",
+              "ToolTip": "C:\\Users\\588th\\Documents\\ProjectsGodot\\Domovoy\\Scripts\\Player\\MonsterSettings.cs",
+              "RelativeToolTip": "Scripts\\Player\\MonsterSettings.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAAFAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-02-15T18:18:41.932Z"
+              "WhenOpened": "2025-02-20T11:29:11.792Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "PlayerVoiceRecorder.cs",
-              "DocumentMoniker": "C:\\Users\\588th\\Documents\\ProjectsGodot\\Domovoy\\Scripts\\Player\\PlayerVoiceRecorder.cs",
-              "RelativeDocumentMoniker": "Scripts\\Player\\PlayerVoiceRecorder.cs",
-              "ToolTip": "C:\\Users\\588th\\Documents\\ProjectsGodot\\Domovoy\\Scripts\\Player\\PlayerVoiceRecorder.cs",
-              "RelativeToolTip": "Scripts\\Player\\PlayerVoiceRecorder.cs",
-              "ViewState": "AgIAABQAAAAAAAAAAAA6wCMAAAAJAAAAAAAAAA==",
+              "DocumentIndex": 3,
+              "Title": "HumanSettings.cs",
+              "DocumentMoniker": "C:\\Users\\588th\\Documents\\ProjectsGodot\\Domovoy\\Scripts\\Player\\HumanSettings.cs",
+              "RelativeDocumentMoniker": "Scripts\\Player\\HumanSettings.cs",
+              "ToolTip": "C:\\Users\\588th\\Documents\\ProjectsGodot\\Domovoy\\Scripts\\Player\\HumanSettings.cs",
+              "RelativeToolTip": "Scripts\\Player\\HumanSettings.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-02-15T18:16:12.075Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "PlayerInputKeys.cs",
-              "DocumentMoniker": "C:\\Users\\588th\\Documents\\ProjectsGodot\\Domovoy\\Scripts\\Player\\PlayerInputKeys.cs",
-              "RelativeDocumentMoniker": "Scripts\\Player\\PlayerInputKeys.cs",
-              "ToolTip": "C:\\Users\\588th\\Documents\\ProjectsGodot\\Domovoy\\Scripts\\Player\\PlayerInputKeys.cs",
-              "RelativeToolTip": "Scripts\\Player\\PlayerInputKeys.cs",
-              "ViewState": "AgIAAA4AAAAAAAAAAAAQwCUAAAAPAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-02-15T18:13:07.316Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 9,
-              "Title": "SpawnSystemLobby.cs",
-              "DocumentMoniker": "C:\\Users\\588th\\Documents\\ProjectsGodot\\Domovoy\\Scripts\\Spawners\\SpawnSystemLobby.cs",
-              "RelativeDocumentMoniker": "Scripts\\Spawners\\SpawnSystemLobby.cs",
-              "ToolTip": "C:\\Users\\588th\\Documents\\ProjectsGodot\\Domovoy\\Scripts\\Spawners\\SpawnSystemLobby.cs",
-              "RelativeToolTip": "Scripts\\Spawners\\SpawnSystemLobby.cs",
-              "ViewState": "AgIAABYAAAAAAAAAAAAuwCMAAABQAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-02-15T18:10:28.918Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 8,
-              "Title": "UISettingsMouse.cs",
-              "DocumentMoniker": "C:\\Users\\588th\\Documents\\ProjectsGodot\\Domovoy\\Scripts\\UserInterface\\Menu\\UISettingsMouse.cs",
-              "RelativeDocumentMoniker": "Scripts\\UserInterface\\Menu\\UISettingsMouse.cs",
-              "ToolTip": "C:\\Users\\588th\\Documents\\ProjectsGodot\\Domovoy\\Scripts\\UserInterface\\Menu\\UISettingsMouse.cs",
-              "RelativeToolTip": "Scripts\\UserInterface\\Menu\\UISettingsMouse.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-02-15T18:08:18.182Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "UISettingsRound.cs",
-              "DocumentMoniker": "C:\\Users\\588th\\Documents\\ProjectsGodot\\Domovoy\\Scripts\\UserInterface\\Menu\\UISettingsRound.cs",
-              "RelativeDocumentMoniker": "Scripts\\UserInterface\\Menu\\UISettingsRound.cs",
-              "ToolTip": "C:\\Users\\588th\\Documents\\ProjectsGodot\\Domovoy\\Scripts\\UserInterface\\Menu\\UISettingsRound.cs",
-              "RelativeToolTip": "Scripts\\UserInterface\\Menu\\UISettingsRound.cs",
-              "ViewState": "AgIAAB4AAAAAAAAAAAAowDIAAAAfAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-02-15T18:35:33.991Z"
+              "WhenOpened": "2025-02-20T11:29:01.982Z",
+              "EditorCaption": ""
             }
           ]
         }

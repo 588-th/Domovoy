@@ -24,8 +24,8 @@ public partial class PlayerAuraColor : Node
 
     private void UpdateEffects()
     {
-        float maxHealth = _playerHealth.MaxHealth;
-        float currentHealth = _playerHealth.CurrentHealth;
+        float maxHealth = _playerHealth.GetMaxHealth();
+        float currentHealth = _playerHealth.GetCurrentHealth();
 
         float healthPercent = Mathf.Clamp(currentHealth / maxHealth, 0f, 1f);
 

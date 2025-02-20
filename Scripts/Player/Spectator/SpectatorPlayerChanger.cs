@@ -17,7 +17,8 @@ public partial class SpectatorPlayerChanger : Node
         _inputActions.SpectatePreviousPlayerDown += PreviousPlayer;
 
         UpdatePlayersNode();
-        InvokePlayerChange(_spectatingPlayerNumber);
+        if (_playerRootList.Count > 0)
+            InvokePlayerChange(_spectatingPlayerNumber);
     }
 
     public override void _ExitTree()

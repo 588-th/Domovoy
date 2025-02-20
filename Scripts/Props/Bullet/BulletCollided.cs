@@ -47,7 +47,7 @@ public partial class BulletCollided : Node
         PlayerHealth playerHealth = playerRoot.GetNode(playerHealthNode.ToString()) as PlayerHealth;
 
         playerHealth.DecreaseHealth(10);
-        return playerHealth.CurrentHealth;
+        return playerHealth.GetCurrentHealth();
     }
 
     private void PlayHitAudio(Node body)

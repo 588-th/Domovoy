@@ -24,15 +24,15 @@ public partial class PlayerHealthNoise : Node
 
     private void OnHealthChanged()
     {
-        int currentHP = _playerHealth.CurrentHealth;
+        int currentHealth = _playerHealth.GetCurrentHealth();
 
-        if (currentHP <= _healthThreshold)
-            PlayNoise(currentHP);
+        if (currentHealth <= _healthThreshold)
+            PlayNoise(currentHealth);
         else if (_isPlaying)
             StopNoise();
     }
 
-    private void PlayNoise(int currentHP)
+    private void PlayNoise(int currentHealth)
     {
         if (!_isPlaying)
         {
@@ -40,7 +40,7 @@ public partial class PlayerHealthNoise : Node
             _isPlaying = true;
         }
 
-        float healthFactor = Mathf.Clamp((float)currentHP / _healthThreshold, 0f, 1f);
+        float healthFactor = Mathf.Clamp((float)currentHealth / _healthThreshold, 0f, 1f);
         float volumeDb = Mathf.Lerp(_maxVolumeDb, _minVolumeDb, healthFactor);
         _audioPlayer.VolumeDb = volumeDb;
     }

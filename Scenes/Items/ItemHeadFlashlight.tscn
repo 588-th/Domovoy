@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://k7pkap4vw1ub"]
+[gd_scene load_steps=18 format=3 uid="uid://k7pkap4vw1ub"]
 
 [ext_resource type="Script" path="res://Scripts/Items/HeadFlashlight/HeadFlashlight.cs" id="1_lkn76"]
 [ext_resource type="AudioStream" uid="uid://5h7hqp3o4agm" path="res://Audio/SFX/Common/Pickup.mp3" id="2_b0dn4"]
@@ -10,6 +10,7 @@
 [ext_resource type="AudioStream" uid="uid://ba6b3aeu5rl7h" path="res://Audio/SFX/Flashlight/FlashlighOn.mp3" id="9_pi1m2"]
 [ext_resource type="AudioStream" uid="uid://cuanjv4ckdm5p" path="res://Audio/SFX/Flashlight/FlashlightOnDischarged.mp3" id="10_0ldui"]
 [ext_resource type="AudioStream" uid="uid://wcx8lfpw0755" path="res://Audio/SFX/Flashlight/FlashlighOff.mp3" id="10_6pnoi"]
+[ext_resource type="Script" path="res://Scripts/Items/HeadFlashlight/HeadFlashlightSettings.cs" id="11_tkvvb"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_21hoq"]
 
@@ -77,7 +78,6 @@ script = ExtResource("3_mckr8")
 [node name="HeadFlashlightBattery" type="Node" parent="ServerPart" node_paths=PackedStringArray("_headFlashlightToggleLight")]
 script = ExtResource("6_xfi5a")
 _headFlashlightToggleLight = NodePath("../HeadFlashlightToggleLight")
-DrainRate = 0.1
 
 [node name="HeadFlashlightFlicker" type="Node" parent="ServerPart" node_paths=PackedStringArray("_headFlashlightBattery", "_headFlashlightToggleLight", "_flashlight")]
 script = ExtResource("7_guxgo")
@@ -95,6 +95,10 @@ _audioPlayer3D = NodePath("../../AudioPlayer3D")
 _flashlightOnAudio = ExtResource("9_pi1m2")
 _flashlightOffAudio = ExtResource("10_6pnoi")
 _flashlightOnDischargedAudio = ExtResource("10_0ldui")
+
+[node name="HeadFlashlightSettings" type="Node" parent="ServerPart" node_paths=PackedStringArray("_headFlashlightBattery")]
+script = ExtResource("11_tkvvb")
+_headFlashlightBattery = NodePath("../HeadFlashlightBattery")
 
 [node name="Synchronizer" type="Node" parent="."]
 

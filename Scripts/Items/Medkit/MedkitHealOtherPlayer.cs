@@ -31,7 +31,7 @@ public partial class MedkitHealOtherPlayer : Node
             return false;
 
         PlayerHealth playerHealth = GetOtherPlayerHealth();
-        if (playerHealth.MaxHealth == playerHealth.CurrentHealth)
+        if (playerHealth.GetMaxHealth() == playerHealth.GetCurrentHealth())
             return false;
 
         return true;

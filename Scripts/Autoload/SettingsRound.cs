@@ -7,8 +7,19 @@ public partial class SettingsRound : Node
 
     public Action<PackedScene> MapUpdated;
 
-    private PackedScene _map;
+    public int HeadFlashlightBattery;
+    public int DefaultHeadFlashlightBattery = 60;
 
+    public int HumanHealth;
+    public int DefaultHumanHealth = 100;
+
+    public int MonsterHealth;
+    public int DefaultMonsterHealth = 100;
+
+    public int MonsterDamage;
+    public int DefaultMonsterDamage = 35;
+
+    private PackedScene _map;
     public PackedScene Map
     {
         get { return _map; }

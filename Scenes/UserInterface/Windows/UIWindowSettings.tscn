@@ -32,7 +32,7 @@ offset_bottom = 190.0
 grow_horizontal = 2
 grow_vertical = 2
 tab_alignment = 1
-current_tab = 1
+current_tab = 4
 clip_tabs = false
 
 [node name="Video" type="TabBar" parent="TabContainer" node_paths=PackedStringArray("_UIWindowSettings", "_optionButtonWindowMode", "_optionButtonResolutions", "_spinBoxFOV", "_hSliderFOV", "_buttonClose")]
@@ -118,6 +118,7 @@ grow_vertical = 0
 text = "Close"
 
 [node name="Audio" type="TabBar" parent="TabContainer" node_paths=PackedStringArray("_UIWindowSettings", "_hSliderMaster", "_hSliderInterface", "_hSliderEffects", "_hSliderVoiceChat", "_spinBoxMaster", "_spinBoxInterface", "_spinBoxEffects", "_spinBoxVoiceChat", "_checkBoxMuteYourself", "_buttonResetMaster", "_buttonResetInterface", "_buttonResetEffects", "_buttonResetVoiceChat", "_buttonResetMuteYourself", "_buttonClose")]
+visible = false
 layout_mode = 2
 script = ExtResource("2_smob6")
 _UIWindowSettings = NodePath("../..")
@@ -481,13 +482,24 @@ grow_horizontal = 2
 grow_vertical = 0
 text = "Close"
 
-[node name="Round" type="TabBar" parent="TabContainer" node_paths=PackedStringArray("_UIWindowSettings", "_optionButtonMap", "_buttonClose")]
-visible = false
+[node name="Round" type="TabBar" parent="TabContainer" node_paths=PackedStringArray("_UIWindowSettings", "_optionButtonMap", "_buttonClose", "_spinBoxBattery", "_hSliderBattery", "_buttonResetBattery", "_spinBoxHumanHealth", "_hSliderHumanHealth", "_buttonResetHumanHealth", "_spinBoxMonsterHealth", "_hSliderMonsterHealth", "_buttonResetMonsterHealth", "_spinBoxMonsterDamage", "_hSliderMonsterDamage", "_buttonResetMonsterDamage")]
 layout_mode = 2
 script = ExtResource("7_ygg7y")
 _UIWindowSettings = NodePath("../..")
-_optionButtonMap = NodePath("MarginContainer/VBoxContainer/VBoxMap/OptionButtonMap")
+_optionButtonMap = NodePath("MarginContainer/ScrollContainer/VBoxContainer/VBoxMap/OptionButtonMap")
 _buttonClose = NodePath("ButtonCloseRound")
+_spinBoxBattery = NodePath("MarginContainer/ScrollContainer/VBoxContainer/HBoxHeadFlashlightBattery/VBoxContainer/HBoxContainer/SpinBoxBattery")
+_hSliderBattery = NodePath("MarginContainer/ScrollContainer/VBoxContainer/HBoxHeadFlashlightBattery/VBoxContainer/HSliderBattery")
+_buttonResetBattery = NodePath("MarginContainer/ScrollContainer/VBoxContainer/HBoxHeadFlashlightBattery/ButtonResetBattery")
+_spinBoxHumanHealth = NodePath("MarginContainer/ScrollContainer/VBoxContainer/HBoxHumanHealth/VBoxContainer/HBoxContainer/SpinBoxHealth")
+_hSliderHumanHealth = NodePath("MarginContainer/ScrollContainer/VBoxContainer/HBoxHumanHealth/VBoxContainer/HSliderHealth")
+_buttonResetHumanHealth = NodePath("MarginContainer/ScrollContainer/VBoxContainer/HBoxHumanHealth/ButtonResetHealth")
+_spinBoxMonsterHealth = NodePath("MarginContainer/ScrollContainer/VBoxContainer/HBoxMonsterHealth/VBoxContainer/HBoxContainer/SpinBoxHealth")
+_hSliderMonsterHealth = NodePath("MarginContainer/ScrollContainer/VBoxContainer/HBoxMonsterHealth/VBoxContainer/HSliderHealth")
+_buttonResetMonsterHealth = NodePath("MarginContainer/ScrollContainer/VBoxContainer/HBoxMonsterHealth/ButtonResetHealth")
+_spinBoxMonsterDamage = NodePath("MarginContainer/ScrollContainer/VBoxContainer/HBoxMonsterDamage/VBoxContainer/HBoxContainer/SpinBoxDamage")
+_hSliderMonsterDamage = NodePath("MarginContainer/ScrollContainer/VBoxContainer/HBoxMonsterDamage/VBoxContainer/HSliderDamage")
+_buttonResetMonsterDamage = NodePath("MarginContainer/ScrollContainer/VBoxContainer/HBoxMonsterDamage/ButtonResetDamage")
 metadata/_tab_index = 4
 
 [node name="MarginContainer" type="MarginContainer" parent="TabContainer/Round"]
@@ -503,18 +515,179 @@ theme_override_constants/margin_top = 15
 theme_override_constants/margin_right = 15
 theme_override_constants/margin_bottom = 5
 
-[node name="VBoxContainer" type="VBoxContainer" parent="TabContainer/Round/MarginContainer"]
+[node name="ScrollContainer" type="ScrollContainer" parent="TabContainer/Round/MarginContainer"]
 layout_mode = 2
 
-[node name="VBoxMap" type="VBoxContainer" parent="TabContainer/Round/MarginContainer/VBoxContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="TabContainer/Round/MarginContainer/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="VBoxMap" type="VBoxContainer" parent="TabContainer/Round/MarginContainer/ScrollContainer/VBoxContainer"]
 layout_mode = 2
 
-[node name="LabelMap" type="Label" parent="TabContainer/Round/MarginContainer/VBoxContainer/VBoxMap"]
+[node name="LabelMap" type="Label" parent="TabContainer/Round/MarginContainer/ScrollContainer/VBoxContainer/VBoxMap"]
 layout_mode = 2
 text = "Map"
 
-[node name="OptionButtonMap" type="OptionButton" parent="TabContainer/Round/MarginContainer/VBoxContainer/VBoxMap"]
+[node name="OptionButtonMap" type="OptionButton" parent="TabContainer/Round/MarginContainer/ScrollContainer/VBoxContainer/VBoxMap"]
 layout_mode = 2
+
+[node name="HSeparatorHealFlashlight" type="HSeparator" parent="TabContainer/Round/MarginContainer/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="LabelHeadFlashligh" type="Label" parent="TabContainer/Round/MarginContainer/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+text = "Item HeadFlashlight"
+
+[node name="HBoxHeadFlashlightBattery" type="HBoxContainer" parent="TabContainer/Round/MarginContainer/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="TabContainer/Round/MarginContainer/ScrollContainer/VBoxContainer/HBoxHeadFlashlightBattery"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="TabContainer/Round/MarginContainer/ScrollContainer/VBoxContainer/HBoxHeadFlashlightBattery/VBoxContainer"]
+layout_mode = 2
+
+[node name="LabelBattery" type="Label" parent="TabContainer/Round/MarginContainer/ScrollContainer/VBoxContainer/HBoxHeadFlashlightBattery/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "Battery"
+
+[node name="SpinBoxBattery" type="SpinBox" parent="TabContainer/Round/MarginContainer/ScrollContainer/VBoxContainer/HBoxHeadFlashlightBattery/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 10
+max_value = 1000.0
+alignment = 2
+
+[node name="HSliderBattery" type="HSlider" parent="TabContainer/Round/MarginContainer/ScrollContainer/VBoxContainer/HBoxHeadFlashlightBattery/VBoxContainer"]
+layout_mode = 2
+max_value = 1000.0
+
+[node name="ButtonResetBattery" type="Button" parent="TabContainer/Round/MarginContainer/ScrollContainer/VBoxContainer/HBoxHeadFlashlightBattery"]
+layout_mode = 2
+size_flags_horizontal = 10
+size_flags_vertical = 4
+size_flags_stretch_ratio = 0.1
+disabled = true
+text = "R"
+
+[node name="HSeparatorHuman" type="HSeparator" parent="TabContainer/Round/MarginContainer/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="LabelHuman" type="Label" parent="TabContainer/Round/MarginContainer/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+text = "Player Human"
+
+[node name="HBoxHumanHealth" type="HBoxContainer" parent="TabContainer/Round/MarginContainer/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="TabContainer/Round/MarginContainer/ScrollContainer/VBoxContainer/HBoxHumanHealth"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="TabContainer/Round/MarginContainer/ScrollContainer/VBoxContainer/HBoxHumanHealth/VBoxContainer"]
+layout_mode = 2
+
+[node name="LabelHealth" type="Label" parent="TabContainer/Round/MarginContainer/ScrollContainer/VBoxContainer/HBoxHumanHealth/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "Health"
+
+[node name="SpinBoxHealth" type="SpinBox" parent="TabContainer/Round/MarginContainer/ScrollContainer/VBoxContainer/HBoxHumanHealth/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 10
+min_value = 1.0
+max_value = 1000.0
+value = 1.0
+alignment = 2
+
+[node name="HSliderHealth" type="HSlider" parent="TabContainer/Round/MarginContainer/ScrollContainer/VBoxContainer/HBoxHumanHealth/VBoxContainer"]
+layout_mode = 2
+min_value = 1.0
+max_value = 1000.0
+value = 1.0
+
+[node name="ButtonResetHealth" type="Button" parent="TabContainer/Round/MarginContainer/ScrollContainer/VBoxContainer/HBoxHumanHealth"]
+layout_mode = 2
+size_flags_horizontal = 10
+size_flags_vertical = 4
+size_flags_stretch_ratio = 0.1
+disabled = true
+text = "R"
+
+[node name="HSeparatorMonster" type="HSeparator" parent="TabContainer/Round/MarginContainer/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="LabelMonster" type="Label" parent="TabContainer/Round/MarginContainer/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+text = "Player Monster"
+
+[node name="HBoxMonsterHealth" type="HBoxContainer" parent="TabContainer/Round/MarginContainer/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="TabContainer/Round/MarginContainer/ScrollContainer/VBoxContainer/HBoxMonsterHealth"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="TabContainer/Round/MarginContainer/ScrollContainer/VBoxContainer/HBoxMonsterHealth/VBoxContainer"]
+layout_mode = 2
+
+[node name="LabelHealth" type="Label" parent="TabContainer/Round/MarginContainer/ScrollContainer/VBoxContainer/HBoxMonsterHealth/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "Health"
+
+[node name="SpinBoxHealth" type="SpinBox" parent="TabContainer/Round/MarginContainer/ScrollContainer/VBoxContainer/HBoxMonsterHealth/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 10
+min_value = 1.0
+max_value = 1000.0
+value = 1.0
+alignment = 2
+
+[node name="HSliderHealth" type="HSlider" parent="TabContainer/Round/MarginContainer/ScrollContainer/VBoxContainer/HBoxMonsterHealth/VBoxContainer"]
+layout_mode = 2
+min_value = 1.0
+max_value = 1000.0
+value = 1.0
+
+[node name="ButtonResetHealth" type="Button" parent="TabContainer/Round/MarginContainer/ScrollContainer/VBoxContainer/HBoxMonsterHealth"]
+layout_mode = 2
+size_flags_horizontal = 10
+size_flags_vertical = 4
+size_flags_stretch_ratio = 0.1
+disabled = true
+text = "R"
+
+[node name="HBoxMonsterDamage" type="HBoxContainer" parent="TabContainer/Round/MarginContainer/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="TabContainer/Round/MarginContainer/ScrollContainer/VBoxContainer/HBoxMonsterDamage"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="TabContainer/Round/MarginContainer/ScrollContainer/VBoxContainer/HBoxMonsterDamage/VBoxContainer"]
+layout_mode = 2
+
+[node name="LabelDamage" type="Label" parent="TabContainer/Round/MarginContainer/ScrollContainer/VBoxContainer/HBoxMonsterDamage/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "Damage"
+
+[node name="SpinBoxDamage" type="SpinBox" parent="TabContainer/Round/MarginContainer/ScrollContainer/VBoxContainer/HBoxMonsterDamage/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 10
+max_value = 1000.0
+alignment = 2
+
+[node name="HSliderDamage" type="HSlider" parent="TabContainer/Round/MarginContainer/ScrollContainer/VBoxContainer/HBoxMonsterDamage/VBoxContainer"]
+layout_mode = 2
+max_value = 1000.0
+
+[node name="ButtonResetDamage" type="Button" parent="TabContainer/Round/MarginContainer/ScrollContainer/VBoxContainer/HBoxMonsterDamage"]
+layout_mode = 2
+size_flags_horizontal = 10
+size_flags_vertical = 4
+size_flags_stretch_ratio = 0.1
+disabled = true
+text = "R"
 
 [node name="ButtonCloseRound" type="Button" parent="TabContainer/Round"]
 layout_mode = 1

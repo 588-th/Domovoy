@@ -3,15 +3,10 @@ using Godot;
 public partial class HeadFlashlightBattery : Node
 {
     [Export] private HeadFlashlightToggleLight _headFlashlightToggleLight;
-    [Export] public float MaxBatteryLife = 100f;
-    [Export] public float DrainRate = 5f;
+    [Export] public float MaxBatteryLife = 60f;
+    [Export] public float DrainRate = 1f;
 
     private float _currentBatteryLife;
-
-    public override void _Ready()
-    {
-        _currentBatteryLife = MaxBatteryLife;
-    }
 
     public override void _Process(double delta)
     {
@@ -24,6 +19,12 @@ public partial class HeadFlashlightBattery : Node
     public float GetBatteryLife()
     {
         return _currentBatteryLife;
+    }
+
+    public void SetBatteryLife(float batterLife)
+    {
+        if (MaxBatteryLife <= batterLife)
+            _currentBatteryLife = batterLife;
     }
 
     public void Drain(float delta)

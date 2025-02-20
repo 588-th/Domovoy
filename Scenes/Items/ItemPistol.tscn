@@ -76,6 +76,7 @@ shape = SubResource("BoxShape3D_pjvfg")
 light_color = Color(0.19, 1, 0.217, 1)
 light_energy = 0.0
 light_specular = 5.0
+shadow_enabled = true
 spot_range = 25.0
 spot_angle = 0.5
 spot_angle_attenuation = 0.420449
@@ -94,7 +95,7 @@ TotalClips = 2
 CurrentBulletsInClip = 13
 CurrentClips = 2
 FireRate = 2.0
-BulletSpeed = 1.5
+BulletSpeed = 80.0
 LaserEnergy = 10
 ShotAudio = ExtResource("7_iv6w0")
 EmptyShotAudio = ExtResource("10_aobik")
@@ -133,7 +134,7 @@ _laserLight = NodePath("../../LaserLight")
 wait_time = 0.3
 
 [node name="BulletSpawnPosition" type="Marker3D" parent="ServerPart"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.12331)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.14273, -0.190087)
 
 [node name="Synchronizer" type="Node" parent="."]
 

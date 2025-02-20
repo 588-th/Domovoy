@@ -9,8 +9,8 @@ public partial class PlayerMeleeAttack : Node
     [Export] private RayCast3D _rayOfAttack;
 
     [ExportGroup("Parameters")]
-    [Export] private float _attackCooldownTime;
-    [Export] private int _attackDamage;
+    [Export] private float _attackCooldownTime = 1f;
+    [Export] private int _attackDamage = 35;
 
     [ExportGroup("Audio")]
     [Export] private AudioPlayer3D _audioPlayer3D;
@@ -31,6 +31,11 @@ public partial class PlayerMeleeAttack : Node
     {
         _attackCooldownTimer.Timeout -= CooldownAttackTimeout;
         _inputActions.AttackKeyDown -= () => AttemptAttack(_attackDamage);
+    }
+
+    public void SetAttackDamage(int value)
+    {
+        _attackDamage = value;
     }
 
     private void CooldownAttackTimeout()

@@ -11,14 +11,14 @@ public partial class UIEffectSanity : Node
     {
         _shaderMaterial = _colorRectSanity.Material as ShaderMaterial;
 
-        _hudParameters.PlayerHealthUpdated += UpdateSanityEffect;
         _hudParameters.PlayerHealthMaxUpdated += UpdateSanityEffect;
+        _hudParameters.PlayerHealthUpdated += UpdateSanityEffect;
     }
 
     public override void _ExitTree()
     {
-        _hudParameters.PlayerHealthUpdated -= UpdateSanityEffect;
         _hudParameters.PlayerHealthMaxUpdated -= UpdateSanityEffect;
+        _hudParameters.PlayerHealthUpdated -= UpdateSanityEffect;
     }
 
     private void UpdateSanityEffect()

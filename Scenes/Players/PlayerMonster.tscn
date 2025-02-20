@@ -1,4 +1,4 @@
-[gd_scene load_steps=55 format=4 uid="uid://dw2d8yb5aog0t"]
+[gd_scene load_steps=56 format=4 uid="uid://dw2d8yb5aog0t"]
 
 [ext_resource type="Script" path="res://Scripts/Audio/AudioPlayer3D.cs" id="1_cu3h5"]
 [ext_resource type="Script" path="res://Scripts/Player/PlayerInputVector.cs" id="1_l02lm"]
@@ -38,6 +38,7 @@
 [ext_resource type="AudioStream" uid="uid://dhgbfgf43idpd" path="res://Audio/SFX/MonsterHitAttackAudio.mp3" id="27_w1d6b"]
 [ext_resource type="Script" path="res://Scripts/Player/Movement/PlayerMovementSounds.cs" id="33_nwoie"]
 [ext_resource type="Script" path="res://Scripts/Player/Monster/PlayerMonsterNerf.cs" id="38_wvj4j"]
+[ext_resource type="Script" path="res://Scripts/Player/MonsterSettings.cs" id="39_vnvtl"]
 
 [sub_resource type="AudioStreamGenerator" id="AudioStreamGenerator_0nix6"]
 mix_rate = 48000.0
@@ -412,8 +413,6 @@ _landAudio = ExtResource("25_bbxue")
 
 [node name="PlayerHealth" type="Node" parent="ServerPart/Scripts"]
 script = ExtResource("9_2j7p8")
-MaxHealth = 100
-CurrentHealth = 90
 
 [node name="PlayerDeath" type="Node" parent="ServerPart/Scripts" node_paths=PackedStringArray("_playerRoot", "_playerHealth", "_playerBody")]
 script = ExtResource("15_t6oc2")
@@ -437,8 +436,6 @@ _meleeAttackActions = NodePath("../../../ClientServerPart/Scripts/MeleeAttackAct
 _playerPropInteractor = NodePath("../PlayerPropInteractor")
 _attackCooldownTimer = NodePath("../../Timers/AttackCooldownTimer")
 _rayOfAttack = NodePath("../../../CommonPart/CameraHolder/PlayerCamera/PlayerLook/RayOfAttack")
-_attackCooldownTime = 0.8
-_attackDamage = 35
 _audioPlayer3D = NodePath("../../../CommonPart/CameraHolder/PlayerCamera/Audio3D/Movement")
 _missAttackAudio = ExtResource("26_iqfag")
 _hitAttackAudio = ExtResource("27_w1d6b")
@@ -463,6 +460,11 @@ _playerBody = NodePath("../../../CommonPart/PlayerBody")
 script = ExtResource("38_wvj4j")
 _playerMovement = NodePath("../PlayerMovement")
 _playerAuraVision = NodePath("../PlayerAuraVision")
+
+[node name="MonsterSettings" type="Node" parent="ServerPart/Scripts" node_paths=PackedStringArray("_playerHealth", "_playerMeleeAttack")]
+script = ExtResource("39_vnvtl")
+_playerHealth = NodePath("../PlayerHealth")
+_playerMeleeAttack = NodePath("../PlayerMeleeAttack")
 
 [node name="Timers" type="Node" parent="ServerPart"]
 

@@ -495,7 +495,7 @@ script = ExtResource("14_3oodw")
 
 [node name="RoundLightOn" type="Node" parent="SerevrPart/Scripts/Round" node_paths=PackedStringArray("_mapLights")]
 script = ExtResource("22_e4wfl")
-_mapLights = []
+_mapLights = [NodePath("../../../../Light/SpawnLight"), NodePath("../../../../Light/OmniLight3D3"), NodePath("../../../../Light/OmniLight3D6"), NodePath("../../../../Light/OmniLight3D4"), NodePath("../../../../Light/OmniLight3D7"), NodePath("../../../../Light/OmniLight3D8"), NodePath("../../../../Light/OmniLight3D5"), NodePath("../../../../Light/OmniLight3D10"), NodePath("../../../../Light/OmniLight3D11"), NodePath("../../../../Light/OmniLight3D12"), NodePath("../../../../Light/OmniLight3D14"), NodePath("../../../../Light/OmniLight3D15"), NodePath("../../../../Light/OmniLight3D16"), NodePath("../../../../Light/OmniLight3D17")]
 
 [node name="RoundLightOff" type="Node" parent="SerevrPart/Scripts/Round" node_paths=PackedStringArray("_timer", "_light", "_audioPlayer3D")]
 script = ExtResource("22_ngdxw")
